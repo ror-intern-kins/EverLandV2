@@ -1,43 +1,41 @@
-<p id="notice"><%= notice %></p>
 
+<% if !@posts.present? %>    
+    <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+<% else %>
+    <h1>Posts</h1>
 
-<%= render 'search'%>
-
-
-<h1>Posts</h1>
-
-<table>
-  <thead>
+    <table>
+    <thead>
     <tr>
-      <th>Title</th>
-      <th>Address number</th>
-      <th>Description</th>
-      <th>Project</th>
-      <th>Area</th>
-      <th>Price</th>
-      <th>Unit</th>
-      <th>Lng</th>
-      <th>Lat</th>
-      <th>Front</th>
-      <th>Entrance</th>
-      <th>House direction</th>
-      <th>Balcony direction</th>
-      <th>Floor</th>
-      <th>Bedroom</th>
-      <th>Toilet</th>
-      <th>Furniture</th>
-      <th>Contact name</th>
-      <th>Contact address</th>
-      <th>Contact phone</th>
-      <th>Contact mobile</th>
-      <th>Contact mail</th>
-      <th colspan="3"></th>
+        <th>Title</th>
+        <th>Address number</th>
+        <th>Description</th>
+        <th>Project</th>
+        <th>Area</th>
+        <th>Price</th>
+        <th>Unit</th>
+        <th>Lng</th>
+        <th>Lat</th>
+        <th>Front</th>
+        <th>Entrance</th>
+        <th>House direction</th>
+        <th>Balcony direction</th>
+        <th>Floor</th>
+        <th>Bedroom</th>
+        <th>Toilet</th>
+        <th>Furniture</th>
+        <th>Contact name</th>
+        <th>Contact address</th>
+        <th>Contact phone</th>
+        <th>Contact mobile</th>
+        <th>Contact mail</th>
+        <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @posts.each do |post| %>
-      <tr>
+        <tr>
         <td><%= post.title %></td>
         <td><%= post.address_number %></td>
         <td><%= post.description %></td>
@@ -63,11 +61,9 @@
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+    </table>
+<% end %>
 
-<br>
-
-<%= link_to 'New Post', new_post_path %>

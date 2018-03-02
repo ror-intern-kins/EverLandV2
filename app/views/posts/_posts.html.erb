@@ -1,8 +1,7 @@
-<p id="notice"><%= notice %></p>
 
-
-<%= render 'search'%>
-
+<% if !@posts.present? %>
+  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+<% end %>
 
 <h1>Posts</h1>
 
@@ -67,7 +66,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>

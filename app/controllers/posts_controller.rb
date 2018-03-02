@@ -12,6 +12,17 @@ class PostsController < ApplicationController
   def show
   end
 
+  def result
+    search_type = params[:search_type]
+    case search_type
+    when "advance"
+    query = params.require(:query).permit(:category_id,:area,:price,:city_id)   
+    @posts = Post.where(query)
+    when "full"
+      text = params[:query]
+      @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   )   
+    end
+  end
   # GET /posts/new
   def new
     @post = Post.new
@@ -60,7 +71,21 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  # POST post/search 
+  def search
+    # query = params[:query]
+    search_type = params[:search_type]
+    case search_type
+    when "advance"
+    query = params.require(:query).permit(:category_id,:area,:price,:city_id)   
+    @posts = Post.where(query)
+    when "full"
+      text = params[:query]
+      @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   )   
+    end
 
+    return @posts
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
