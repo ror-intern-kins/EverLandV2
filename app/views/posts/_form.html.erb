@@ -1,0 +1,127 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :post_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address_number %>
+    <%= form.text_field :address_number, id: :post_address_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :post_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :project %>
+    <%= form.text_field :project, id: :post_project %>
+  </div>
+
+  <div class="field">
+    <%= form.label :area %>
+    <%= form.text_field :area, id: :post_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price, id: :post_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :unit %>
+    <%= form.text_field :unit, id: :post_unit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lng %>
+    <%= form.text_field :lng, id: :post_lng %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lat %>
+    <%= form.text_field :lat, id: :post_lat %>
+  </div>
+
+  <div class="field">
+    <%= form.label :front %>
+    <%= form.text_field :front, id: :post_front %>
+  </div>
+
+  <div class="field">
+    <%= form.label :entrance %>
+    <%= form.text_field :entrance, id: :post_entrance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :house_direction %>
+    <%= form.text_field :house_direction, id: :post_house_direction %>
+  </div>
+
+  <div class="field">
+    <%= form.label :balcony_direction %>
+    <%= form.text_field :balcony_direction, id: :post_balcony_direction %>
+  </div>
+
+  <div class="field">
+    <%= form.label :floor %>
+    <%= form.number_field :floor, id: :post_floor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bedroom %>
+    <%= form.number_field :bedroom, id: :post_bedroom %>
+  </div>
+
+  <div class="field">
+    <%= form.label :toilet %>
+    <%= form.number_field :toilet, id: :post_toilet %>
+  </div>
+
+  <div class="field">
+    <%= form.label :furniture %>
+    <%= form.text_area :furniture, id: :post_furniture %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_name %>
+    <%= form.text_field :contact_name, id: :post_contact_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_address %>
+    <%= form.text_field :contact_address, id: :post_contact_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_phone %>
+    <%= form.text_field :contact_phone, id: :post_contact_phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_mobile %>
+    <%= form.text_field :contact_mobile, id: :post_contact_mobile %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_mail %>
+    <%= form.text_field :contact_mail, id: :post_contact_mail %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
