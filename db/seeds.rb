@@ -54,15 +54,17 @@ Category.create([
     5.times do |j|
         user.posts.create([
             {
-                title: "Post #{i} #{j}",
+                title: "Post #{i} #{j} lorem lorem lorem lorem",
                 category_id: 2,
-                city_id: 0,
-                district_id: 0,
-                ward_id: 0,
-                street_id: 0,
+                city_id: 1,
+                district_id: 1,
+                ward_id: 1,
+                street_id: 1,
                 description: "#{i} #{j} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt placeat ipsam veritatis ea libero, minima itaque fugit, unde cumque accusantium doloribus vel consequatur dicta recusandae, nobis iste? Ex, excepturi assumenda.",
                 price: 100 + i + j,
-                unit: "triệu/tháng"
+                unit: "triệu/tháng",
+                contact_mobile: "19001000101",
+                address_number: "122212"
             }
         ])
     end
