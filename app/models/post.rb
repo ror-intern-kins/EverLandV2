@@ -2,39 +2,67 @@ class Post < ApplicationRecord
     belongs_to :user
     has_many :images
 
+    #Check foreign key exists
     validate :category_id_exists
     validate :city_id_exists
     validate :district_id_exists
     
-    #Attributes can not be blank
-    validates :title, :description, :category_id, :city_id, :district_id, :address_number, :contact_mobile, 
-        presence: true
-    #Title
-    validates :title, length: {minimum:30, maximum:99}
-    #Description of post
-    validates :description, length: {minimum:50, maximum:3000}
-    #Address
-    validates :address_number,length: {maximum:200}
-    #Phone
-    validates :contact_mobile, length: {minimum:10, maximum:14}, format: {with: /\d[0-9]\)*\z/}
+    #Can not be blank
+    validates :title, presence: {message: 'Tiêu đề không thể bỏ trống.'}
+    validates :description, presence: {message: 'Mô tả không thể bỏ trống.'}
+    validates :category_id, presence: {message: 'Hình thức không thể bỏ trống.'}
+    validates :city_id, presence: {message: 'Thành phố không thể bỏ trống.'}
+    validates :district_id, presence: {message: 'Quận không thể bỏ trống.'}
+    validates :address_number, presence: {message: 'Địa chỉ không thể bỏ trống.'}
+    validates :contact_mobile, presence: {message: 'Di động không thể bỏ trống.'}
 
-    #Can be blank
-    validates :furniture, :contact_address, length: {maximum:200, allow_blank: true}    
-    validates :contact_phone, length: {minimum:10, maximum:14,}, format: {with: /\d[0-9]\)*\z/}, allow_blank:true
-    validates :price, :area, :front, :entrance, 
-        allow_blank:true, numericality: {only_float: true, greater_than: 0, less_than_or_equal_to: 999999}
-    validates :floor, :bedroom, :toilet,
-        allow_blank:true, numericality: {only_integer: true, greater_than:0, less_than_or_equal_to: 999}
-    validates :contact_name, allow_blank:true ,length: {maximum:200}, format: {with: /\A[a-zA-Z]+\z?/}
-    validates :contact_mail, 
-        allow_blank:true, length: {maximum: 100}, format: { with:  /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info))\z/i}
+    #Length
+    validates :title, length: {minimum:30, maximum:99, 
+        message: 'Tiêu đề phải có độ dài tối thiểu 30 ký tự và tối đa 99 ký tự.'}
+    validates :description, length: {minimum:50, maximum:3000,
+        message: 'Mô tả phải có độ dài tối thiểu 50 ký tự và tối đa 3000 ký tự.'}
+    validates :address_number,length: {maximum:200,
+        message: 'Địa chỉ phải có độ dài tối đa 200 ký tự.'}
+    validates :furniture, length: {maximum:200, allow_blank: true,
+        message: 'Mô tả nội thất phải có độ dài tối đa 200 ký tự.'}  
+    validates :contact_address, length: {maximum:200, allow_blank: true,
+        message: 'Địa chỉ liên hệ phải có độ dài tối đa 200 ký tự.'}    
+        #Format
+    validates :contact_mobile, length: {minimum:10, maximum:14,
+        message: 'Di động phải có độ dài tối thiểu 10 ký tự và tối đa 14 ký tự.'}, 
+    format: {with: /\A[0]\d{9,14}\z/, message: "Số di động không đúng."}
+    validates :contact_phone, length: {minimum:10, maximum:14,
+        message: 'Điện thoại phải có độ dài tối thiểu 10 ký tự và tối đa 14 ký tự.'},  
+    format: {with: /\d{9,14}\z/, message: 'Số điện thoại không đúng.'}, allow_blank:true
+    validates :contact_mail, allow_blank:true, 
+    length: {maximum: 100, message: 'Mail liên hệ phải có độ dài tối đa 100 ký tự.'}, 
+    format: { with: /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info))\z/i, 
+        message: "Địa chỉ email không hợp lệ."}
+    validates :contact_name, allow_blank:true,
+    length: {maximum:200, message: 'Tên phải có độ dài tối đa 200 ký tự.'}, 
+    format: {with: /\A[a-zA-Z]+\z?/, message: 'Tên không hợp lệ.'}
+        #Num
+    validates :price, allow_blank:true, numericality: {only_float: true, greater_than: 0, less_than_or_equal_to: 999999, 
+        message: 'Giá không hợp lệ.'}
+    validates :area, allow_blank:true, numericality: {only_float: true, greater_than: 0, less_than_or_equal_to: 999999, 
+        message: 'Diện tích không hợp lệ.'}
+    validates :front, allow_blank:true, numericality: {only_float: true, greater_than: 0, less_than_or_equal_to: 999999, 
+        message: 'Mặt tiền không hợp lệ.'}
+    validates :entrance, allow_blank:true, numericality: {only_float: true, greater_than: 0, less_than_or_equal_to: 999999,
+        message: 'Đường vào không hợp lệ.'}
+    validates :floor, allow_blank:true, numericality: {only_integer: true, greater_than:0, less_than_or_equal_to: 999,
+        message: 'Số tầng không hợp lệ.'}
+    validates :bedroom, allow_blank:true, numericality: {only_integer: true, greater_than:0, less_than_or_equal_to: 999,
+        message: 'Số phòng ngủ không hợp lệ.'}
+    validates :toilet,allow_blank:true, numericality: {only_integer: true, greater_than:0, less_than_or_equal_to: 999,
+        message: 'Số toilet không hợp lệ.'}
     
     protected
     def category_id_exists
         begin
           Category.find(self.category_id)
         rescue ActiveRecord::RecordNotFound
-          errors.add(:category_id, "category_id foreign key must exist")
+          errors.add(:category_id, "Hình thức không tồn tại.")
           false
         end
     end
@@ -42,7 +70,7 @@ class Post < ApplicationRecord
         begin
           City.find(self.city_id)
         rescue ActiveRecord::RecordNotFound
-          errors.add(:city_id, "city_id foreign key must exist")
+          errors.add(:city_id, "Thành phố không có thật.")
           false
         end
     end
@@ -50,7 +78,7 @@ class Post < ApplicationRecord
         begin
           District.find(self.district_id)
         rescue ActiveRecord::RecordNotFound
-          errors.add(:district_id, "district_id foreign key must exist")
+          errors.add(:district_id, "Quận không có thật")
           false
         end
     end
