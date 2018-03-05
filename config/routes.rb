@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :categories
 
   resources :users do
@@ -6,7 +7,11 @@ Rails.application.routes.draw do
       resources :images,only: [:create, :edit, :update, :show, :destory]
     end
   end
-
+  get '/signup', to: 'users#new'
+  get '/login', to: 'sessions#new'
+  get '/session_home', to: 'sessions#home'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 
   # add a collection search - Q
   resources :posts, except: [:create, :edit, :update,:destory] do
