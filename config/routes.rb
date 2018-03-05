@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   resources :categories
 
+  #Add action new 5.3
   resources :users do
-    resources :posts, only: [:create, :edit, :update, :destory]  do
+    resources :posts, only: [:new, :edit, :update, :destory, :create]  do
       resources :images,only: [:create, :edit, :update, :show, :destory]
     end
   end
-
-
-  # add a collection search - Q
-  resources :posts, except: [:create, :edit, :update,:destory] do
+  
+  #add a collection search - Q
+    resources :posts, except: [:create, :edit, :update,:destory] do
     collection do
       post 'search'
     end
