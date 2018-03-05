@@ -33,3 +33,6 @@ en:
   hello: "Hello world"
   errors:
     format: "%{message}"
+  helpers:
+    submit: 
+      create: 'Đăng Tin'
