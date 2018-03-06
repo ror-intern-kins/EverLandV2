@@ -13,15 +13,18 @@
         <%= f.hidden_field :search_type, :value => "advance" %>
         <!-- CATEGORY select -->
         <div class="category">
-            <%= f.select :category_id, options_from_collection_for_select(@categories, "id", "name"), prompt: "Select type"%>
+            <%= f.select :category_id, options_from_collection_for_select(@categories, "id", "name"), prompt: "--Select category--"%>
+        </div>
+        <div id="category-detail" style="display:none;">
+            <%= f.select :category_detail_id, "<option></option>", prompt: "--Select specific category--"%>
         </div>
         <!-- CITY SELECT -->
         <div class="city">
-            <%= f.select :city_id, options_from_collection_for_select(@cities, "id", "name", params[:id]), prompt: "Select city" %>
+            <%= f.select :city_id, options_from_collection_for_select(@cities, "id", "name", params[:id]), prompt: "--Select city--" %>
         </div>
         <!-- DISTRICT SELECT -->
         <div class="district">
-            <%= f.select :district_id,"<option></option>", include_blank: true, prompt: "Select district" %>
+            <%= f.select :district_id,"<option></option>", include_blank: true, prompt: "--Select district" %>
         </div>
         <div class="actions">
             <%= f.submit %>
@@ -31,9 +34,10 @@
 <a id='show-full' class="btn btn-primary" onclick="onChangeForm('full-search', 'advance-search')">full search</a>
 <script>
         $(function() {
+            
             $('#search_city_id').change(function(){
                 var value = $('#search_city_id').val();
-               
+                $('#search_district_id').html("<option>--Select district--</option>");
                 $.get("posts", {
                     city_id: value
                 },
@@ -43,6 +47,22 @@
                     });
                 })
             });
+
+            $('#search_category_id').change(function(){
+                var value = $(this).val();
+                $("#category-detail").removeAttr("style").hide();
+                $("#category-detail").show();
+                $('#search_category_detail_id').html("<option>--Select specific category--</option>");
+                $.get("posts", {
+                    category_id: value
+                },
+                function(data, status){
+                    data.forEach(item => {
+                        $('#search_category_detail_id').append("<option value="+item.id+ ">"+ item.name + "</option>")
+                    });
+                })
+            });
+
         });
 </script>
 </div>

@@ -17,6 +17,12 @@ class PostsController < ApplicationController
         format.json { render json: @districts  }  
       end
     end
+    if( params[:category_id])
+      @category_details = Category.where(super_id: params[:category_id])
+      respond_to do |format|  
+        format.json { render json: @category_details  }  
+      end
+    end
   end
 
   # GET users/1/posts/1
@@ -32,9 +38,14 @@ class PostsController < ApplicationController
       text = params[:query]
       @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   )   
     else
-      query = params.require(:search).permit(:category_id,:area,:price,:city_id, :district_id)  
+      query = params.require(:search).permit(:category_id,:category_detail_id,:area,:price,:city_id, :district_id)  
       query.each do |key, value|
         if value.blank?
+          query.delete(key)
+        end
+
+        if key == "category_detail_id"
+          query[:category_id] = query[:category_detail_id]
           query.delete(key)
         end
       end
