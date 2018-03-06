@@ -39,6 +39,12 @@ class PostsController < ApplicationController
       format.json { render json: @wards }
     end
   end
+  if params[:ward_id]
+    @streets = Ward.find(params[:ward_id]).streets.all
+    respond_to do |format|
+      format.json { render json: @streets }
+    end
+  end
 end
 
   # GET /posts/1/edit
