@@ -5,13 +5,44 @@
     <%= text_field_tag(:query) %>
     <%= submit_tag("Search") %>
     <% end %>    
-<button type="button" id='show-advance' onclick="onChangeForm('advance-search', 'full-search',)">advance search</button>
+<a type="button" id='show-advance' class="btn btn-primary" onclick="onChangeForm('advance-search', 'full-search',)">advance search</a>
         
 </div>
 <div id="advance-search" style="display: none">
-    <%= select_tag "categories", options_from_collection_for_select(@categories, "id", "name") %>
-    <%= select_tag "cities", options_from_collection_for_select(@cities, "id", "name") %>
+    <%= form_for(:search, url:"/posts/result", method: "get" ) do |f| %>
+        <%= f.hidden_field :search_type, :value => "advance" %>
+        <!-- CATEGORY select -->
+        <div class="category">
+            <%= f.select :category_id, options_from_collection_for_select(@categories, "id", "name"), prompt: "Select type"%>
+        </div>
+        <!-- CITY SELECT -->
+        <div class="city">
+            <%= f.select :city_id, options_from_collection_for_select(@cities, "id", "name", params[:id]), prompt: "Select city" %>
+        </div>
+        <!-- DISTRICT SELECT -->
+        <div class="district">
+            <%= f.select :district_id,"<option></option>", include_blank: true, prompt: "Select district" %>
+        </div>
+        <div class="actions">
+            <%= f.submit %>
+        </div>
+    <% end %>
     
-<button id='show-full' onclick="onChangeForm('full-search', 'advance-search')">full search</button>
-    
+<a id='show-full' class="btn btn-primary" onclick="onChangeForm('full-search', 'advance-search')">full search</a>
+<script>
+        $(function() {
+            $('#search_city_id').change(function(){
+                var value = $('#search_city_id').val();
+               
+                $.get("posts", {
+                    city_id: value
+                },
+                function(data, status){
+                    data.forEach(item => {
+                        $('#search_district_id').append("<option value="+item.id+ ">"+ item.name + "</option>")
+                    });
+                })
+            });
+        });
+</script>
 </div>

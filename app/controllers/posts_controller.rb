@@ -5,7 +5,18 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
-    @categories = Category.all
+
+    @search 
+    @categories = Category.where(super_id: nil)
+    puts @categories
+    @cities = City.all
+    @districts
+    if( params[:city_id])
+      @districts = City.find(params[:city_id]).districts.all
+      respond_to do |format|  
+        format.json { render json: @districts  }  
+      end
+    end
   end
 
   # GET users/1/posts/1
@@ -17,13 +28,19 @@ class PostsController < ApplicationController
   def result
     search_type = params[:search_type]
     case search_type
-    when "advance"
-      query = params.require(:query).permit(:category_id,:area,:price,:city_id)   
-      @posts = Post.where(query)
     when "full"
       text = params[:query]
       @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   )   
+    else
+      query = params.require(:search).permit(:category_id,:area,:price,:city_id, :district_id)  
+      query.each do |key, value|
+        if value.blank?
+          query.delete(key)
+        end
+      end
+      @posts = Post.where(query)
     end
+    
   end
   # GET /posts/new
   def new

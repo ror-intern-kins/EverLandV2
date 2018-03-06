@@ -1,73 +1,78 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <p id="notice"><%= notice %></p>
 
 
-<%= render 'search'%>
-
-
-<h1>Posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Address number</th>
-      <th>Description</th>
-      <th>Project</th>
-      <th>Area</th>
-      <th>Price</th>
-      <th>Unit</th>
-      <th>Lng</th>
-      <th>Lat</th>
-      <th>Front</th>
-      <th>Entrance</th>
-      <th>House direction</th>
-      <th>Balcony direction</th>
-      <th>Floor</th>
-      <th>Bedroom</th>
-      <th>Toilet</th>
-      <th>Furniture</th>
-      <th>Contact name</th>
-      <th>Contact address</th>
-      <th>Contact phone</th>
-      <th>Contact mobile</th>
-      <th>Contact mail</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.address_number %></td>
-        <td><%= post.description %></td>
-        <td><%= post.project %></td>
-        <td><%= post.area %></td>
-        <td><%= post.price %></td>
-        <td><%= post.unit %></td>
-        <td><%= post.lng %></td>
-        <td><%= post.lat %></td>
-        <td><%= post.front %></td>
-        <td><%= post.entrance %></td>
-        <td><%= post.house_direction %></td>
-        <td><%= post.balcony_direction %></td>
-        <td><%= post.floor %></td>
-        <td><%= post.bedroom %></td>
-        <td><%= post.toilet %></td>
-        <td><%= post.furniture %></td>
-        <td><%= post.contact_name %></td>
-        <td><%= post.contact_address %></td>
-        <td><%= post.contact_phone %></td>
-        <td><%= post.contact_mobile %></td>
-        <td><%= post.contact_mail %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_user_post_path(post.user_id,post.id) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+  <%= render 'search'%>
+  
+  
+  <h1>Posts</h1>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Address number</th>
+          <th>Description</th>
+          <th>Project</th>
+          <th>Area</th>
+          <th>Price</th>
+          <th>Unit</th>
+          <th>Lng</th>
+          <th>Lat</th>
+          <th>Front</th>
+          <th>Entrance</th>
+          <th>House direction</th>
+          <th>Balcony direction</th>
+          <th>Floor</th>
+          <th>Bedroom</th>
+          <th>Toilet</th>
+          <th>Furniture</th>
+          <th>Contact name</th>
+          <th>Contact address</th>
+          <th>Contact phone</th>
+          <th>Contact mobile</th>
+          <th>Contact mail</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= post.title %></td>
+            <td><%= post.address_number %></td>
+            <td><%= post.description %></td>
+            <td><%= post.project %></td>
+            <td><%= post.area %></td>
+            <td><%= post.price %></td>
+            <td><%= post.unit %></td>
+            <td><%= post.lng %></td>
+            <td><%= post.lat %></td>
+            <td><%= post.front %></td>
+            <td><%= post.entrance %></td>
+            <td><%= post.house_direction %></td>
+            <td><%= post.balcony_direction %></td>
+            <td><%= post.floor %></td>
+            <td><%= post.bedroom %></td>
+            <td><%= post.toilet %></td>
+            <td><%= post.furniture %></td>
+            <td><%= post.contact_name %></td>
+            <td><%= post.contact_address %></td>
+            <td><%= post.contact_phone %></td>
+            <td><%= post.contact_mobile %></td>
+            <td><%= post.contact_mail %></td>
+            <td><%= link_to 'Show', post %></td>
+            <td><%= link_to 'Edit', edit_user_post_path(post.user_id,post.id) %></td>
+            <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  <br>
+  
+  <%= link_to 'New Post', new_post_path %>
+  
+</div>
