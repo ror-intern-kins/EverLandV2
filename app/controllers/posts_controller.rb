@@ -8,9 +8,10 @@ class PostsController < ApplicationController
     @categories = Category.all
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
+  # GET users/1/posts/1
+  # GET users/1/posts/1.json
   def show
+    # @user = User.find(params[:user_id])
   end
 
   def result
