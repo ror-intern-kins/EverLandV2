@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :set_post_to_show, only: [:show]
 
   # GET /posts
   # GET /posts.json
@@ -7,9 +8,10 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
+  # GET users/1/posts/1
+  # GET users/1/posts/1.json
   def show
+    # @user = User.find(params[:user_id])
   end
 
   # GET /posts/new
@@ -66,7 +68,10 @@ class PostsController < ApplicationController
     def set_post
       @post = Post.find(params[:id])
     end
+    def set_post_to_show
+      @post = Post.includes(:images).find(params[:id])
 
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:title,:description, :user_id,

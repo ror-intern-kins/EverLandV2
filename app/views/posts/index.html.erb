@@ -57,7 +57,7 @@
         <td><%= post.contact_mobile %></td>
         <td><%= post.contact_mail %></td>
         <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Edit', edit_user_post_path(post.user_id,post.id) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
