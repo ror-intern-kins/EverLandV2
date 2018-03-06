@@ -1,6 +1,17 @@
-<%= form_tag("/posts/result", method: "get") do %>
-<%= label_tag(:query, "Search for:") %>
-<%= hidden_field_tag(:search_type, "full") %>
-<%= text_field_tag(:query) %>
-<%= submit_tag("Search") %>
-<% end %>
+<div id="full-search">
+    <%= form_tag("/posts/result", method: "get") do %>
+    <%= label_tag(:query, "Search for:") %>
+    <%= hidden_field_tag(:search_type, "full") %>
+    <%= text_field_tag(:query) %>
+    <%= submit_tag("Search") %>
+    <% end %>    
+<button type="button" id='show-advance' onclick="onChangeForm('advance-search', 'full-search',)">advance search</button>
+        
+</div>
+<div id="advance-search" style="display: none">
+    <%= select_tag "categories", options_from_collection_for_select(@categories, "id", "name") %>
+    <%= select_tag "cities", options_from_collection_for_select(@cities, "id", "name") %>
+    
+<button id='show-full' onclick="onChangeForm('full-search', 'advance-search')">full search</button>
+    
+</div>

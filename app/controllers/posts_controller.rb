@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    @categories = Category.all
   end
 
   # GET /posts/1
@@ -16,8 +17,8 @@ class PostsController < ApplicationController
     search_type = params[:search_type]
     case search_type
     when "advance"
-    query = params.require(:query).permit(:category_id,:area,:price,:city_id)   
-    @posts = Post.where(query)
+      query = params.require(:query).permit(:category_id,:area,:price,:city_id)   
+      @posts = Post.where(query)
     when "full"
       text = params[:query]
       @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   )   
