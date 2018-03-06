@@ -25,54 +25,60 @@
     <div class="col-sm-6 row">
       <label class="col-sm-4 col-form-label">Hình Thức (<span style="color:red;">*</span>) :</label>
       <div class="col-sm-8">
-        <%= form.collection_select(:category_id, Category.first(2), :id, :name, 
-        {prompt: '-- Hình Thức --'},{class:"custom-select", id:'cate_id', onChange:"getId(this);"}) %>
-        <script>
-            function getId(e) {
-            return  e.value
-          };
-        </script>
+        <%= form.collection_select(:category_id, Category.where(super_id: nil), :id, :name, 
+        {prompt: '-- Hình Thức --'},{class:"custom-select", id:'cate_id'}) %>
       </div>
-      
     </div>
+
     <div class="col-sm-6 row">
         <label class="col-sm-3 col-form-label"> Loại (<span style="color:red;">*</span>) :</label>
         <div class="col-sm-9">
-            <%= form.collection_select(:category_id,
-            Category.where('category_id = ? AND category_id = supper_id', ), :id, :name)%>
-        </div><!--form.collection_select(:category_id, Category.all, :id, :name, 
-          Category.where('category_id = ? AND category_id = supper_id', params[:id]), :id, :name)  -->
-    </div>          
+            <%= form.select :category_detail_id, "<option></option>", 
+              {prompt:'--Phân Mục--'},{class:"custom-select", id:'cate_detail_id'}%>
+        </div>
+    </div>   
   </div>
   <!-- End Row Hình thức -->
-  <!-- Row Phường Quận -->
+
+  <!-- Row Quận -->
   <div class="form-group row">
       <div class="col-sm-6 row">
         <label class="col-sm-4 col-form-label">Tỉnh/Thành Phố (<span style="color:red;">*</span>) :</label>
         <div class="col-sm-8">
-          <%= form.collection_select(:city_id, City.all, :id, :name, {prompt: '-- Tỉnh/Thành Phố --'}, {class:"custom-select"}) %>
+          <%= form.collection_select(:city_id, City.all, :id, :name, 
+            {prompt: '-- Tỉnh/Thành Phố --'}, {class:"custom-select", id:'city_details'}) %>
         </div>
       </div>
+
       <div class="col-sm-6 row">
           <label class="col-sm-3 col-form-label"> Quận/Huyện (<span style="color:red;">*</span>) :</label>
           <div class="col-sm-9">
-            <%=form.collection_select(:district_id, 
-            District.all, :id, :name, {prompt: '-- Quận Huyện --'}, {class:"custom-select"}) %>
-          </div><!-- form.collection_select(:district_id, District.find_by(:city_id), :id, :name)  -->
+              <%= form.select :district_id, "<option></option>", 
+              {prompt:'--Quận Huyện--'},{class:"custom-select", id:'district_details'}%>
+          </div>
       </div>          
     </div>
-    <!-- End Row Phường Quận-->
-  
-  <div class="field">
-    Phường/Xã:
-    <%=form.collection_select(:ward_id, 
-    Ward.all, :id, :name, {prompt: '-- Phường/Xã --'}, {class:"custom-select"}) %>
-    <!-- form.collection_select(:ward_id, Ward.find_by(:district_id), :id, :name)  -->
+    <!-- End Row Quận-->
+
+  <!-- Row Phường  -->
+  <div class="form-group row">
+    <div class="col-sm-6 row">
+      <label class="col-sm-4 col-form-label">Phường/Xã:</label>
+      <div class="col-sm-8">
+          <%= form.select :ward_id, "<option></option>", 
+          {prompt:'-- Phường/Xã --'},{class:"custom-select", id:'ward_details'}%>
+      </div>
+    </div>
+    <div class="col-sm-6 row">
+        <label class="col-sm-3 col-form-label">Đường/Phố:</label>
+        <div class="col-sm-9">
+            <%= form.select :street_id, "<option></option>", 
+            {prompt:'-- Đường Phố --'},{class:"custom-select", id:'street_details'}%>
+        </div>
+    </div>          
   </div>
-  <div>
-    Đường/Phố:
-    <%= form.text_field :street_id, id: :post_street_id %>
-  </div>
+    <!-- End Row Phường-->
+
   <div class="field">
     Dự Án:
     <%= form.text_field :project, id: :post_project %>
@@ -211,3 +217,53 @@
         <%= form.submit %>
       </div>
       <% end %>
+
+
+
+<script>
+  //Ajax kiểm tra Hình thức - Loại
+  $(function() {
+    $('#cate_id').change(function(){
+      var value = $(this).val();
+      $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
+      $.get("new", {
+       category_id: value
+      },
+      function(data, status){
+        data.forEach(item => {
+            $('#cate_detail_id').append("<option value="+item.id+ ">"+ item.name + "</option>")
+        });
+      })
+    });
+  });
+  //Ajax kiểm tra TP - Quận
+  $(function() {
+    $('#city_details').change(function(){
+      var value = $(this).val();
+      $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
+      $.get("new", {
+       city_id: value
+      },
+      function(data, status){
+        data.forEach(item => {
+            $('#district_details').append("<option value="+item.id+ ">"+ item.name + "</option>")
+        });
+      })
+    });
+  });
+  //Ajax kiểm tra Quận - Phường
+  $(function() {
+    $('#district_details').change(function(){
+      var value = $(this).val();
+      $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
+      $.get("new", {
+       district_id: value
+      },
+      function(data, status){
+        data.forEach(item => {
+            $('#ward_details').append("<option value="+item.id+ ">"+ item.name + "</option>")
+        });
+      })
+    });
+  })
+</script>

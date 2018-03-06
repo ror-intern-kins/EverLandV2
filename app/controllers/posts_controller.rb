@@ -17,7 +17,29 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+
+    @categories = Category.where(super_id: nil)
+    @cities = City.all
+  
+  if params[:category_id]
+      @name = Category.where('super_id = ? and super_id is not null', params[:category_id])
+    respond_to do |format|
+      format.json { render json: @name }
+    end
   end
+  if params[:city_id]
+    @districts = City.find(params[:city_id]).districts.all
+    respond_to do |format|  
+      format.json { render json: @districts  }  
+    end
+  end
+  if params[:district_id]
+    @wards = District.find(params[:district_id]).wards.all
+    respond_to do |format|
+      format.json { render json: @wards }
+    end
+  end
+end
 
   # GET /posts/1/edit
   def edit
@@ -26,6 +48,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+
     @user = User.find(params[:user_id])
     @post = @user.posts.build(post_params)
     respond_to do |format|
