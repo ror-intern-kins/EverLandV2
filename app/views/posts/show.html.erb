@@ -1,114 +1,132 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <p class="display-4"><%= @post.title %></p>
+  </div>
+  <div class="row">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <%= link_to 'Edit', edit_user_post_path(@post), class: "btn btn-secondary" %> 
+        <%= link_to 'Back', posts_path, class: "btn btn-secondary"  %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <p>
+      
+      <% if @post.images.empty? %>
+        
+      <% else %>
+        <%= image_tag @post.images.first.url %>
+      <% end %>
+      
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p>
+        <strong>Address number:</strong>
+        <%= @post.address_number %>
+      </p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+      <p>
+        <strong>Project:</strong>
+        <%= @post.project %>
+      </p>
 
-<p>
-  <strong>Address number:</strong>
-  <%= @post.address_number %>
-</p>
+      <p>
+        <strong>Area:</strong>
+        <%= @post.area %>
+      </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
+      <p>
+        <strong>Price:</strong>
+        <%= @post.price %> <%= @post.unit %>
+      </p>
 
-<p>
-  <strong>Project:</strong>
-  <%= @post.project %>
-</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>
+        <strong>Description:</strong>
+        <%= @post.description %>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <p>
+        <strong>Front:</strong>
+        <%= @post.front %>
+      </p>
 
-<p>
-  <strong>Area:</strong>
-  <%= @post.area %>
-</p>
+      <p>
+        <strong>Entrance:</strong>
+        <%= @post.entrance %>
+      </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @post.price %>
-</p>
+      <p>
+        <strong>House direction:</strong>
+        <%= @post.house_direction %>
+      </p>
 
-<p>
-  <strong>Unit:</strong>
-  <%= @post.unit %>
-</p>
+      <p>
+        <strong>Balcony direction:</strong>
+        <%= @post.balcony_direction %>
+      </p>
 
-<p>
-  <strong>Lng:</strong>
-  <%= @post.lng %>
-</p>
+      <p>
+        <strong>Floor:</strong>
+        <%= @post.floor %>
+      </p>
 
-<p>
-  <strong>Lat:</strong>
-  <%= @post.lat %>
-</p>
+      <p>
+        <strong>Bedroom:</strong>
+        <%= @post.bedroom %>
+      </p>
 
-<p>
-  <strong>Front:</strong>
-  <%= @post.front %>
-</p>
+      <p>
+        <strong>Toilet:</strong>
+        <%= @post.toilet %>
+      </p>
 
-<p>
-  <strong>Entrance:</strong>
-  <%= @post.entrance %>
-</p>
+      <p>
+        <strong>Furniture:</strong>
+        <%= @post.furniture %>
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p>
+        <strong>Contact name:</strong>
+        <%= @post.contact_name %>
+      </p>
 
-<p>
-  <strong>House direction:</strong>
-  <%= @post.house_direction %>
-</p>
+      <p>
+        <strong>Contact address:</strong>
+        <%= @post.contact_address %>
+      </p>
 
-<p>
-  <strong>Balcony direction:</strong>
-  <%= @post.balcony_direction %>
-</p>
+      <p>
+        <strong>Contact phone:</strong>
+        <%= @post.contact_phone %>
+      </p>
 
-<p>
-  <strong>Floor:</strong>
-  <%= @post.floor %>
-</p>
+      <p>
+        <strong>Contact mobile:</strong>
+        <%= @post.contact_mobile %>
+      </p>
 
-<p>
-  <strong>Bedroom:</strong>
-  <%= @post.bedroom %>
-</p>
+      <p>
+        <strong>Contact mail:</strong>
+        <%= @post.contact_mail %>
+      </p>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Toilet:</strong>
-  <%= @post.toilet %>
-</p>
 
-<p>
-  <strong>Furniture:</strong>
-  <%= @post.furniture %>
-</p>
 
-<p>
-  <strong>Contact name:</strong>
-  <%= @post.contact_name %>
-</p>
 
-<p>
-  <strong>Contact address:</strong>
-  <%= @post.contact_address %>
-</p>
 
-<p>
-  <strong>Contact phone:</strong>
-  <%= @post.contact_phone %>
-</p>
 
-<p>
-  <strong>Contact mobile:</strong>
-  <%= @post.contact_mobile %>
-</p>
 
-<p>
-  <strong>Contact mail:</strong>
-  <%= @post.contact_mail %>
-</p>
 
-<%= link_to 'Edit', edit_user_post_path(@post) %> 
-<%= link_to 'Back', posts_path %>
