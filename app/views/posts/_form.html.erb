@@ -25,15 +25,22 @@
     <div class="col-sm-6 row">
       <label class="col-sm-4 col-form-label">Hình Thức (<span style="color:red;">*</span>) :</label>
       <div class="col-sm-8">
-        <%= form.collection_select(:category_id, Category.first(2), :id, :name, {prompt: '-- Hình Thức --'}, {class:"custom-select"}) %>
+        <%= form.collection_select(:category_id, Category.first(2), :id, :name, 
+        {prompt: '-- Hình Thức --'},{class:"custom-select", id:'cate_id', onChange:"getId(this);"}) %>
+        <script>
+            function getId(e) {
+            return  e.value
+          };
+        </script>
       </div>
+      
     </div>
     <div class="col-sm-6 row">
         <label class="col-sm-3 col-form-label"> Loại (<span style="color:red;">*</span>) :</label>
         <div class="col-sm-9">
-          <%=form.collection_select(:category_id, 
-            Category.all, :id, :name, {prompt: '-- Phân mục --'}, {class:"custom-select"}) %>
-        </div><!--form.collection_select(:category_id, 
+            <%= form.collection_select(:category_id,
+            Category.where('category_id = ? AND category_id = supper_id', ), :id, :name)%>
+        </div><!--form.collection_select(:category_id, Category.all, :id, :name, 
           Category.where('category_id = ? AND category_id = supper_id', params[:id]), :id, :name)  -->
     </div>          
   </div>
@@ -58,7 +65,13 @@
   
   <div class="field">
     Phường/Xã:
+    <%=form.collection_select(:ward_id, 
+    Ward.all, :id, :name, {prompt: '-- Phường/Xã --'}, {class:"custom-select"}) %>
     <!-- form.collection_select(:ward_id, Ward.find_by(:district_id), :id, :name)  -->
+  </div>
+  <div>
+    Đường/Phố:
+    <%= form.text_field :street_id, id: :post_street_id %>
   </div>
   <div class="field">
     Dự Án:
