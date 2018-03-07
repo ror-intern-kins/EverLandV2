@@ -8,19 +8,21 @@
           <li>
             <%= message %>
           </li>
-        <% end %>
+          <% end %>
       </ul>
     </div>
-  <% end %>
+    <% end %>
 
-  <!-- THÔNG TIN CƠ BẢN -->
+<!-- THÔNG TIN CƠ BẢN -->
+<div class="container">
+  <h3>THÔNG TIN CƠ BẢN</h3>
   <div class="form-group row">
-      <div class="col-sm-12 row">
+    <div class="col-sm-12 row">
       <label class="col-sm-2 col-form-label"> Tiêu Đề (<span style="color:red;">*</span>):</label>
       <div class="col-sm-10">
         <%= form.text_field :title, id: :post_title, class:"form-control", placeholder:"Vui lòng nhập tiêu đề tin đăng của bạn. Tối thiểu là 30 ký tự và tối đa là 99 ký tự." %>
+      </div>
     </div>
-  </div>
   </div>
   <!-- Row Hình thức -->
   <div class="form-group row">
@@ -28,175 +30,247 @@
       <label class="col-sm-4 col-form-label">Hình Thức (<span style="color:red;">*</span>) :</label>
       <div class="col-sm-8">
         <%= form.collection_select(:category_id, Category.where(super_id: nil), :id, :name, 
-        {prompt: '-- Hình Thức --'},{class:"custom-select", id:'cate_id'}) %>
+    {prompt: '-- Hình Thức --'},{class:"custom-select", id:'cate_id'}) %>
       </div>
     </div>
 
     <div class="col-sm-6 row">
-        <label class="col-sm-3 col-form-label"> Loại (<span style="color:red;">*</span>) :</label>
-        <div class="col-sm-9">
-            <%= form.select :category_detail_id, "<option></option>", 
-              {prompt:'--Phân Mục--'},{class:"custom-select", id:'cate_detail_id'}%>
-        </div>
-    </div>   
+      <label class="col-sm-3 col-form-label"> Loại (<span style="color:red;">*</span>) :</label>
+      <div class="col-sm-9">
+        <%= form.select :category_detail_id, "<option></option>", 
+          {prompt:'--Phân Mục--'},{class:"custom-select", id:'cate_detail_id'}%>
+      </div>
+    </div>
   </div>
   <!-- End Row Hình thức -->
 
   <!-- Row Quận -->
   <div class="form-group row">
-      <div class="col-sm-6 row">
-        <label class="col-sm-4 col-form-label">Tỉnh/Thành Phố (<span style="color:red;">*</span>) :</label>
-        <div class="col-sm-8">
-          <%= form.collection_select(:city_id, City.all, :id, :name, 
-            {prompt: '-- Tỉnh/Thành Phố --'}, {class:"custom-select", id:'city_details'}) %>
-        </div>
+    <div class="col-sm-6 row">
+      <label class="col-sm-4 col-form-label">Tỉnh/Thành Phố (<span style="color:red;">*</span>):</label>
+      <div class="col-sm-8">
+        <%= form.collection_select(:city_id, City.all, :id, :name, 
+        {prompt: '-- Tỉnh/Thành Phố --'}, {class:"custom-select", id:'city_details'}) %>
       </div>
-
-      <div class="col-sm-6 row">
-          <label class="col-sm-3 col-form-label"> Quận/Huyện (<span style="color:red;">*</span>) :</label>
-          <div class="col-sm-9">
-              <%= form.select :district_id, "<option></option>", 
-              {prompt:'--Quận Huyện--'},{class:"custom-select", id:'district_details'}%>
-          </div>
-      </div>          
     </div>
-    <!-- End Row Quận-->
+
+    <div class="col-sm-6 row">
+      <label class="col-sm-3 col-form-label">Quận/Huyện(<span style="color:red;">*</span>):</label>
+      <div class="col-sm-9">
+        <%= form.select :district_id, "<option></option>", 
+          {prompt:'--Quận Huyện--'},{class:"custom-select", id:'district_details'}%>
+      </div>
+    </div>
+  </div>
+  <!-- End Row Quận-->
 
   <!-- Row Phường  -->
   <div class="form-group row">
     <div class="col-sm-6 row">
       <label class="col-sm-4 col-form-label">Phường/Xã:</label>
       <div class="col-sm-8">
-          <%= form.select :ward_id, "<option></option>", 
-          {prompt:'-- Phường/Xã --'},{class:"custom-select", id:'ward_details'}%>
+        <%= form.select :ward_id, "<option></option>", 
+      {prompt:'-- Phường/Xã --'},{class:"custom-select", id:'ward_details'}%>
       </div>
     </div>
     <div class="col-sm-6 row">
-        <label class="col-sm-3 col-form-label">Đường/Phố:</label>
-        <div class="col-sm-9">
-            <%= form.select :street_id, "<option></option>", 
-            {prompt:'-- Đường Phố --'},{class:"custom-select", id:'street_details'}%>
-        </div>
-    </div>          
+      <label class="col-sm-3 col-form-label">Đường/Phố:</label>
+      <div class="col-sm-9">
+        <%= form.select :street_id, "<option></option>", 
+        {prompt:'-- Đường Phố --'},{class:"custom-select", id:'street_details'}%>
+      </div>
+    </div>
   </div>
   <!-- End Row Phường-->
 
-<!-- Row Dự Án - Diện Tích  -->
-<div class="form-group row">
+  <!-- Row Dự Án - Diện Tích  -->
+  <div class="form-group row">
     <div class="col-sm-6 row">
       <label class="col-sm-4 col-form-label">Dự Án:</label>
       <div class="col-sm-8">
-          <%= form.select :project, "<option></option>", 
-          {prompt:'-- Dự Án --'},{class:"custom-select", id:'project_details'}%>
+        <%= form.text_field :project, id: :post_project, class:"form-control"%>
       </div>
     </div>
     <div class="col-sm-6 row">
-        <label class="col-sm-3 col-form-label">Diện Tích:</label>
-        <div class="col-sm-6">
-          <%= form.text_field :area, id: :post_area, class:"form-control" %>
-        </div>
-        <div class="col-sm-2">m2</div>
-    </div>          
+      <label class="col-sm-3 col-form-label">Diện Tích:</label>
+      <div class="col-sm-6">
+        <%= form.text_field :area, id: :post_area, class:"form-control" %>
+      </div>
+      <div class="col-sm-2">m2</div>
+    </div>
   </div>
   <!-- End Row  Dự Án - Diện Tích-->
 
   <!-- Row Giá - Đơn Vị  -->
-<div class="form-group row">
+  <div class="form-group row">
     <div class="col-sm-6 row">
       <label class="col-sm-4 col-form-label">Giá:</label>
       <div class="col-sm-8">
         <%= form.text_field :price, id: :post_price, class:"form-control"%>
-      <!-- if unit.key = 1 :post_price = "" -->        
+          <!-- if unit.key = 1 :post_price = "" -->
       </div>
     </div>
     <div class="col-sm-6 row">
-        <label class="col-sm-3 col-form-label"> Đơn Vị:</label>
-        <div class="col-sm-9">
-            <%= form.select :unit, [['Thỏa Thuận', 1], ['Triệu', 2], ['Tỷ', 3], ['Trăm nghìn/m2', 4], ['Triệu/m2', 5]], 
-            {prompt:false},{class:"custom-select"}%>
-        </div>
-    </div>          
+      <label class="col-sm-3 col-form-label">Đơn Vị:</label>
+      <div class="col-sm-9">
+        <%= form.select :unit, [['Thỏa Thuận', 1], ['Triệu', 2], ['Tỷ', 3], ['Trăm nghìn/m2', 4], ['Triệu/m2', 5]], 
+        {prompt:false},{class:"custom-select"}%>
+      </div>
+    </div>
   </div>
   <!-- End Row  Giá - Đơn Vị -->
-      <div class="field">
-        Tổng Giá Tiền:
+
+  <!-- Row Tổng Tiền  -->
+  <div class="form-group row">
+    <div class="col-sm-12 row">
+      <label class="col-sm-2 col-form-label">Tổng Giá Tiền:</label>
+      <div class="col-sm-10" id="totalPrice">
         <!-- if unit.key = 2 :post_price * 1000000 
-    if unit.key = 3 :post_price * 1000000000
-    if unit.key = 4 :post_price * :area * 100000
-    if unit.key = 5 :post_price * :area * 1000000 
-    if unit.key = 1 Thoả Thuận, :price = ""
-    else -->
+if unit.key = 3 :post_price * 1000000000
+if unit.key = 4 :post_price * :area * 100000
+if unit.key = 5 :post_price * :area * 1000000 
+if unit.key = 1 Thoả Thuận, :price = ""
+else -->
       </div>
-      <div class="field">
-        Địa Chỉ (
-        <span style="color:red;">*</span>) :
-        <%= form.text_field :address_number, id: :post_address_number %>
-      </div>
-      <!-- THÔNG TIN CƠ BẢN -->
+    </div>
+  </div>
+  <!-- End Row Tổng Tiền -->
 
-      <!-- THÔNG TIN MÔ TẢ -->
-      <div class="field">
-        <small>(
-          <span style="color:red;">*</span>) Tối đa chỉ 3000 ký tự</small>
-        <%= form.text_area :description, id: :post_description %>
-          <small>
-            Giới thiệu chung về bất động sản của bạn. Ví dụ: Khu nhà có vị trí thuận lợi: Gần công viên, gần trường học ... Tổng diện
-            tích 52m2, đường đi ô tô vào tận cửa.
-          </small>
-          <br>
-          <small style="color:red;">Lưu ý: tin rao chỉ để mệnh giá tiền Việt Nam Đồng.</small>
+  <!-- Row Địa chỉ  -->
+  <div class="form-group row">
+    <div class="col-sm-12 row">
+      <label class="col-sm-2 col-form-label">Địa Chỉ (<span style="color:red;">*</span>):</label>
+      <div class="col-sm-10">
+        <%= form.text_field :address_number, id: :post_address_number, class:"form-control" %>
       </div>
+    </div>
+  </div>
+  <!-- End Row Tổng Tiền -->
+</div>
+<!-- THÔNG TIN CƠ BẢN -->
 
-      <!-- THÔNG TIN KHÁC -->
-      <div class="field">
-        Mặt Tiền (m):
-        <%= form.text_field :front, id: :post_front %>
+<!-- THÔNG TIN MÔ TẢ -->      
+<div class="container">
+  <h3>THÔNG TIN MÔ TẢ</h3>
+    <div class="form-group row">
+        <div class="col-sm-12 row">
+          <label class="col-sm-12 col-form-label"><small>(<span style="color:red;">*</span>) Tối đa chỉ 3000 ký tự</small></label>
+          <div class="col-sm-8">
+            <%= form.text_area :description, id: :post_description, class:"form-control", rows:"8",cols:"100" %>
+          </div>
+          <div class="col-sm-4" style="text-align: justify;">
+              <small>
+                  Giới thiệu chung về bất động sản của bạn. Ví dụ: Khu nhà có vị trí thuận lợi: Gần công viên, gần trường học ... Tổng diện
+                  tích 52m2, đường đi ô tô vào tận cửa.
+                </small>
+                <br>
+                <small style="color:red;">Lưu ý: tin rao chỉ để mệnh giá tiền Việt Nam Đồng.</small>
+          </div>
+        </div>
       </div>
+</div>
+<!-- THÔNG TIN MÔ TẢ -->
 
-      <div class="field">
-        Đường vào (m):
-        <%= form.text_field :entrance, id: :post_entrance %>
+<!-- THÔNG TIN KHÁC -->
+<div class="container">
+  <h3>THÔNG TIN KHÁC</h3>
+  <small>Quý vị nên điền đầy đủ thông tin vào các mục dưới đây để tin đăng có hiệu quả hơn</small>
+  <!-- row mặt tiền- đường vào -->
+  <div class="form-group row">
+      <div class="col-sm-6 row">
+        <label class="col-sm-4 col-form-label">Mặt Tiền (m):</label>
+        <div class="col-sm-8">
+            <%= form.text_field :front, id: :post_front, class:'form-control' %>
+        </div>
       </div>
+  
+      <div class="col-sm-6 row">
+        <label class="col-sm-4 col-form-label"> Đường vào (m):</label>
+        <div class="col-sm-8">
+            <%= form.text_field :entrance, id: :post_entrance, class:'form-control' %>
+        </div>
+      </div>
+  </div>
+  <!-- row mặt tiền- đường vào -->
+  
+  <!-- row hướng nhà hướng ban công -->
+  <div class="form-group row">
+      <div class="col-sm-6 row">
+        <label class="col-sm-4 col-form-label">Hướng Nhà:</label>
+        <div class="col-sm-8">
+            <%= form.select :house_direction, [['Đông', 1], ['Tây', 2], ['Nam', 3], ['Bắc', 4]],
+            {prompt:'--KXĐ--'},{class:"custom-select"} %>
+        </div>
+      </div>
+  
+      <div class="col-sm-6 row">
+        <label class="col-sm-4 col-form-label">Hướng Ban Công:</label>
+        <div class="col-sm-8">
+            <%= form.select :balcony_direction, [['Đông', 1], ['Tây', 2], ['Nam', 3], ['Bắc', 4]],
+            {prompt:'--KXĐ--'},{class:"custom-select"} %>
+        </div>
+      </div>
+    </div>
+    <!--  row hướng nhà hướng ban công-->
 
-      <div class="field">
-        Hướng Nhà:
-        <%= select(:post, :house_direction, 
-    [['Đông', 1], ['Tây', 2], ['Nam', 3], ['Bắc', 4]]) %>
+  <!-- row hướng số tầng-->
+  <div class="form-group row">
+      <div class="col-sm-6 row">
+        <label class="col-sm-4 col-form-label"> Số Tầng:</label>
+        <div class="col-sm-8">
+            <%= form.number_field :floor, id: :post_floor, in: 0..999, class:'form-control' %>
+        </div>
       </div>
+    </div>
+  <!--  row hướng số tầng-->
 
-      <div class="field">
-        Hướng Ban Công:
-        <%= select(:post, :balcony_direction, 
-    [['Đông', 1], ['Tây', 2], ['Nam', 3], ['Bắc', 4]]) %>
+ <!-- row hướng số phòng, toilet-->
+ <div class="form-group row">
+    <div class="col-sm-6 row">
+        <label class="col-sm-4 col-form-label">Số Phòng Ngủ:</label>
+        <div class="col-sm-8">
+            <%= form.number_field :bedroom, id: :post_bedroom, in: 0..999, class:'form-control' %>
+        </div>
       </div>
-      <div class="field">
-        Số Tầng:
-        <%= form.number_field :floor, id: :post_floor, in: 0..999 %>
+  
+      <div class="col-sm-6 row">
+        <label class="col-sm-4 col-form-label"> Số Toilet:</label>
+        <div class="col-sm-8">
+            <%= form.number_field :toilet, id: :post_toilet, in: 0..999, class:'form-control' %>
+        </div>
       </div>
+  </div>
+  <!--  row hướng nhà hướng ban công-->
 
-      <div class="field">
-        Số Phòng Ngủ:
-        <%= form.number_field :bedroom, id: :post_bedroom, in: 0..999 %>
+<!-- row nội thất-->
+<div class="form-group row">
+    <div class="col-sm-12 row">
+        <label class="col-sm-2 col-form-label"> Nội Thất:</label>
+        <div class="col-sm-10">
+        <%= form.text_area :furniture, id: :post_furniture, cols:"100", rows:"10", class:'form-control' %> 
+        </div>
       </div>
+  </div>
+<!-- row nội thất-->
+</div>
+<!-- THÔNG TIN KHÁC -->
 
-      <div class="field">
-        Số Toilet:
-        <%= form.number_field :toilet, id: :post_toilet, in: 0..999 %>
-      </div>
-      <div class="field">
-        Nội Thất:
-        <%= form.text_area :furniture, id: :post_furniture %>
-      </div>
-      <!-- THÔNG TIN KHÁC -->
+<!-- HÌNH ẢNH VÀ VIDEO chưa làm -->
+<div class="container">
+  <h3>HÌNH ẢNH</h3>
+    <small>Tối đa 8 ảnh với tin thường và 16 với tin VIP. Mỗi ảnh tối đa 2MB </small>
+    <br><small>Tin rao có ảnh sẽ được xem nhiều hơn gấp 10 lần và được nhiều người gọi 
+      gấp 5 lần so với tin rao không có ảnh. Hãy đăng ảnh để được giao dịch nhanh chóng!</small>
+</div>
 
-      <!-- HÌNH ẢNH VÀ VIDEO chưa làm -->
-      <small>Tối đa 8 ảnh với tin thường và 16 với tin VIP. Mỗi ảnh tối đa 2MB </small>
-      <br>
-      <small>Tin rao có ảnh sẽ được xem nhiều hơn gấp 10 lần và được nhiều người gọi gấp 5 lần so với tin rao không có ảnh. Hãy
-        đăng ảnh để được giao dịch nhanh chóng!</small>
-      <!-- BẢN ĐỒ  chưa làm-->
-
-      <!-- <div class="field">
+<!-- BẢN ĐỒ  chưa làm-->
+<div class="container">
+<h3>BẢN ĐỒ</h3>
+<small>Để tăng độ tin cậy và tin rao được nhiều người quan tâm hơn, 
+  hãy sửa vị trí tin rao của bạn trên bản đồ bằng cách kéo icon tới đúng vị trí của tin rao.</small>
+  <small>Có thể dữ liệu bản đồ không chính xác. 
+    Vì vậy nếu có bất kỳ sai xót nào xin bạn hãy báo cho chúng tôi để khắc phục kịp thời.</small>
+<!-- <div class="field">
     <%= form.label :lng %>
     <%= form.text_field :lng, id: :post_lng %>
   </div>
@@ -205,101 +279,130 @@
     <%= form.label :lat %>
     <%= form.text_field :lat, id: :post_lat %>
   </div> -->
+</div>
 
-      <!-- LIÊN HỆ -->
-      <div class="field">
-        Tên Liên Hệ:
-        <%= form.text_field :contact_name, id: :post_contact_name %>
+  <!-- LIÊN HỆ -->
+  <div class="container">
+    <h3>LIÊN HỆ</h3>
+    <div class="form-group row">
+        <div class="col-sm-12 row">
+            <label class="col-sm-2 col-form-label">Tên Liên Hệ:</label>
+            <div class="col-sm-10">
+              <%= form.text_field :contact_name, id: :post_contact_name, class:'form-control' %>
+            </div>
+          </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12 row">
+            <label class="col-sm-2 col-form-label">Địa Chỉ:</label>
+            <div class="col-sm-10">
+              <%= form.text_field :contact_address, id: :post_contact_address, class:'form-control' %>
+            </div>
+          </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12 row">
+            <label class="col-sm-2 col-form-label"> Điện Thoại:</label>
+            <div class="col-sm-10">
+              <%= form.text_field :contact_phone, id: :post_contact_phone, class:'form-control'  %>
+            </div>
+          </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12 row">
+            <label class="col-sm-2 col-form-label"> Di Dộng (<span style="color:red;">*</span>):</label>
+            <div class="col-sm-10">
+              <%= form.text_field :contact_mobile, id: :post_contact_mobile, class:'form-control'  %>
+            </div>
+          </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12 row">
+            <label class="col-sm-2 col-form-label"> Email:</label>
+            <div class="col-sm-10">
+              <%= form.text_field :contact_mail, id: :post_contact_mail, class:'form-control'  %>
+            </div>
+          </div>
+    </div>
+  </div>
+  <!-- LIÊN HỆ -->
+  <div class="container">
+      <div class="row">
+        <div class="col-md-3 offset-md-6">
+            <div class="actions">
+                <%= form.submit class:'btn btn-danger' %>
+              </div>
+        </div>
       </div>
-
-      <div class="field">
-        Địa Chỉ:
-        <%= form.text_field :contact_address, id: :post_contact_address %>
-      </div>
-
-      <div class="field">
-        Điện Thoại:
-        <%= form.text_field :contact_phone, id: :post_contact_phone %>
-      </div>
-
-      <div class="field">
-        Di Dộng (
-        <span style="color:red;">*</span>) :
-        <%= form.text_field :contact_mobile, id: :post_contact_mobile %>
-      </div>
-
-      <div class="field">
-        Email:
-        <%= form.text_field :contact_mail, id: :post_contact_mail %>
-      </div>
-      <!-- LIÊN HỆ -->
-      <div class="actions">
-        <%= form.submit %>
-      </div>
-      <% end %>
+  </div>
+  
+<% end %>
 
 
 
-<script>
-  //Ajax kiểm tra Hình thức - Loại
-  $(function() {
-    $('#cate_id').change(function(){
-      var value = $(this).val();
-      $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
-      $.get("new", {
-       category_id: value
-      },
-      function(data, status){
-        data.forEach(item => {
-            $('#cate_detail_id').append("<option value="+item.id+ ">"+ item.name + "</option>")
-        });
-      })
-    });
-  });
-  //Ajax kiểm tra TP - Quận
-  $(function() {
-    $('#city_details').change(function(){
-      var value = $(this).val();
-      $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
-      $.get("new", {
-       city_id: value
-      },
-      function(data, status){
-        data.forEach(item => {
-            $('#district_details').append("<option value="+item.id+ ">"+ item.name + "</option>")
-        });
-      })
-    });
-  });
-  //Ajax kiểm tra Quận - Phường
-  $(function() {
-    $('#district_details').change(function(){
-      var value = $(this).val();
-      $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
-      $.get("new", {
-       district_id: value
-      },
-      function(data, status){
-        data.forEach(item => {
-            $('#ward_details').append("<option value="+item.id+ ">"+ item.name + "</option>")
-        });
-      })
-    });
-  })
-  //Ajax kiểm tra Phường - Đường
-  $(function() {
-    $('#ward_details').change(function(){
-      var value = $(this).val();
-      $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
-      //check empty key...
-      $.get("new", {
-       ward_id: value
-      },
-      function(data, status){
-        data.forEach(item => {
-            $('#street_details').append("<option value="+item.id+ ">"+ item.name + "</option>")
-        });
-      })
-    });
-  })
-</script>
+        <script>
+          //Ajax kiểm tra Hình thức - Loại
+          $(function () {
+            $('#cate_id').change(function () {
+              var value = $(this).val();
+              $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
+              $.get("new", {
+                  category_id: value
+                },
+                function (data, status) {
+                  data.forEach(item => {
+                    $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name +
+                      "</option>")
+                  });
+                })
+            });
+          });
+          //Ajax kiểm tra TP - Quận
+          $(function () {
+            $('#city_details').change(function () {
+              var value = $(this).val();
+              $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
+              $.get("new", {
+                  city_id: value
+                },
+                function (data, status) {
+                  data.forEach(item => {
+                    $('#district_details').append("<option value=" + item.id + ">" + item.name +
+                      "</option>")
+                  });
+                })
+            });
+          });
+          //Ajax kiểm tra Quận - Phường
+          $(function () {
+            $('#district_details').change(function () {
+              var value = $(this).val();
+              $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
+              $.get("new", {
+                  district_id: value
+                },
+                function (data, status) {
+                  data.forEach(item => {
+                    $('#ward_details').append("<option value=" + item.id + ">" + item.name + "</option>")
+                  });
+                })
+            });
+          })
+          //Ajax kiểm tra Phường - Đường
+          $(function () {
+            $('#ward_details').change(function () {
+              var value = $(this).val();
+              $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
+              //check empty key...
+              $.get("new", {
+                  ward_id: value
+                },
+                function (data, status) {
+                  data.forEach(item => {
+                    $('#street_details').append("<option value=" + item.id + ">" + item.name +
+                      "</option>")
+                  });
+                })
+            });
+          })
+        </script>
