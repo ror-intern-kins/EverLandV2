@@ -17,7 +17,35 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+
+    @categories = Category.where(super_id: nil)
+    @cities = City.all
+  
+  if params[:category_id]
+      @name = Category.where('super_id = ? and super_id is not null', params[:category_id])
+    respond_to do |format|
+      format.json { render json: @name }
+    end
   end
+  if params[:city_id]
+    @districts = City.find(params[:city_id]).districts.all
+    respond_to do |format|  
+      format.json { render json: @districts  }  
+    end
+  end
+  if params[:district_id]
+    @wards = District.find(params[:district_id]).wards.all
+    respond_to do |format|
+      format.json { render json: @wards }
+    end
+  end
+  if params[:ward_id]
+    @streets = Ward.find(params[:ward_id]).streets.all
+    respond_to do |format|
+      format.json { render json: @streets }
+    end
+  end
+end
 
   # GET /posts/1/edit
   def edit
@@ -26,11 +54,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
 
+    @user = User.find(params[:user_id])
+    @post = @user.posts.build(post_params)
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to post_path(@post), notice: 'Bài viết đã được đăng thành công.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -74,6 +103,13 @@ class PostsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :address_number, :description, :project, :area, :price, :unit, :lng, :lat, :front, :entrance, :house_direction, :balcony_direction, :floor, :bedroom, :toilet, :furniture, :contact_name, :contact_address, :contact_phone, :contact_mobile, :contact_mail)
+      params.require(:post).permit(:title,:description, :user_id,
+      :category_id, :city_id, :district_id, :ward_id, 
+      :street_id, :address_number,:project, :unit, 
+      :area, :price,:front, :entrance,
+      :lng, :lat, 
+      :house_direction, :balcony_direction, 
+      :floor, :bedroom, :toilet, :furniture, 
+      :contact_name, :contact_address, :contact_phone, :contact_mobile, :contact_mail)
     end
 end

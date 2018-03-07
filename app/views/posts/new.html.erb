@@ -1,5 +1,9 @@
-<h1>New Post</h1>
+<div class="container">
+    <h3>ĐĂNG TIN RAO BÁN, CHO THUÊ NHÀ ĐẤT</h3>
+    <span>(Quý vị nhập thông tin nhà đất cần bán hoặc cho thuê vào các mục dưới đây)</span>
+    
+    <%= render 'form', post: @post %>
+    
+  </div>
 
-<%= render 'form', post: @post %>
-
-<%= link_to 'Back', posts_path %>
+<!-- <%= link_to 'Back', posts_path %> -->
