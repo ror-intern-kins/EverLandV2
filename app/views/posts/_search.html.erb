@@ -26,43 +26,49 @@
         <div class="district">
             <%= f.select :district_id,"<option></option>", include_blank: true, prompt: "--Select district" %>
         </div>
+        <!-- AREA  -->
+        <div class="field">
+            <%= f.label :area_bottom %>
+            <%= f.text_field :area_bottom, id: :area_bottom %>
+        </div>
+        <div class="field">
+            <%= f.label :area_top %>
+            <%= f.text_field :area_top, id: :area_top %>
+        </div>
+        <!-- PRICE  -->
+        <div class="field">
+            <%= f.label :price_bottom %>
+            <%= f.text_field :price_bottom, id: :price_bottom %>
+        </div>
+        <div class="field">
+            <%= f.label :price_top %>
+            <%= f.text_field :price_top, id: :price_top %>
+        </div>
+        <button type="button" id="btnShowSAdvance" class="btn btn-success" >Show super advance</button>
+        <!-- SUPER ADVANCE -->
+        <div id="super_advance" style="display: none;">
+            <!-- WARD -->
+            <div class="ward">
+                <%= f.select :ward_id,"<option></option>", prompt: "--Select ward" %>
+            </div>
+            <!-- STREET -->
+            <div class="street">
+                <%= f.select :street_id,"<option></option>", prompt: "--Select street" %>
+            </div>
+            <!-- HOUSE DIRECTION -->
+            <div class="house_direction">
+                    <%= f.select :house_direction,"<option value="">Không xác định</option><option value='Đông'>Đông</option><option value='Tây'>Tây</option><option value='Nam'>Nam</option><option value='Bắc'>Bắc</option><option value='Đông-Bắc'>Đông-Bắc</option><option value='Tây-Bắc'>Tây-Bắc</option><option value='Tây-Nam'>Tây-Nam</option><option value='Đông-Nam'>Đông-Nam</option>".html_safe, prompt: "--Select house direction" %>               
+            </div>
+            <!-- BEDROOM -->
+            <div class="bedroom">
+                <%= f.select :bedroom,"<option value="">Không xác định</option><option value=1>1+</option><option value=2>2+</option><option value=3>3+</option><option value=4>4+</option><option value=5>5+</option>".html_safe, prompt: "--Select house direction" %>                               
+            </div>
+        </div>
         <div class="actions">
             <%= f.submit %>
         </div>
     <% end %>
     
 <a id='show-full' class="btn btn-primary" onclick="onChangeForm('full-search', 'advance-search')">full search</a>
-<script>
-        $(function() {
-            
-            $('#search_city_id').change(function(){
-                var value = $('#search_city_id').val();
-                $('#search_district_id').html("<option>--Select district--</option>");
-                $.get("posts", {
-                    city_id: value
-                },
-                function(data, status){
-                    data.forEach(item => {
-                        $('#search_district_id').append("<option value="+item.id+ ">"+ item.name + "</option>")
-                    });
-                })
-            });
 
-            $('#search_category_id').change(function(){
-                var value = $(this).val();
-                $("#category-detail").removeAttr("style").hide();
-                $("#category-detail").show();
-                $('#search_category_detail_id').html("<option>--Select specific category--</option>");
-                $.get("posts", {
-                    category_id: value
-                },
-                function(data, status){
-                    data.forEach(item => {
-                        $('#search_category_detail_id').append("<option value="+item.id+ ">"+ item.name + "</option>")
-                    });
-                })
-            });
-
-        });
-</script>
 </div>
