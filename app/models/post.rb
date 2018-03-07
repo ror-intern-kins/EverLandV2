@@ -41,6 +41,9 @@ class Post < ApplicationRecord
     validates :contact_name, allow_blank:true,
     length: {maximum:200, message: 'Tên phải có độ dài tối đa 200 ký tự.'}, 
     format: {with: /\A[a-zA-Z]+\z?/, message: 'Tên không hợp lệ.'}
+    validates :project, allow_blank:true,
+    length: {maximum:200, message: 'Dự án có độ dài tối đa 200 ký tự.'}, 
+    format: {with: /\A[a-zA-Z]+\z?/, message: 'Tên dự án không hợp lệ.'}
         #Num
     validates :price, allow_blank:true, numericality: {only_float: true, greater_than: 0, less_than_or_equal_to: 999999, 
         message: 'Giá không hợp lệ.'}

@@ -20,7 +20,9 @@
     <div class="col-sm-12 row">
       <label class="col-sm-2 col-form-label"> Tiêu Đề (<span style="color:red;">*</span>):</label>
       <div class="col-sm-10">
-        <%= form.text_field :title, id: :post_title, class:"form-control", placeholder:"Vui lòng nhập tiêu đề tin đăng của bạn. Tối thiểu là 30 ký tự và tối đa là 99 ký tự." %>
+        <%= form.text_field :title, id: :post_title, class:"form-control", 
+        placeholder:"Vui lòng nhập tiêu đề tin đăng của bạn. Tối thiểu là 30 ký tự và tối đa là 99 ký tự.",
+        maxlength:"99", minlength:"30"%>
       </div>
     </div>
   </div>
@@ -88,13 +90,14 @@
     <div class="col-sm-6 row">
       <label class="col-sm-4 col-form-label">Dự Án:</label>
       <div class="col-sm-8">
-        <%= form.text_field :project, id: :post_project, class:"form-control"%>
+        <%= form.text_field :project, id: :post_project, class:"form-control", maxlength:"200"%>
       </div>
     </div>
     <div class="col-sm-6 row">
       <label class="col-sm-3 col-form-label">Diện Tích:</label>
       <div class="col-sm-6">
-        <%= form.text_field :area, id: :post_area, class:"form-control" %>
+        <%= form.text_field :area, id: :post_area, class:"form-control", 
+        numbersonly:"true",numberonly:"2", maxlength:"6"%>
       </div>
       <div class="col-sm-2">m2</div>
     </div>
@@ -106,7 +109,8 @@
     <div class="col-sm-6 row">
       <label class="col-sm-4 col-form-label">Giá:</label>
       <div class="col-sm-8">
-        <%= form.text_field :price, id: :post_price, class:"form-control"%>
+        <%= form.text_field :price, id: :post_price, class:"form-control",
+        numbersonly:"true",numberonly:"2", maxlength:"6"%>
           <!-- if unit.key = 1 :post_price = "" -->
       </div>
     </div>
@@ -141,7 +145,8 @@ else -->
     <div class="col-sm-12 row">
       <label class="col-sm-2 col-form-label">Địa Chỉ (<span style="color:red;">*</span>):</label>
       <div class="col-sm-10">
-        <%= form.text_field :address_number, id: :post_address_number, class:"form-control" %>
+        <%= form.text_field :address_number, id: :post_address_number, class:"form-control",
+        maxlength:"200"%>
       </div>
     </div>
   </div>
@@ -156,7 +161,8 @@ else -->
         <div class="col-sm-12 row">
           <label class="col-sm-12 col-form-label"><small>(<span style="color:red;">*</span>) Tối đa chỉ 3000 ký tự</small></label>
           <div class="col-sm-8">
-            <%= form.text_area :description, id: :post_description, class:"form-control", rows:"8",cols:"100" %>
+            <%= form.text_area :description, id: :post_description, class:"form-control", 
+            rows:"8",cols:"100", minlength:"30", maxlength:"3000" %>
           </div>
           <div class="col-sm-4" style="text-align: justify;">
               <small>
@@ -180,14 +186,16 @@ else -->
       <div class="col-sm-6 row">
         <label class="col-sm-4 col-form-label">Mặt Tiền (m):</label>
         <div class="col-sm-8">
-            <%= form.text_field :front, id: :post_front, class:'form-control' %>
+            <%= form.text_field :front, id: :post_front, class:'form-control',
+            maxlength:"6", numberonly:"2", numbersonly:"true"%>
         </div>
       </div>
   
       <div class="col-sm-6 row">
         <label class="col-sm-4 col-form-label"> Đường vào (m):</label>
         <div class="col-sm-8">
-            <%= form.text_field :entrance, id: :post_entrance, class:'form-control' %>
+            <%= form.text_field :entrance, id: :post_entrance, class:'form-control',
+            maxlength:"6", numberonly:"2", numbersonly:"true" %>
         </div>
       </div>
   </div>
@@ -218,7 +226,8 @@ else -->
       <div class="col-sm-6 row">
         <label class="col-sm-4 col-form-label"> Số Tầng:</label>
         <div class="col-sm-8">
-            <%= form.number_field :floor, id: :post_floor, in: 0..999, class:'form-control' %>
+            <%= form.text_field :floor, id: :post_floor, class:'form-control',
+            maxlength:"3", numberonly:"1", numbersonly:"true", decimal:"false" %>
         </div>
       </div>
     </div>
@@ -229,14 +238,16 @@ else -->
     <div class="col-sm-6 row">
         <label class="col-sm-4 col-form-label">Số Phòng Ngủ:</label>
         <div class="col-sm-8">
-            <%= form.number_field :bedroom, id: :post_bedroom, in: 0..999, class:'form-control' %>
+            <%= form.text_field :bedroom, id: :post_bedroom, class:'form-control',
+            maxlength:"3", numberonly:"1", numbersonly:"true", decimal:"false"%>
         </div>
       </div>
   
       <div class="col-sm-6 row">
         <label class="col-sm-4 col-form-label"> Số Toilet:</label>
         <div class="col-sm-8">
-            <%= form.number_field :toilet, id: :post_toilet, in: 0..999, class:'form-control' %>
+            <%= form.text_field :toilet, id: :post_toilet, in: 0..999, class:'form-control',
+            maxlength:"3", numberonly:"1", numbersonly:"true", decimal:"false"%>
         </div>
       </div>
   </div>
@@ -247,7 +258,8 @@ else -->
     <div class="col-sm-12 row">
         <label class="col-sm-2 col-form-label"> Nội Thất:</label>
         <div class="col-sm-10">
-        <%= form.text_area :furniture, id: :post_furniture, cols:"100", rows:"10", class:'form-control' %> 
+        <%= form.text_area :furniture, id: :post_furniture, cols:"100", rows:"10", 
+        class:'form-control', maxlength:"200" %> 
         </div>
       </div>
   </div>
@@ -288,7 +300,8 @@ else -->
         <div class="col-sm-12 row">
             <label class="col-sm-2 col-form-label">Tên Liên Hệ:</label>
             <div class="col-sm-10">
-              <%= form.text_field :contact_name, id: :post_contact_name, class:'form-control' %>
+              <%= form.text_field :contact_name, id: :post_contact_name, 
+              class:'form-control', maxlength:"200" %>
             </div>
           </div>
     </div>
@@ -296,7 +309,8 @@ else -->
         <div class="col-sm-12 row">
             <label class="col-sm-2 col-form-label">Địa Chỉ:</label>
             <div class="col-sm-10">
-              <%= form.text_field :contact_address, id: :post_contact_address, class:'form-control' %>
+              <%= form.text_field :contact_address, id: :post_contact_address, 
+              class:'form-control', maxlength:"200" %>
             </div>
           </div>
     </div>
@@ -304,7 +318,8 @@ else -->
         <div class="col-sm-12 row">
             <label class="col-sm-2 col-form-label"> Điện Thoại:</label>
             <div class="col-sm-10">
-              <%= form.text_field :contact_phone, id: :post_contact_phone, class:'form-control'  %>
+              <%= form.text_field :contact_phone, id: :post_contact_phone, 
+              class:'form-control', maxlength:"14", numberonly:'1'  %>
             </div>
           </div>
     </div>
@@ -312,7 +327,8 @@ else -->
         <div class="col-sm-12 row">
             <label class="col-sm-2 col-form-label"> Di Dộng (<span style="color:red;">*</span>):</label>
             <div class="col-sm-10">
-              <%= form.text_field :contact_mobile, id: :post_contact_mobile, class:'form-control'  %>
+              <%= form.text_field :contact_mobile, id: :post_contact_mobile, 
+              class:'form-control', maxlength:"14", minlength:'10',numberonly:'1'  %>
             </div>
           </div>
     </div>
@@ -320,7 +336,8 @@ else -->
         <div class="col-sm-12 row">
             <label class="col-sm-2 col-form-label"> Email:</label>
             <div class="col-sm-10">
-              <%= form.text_field :contact_mail, id: :post_contact_mail, class:'form-control'  %>
+              <%= form.text_field :contact_mail, id: :post_contact_mail, class:'form-control',
+              maxlength:"100", email:"1"  %>
             </div>
           </div>
     </div>
@@ -338,71 +355,69 @@ else -->
   
 <% end %>
 
-
-
-        <script>
-          //Ajax kiểm tra Hình thức - Loại
-          $(function () {
-            $('#cate_id').change(function () {
-              var value = $(this).val();
-              $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
-              $.get("new", {
-                  category_id: value
-                },
-                function (data, status) {
-                  data.forEach(item => {
-                    $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name +
-                      "</option>")
-                  });
-                })
-            });
+<script>
+  //Ajax kiểm tra Hình thức - Loại
+  $(function () {
+    $('#cate_id').change(function () {
+      var value = $(this).val();
+      $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
+      $.get("new", {
+          category_id: value
+        },
+        function (data, status) {
+          data.forEach(item => {
+            $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name +
+              "</option>")
           });
-          //Ajax kiểm tra TP - Quận
-          $(function () {
-            $('#city_details').change(function () {
-              var value = $(this).val();
-              $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
-              $.get("new", {
-                  city_id: value
-                },
-                function (data, status) {
-                  data.forEach(item => {
-                    $('#district_details').append("<option value=" + item.id + ">" + item.name +
-                      "</option>")
-                  });
-                })
-            });
+        })
+    });
+  });
+  //Ajax kiểm tra TP - Quận
+  $(function () {
+    $('#city_details').change(function () {
+      var value = $(this).val();
+      $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
+      $.get("new", {
+          city_id: value
+        },
+        function (data, status) {
+          data.forEach(item => {
+            $('#district_details').append("<option value=" + item.id + ">" + item.name +
+              "</option>")
           });
-          //Ajax kiểm tra Quận - Phường
-          $(function () {
-            $('#district_details').change(function () {
-              var value = $(this).val();
-              $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
-              $.get("new", {
-                  district_id: value
-                },
-                function (data, status) {
-                  data.forEach(item => {
-                    $('#ward_details').append("<option value=" + item.id + ">" + item.name + "</option>")
-                  });
-                })
-            });
-          })
-          //Ajax kiểm tra Phường - Đường
-          $(function () {
-            $('#ward_details').change(function () {
-              var value = $(this).val();
-              $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
-              //check empty key...
-              $.get("new", {
-                  ward_id: value
-                },
-                function (data, status) {
-                  data.forEach(item => {
-                    $('#street_details').append("<option value=" + item.id + ">" + item.name +
-                      "</option>")
-                  });
-                })
-            });
-          })
-        </script>
+        })
+    });
+  });
+  //Ajax kiểm tra Quận - Phường
+  $(function () {
+    $('#district_details').change(function () {
+      var value = $(this).val();
+      $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
+      $.get("new", {
+          district_id: value
+        },
+        function (data, status) {
+          data.forEach(item => {
+            $('#ward_details').append("<option value=" + item.id + ">" + item.name + "</option>")
+          });
+        })
+    });
+  })
+  //Ajax kiểm tra Phường - Đường
+  $(function () {
+    $('#ward_details').change(function () {
+      var value = $(this).val();
+      $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
+      //check empty key...
+      $.get("new", {
+          ward_id: value
+        },
+        function (data, status) {
+          data.forEach(item => {
+            $('#street_details').append("<option value=" + item.id + ">" + item.name +
+              "</option>")
+          });
+        })
+    });
+  })
+</script>
