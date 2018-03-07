@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.all.page(params[:page]).per(5)
 
     @search 
     @categories = Category.where(super_id: nil)
@@ -52,7 +52,7 @@ class PostsController < ApplicationController
     case search_type # switch case search type
     when "full"
       text = params[:query]
-      @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   )   
+      @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   ).all.page(params[:page]).per(5)
     else
       query = params.require(:search).permit(:category_id,:area_top, :area_bottom,:price_top, :price_bottom, :category_detail_id,:area,:price,:city_id, :district_id, :ward_id, :street_id, :house_direction, :bedroom)  
       @h = Array.new # search array only for area and price
@@ -117,9 +117,9 @@ class PostsController < ApplicationController
       end #end foreach
 
       if(!@s.blank?) # check array , prevent where null 
-        @posts = Post.where(query).where(@h)
+        @posts = Post.where(query).where(@h).page(params[:page]).per(5)
       elsif
-        @posts = Post.where(query)
+        @posts = Post.where(query).page(params[:page]).per(5)
       end
       
     end #end else
