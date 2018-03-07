@@ -1,4 +1,4 @@
-<%= form_with model: @post, url: {action: "create"}, local:true do |form| %>
+<%= form_with model: @post, url: {action: "create"}, local:true, id:'from-create-post' do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2>Có
@@ -21,8 +21,8 @@
       <label class="col-sm-2 col-form-label"> Tiêu Đề (<span style="color:red;">*</span>):</label>
       <div class="col-sm-10">
         <%= form.text_field :title, id: :post_title, class:"form-control", 
-        placeholder:"Vui lòng nhập tiêu đề tin đăng của bạn. Tối thiểu là 30 ký tự và tối đa là 99 ký tự.",
-        maxlength:"99", minlength:"30"%>
+        placeholder:"Vui lòng nhập tiêu đề tin đăng của bạn. Tối thiểu là 30 ký tự và tối đa là 99 ký tự."%>
+        <span id="title_error"></span>
       </div>
     </div>
   </div>
@@ -32,7 +32,8 @@
       <label class="col-sm-4 col-form-label">Hình Thức (<span style="color:red;">*</span>) :</label>
       <div class="col-sm-8">
         <%= form.collection_select(:category_id, Category.where(super_id: nil), :id, :name, 
-    {prompt: '-- Hình Thức --'},{class:"custom-select", id:'cate_id'}) %>
+          {prompt: '-- Hình Thức --'},{class:"custom-select", id:'cate_id'}) %>
+        <span id="category_error"></span>
       </div>
     </div>
 
@@ -41,7 +42,8 @@
       <div class="col-sm-9">
         <%= form.select :category_detail_id, "<option></option>", 
           {prompt:'--Phân Mục--'},{class:"custom-select", id:'cate_detail_id'}%>
-      </div>
+        <span id="subcategory_error"></span>
+        </div>
     </div>
   </div>
   <!-- End Row Hình thức -->
@@ -53,6 +55,7 @@
       <div class="col-sm-8">
         <%= form.collection_select(:city_id, City.all, :id, :name, 
         {prompt: '-- Tỉnh/Thành Phố --'}, {class:"custom-select", id:'city_details'}) %>
+        <span id="city_error"></span>
       </div>
     </div>
 
@@ -61,6 +64,7 @@
       <div class="col-sm-9">
         <%= form.select :district_id, "<option></option>", 
           {prompt:'--Quận Huyện--'},{class:"custom-select", id:'district_details'}%>
+          <span id="district_error"></span>
       </div>
     </div>
   </div>
@@ -91,6 +95,7 @@
       <label class="col-sm-4 col-form-label">Dự Án:</label>
       <div class="col-sm-8">
         <%= form.text_field :project, id: :post_project, class:"form-control", maxlength:"200"%>
+        <span id="project_error"></span>
       </div>
     </div>
     <div class="col-sm-6 row">
@@ -98,6 +103,7 @@
       <div class="col-sm-6">
         <%= form.text_field :area, id: :post_area, class:"form-control", 
         numbersonly:"true",numberonly:"2", maxlength:"6"%>
+        <span id="area_error"></span>
       </div>
       <div class="col-sm-2">m2</div>
     </div>
@@ -111,6 +117,7 @@
       <div class="col-sm-8">
         <%= form.text_field :price, id: :post_price, class:"form-control",
         numbersonly:"true",numberonly:"2", maxlength:"6"%>
+        <span id="price_error"></span>
           <!-- if unit.key = 1 :post_price = "" -->
       </div>
     </div>
@@ -147,6 +154,7 @@ else -->
       <div class="col-sm-10">
         <%= form.text_field :address_number, id: :post_address_number, class:"form-control",
         maxlength:"200"%>
+        <span id="address_error"></span>
       </div>
     </div>
   </div>
@@ -162,7 +170,8 @@ else -->
           <label class="col-sm-12 col-form-label"><small>(<span style="color:red;">*</span>) Tối đa chỉ 3000 ký tự</small></label>
           <div class="col-sm-8">
             <%= form.text_area :description, id: :post_description, class:"form-control", 
-            rows:"8",cols:"100", minlength:"30", maxlength:"3000" %>
+            rows:"8",cols:"100" %>
+          <span id="desciption_error"></span>
           </div>
           <div class="col-sm-4" style="text-align: justify;">
               <small>
@@ -188,7 +197,8 @@ else -->
         <div class="col-sm-8">
             <%= form.text_field :front, id: :post_front, class:'form-control',
             maxlength:"6", numberonly:"2", numbersonly:"true"%>
-        </div>
+            <span id="front_error"></span>
+          </div>
       </div>
   
       <div class="col-sm-6 row">
@@ -196,6 +206,7 @@ else -->
         <div class="col-sm-8">
             <%= form.text_field :entrance, id: :post_entrance, class:'form-control',
             maxlength:"6", numberonly:"2", numbersonly:"true" %>
+            <span id="entrance_error"></span>
         </div>
       </div>
   </div>
@@ -228,6 +239,7 @@ else -->
         <div class="col-sm-8">
             <%= form.text_field :floor, id: :post_floor, class:'form-control',
             maxlength:"3", numberonly:"1", numbersonly:"true", decimal:"false" %>
+            <span id="floor_error"></span>
         </div>
       </div>
     </div>
@@ -240,14 +252,16 @@ else -->
         <div class="col-sm-8">
             <%= form.text_field :bedroom, id: :post_bedroom, class:'form-control',
             maxlength:"3", numberonly:"1", numbersonly:"true", decimal:"false"%>
+            <span id="bedroom_error"></span>
         </div>
       </div>
   
       <div class="col-sm-6 row">
         <label class="col-sm-4 col-form-label"> Số Toilet:</label>
         <div class="col-sm-8">
-            <%= form.text_field :toilet, id: :post_toilet, in: 0..999, class:'form-control',
+            <%= form.text_field :toilet, id: :post_toilet, class:'form-control',
             maxlength:"3", numberonly:"1", numbersonly:"true", decimal:"false"%>
+            <span id="toilet_error"></span>
         </div>
       </div>
   </div>
@@ -260,6 +274,7 @@ else -->
         <div class="col-sm-10">
         <%= form.text_area :furniture, id: :post_furniture, cols:"100", rows:"10", 
         class:'form-control', maxlength:"200" %> 
+        <span id="furniture_error"></span>
         </div>
       </div>
   </div>
@@ -302,6 +317,7 @@ else -->
             <div class="col-sm-10">
               <%= form.text_field :contact_name, id: :post_contact_name, 
               class:'form-control', maxlength:"200" %>
+              <span id="contact_name_error"></span>
             </div>
           </div>
     </div>
@@ -311,6 +327,7 @@ else -->
             <div class="col-sm-10">
               <%= form.text_field :contact_address, id: :post_contact_address, 
               class:'form-control', maxlength:"200" %>
+              <span id="contact_address_error"></span>
             </div>
           </div>
     </div>
@@ -320,6 +337,7 @@ else -->
             <div class="col-sm-10">
               <%= form.text_field :contact_phone, id: :post_contact_phone, 
               class:'form-control', maxlength:"14", numberonly:'1'  %>
+              <span id="contact_phone_error"></span>
             </div>
           </div>
     </div>
@@ -329,6 +347,7 @@ else -->
             <div class="col-sm-10">
               <%= form.text_field :contact_mobile, id: :post_contact_mobile, 
               class:'form-control', maxlength:"14", minlength:'10',numberonly:'1'  %>
+              <span id="contact_mobile_error"></span>
             </div>
           </div>
     </div>
@@ -337,7 +356,8 @@ else -->
             <label class="col-sm-2 col-form-label"> Email:</label>
             <div class="col-sm-10">
               <%= form.text_field :contact_mail, id: :post_contact_mail, class:'form-control',
-              maxlength:"100", email:"1"  %>
+              maxlength:"100", email:"1"%>
+              <span id="contact_mail_error"></span>
             </div>
           </div>
     </div>
@@ -361,7 +381,7 @@ else -->
     $('#cate_id').change(function () {
       var value = $(this).val();
       $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
-      $.get("new", {
+      $.get("/posts/new", {
           category_id: value
         },
         function (data, status) {
@@ -377,7 +397,7 @@ else -->
     $('#city_details').change(function () {
       var value = $(this).val();
       $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
-      $.get("new", {
+      $.get("/posts/new", {
           city_id: value
         },
         function (data, status) {
@@ -393,7 +413,7 @@ else -->
     $('#district_details').change(function () {
       var value = $(this).val();
       $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
-      $.get("new", {
+      $.get("/posts/new", {
           district_id: value
         },
         function (data, status) {
@@ -409,7 +429,7 @@ else -->
       var value = $(this).val();
       $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
       //check empty key...
-      $.get("new", {
+      $.get("/posts/new", {
           ward_id: value
         },
         function (data, status) {
