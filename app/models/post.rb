@@ -30,10 +30,10 @@ class Post < ApplicationRecord
         #Format
     validates :contact_mobile, length: {minimum:10, maximum:14,
         message: 'Di động phải có độ dài tối thiểu 10 ký tự và tối đa 14 ký tự.'}, 
-    format: {with: /\A[0]\d{9,14}\z/, message: "Số di động không đúng."}
+    format: {with: /\A[0]\d{9,10}\z/, message: "Số di động không đúng."}
     validates :contact_phone, length: {minimum:10, maximum:14,
         message: 'Điện thoại phải có độ dài tối thiểu 10 ký tự và tối đa 14 ký tự.'},  
-    format: {with: /\d{9,14}\z/, message: 'Số điện thoại không đúng.'}, allow_blank:true
+    format: {with: /\d{9,10}\z/, message: 'Số điện thoại không đúng.'}, allow_blank:true
     validates :contact_mail, allow_blank:true, 
     length: {maximum: 100, message: 'Mail liên hệ phải có độ dài tối đa 100 ký tự.'}, 
     format: { with: /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info))\z/i, 
