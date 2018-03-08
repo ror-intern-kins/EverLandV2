@@ -125,7 +125,7 @@
       <label class="col-sm-3 col-form-label">Đơn Vị:</label>
       <div class="col-sm-9">
         <%= form.select :unit, [['Thỏa Thuận', 1], ['Triệu', 2], ['Tỷ', 3], ['Trăm nghìn/m2', 4], ['Triệu/m2', 5]], 
-        {prompt:false},{class:"custom-select"}%>
+        {prompt:false},{class:"custom-select", id:'post_unit'}%>
       </div>
     </div>
   </div>
@@ -135,7 +135,8 @@
   <div class="form-group row">
     <div class="col-sm-12 row">
       <label class="col-sm-2 col-form-label">Tổng Giá Tiền:</label>
-      <div class="col-sm-10" id="totalPrice">
+      <div class="col-sm-10" >
+        <span id="totalPrice"></span>
         <!-- if unit.key = 2 :post_price * 1000000 
 if unit.key = 3 :post_price * 1000000000
 if unit.key = 4 :post_price * :area * 100000
@@ -146,6 +147,7 @@ else -->
     </div>
   </div>
   <!-- End Row Tổng Tiền -->
+
 
   <!-- Row Địa chỉ  -->
   <div class="form-group row">
@@ -336,7 +338,7 @@ else -->
             <label class="col-sm-2 col-form-label"> Điện Thoại:</label>
             <div class="col-sm-10">
               <%= form.text_field :contact_phone, id: :post_contact_phone, 
-              class:'form-control', maxlength:"14", numberonly:'1'  %>
+              class:'form-control', maxlength:"11", numberonly:'1'  %>
               <span id="contact_phone_error"></span>
             </div>
           </div>
@@ -346,7 +348,7 @@ else -->
             <label class="col-sm-2 col-form-label"> Di Dộng (<span style="color:red;">*</span>):</label>
             <div class="col-sm-10">
               <%= form.text_field :contact_mobile, id: :post_contact_mobile, 
-              class:'form-control', maxlength:"14", minlength:'10',numberonly:'1'  %>
+              class:'form-control', maxlength:"11", minlength:'10',numberonly:'1'  %>
               <span id="contact_mobile_error"></span>
             </div>
           </div>
@@ -378,6 +380,7 @@ else -->
 <script>
   //Ajax kiểm tra Hình thức - Loại
   $(function () {
+    
     $('#cate_id').change(function () {
       var value = $(this).val();
       $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
@@ -396,16 +399,31 @@ else -->
   $(function () {
     $('#city_details').change(function () {
       var value = $(this).val();
+      var index = $(this).prop('selectedIndex')
+      console.log(index);
+
+    if (index > 0) {
       $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
       $.get("/posts/new", {
           city_id: value
-        },
-        function (data, status) {
+        },function (data, status) {
           data.forEach(item => {
             $('#district_details').append("<option value=" + item.id + ">" + item.name +
               "</option>")
           });
-        })
+        }).fail(function(data) {
+          console.log(data)     
+      });
+     } else {
+      $('select#district_details').prop('selectedIndex', 0);
+      $('#district_details').html("<option>--Quận Huyện--</option>");
+
+      $('select#ward_details').prop('selectedIndex', 0);
+      $('#ward_details').html("<option>-- Phường/Xã  --</option>"); 
+
+      $('select#street_details').prop('selectedIndex', 0);
+      $('#street_details').html("<option>-- Đường Phố --</option>");
+     }
     });
   });
   //Ajax kiểm tra Quận - Phường
@@ -413,7 +431,7 @@ else -->
     $('#district_details').change(function () {
       var value = $(this).val();
       $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
-      $.get("/posts/new", {
+      $.get("/posts/new", { // posts/:id/edit
           district_id: value
         },
         function (data, status) {

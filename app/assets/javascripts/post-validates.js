@@ -2,27 +2,69 @@ $(document).ready(function () {
     $('#from-create-post').submit(function () {
         //alert('aaaaaaaa')        
         //messages
-        $('#title_error').text('');
-        $('#category_error').text('');
-        $('#subcategory_error').text('');
-        $('#city_error').text('');
-        $('#district_error').text('');
-        $('#project_error').text('');
-        $('#area_error').text('');
-        $('#price_error').text('');
-        $('#address_error').text('');
-        $('#desciption_error').text('');
-        $('#front_error').text('');
-        $('#entrance_error').text('');
-        $('#floor_error').text('');
-        $('#bedroom_error').text('');
-        $('#toilet_error').text('');
-        $('#furniture_error').text('');
-        $('#contact_name_error').text('');
-        $('#contact_address_error').text('');
-        $('#contact_phone_error').text('');
-        $('#contact_mobile_error').text('');
-        $('#contact_mail_error').text('');
+        $('#title_error').text('').css({
+            "color": "red"
+        });
+        $('#category_error').text('').css({
+            "color": "red"
+        });
+        $('#subcategory_error').text('').css({
+            "color": "red"
+        });
+        $('#city_error').text('').css({
+            "color": "red"
+        });
+        $('#district_error').text('').css({
+            "color": "red"
+        });
+        $('#project_error').text('').css({
+            "color": "red"
+        });
+        $('#area_error').text('').css({
+            "color": "red"
+        });
+        $('#price_error').text('').css({
+            "color": "red"
+        });
+        $('#address_error').text('').css({
+            "color": "red"
+        });
+        $('#desciption_error').text('').css({
+            "color": "red"
+        });
+        $('#front_error').text('').css({
+            "color": "red"
+        });
+        $('#entrance_error').text('').css({
+            "color": "red"
+        });
+        $('#floor_error').text('').css({
+            "color": "red"
+        });
+        $('#bedroom_error').text('').css({
+            "color": "red"
+        });
+        $('#toilet_error').text('').css({
+            "color": "red"
+        });
+        $('#furniture_error').text('').css({
+            "color": "red"
+        });
+        $('#contact_name_error').text('').css({
+            "color": "red"
+        });
+        $('#contact_address_error').text('').css({
+            "color": "red"
+        });
+        $('#contact_phone_error').text('').css({
+            "color": "red"
+        });
+        $('#contact_mobile_error').text('').css({
+            "color": "red"
+        });
+        $('#contact_mail_error').text('').css({
+            "color": "red"
+        });
 
         var title = $.trim($('#post_title').val())
         var category = $('#cate_id :selected').text()
@@ -46,7 +88,10 @@ $(document).ready(function () {
         var contact_mobile = $.trim($('#post_contact_mobile').val())
         var contact_mail = $.trim($('#post_contact_mail').val())
 
-        var letters = '/\A[a-zA-Z]+\z?/';
+        var validate_characters = /^[A-Z]?[- a-zA-Z]( [a-zA-Z])*$/;
+        var validate_digits = /^[0-9,\+-]+$/
+        var validate_phone = /^0[0-9]{9,10}$/
+        var validate_mail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
         var flag = true
 
         //THÔNG TIN CƠ BẢN
@@ -78,7 +123,7 @@ $(document).ready(function () {
             flag = false;
         } else $('#city_error').text('');
         //district
-        if (district == '') {
+        if (district == '--Quận Huyện--') {
             $('#district_error').text('Vui lòng chọn quận huyện');
             flag = false;
         } else $('#district_error').text('');
@@ -86,7 +131,8 @@ $(document).ready(function () {
         if (project.length > 200) {
             $('#project_error').text('Dự án có độ dài tối đa 200 ký tự.');
             flag = false;
-        } else if (project.match(letters)) {
+        } else if (!project.match(validate_characters) && project != '') {
+            //console.log(project.match(validate_characters))
             $('#project_error').text('Tên dự án không hợp lệ.');
             flag = false;
         } else $('#project_error').text('');
@@ -94,7 +140,7 @@ $(document).ready(function () {
         if (area.length > 6) {
             $('#area_error').text('Diện tích tối đa 999999');
             flag = false;
-        } else if (!$.isNumeric(area) && area != '') {
+        } else if ((!$.isNumeric(area) && area != '') || (area <= 0 && area != '')) {
             $('#area_error').text('Diện tích không hợp lệ.');
             flag = false;
         } else $('#area_error').text('');
@@ -102,7 +148,7 @@ $(document).ready(function () {
         if (price.length > 6) {
             $('#price_error').text('Giá tối đa 999999');
             flag = false;
-        } else if (!$.isNumeric(price) && price != '') {
+        } else if ((!$.isNumeric(price) && price != '') || (price <= 0 && price != '')) {
             $('#price_error').text('Giá không hợp lệ.');
             flag = false;
         } else $('#price_error').text('');
@@ -129,7 +175,7 @@ $(document).ready(function () {
         } else $('#desciption_error').text('');
         //THÔNG TIN KHÁC
         //front
-        if (!$.isNumeric(front) && front != '') {
+        if ((!$.isNumeric(front) && front != '') || (front <= 0 && front != '')) {
             $('#front_error').text('Mặt tiền không hợp lệ.');
             flag = false;
         } else if (front.length > 6) {
@@ -137,7 +183,7 @@ $(document).ready(function () {
             flag = false;
         } else $('#front_error').text('');
         //entrance
-        if (!$.isNumeric(entrance) && entrance != '') {
+        if ((!$.isNumeric(entrance) && entrance != '') || (entrance <= 0 && entrance != '')) {
             $('#entrance_error').text('Đường vào không hợp lệ.');
             flag = false;
         } else if (entrance.length > 6) {
@@ -145,7 +191,7 @@ $(document).ready(function () {
             flag = false;
         } else $('#entrance_error').text('');
         //floor
-        if (!$.isNumeric(floor) && floor != '') {
+        if ((!floor.match(validate_digits) && floor != '') || (floor <= 0 && floor != '')) {
             $('#floor_error').text('Số tầng không hợp lệ.');
             flag = false;
         } else if (floor.length > 3) {
@@ -153,7 +199,7 @@ $(document).ready(function () {
             flag = false;
         } else $('#floor_error').text('');
         //bedroom
-        if (!$.isNumeric(bedroom) && bedroom != '') {
+        if ((!bedroom.match(validate_digits) && bedroom != '') || (bedroom != '' && bedroom <= 0)) {
             $('#bedroom_error').text('Số phòng ngủ không hợp lệ.');
             flag = false;
         } else if (bedroom.length > 3) {
@@ -161,7 +207,7 @@ $(document).ready(function () {
             flag = false;
         } else $('#bedroom_error').text('');
         //toilet
-        if (!$.isNumeric(toilet) && toilet != '') {
+        if ((!toilet.match(validate_digits) && toilet != '') || (toilet != '' && toilet <= 0)) {
             $('#toilet_error').text('Số toilet không hợp lệ.');
             flag = false;
         } else if (toilet.length > 3) {
@@ -186,7 +232,7 @@ $(document).ready(function () {
             flag = false;
         } else $('#contact_address_error').text('');
         //contact phone
-        if (contact_phone.match('')) {
+        if (!contact_phone.match(validate_phone) && contact_phone != '') {
             $('#contact_phone_error').text('Số điện thoại không hợp lệ.');
             flag = false;
         } else $('#contact_phone_error').text('');
@@ -194,20 +240,100 @@ $(document).ready(function () {
         if (contact_mobile == '') {
             $('#contact_mobile_error').text('Di động không thể bỏ trống.');
             flag = false;
-        } else if (contact_mobile.match('')) {
+        } else if (!contact_mobile.match(validate_phone)) {
             $('#contact_mobile_error').text('Di động không hợp lệ.');
             flag = false;
         } else $('#contact_mobile_error').text('');
         //mail
-        if (contact_mail.match('')) {
+        if (!contact_mail.match(validate_mail) && contact_mail != '') {
             $('#contact_mail_error').text('Địa chỉ email không hợp lệ.');
             flag = false;
         } else if (contact_mail.length > 100) {
             $('#contact_mail_error').text('Mail liên hệ có độ dài tối đa 100 ký tự.');
             flag = false;
-        }
-        else $('#contact_mail_error').text('');
+        } else $('#contact_mail_error').text('');
         //LIÊN HỆ
         return flag;
+    });
+
+});
+
+
+
+$(function () {
+    var unit, area, price;
+    $('#totalPrice').text('Thỏa Thuận').css({
+        'color': 'red'
+    })
+    //price lost focus
+    $('#post_price').focusout(function () {
+        area = $('#post_area').val();
+        price = $('#post_price').val();
+        unit = $('#post_unit :selected').text();
+
+        if (price == '')
+            $('#totalPrice').text('Thỏa Thuận').css({
+                'color': 'red'
+            })
+        else if (price > 0) {
+            $('#totalPrice').text('Vui lòng chọn đơn vị.').css({
+                'color': 'red'
+            })
+        } else {
+            $('#totalPrice').text('Thỏa Thuận').css({
+                'color': 'red'
+            })
+        }
+    });
+    //unit change
+    $('#post_unit').change(function () {
+        unit = $('#post_unit :selected').text();
+        price = $('#post_price').val();
+        area = $('#post_area').val();
+
+        if (unit == 'Triệu' && price > 0) {
+            $('#totalPrice').text(price + ' triệu').css({
+                'color': 'red'
+            })
+        } else if (unit == 'Tỷ' && price > 0) {
+            $('#totalPrice').text(price + ' tỷ').css({
+                'color': 'red'
+            })
+        } else if (unit == 'Trăm nghìn/m2' && area > 0) {
+            $('#totalPrice').text(price * area * 100 + ' nghìn').css({
+                'color': 'red'
+            })
+        } else if (unit == 'Triệu/m2' && area > 0) {
+            $('#totalPrice').text(price * area + ' triệu').css({
+                'color': 'red'
+            })
+        } else {
+            $('#totalPrice').text('Thỏa Thuận').css({
+                'color': 'red'
+            })
+        }
+    });
+
+    //area focus 
+    $('#post_area').focusout(function () {
+        area = $('#post_area').val();
+        price = $('#post_price').val();
+        unit = $('#post_unit :selected').text();
+
+        if (area > 0 && price > 0 && unit != 'Thỏa Thuận') {
+            if (unit == 'Tỷ') {
+                $('#totalPrice').text(price + ' tỷ').css({
+                    'color': 'red'
+                })
+            } else if (unit == 'Trăm nghìn/m2') {
+                $('#totalPrice').text(price * area * 100 + ' nghìn').css({
+                    'color': 'red'
+                })
+            } else if (unit == 'Triệu/m2') {
+                $('#totalPrice').text(price * area + ' triệu').css({
+                    'color': 'red'
+                })
+            }
+        }
     });
 });
