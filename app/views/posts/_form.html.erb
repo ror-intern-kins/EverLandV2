@@ -361,7 +361,7 @@ else -->
     $('#cate_id').change(function () {
       var value = $(this).val();
       $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
-      $.get("new", {
+      $.get("", {
           category_id: value
         },
         function (data, status) {

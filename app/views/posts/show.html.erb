@@ -8,14 +8,14 @@
     </div>
     <p class="position-center ellipsis col-xs-11 col-sm-10 col-md-8 col-lg-8" id="post_title_style"><%= @post.title %></p>
   </div>
+</div>
   <div class="container">
-  
     <div class="row">
           <%= link_to 'Edit', edit_user_post_path(@post) %>/
           <%= link_to 'Back', posts_path %>
     </div>
-
-    <div class="row window window--padding-100px">
+  
+    <div class="row window window--padding-50px">
       <div class="col-sm-12">
         <p class="post_span--size-big">Infomation</p>
       </div>
@@ -27,7 +27,6 @@
                 <td><strong>Address number:</strong></td>
                 <td><%= @post.address_number %></td>
               </tr>
-
               <tr>
                 <td><strong>Project:</strong></td>
                 <td><%= @post.project %></td>
@@ -54,6 +53,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="container-fluid" style="background-color:#e0e0e0;color:#202020">
+    <br/>
     <div class="row window">
       <div class="col-sm-12" id="post_description_style">
         <p class="post_span--size-big">Description</p>
@@ -101,10 +103,12 @@
             </a>
           </div>
         <% end %>
-        
+        <br/>
       </div>
     </div>
-    <div class="row window window--padding-100px">
+  </div>
+  <div class="container">
+    <div class="row window window--padding-50px">
       <div class="col-sm-12">
         <p class="post_span--size-big">More details</p>
         <br/>
@@ -192,7 +196,6 @@
       </div>
     </div>
   </div>
-</div>
 
 
 
