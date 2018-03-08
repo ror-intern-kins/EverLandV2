@@ -60,8 +60,17 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  #kiểm tra user có tồn tại hay ko
+  def check_existed_user
+    current_user_id = params[:current_user_id]
+    @user = User.find_by_username (current_user_id)
+    respond_to do |format|
+      format.json { render :json => { check: !@user.nil? }} #check true thì có tồn tại user
+    end
+  end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
@@ -69,6 +78,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :username, :password, :birthday, :gender, :email, :phone, :address, :personal)
+      # bỏ require(:user) đi vì dữ liệu truyền về từ data
+      params.permit(:name, :username, :password, :password_confirmation, :birthday, :gender, :email, :phone, :address, :personal)
     end
 end
