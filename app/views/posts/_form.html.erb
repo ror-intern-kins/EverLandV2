@@ -380,7 +380,6 @@ else -->
 <script>
   //Ajax kiểm tra Hình thức - Loại
   $(function () {
-    
     $('#cate_id').change(function () {
       var value = $(this).val();
       $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
@@ -399,11 +398,9 @@ else -->
   $(function () {
     $('#city_details').change(function () {
       var value = $(this).val();
-      var index = $(this).prop('selectedIndex')
-      console.log(index);
-
-    if (index > 0) {
+      //console.log(value)
       $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
+      if (value > 0) {
       $.get("/posts/new", {
           city_id: value
         },function (data, status) {
@@ -431,14 +428,22 @@ else -->
     $('#district_details').change(function () {
       var value = $(this).val();
       $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
-      $.get("/posts/new", { // posts/:id/edit
+
+      if (value > 0) {
+        $.get("/posts/new", { 
           district_id: value
-        },
-        function (data, status) {
+        },function (data, status) {
           data.forEach(item => {
             $('#ward_details').append("<option value=" + item.id + ">" + item.name + "</option>")
           });
         })
+      }else {
+        $('select#ward_details').prop('selectedIndex', 0);
+        $('#ward_details').html("<option>-- Phường/Xã  --</option>"); 
+  
+        $('select#street_details').prop('selectedIndex', 0);
+        $('#street_details').html("<option>-- Đường Phố --</option>");
+      }
     });
   })
   //Ajax kiểm tra Phường - Đường
@@ -447,7 +452,8 @@ else -->
       var value = $(this).val();
       $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
       //check empty key...
-      $.get("/posts/new", {
+      if(value > 0) {
+        $.get("/posts/new", {
           ward_id: value
         },
         function (data, status) {
@@ -456,6 +462,10 @@ else -->
               "</option>")
           });
         })
+      }else {
+        $('select#street_details').prop('selectedIndex', 0);
+        $('#street_details').html("<option>-- Đường Phố --</option>");
+      }
     });
   })
 </script>
