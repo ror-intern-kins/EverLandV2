@@ -19,9 +19,10 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   # add a collection search - Q
-  resources :posts, except: [:create, :edit, :update,:destory] do
+  resources :posts, except: [:destory] do
     collection do
-      post 'search'
+      get 'search'
+      get 'result'
     end
   end
 
