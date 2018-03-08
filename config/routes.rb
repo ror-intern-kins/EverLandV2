@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
 
   resources :categories
 
@@ -7,10 +8,13 @@ Rails.application.routes.draw do
       resources :images,only: [:create, :edit, :update, :show, :destory]
     end
   end
-  get '/signup', to: 'users#new'
-  get '/login', to: 'sessions#new'
-  get '/session_home', to: 'sessions#home'
-  post '/login', to: 'sessions#create'
+
+  get '/home', to: 'sessions#home'
+
+  get '/check_user', to: 'users#check_existed_user' #kiểm tra user tồn tại
+  get '/check_login', to: 'sessions#check_login' #kiểm tra user và pass đúng hay chưa
+
+  post '/login', to: 'sessions#login'
   delete '/logout', to: 'sessions#destroy'
 
   # add a collection search - Q
