@@ -1,0 +1,18 @@
+.nav-fixed{
+    position: fixed;
+    z-index: 100;
+    padding: 0px;
+    box-shadow: grey 0px 0px 20px;
+}
+footer {
+    padding: 50px;
+    font-size: 1.2em;
+    background-color: #eeeeee;
+    i{
+        font-size: 1.5em;
+        color: #333333;
+    }
+}
+#notice{
+    margin: 0;
+}
