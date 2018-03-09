@@ -130,6 +130,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     get_data()    
+  
 end
 
   # GET /posts/1/edit
@@ -144,9 +145,9 @@ end
   def create
     @user = User.find(params[:user_id])
     @post = @user.posts.build(post_params)
+    
     respond_to do |format|
       if @post.save
-        # @post.update_attribute :category_id, @details_category
         format.html { redirect_to post_path(@post), notice: 'Bài viết đã được đăng thành công.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -210,7 +211,6 @@ end
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-  
       params.require(:post).permit(:title,:description, :user_id,
       :category_id, :city_id, :district_id, :ward_id, 
       :street_id, :address_number,:project, :unit, 
@@ -225,13 +225,14 @@ end
     def get_data 
       @categories = Category.where(super_id: nil)
       @cities = City.all
-    
+
     if params[:category_id]
         @name = Category.where('super_id = ? and super_id is not null', params[:category_id])
         respond_to do |format|
         format.json { render json: @name }
       end
     end
+    
     if params[:city_id]
       @districts = City.find(params[:city_id]).districts.all
       respond_to do |format|  
@@ -250,5 +251,6 @@ end
         format.json { render json: @streets }
       end
     end 
+    
     end
 end
