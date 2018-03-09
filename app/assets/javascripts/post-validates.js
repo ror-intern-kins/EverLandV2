@@ -259,81 +259,89 @@ $(document).ready(function () {
 });
 
 
+function checkPrice() {
+    price = $('#post_price').val()
+    area = $('#post_area').val()
+    unit = $('#post_unit :selected').text()
+    if (price > 0) {
+        if (area > 0) {
+            switch (unit) {
+                case 'Triệu':
+                    $('#totalPrice').text(price + ' triệu').css({
+                        'color': 'red'
+                    })
+                    break;
+                case 'Tỷ':
+                    $('#totalPrice').text(price + ' tỷ').css({
+                        'color': 'red'
+                    })
+                    break;
+                case 'Trăm nghìn/m2':
+                    $('#totalPrice').text((price * area * 100) + ' nghìn').css({
+                        'color': 'red'
+                    })
+                    break;
+                case 'Triệu/m2':
+                    $('#totalPrice').text((price * area) + ' triệu').css({
+                        'color': 'red'
+                    })
+                    break;
+                default:
+                    $('#totalPrice').text('Thỏa Thuận.').css({
+                        'color': 'red'
+                    });
+                    break;
+            }
+        } else {
+            switch (unit) {
+                case 'Triệu':
+                    $('#totalPrice').text(price + ' triệu').css({
+                        'color': 'red'
+                    })
+                    break;
+                case 'Tỷ':
+                    $('#totalPrice').text(price + ' tỷ').css({
+                        'color': 'red'
+                    })
+                    break;
+                case 'Trăm nghìn/m2':
+                case 'Triệu/m2':
+                    $('#totalPrice').text('Thỏa Thuận').css({
+                        'color': 'red'
+                    });
+                    break;
+
+                default:
+                    $('#totalPrice').text('Vui lòng chọn đơn vị.').css({
+                        'color': 'red'
+                    });
+                    break;
+            }
+        }
+    } else {
+        $('#totalPrice').text('Thoả Thuận.').css({
+            'color': 'red'
+        });
+    }
+};
 
 $(function () {
     var unit, area, price;
     $('#totalPrice').text('Thỏa Thuận').css({
         'color': 'red'
     })
-    //price lost focus
+    //price lost focus event
     $('#post_price').focusout(function () {
-        area = $('#post_area').val();
-        price = $('#post_price').val();
-        unit = $('#post_unit :selected').text();
-
-        if (price == '')
-            $('#totalPrice').text('Thỏa Thuận').css({
-                'color': 'red'
-            })
-        else if (price > 0) {
-            $('#totalPrice').text('Vui lòng chọn đơn vị.').css({
-                'color': 'red'
-            })
-        } else {
-            $('#totalPrice').text('Thỏa Thuận').css({
-                'color': 'red'
-            })
-        }
+        checkPrice()
     });
-    //unit change
-    $('#post_unit').change(function () {
-        unit = $('#post_unit :selected').text();
-        price = $('#post_price').val();
-        area = $('#post_area').val();
-
-        if (unit == 'Triệu' && price > 0) {
-            $('#totalPrice').text(price + ' triệu').css({
-                'color': 'red'
-            })
-        } else if (unit == 'Tỷ' && price > 0) {
-            $('#totalPrice').text(price + ' tỷ').css({
-                'color': 'red'
-            })
-        } else if (unit == 'Trăm nghìn/m2' && area > 0) {
-            $('#totalPrice').text(price * area * 100 + ' nghìn').css({
-                'color': 'red'
-            })
-        } else if (unit == 'Triệu/m2' && area > 0) {
-            $('#totalPrice').text(price * area + ' triệu').css({
-                'color': 'red'
-            })
-        } else {
-            $('#totalPrice').text('Thỏa Thuận').css({
-                'color': 'red'
-            })
-        }
-    });
-
-    //area focus 
+    //area lost focus event
     $('#post_area').focusout(function () {
-        area = $('#post_area').val();
-        price = $('#post_price').val();
-        unit = $('#post_unit :selected').text();
-
-        if (area > 0 && price > 0 && unit != 'Thỏa Thuận') {
-            if (unit == 'Tỷ') {
-                $('#totalPrice').text(price + ' tỷ').css({
-                    'color': 'red'
-                })
-            } else if (unit == 'Trăm nghìn/m2') {
-                $('#totalPrice').text(price * area * 100 + ' nghìn').css({
-                    'color': 'red'
-                })
-            } else if (unit == 'Triệu/m2') {
-                $('#totalPrice').text(price * area + ' triệu').css({
-                    'color': 'red'
-                })
-            }
-        }
+        checkPrice()
     });
+    // unit dropdown on change
+    $('#post_unit').change(function () {
+        checkPrice()
+    });
+
+
 });

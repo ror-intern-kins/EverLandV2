@@ -40,6 +40,7 @@
     <div class="col-sm-6 row">
       <label class="col-sm-3 col-form-label"> Loại (<span style="color:red;">*</span>) :</label>
       <div class="col-sm-9">
+        
         <%= form.select :category_detail_id, "<option></option>", 
           {prompt:'--Phân Mục--'},{class:"custom-select", id:'cate_detail_id'}%>
         <span id="subcategory_error"></span>
@@ -118,13 +119,13 @@
         <%= form.text_field :price, id: :post_price, class:"form-control",
         numbersonly:"true",numberonly:"2", maxlength:"6"%>
         <span id="price_error"></span>
-          <!-- if unit.key = 1 :post_price = "" -->
       </div>
     </div>
     <div class="col-sm-6 row">
       <label class="col-sm-3 col-form-label">Đơn Vị:</label>
       <div class="col-sm-9">
-        <%= form.select :unit, [['Thỏa Thuận', 1], ['Triệu', 2], ['Tỷ', 3], ['Trăm nghìn/m2', 4], ['Triệu/m2', 5]], 
+        <%= form.select :unit, [['Thỏa Thuận', 'Thỏa Thuận'], ['Triệu', 'Triệu'], ['Tỷ', 'Tỷ'], 
+        ['Trăm nghìn/m2', 'Trăm nghìn/m2'], ['Triệu/m2', 'Triệu/m2']], 
         {prompt:false},{class:"custom-select", id:'post_unit'}%>
       </div>
     </div>
@@ -137,12 +138,6 @@
       <label class="col-sm-2 col-form-label">Tổng Giá Tiền:</label>
       <div class="col-sm-10" >
         <span id="totalPrice"></span>
-        <!-- if unit.key = 2 :post_price * 1000000 
-if unit.key = 3 :post_price * 1000000000
-if unit.key = 4 :post_price * :area * 100000
-if unit.key = 5 :post_price * :area * 1000000 
-if unit.key = 1 Thoả Thuận, :price = ""
-else -->
       </div>
     </div>
   </div>
@@ -219,7 +214,7 @@ else -->
       <div class="col-sm-6 row">
         <label class="col-sm-4 col-form-label">Hướng Nhà:</label>
         <div class="col-sm-8">
-            <%= form.select :house_direction, [['Đông', 1], ['Tây', 2], ['Nam', 3], ['Bắc', 4]],
+            <%= form.select :house_direction, [['Đông', 'Đông'], ['Tây', 'Tây'], ['Nam', 'Nam'], ['Bắc', 'Bắc']],
             {prompt:'--KXĐ--'},{class:"custom-select"} %>
         </div>
       </div>
@@ -227,7 +222,7 @@ else -->
       <div class="col-sm-6 row">
         <label class="col-sm-4 col-form-label">Hướng Ban Công:</label>
         <div class="col-sm-8">
-            <%= form.select :balcony_direction, [['Đông', 1], ['Tây', 2], ['Nam', 3], ['Bắc', 4]],
+            <%= form.select :balcony_direction, [['Đông', 'Đông'], ['Tây', 'Tây'], ['Nam', 'Nam'], ['Bắc', 'Bắc']],
             {prompt:'--KXĐ--'},{class:"custom-select"} %>
         </div>
       </div>
