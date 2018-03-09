@@ -1,5 +1,7 @@
 class User < ApplicationRecord
     has_many :posts
+    
+    has_secure_password #bảo mật mật khẩu
 
     validates :name, presence: { message: "Tên không được để trống." }                         
 
