@@ -1,10 +1,5 @@
 class SessionsController < ApplicationController
-  def new
-    
-  end
-  def home
-  end
-  
+
   def login
     @user = User.find_by_username(params[:session][:username].downcase)
     if @user && @user.authenticate(params[:session][:password])

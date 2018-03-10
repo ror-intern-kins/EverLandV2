@@ -11,9 +11,9 @@ class User < ApplicationRecord
                          format: { with: /\A[a-zA-Z0-9]+\z?/, message: "Tên tài khoản không cho phép chứa ký tự đặc biệt."}
 
 
-    validates :password, presence: { message: "Mật khẩu không được để trống." },
-                         length: {minimum: 6, message: "Mật khẩu phải có độ dài từ 6 kí tự."},
-                         confirmation: { message: "Xác thực mật khẩu không đúng." } 
+    # validates :password, presence: { message: "Mật khẩu không được để trống." },
+    #                      length: {minimum: 6, message: "Mật khẩu phải có độ dài từ 6 kí tự."},
+    #                      confirmation: { message: "Xác thực mật khẩu không đúng." } 
 
     # validates :password_confirmation, presence: { message: "Xác thực mật khẩu không được để trống." } 
 

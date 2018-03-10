@@ -52,11 +52,11 @@
           <!-- show username -->
             <% if logged_in? && !@current_user.nil? %>
             <div class="btn-group">
-              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <strong><%= @current_user.name %></strong>
               </button>
               <div class="dropdown-menu dropdown-menu-right">
-                    <%= link_to  "Xem thông tin", user_path(@current_user.id), class: 'dropdown-item' %>
+                    <%= link_to  "Xem thông tin", edit_user_path(@current_user.id), class: 'dropdown-item' %>
                 <div class="dropdown-divider"></div>
                     <%= link_to  "Đăng xuất", logout_path, method: 'delete', class: 'dropdown-item' %>
               </div>
@@ -147,36 +147,39 @@
                         <h1>Đăng ký</h1>
                         <p >
                             <%= form.label ('Tên đăng nhập ') %> <span>(*)</span> <br/>
-                            <%= form.text_field :username, id: :user_username %>
+                            <%= form.text_field :username, id: :user_username, onchange: 'checkUsername()' %>
                             <p id="errorUser" class='error'></p>
+                            <p id="successUser" class='success'></p>
                         </p>                 
                         <p>
                             <%= form.label ('Địa chỉ email ') %> <span>(*)</span> <br/>
-                            <%= form.text_field :email, id: :user_email %>
+                            <%= form.text_field :email, id: :user_email, onchange: 'checkEmail()' %>
                             <p id="errorEmail" class='error'></p>
+                            <p id="successEmail" class='success'></p>
                         </p>
                       
                         <p>
                             <%= form.label ('Mật khẩu ') %> <span>(*)</span> <br/>
-                            <%= form.password_field :password, id: :user_password %>
+                            <%= form.password_field :password, id: :user_password, onchange: 'checkPassword()' %>
                             <p id="errorPass" class='error'></p>
                         </p>
                       
                         <p>
                             <%= form.label ('Xác thực mật khẩu ') %> <span>(*)</span> <br/>
-                            <%= form.password_field :password_confirmation, id: :user_password_confirmation %>
+                            <%= form.password_field :password_confirmation,
+                             id: :user_password_confirmation, onchange: 'checkPasswordConfirm()' %>
                             <p id="errorPasswordConfirm" class='error'></p>
                         </p>
                       
                         <p>
                             <%= form.label ('Điện thoại di động ') %> <span>(*)</span>  <br/>
-                            <%= form.text_field :phone, id: :user_phone %>
+                            <%= form.text_field :phone, id: :user_phone, onchange: 'checkPhone()' %>
                             <p id="errorPhone" class='error'></p>
                         </p>
                       
                         <p>
                             <%= form.label ('Tên đầy đủ ') %> <span>(*)</span> <br/>
-                            <%= form.text_field :name, id: :user_name %>
+                            <%= form.text_field :name, id: :user_name, onchange: 'checkName()' %>
                             <p id="errorName" class='error'></p>
                         </p>
                       

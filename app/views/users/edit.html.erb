@@ -1,6 +1,44 @@
-<h1>Editing User</h1>
-
-<%= render 'form', user: @user %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<div class="container-fluid">
+        <div class="row">  
+          <div class="col-sm-3 col-lg-3">
+              <h5 class="bg-secondary text-white">Trang cá nhân</h1>
+          </div>
+          <div class="col-sm-9 col-lg-9">
+            <h5 class="bg-secondary text-white">Thông tin cá nhân</h1>
+              <%= form_with(model: @user, local: true) do |form| %>
+              <table>
+                <tr>
+                  <td class="font-weight-bold">Họ và tên <span>(*)</span></td> 
+                  <td><%= form.text_field :name, class: "form-control"%></td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Ngày sinh</td>
+                  <td><%= form.date_select :birthday, class: "form-control" %></td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Giới tính</td>
+                  <td>      
+                    <%= form.radio_button :gender, 'male', checked: true %> Nam
+                    <%= form.radio_button :gender, 'female' %> Nữ
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Email</td>
+                  <td><%= form.text_field :email, class: "form-control" %></td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Số điện thoại</td>
+                  <td><%= form.text_field :phone, class: "form-control" %></td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Địa chỉ</td>
+                  <td><%= form.text_field :address, class: "form-control"  %></td>
+                </tr>         
+              </table>  
+              <%= form.submit ('Lưu thay đổi'), class: 'btn btn-primary' %>
+              <%= link_to 'Trở về', users_path, class: 'btn btn-info' %>
+              <% end %>
+          </div>
+        </div>  
+      </div>
+      
