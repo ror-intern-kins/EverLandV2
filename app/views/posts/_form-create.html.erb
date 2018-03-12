@@ -1,4 +1,4 @@
-<%= form_with model: @post, url: {action: "create"}, local:true, id:'from-create-post' do |form| %>
+<%= form_with model: @post,html: { multipart: true }, url: {action: "create"}, local:true, id:'from-create-post' do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2>Có
@@ -281,6 +281,12 @@
 <!-- THÔNG TIN KHÁC -->
 
 <!-- HÌNH ẢNH VÀ VIDEO chưa làm -->
+<%= form.fields_for :images do |p| %>
+     <div class="field">
+       <%= p.label :url %><br>
+       <%= p.file_field :url, multiple: true, name: "images[url][]" %>
+     </div>
+   <% end %>
 <div class="container">
   <h3>HÌNH ẢNH</h3>
     <small>Tối đa 8 ảnh với tin thường và 16 với tin VIP. Mỗi ảnh tối đa 2MB </small>

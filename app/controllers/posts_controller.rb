@@ -129,6 +129,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @image = @post.images.build
     get_category_new()
     get_data()    
   
@@ -143,14 +144,17 @@ end
     
   end
 
-  # POST /posts
-  # POST /posts.json
+  # POST users/id/posts
+  # POST users/id/posts.json
   def create
     @user = User.find(params[:user_id])
     @post = @user.posts.build(post_params)
     
     respond_to do |format|
       if @post.save
+        params[:images]['url'].each do |a|
+          @image = @post.images.create!(url: a, post_id: @post.id)
+        end
         format.html { redirect_to post_path(@post), notice: 'Bài viết đã được đăng thành công.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -222,7 +226,8 @@ end
       :lng, :lat, 
       :house_direction, :balcony_direction, 
       :floor, :bedroom, :toilet, :furniture, 
-      :contact_name, :contact_address, :contact_phone, :contact_mobile, :contact_mail)
+      :contact_name, :contact_address, :contact_phone, :contact_mobile, :contact_mail,
+      images_attributes: [:id, :post_id, :url])
     end
 
     #NEW
