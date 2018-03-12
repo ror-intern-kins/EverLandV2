@@ -1,17 +1,28 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
+
   resources :categories
 
+  #Add action new 5.3
   resources :users do
-    resources :posts, only: [:create, :edit, :update, :destory]  do
+    resources :posts, only: [:new, :edit, :update, :destory, :create]  do
       resources :images,only: [:create, :edit, :update, :show, :destory]
     end
   end
 
+  get '/home', to: 'sessions#home'
+
+  get '/check_user', to: 'users#check_existed_user' #kiểm tra user tồn tại
+  get '/check_login', to: 'sessions#check_login' #kiểm tra user và pass đúng hay chưa
+
+  post '/login', to: 'sessions#login'
+  delete '/logout', to: 'sessions#destroy'
 
   # add a collection search - Q
-  resources :posts, except: [:create, :edit, :update,:destory] do
+  resources :posts, except: [:destory] do
     collection do
-      post 'search'
+      get 'search'
+      get 'result'
     end
   end
 

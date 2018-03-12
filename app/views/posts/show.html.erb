@@ -1,114 +1,206 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p> -->
+<div class="container-fluid">
+  <div class="row window window--hight-75vh position-realative overflow-hidden">
+    <div class="background background--image paralax"
+          style="background-image: url(<%= asset_url !(@post.images.empty?)?(@post.images.first.url):("default.jpg")%>)"
+      >
+      <div class="background_blackcover"></div>
+    </div>
+    <p class="position-center ellipsis col-xs-11 col-sm-10 col-md-8 col-lg-8" id="post_title_style"><%= @post.title %></p>
+  </div>
+</div>
+  <div class="container">
+    <div class="row">
+          <%= link_to 'Edit', edit_user_post_path(@post) %>/
+          <%= link_to 'Back', posts_path %>
+    </div>
+  
+    <div class="row window window--padding-50px">
+      <div class="col-sm-12">
+        <p class="post_span--size-big">Infomation</p>
+      </div>
+      <div class="col-sm-6">
+        <div class="table--overflow">
+          <table class="table table-hover table--label-right position-center position-relative">
+            <tbody>
+              <tr>
+                <td><strong>Address number:</strong></td>
+                <td><%= @post.address_number %></td>
+              </tr>
+              <tr>
+                <td><strong>Project:</strong></td>
+                <td><%= @post.project %></td>
+              </tr>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+              <tr>
+                <td><strong>Area:</strong></td>
+                <td><%= @post.area %></td>
+              </tr>
 
-<p>
-  <strong>Address number:</strong>
-  <%= @post.address_number %>
-</p>
+              <tr>
+                <td><strong>Price:</strong></td>
+                <td><%= @post.price %> <%= @post.unit %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
+      <div class="col-sm-6" style="min-height:300px;">
+        <div class="background background--image position-relative"
+              style="background-image: url(<%= asset_url !(@post.images.empty?)?(@post.images.first.url):("default.jpg")%>)"
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid" style="background-color:#e0e0e0;color:#202020">
+    <br/>
+    <div class="row window">
+      <div class="col-sm-12" id="post_description_style">
+        <p class="post_span--size-big">Description</p>
+        <p id="post_description_content">
+          <%= @post.description %>
+        </p>
+      </div>
+    </div>
+    <div class="row window">
+      <div class="col-sm-12">
+        <% @imageNum = @post.images.length%>
+        <% if @imageNum == 0 %>
+          <div class="min-size background background--image position-relative" 
+                style="background-image: url(<%= asset_url !(@post.images.empty?)?(@post.images.first.url):("default.jpg")%>)">
+          </div>
+        <% else %>
+          <div id="carouselExampleIndicators" class="carousel slide size" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <% (@imageNum - 1).times do |i|%>
+                <li data-target="#carouselExampleIndicators" data-slide-to="<%= i + 1%>"></li>
+              <% end %>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+              <div class="carousel-item active">
+                <div class="d-block w-100 background background--image" 
+                  style="background-image: url(<%= asset_url @post.images.first.url%>)">
+                </div>
+              </div>
+              <% (@imageNum - 1).times do |i|%>
+                <div class="carousel-item">
+                  <div class="d-block w-100 background background--image" 
+                    style="background-image: url(<%= asset_url (@post.images[i+1].url)%>)">
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        <% end %>
+        <br/>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row window window--padding-50px">
+      <div class="col-sm-12">
+        <p class="post_span--size-big">More details</p>
+        <br/>
+      </div>
+      <div class="col-sm-6">
+        <div class="table--overflow">
+          <p class="post_span--size-small">House infomation</p>
+          <table class="table table-hover table--label-right">
+            <tbody>
+              <tr>
+                <td><strong>Front:</strong></td>
+                <td><%= @post.front %><//td>
+              </tr>
 
-<p>
-  <strong>Project:</strong>
-  <%= @post.project %>
-</p>
+              <tr>
+                <td><strong>Entrance:</strong></td>
+                <td><%= @post.entrance %></td>
+              </tr>
 
-<p>
-  <strong>Area:</strong>
-  <%= @post.area %>
-</p>
+              <tr>
+                <td><strong>House direction:</strong></td>
+                <td><%= @post.house_direction %></td>
+              </tr>
 
-<p>
-  <strong>Price:</strong>
-  <%= @post.price %>
-</p>
+              <tr>
+                <td><strong>Balcony direction:</strong></td>
+                <td><%= @post.balcony_direction %></td>
+              </tr>
 
-<p>
-  <strong>Unit:</strong>
-  <%= @post.unit %>
-</p>
+              <tr>
+                <td><strong>Floor:</strong></td>
+                <td><%= @post.floor %><td>
+              </tr>
 
-<p>
-  <strong>Lng:</strong>
-  <%= @post.lng %>
-</p>
+              <tr>
+                <td><strong>Bedroom:</strong></td>
+                <td><%= @post.bedroom %><td>
+              </tr>
 
-<p>
-  <strong>Lat:</strong>
-  <%= @post.lat %>
-</p>
+              <tr>
+                <td><strong>Toilet:</strong></td>
+                <td><%= @post.toilet %><td>
+              </tr>
 
-<p>
-  <strong>Front:</strong>
-  <%= @post.front %>
-</p>
+              <tr>
+                <td><strong>Furniture:</strong></td>
+                <td><%= @post.furniture %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="table--overflow">
+          <p class="post_span--size-small">Contact infomation</p>
+          <table class="table table-hover table--label-right">
+            <tbody>
+              <tr>
+                <td><strong>Contact name:</strong></td>
+                <td><%= @post.contact_name %></td>
+              </tr>
 
-<p>
-  <strong>Entrance:</strong>
-  <%= @post.entrance %>
-</p>
+              <tr>
+                <td><strong>Contact address:</strong></td>
+                <td><%= @post.contact_address %></td>
+              </tr>
 
-<p>
-  <strong>House direction:</strong>
-  <%= @post.house_direction %>
-</p>
+              <tr>
+                <td><strong>Contact phone:</strong></td>
+                <td><%= @post.contact_phone %></td>
+              </tr>
 
-<p>
-  <strong>Balcony direction:</strong>
-  <%= @post.balcony_direction %>
-</p>
+              <tr>
+                <td><strong>Contact mobile:</strong></td>
+                <td><%= @post.contact_mobile %></td>
+              </tr>
 
-<p>
-  <strong>Floor:</strong>
-  <%= @post.floor %>
-</p>
+              <tr>
+                <td><strong>Contact mail:</strong></td>
+                <td><%= @post.contact_mail %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Bedroom:</strong>
-  <%= @post.bedroom %>
-</p>
 
-<p>
-  <strong>Toilet:</strong>
-  <%= @post.toilet %>
-</p>
 
-<p>
-  <strong>Furniture:</strong>
-  <%= @post.furniture %>
-</p>
 
-<p>
-  <strong>Contact name:</strong>
-  <%= @post.contact_name %>
-</p>
 
-<p>
-  <strong>Contact address:</strong>
-  <%= @post.contact_address %>
-</p>
 
-<p>
-  <strong>Contact phone:</strong>
-  <%= @post.contact_phone %>
-</p>
 
-<p>
-  <strong>Contact mobile:</strong>
-  <%= @post.contact_mobile %>
-</p>
 
-<p>
-  <strong>Contact mail:</strong>
-  <%= @post.contact_mail %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>

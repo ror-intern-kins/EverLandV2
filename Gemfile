@@ -5,7 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'bcrypt', '3.1.11' #bảo mật mật khẩu
 
+gem 'jquery-validation-rails'
+# Search
+gem 'kaminari' 
+gem 'bootstrap4-kaminari-views' 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
 # Use sqlite3 as the database for Active Record
@@ -32,6 +37,12 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# My imported gem
+gem 'jquery-rails'
+gem 'bootstrap', '~> 4.0.0'
+gem 'autoprefixer-rails'
+gem "font-awesome-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

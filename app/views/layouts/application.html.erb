@@ -2,13 +2,231 @@
 <html>
   <head>
     <title>EverLandV2</title>
+    <%# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> %>
     <%= csrf_meta_tags %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+		
   </head>
-
   <body>
+    <div class="container-fluid nav-fixed">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Everland</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <!-- -xử lý đăng nhập/ đăng xuất- -->
+          <!-- login button -->
+          <!-- show username -->
+            <% if logged_in? && !@current_user.nil? %>
+            <div class="dropdown" >
+                <button class="btn btn-outline-info">Avatar</button>
+                <div class="dropdown-content">
+                    <%= link_to  "#{@current_user.name}", edit_user_path(@current_user.id), class: 'font-weight-bold' %>
+                    <div class="dropdown-divider"></div>
+                    <%= link_to  "Đăng xuất", logout_path, method: 'delete' %>
+                </div>
+            </div>
+            <% else %>
+            <%= link_to 'Đăng nhập', '#loginForm', class: 'btn btn-success',
+            onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
+            <% end %> 
+            <!-- ........................................................... -->
+        </div>
+      </nav>
+    </div>
+    <div style="padding-top:56px">
+    </div>
+
     <%= yield %>
-  </body>
+    <footer class="container-fluid">
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <p class="post_span--size-big">About us</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <p><i class="fa fa-map-marker"></i> 225 Võ Văn Kiệt, Quận 1, Hồ Chí Minh</p>
+            <p><i class="fa fa-map-marker"></i> 432/2 Quang Trung, Quận Gò Vấp, Hồ Chí Minh</p>
+            <p><i class="fa fa-phone"></i> 0280456214</p>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <p><a href="#"><i class="fa fa-facebook-official"></i> /everland</a></p>
+            <p><a href="#"><i class="fa fa-google-plus-square"></i> /everland</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+<div class="tung-modal">
+<!-- Modal login -->
+<div class="modal fade" id="loginForm">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border: 0px; background-color: inherit">
+            <div id="wrapper">
+                <div id="login">                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="closeB" aria-hidden="true">&times;</span>
+                    </button>
+                    <%= form_for(:session, url: login_path, html: {id: 'login_form'}, method: 'post') do |form| %>   <!-- form đăng nhập -->
+                        <h1>Đăng nhập </h1>                                 
+                    <p>
+                        <%= form.label ('Tên đăng nhập:'), class: 'uname' %> <br/>
+                        <%= form.text_field :username %> <br/>
+                        <p id="errorUsername" class='error' ></p>
+                    </p>   
+                    <p>
+                        <%= form.label ('Mật khẩu:'), class: 'youpasswd' %> <br/>
+                        <%= form.password_field :password %> <br/>
+                        <p id="errorPassword" class='error'></p>
+                    </p>
+                    <p id="invalid" class='error'>
+                       
+                    </p>
+                    <p class="login button"> 
+                        <%= form.submit ('Đăng nhập'),  id: 'login_btn', :type => 'button', onclick: 'validateLoginForm()' %>
+                    </p>
+
+                    <p class="change_link">
+                        Bạn đã đăng kí thành viên chưa?
+                        <%= link_to  "Đăng kí", '#', id: 'signupl', onclick: 'resetSignupForm()',
+                            data: { toggle: 'modal', dismiss: 'modal', target: '#signupForm' } %>
+                    </p>
+                    <% end %>            
+                </div>                    
+            </div>
+        </div>             
+    </div>
+</div>  
+<!-- Modal signup -->
+<div class="modal fade" id="signupForm">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border: 0px; background-color: inherit">
+            <div id="wrapper"> 
+                <div id="register">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="closeB" aria-hidden="true">&times;</span>
+                    </button>
+
+                    <%= form_with(local: true, id: 'register_form', url: users_path ) do |form| %> <!-- form đăng ký -->
+                        <h1>Đăng ký</h1>
+                        <p >
+                            <%= form.label ('Tên đăng nhập ') %> <span>(*)</span> <br/>
+                            <%= form.text_field :username, id: :user_username, onchange: 'checkUsername()' %>
+                            <p id="errorUser" class='error'></p>
+                            <p id="successUser" class='success'></p>
+                        </p>                 
+                        <p>
+                            <%= form.label ('Địa chỉ email ') %> <span>(*)</span> <br/>
+                            <%= form.text_field :email, id: :user_email, onchange: 'checkEmail()' %>
+                            <p id="errorEmail" class='error'></p>
+                            <p id="successEmail" class='success'></p>
+                        </p>
+                      
+                        <p>
+                            <%= form.label ('Mật khẩu ') %> <span>(*)</span> <br/>
+                            <%= form.password_field :password, id: :user_password, onchange: 'checkPassword()' %>
+                            <p id="errorPass" class='error'></p>
+                        </p>
+                      
+                        <p>
+                            <%= form.label ('Xác thực mật khẩu ') %> <span>(*)</span> <br/>
+                            <%= form.password_field :password_confirmation,
+                             id: :user_password_confirmation, onchange: 'checkPasswordConfirm()' %>
+                            <p id="errorPasswordConfirm" class='error'></p>
+                        </p>
+                      
+                        <p>
+                            <%= form.label ('Điện thoại di động ') %> <span>(*)</span>  <br/>
+                            <%= form.text_field :phone, id: :user_phone, onchange: 'checkPhone()' %>
+                            <p id="errorPhone" class='error'></p>
+                        </p>
+                      
+                        <p>
+                            <%= form.label ('Tên đầy đủ ') %> <span>(*)</span> <br/>
+                            <%= form.text_field :name, id: :user_name, onchange: 'checkName()' %>
+                            <p id="errorName" class='error'></p>
+                        </p>
+                      
+                        <p>
+                            <%= form.label ('Ngày sinh ') %> <br/>
+                            <%= form.date_field :birthday, class: "form-control" %>
+                        </p>
+                      
+                        <p>
+                            <label class="container">Nam
+                                <%= form.radio_button :gender, 'male', checked: true %>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Nữ
+                                <%= form.radio_button :gender, 'female' %>
+                                <span class="checkmark"></span>
+                            </label>                            
+                        </p>
+                      
+                        <p>
+                            <%= form.label ('Địa chỉ ') %> <br/>
+                            <%= form.text_field :address, id: :user_address %>
+                        </p>
+                      
+                        <p>
+                            <label class="container">Cá nhân
+                                <%= form.radio_button :personal, 'true', checked: true %>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Công ty
+                                <%= form.radio_button :personal, 'false' %>
+                                <span class="checkmark"></span>
+                            </label>                          
+                        </p>
+                      
+                        <p class="signin button">
+                            <%= form.submit ('Đăng ký'), id: 'signup_btn', :type => 'button', onclick: 'validateSignupForm()' %>
+                        </p>
+                        <p class="change_link">  
+                            Bạn đã là thành viên?
+                        <%= link_to  " Trở lại đăng nhập ", '#', onclick: 'resetLoginForm()',
+                            data: { toggle: 'modal', dismiss: 'modal', target: '#loginForm' } %>
+                        </p>
+                    <% end %>
+                </div>
+            </div>                    
+        </div>
+    </div>
+</div>
+</div>
+</body>
 </html>

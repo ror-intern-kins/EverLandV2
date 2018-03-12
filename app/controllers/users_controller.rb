@@ -9,47 +9,31 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  def show
+  def edit
+    @user = User.find(params[:id])
   end
-
   # GET /users/new
   def new
     @user = User.new
   end
-
-  # GET /users/1/edit
-  def edit
-  end
-
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
+    @user = User.new(data_params)
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        log_in @user
+        redirect_to root_path    
       else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        render 'edit'
       end
     end
-  end
 
   # DELETE /users/1
   # DELETE /users/1.json
@@ -60,15 +44,29 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  #kiểm tra user có tồn tại hay ko
+  def check_existed_user
+    current_user_id = params[:current_user_id]
+    @user = User.find_by_username (current_user_id)
+    respond_to do |format|
+      format.json { render :json => { check: !@user.nil? }} #check true thì có tồn tại user
+    end
+  end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    def data_params
+      # bỏ require(:user) đi vì dữ liệu truyền về từ data
+      params.permit(:name, :username, :password, :password_confirmation, :birthday, :gender, :email, :phone, :address, :personal)
+    end
     def user_params
-      params.require(:user).permit(:name, :username, :password, :birthday, :gender, :email, :phone, :address, :personal)
+      # bỏ require(:user) đi vì dữ liệu truyền về từ data
+      params.require(:user).permit(:name, :username, :password, :password_confirmation, :birthday, :gender, :email, :phone, :address, :personal)
     end
 end
