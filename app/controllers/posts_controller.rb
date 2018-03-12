@@ -129,6 +129,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    get_category_new()
     get_data()    
   
 end
@@ -137,7 +138,9 @@ end
   def edit
     @user = User.find(params[:user_id])
     @post = @user.posts.find(params[:id])
+    get_category_edit()    
     get_data()
+    
   end
 
   # POST /posts
@@ -162,6 +165,7 @@ end
   def update
     @user = User.find(params[:user_id])    
     @post = @user.posts.find(params[:id])
+
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Bài viết đã được chỉnh sửa thành công.' }
@@ -221,22 +225,40 @@ end
       :contact_name, :contact_address, :contact_phone, :contact_mobile, :contact_mail)
     end
 
-    #get data select option in view
-    def get_data 
-      @categories = Category.where(super_id: nil)
-      @cities = City.all
+    #NEW
+    def get_category_new
+      @categories = Category.where(super_id: nil) #find all category parent
+      if params[:category_id]
+          @sub_cate = Category.where('super_id = ? ', params[:category_id]) #find all child
+          respond_to do |format|
+          format.json { render json: [@categories, @sub_cate] } 
+        end
+      end  
+    end
 
-    if params[:category_id]
-        @name = Category.where('super_id = ? and super_id is not null', params[:category_id])
+    #EDIT
+    def get_category_edit
+      @categories = Category.where(super_id: nil) #categories dropdown (all load)
+      if params[:category_id]
+        #get super id in post edit
+        @tmp = Category.where('id = ?', params[:category_id]) #category in post edit
+        @sCategory = Category.where('super_id = ?', @tmp[0].super_id)  #category child when load page
+        @list_child_categories = Category.where('super_id = ? ', params[:category_id]) #categories child dropdown
         respond_to do |format|
-        format.json { render json: @name }
+          format.json { render json: [@categories, @sCategory, @list_child_categories, @tmp] }
+       #categories: full list hinh thuc
+       #sCategory full list loai
+       #list child full list loai
+        end  
       end
     end
-    
+    #get data select option in view
+    def get_data 
+      @cities = City.all
     if params[:city_id]
       @districts = City.find(params[:city_id]).districts.all
       respond_to do |format|  
-        format.json { render json: @districts  }  
+        format.json { render json: [@cities, @districts] }  
       end
     end
     if params[:district_id]
@@ -251,6 +273,5 @@ end
         format.json { render json: @streets }
       end
     end 
-    
     end
 end

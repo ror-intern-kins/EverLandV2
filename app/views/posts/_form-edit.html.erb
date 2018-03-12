@@ -1,4 +1,4 @@
-<%= form_with model: @post, url: {action: "create"}, local:true, id:'from-create-post' do |form| %>
+<%= form_with model: @post, url: {action: "update"}, local:true, id:'from-create-post' do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2>Có
@@ -383,19 +383,79 @@
 <% end %>
 
 <script>
+  //load data first time
+  $(document).ready(function () {
+  var ca_id = '<%= @post.category_id %>'; //get category id in post
+  var c_id = '<%= @post.city_id %>';  //get city id
+  var dis_id = '<%= @post.district_id %>' //get district id
+  var w_id = '<%= @post.ward_id %>' //get ward id
+  var s_id = '<%= @post.street_id %>' //get street id
+  //category dropdown
+  $.get("", { 
+    category_id: ca_id
+  }, function (data, status) { 
+    console.log(data)         
+    var t = data[3][0].super_id //get super_id in category have post edit
+    //console.log(t.super_id) 
+    $("select#cate_id").val(t); 
+    data[1].forEach(item => {
+      if (item.id == ca_id) {
+        $('#cate_detail_id').append("<option selected='selected' value=" + item.id + ">" + item.name +"</option>")
+      } else {
+        $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name +"</option>")
+      }})
+  });
+  //city dropdown
+  $.get("", {
+    city_id: c_id
+  },function (data, status) {
+    //data[1] : districts json
+    data[1].forEach(item => {
+    if(item.id == dis_id){
+      $('#district_details').append("<option selected='selected' value=" + item.id + ">" + item.name +"</option>")
+    }else {
+      $('#district_details').append("<option value=" + item.id + ">" + item.name +"</option>")
+    }});
+  });
+  //district dropdown
+  $.get("", {
+    district_id: dis_id
+  },function (data, status) {    
+    data.forEach(item => {
+    if(item.id == w_id){
+      $('#ward_details').append("<option selected='selected' value=" + item.id + ">" + item.name +"</option>")
+    }else {
+      $('#ward_details').append("<option value=" + item.id + ">" + item.name +"</option>")
+    }});
+  });
+  //ward can be empty in db so if empty render html
+  if(w_id == 0){
+    $('#ward_details').html("<option>-- Phường/Xã  --</option>"); 
+  } else {
+    $.get("", {
+      ward_id: w_id
+    },function (data, status) {    
+      data.forEach(item => {
+      if (item.id == s_id){
+        $('#street_details').append("<option selected='selected' value=" + item.id + ">" + item.name +"</option>")
+      }else {
+        $('#street_details').append("<option value=" + item.id + ">" + item.name +"</option>")
+      }});
+    });
+  }
+});
+  //Chosse Again
   //Ajax kiểm tra Hình thức - Loại
   $(function () {
     $('#cate_id').change(function () {
       var value = $(this).val();
       $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
-      $.get("/posts/new", {
+      $.get("", {
           category_id: value
         },
         function (data, status) {
-          var category_detail = data[1];
-          category_detail.forEach(item => {
-            $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name +
-              "</option>")
+          data[2].forEach(item => {   //data [2] : category child json (loại)
+            $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name +"</option>")
           });
         })
     });    
@@ -406,18 +466,14 @@
       var value = $(this).val();
       $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
       if (value > 0) {
-      $.get("/posts/new", {
+      $.get("", {
           city_id: value
         },function (data, status) {
-          var district = data[1];
-          district.forEach(item => {
-            $('#district_details').append("<option value=" + item.id + ">" + item.name +
-              "</option>")
+          data[1].forEach(item => {  //data[1] : districts json
+            $('#district_details').append("<option value=" + item.id + ">" + item.name + "</option>")
           });
-        }).fail(function(data) {
-          console.log(data)     
-      });
-     } else {
+        });
+      } else {
       $('select#district_details').prop('selectedIndex', 0);
       $('#district_details').html("<option>--Quận Huyện--</option>");
 
@@ -426,17 +482,15 @@
 
       $('select#street_details').prop('selectedIndex', 0);
       $('#street_details').html("<option>-- Đường Phố --</option>");
-     }
-    });
+     }});
   });
   //Ajax kiểm tra Quận - Phường
   $(function () {
     $('#district_details').change(function () {
       var value = $(this).val();
       $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
-
       if (value > 0) {
-        $.get("/posts/new", { 
+        $.get("", { 
           district_id: value
         },function (data, status) {
           data.forEach(item => {
@@ -449,9 +503,8 @@
   
         $('select#street_details').prop('selectedIndex', 0);
         $('#street_details').html("<option>-- Đường Phố --</option>");
-      }
-    });
-  })
+      }});
+  });
   //Ajax kiểm tra Phường - Đường
   $(function () {
     $('#ward_details').change(function () {
@@ -459,19 +512,17 @@
       $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
       //check empty key...
       if(value > 0) {
-        $.get("/posts/new", {
+        $.get("", {
           ward_id: value
         },
         function (data, status) {
           data.forEach(item => {
-            $('#street_details').append("<option value=" + item.id + ">" + item.name +
-              "</option>")
+            $('#street_details').append("<option value=" + item.id + ">" + item.name + "</option>")
           });
         })
       }else {
         $('select#street_details').prop('selectedIndex', 0);
         $('#street_details').html("<option>-- Đường Phố --</option>");
-      }
-    });
-  })
+      }});
+  });
 </script>

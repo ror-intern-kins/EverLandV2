@@ -65,6 +65,9 @@ $(document).ready(function () {
         $('#contact_mail_error').text('').css({
             "color": "red"
         });
+        $('#notice_error').text('').css({
+            "color": "red"
+        });
 
         var title = $.trim($('#post_title').val())
         var category = $('#cate_id :selected').text()
@@ -88,7 +91,7 @@ $(document).ready(function () {
         var contact_mobile = $.trim($('#post_contact_mobile').val())
         var contact_mail = $.trim($('#post_contact_mail').val())
 
-        var validate_characters = /^[A-Z]?[- a-zA-Z]( [a-zA-Z])*$/;
+        var validate_characters = /[A-Z]?[- a-zA-Z]( [a-zA-Z])*$/;
         var validate_digits = /^[0-9,\+-]+$/
         var validate_phone = /^0[0-9]{9,10}$/
         var validate_mail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
@@ -253,6 +256,12 @@ $(document).ready(function () {
             flag = false;
         } else $('#contact_mail_error').text('');
         //LIÊN HỆ
+        if (!flag) {
+            $('#notice_error').text('Vui lòng kiểm tra lại thông tin đã nhập.').css({
+                "color": "red"
+            });
+            console.log(flag)
+        }
         return flag;
     });
 
