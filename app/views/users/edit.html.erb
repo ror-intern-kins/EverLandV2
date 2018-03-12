@@ -1,6 +1,81 @@
-<h1>Editing User</h1>
+<div class="container-fluid" style='background-color: #e6fff9'>
+        <div class="row">  
+          <!-- show personal -->
+          <div class="col-sm-3 col-lg-3">
+              <h1 class="btn btn-info col-sm-12 col-lg-12 font-weight-bold">Trang cá nhân</h1>
+              <div class="card col-sm-12 ">
+                <%= image_tag("default.jpg", size: '200x200', class: 'avatar-img')%>
+                <h1 style="margin-bottom: 30px"><%= @user.name %></h1>
+                <button class="btn btn-danger">Thay đổi mật khẩu</button>
+              </div>
 
-<%= render 'form', user: @user %>
+          </div>
+          <!-- show info -->
+          <div class="col-sm-9 col-lg-9">
+            <h1 class="btn btn-info col-sm-12 col-lg-12 font-weight-bold" style='text-align: left'>Thông tin cá nhân</h1>
+            <div class="col-sm-12 col-lg-12" style="padding-left: 30px">
+              <%= form_with(model: @user, local: true) do |form| %>
+                <!-- input Name -->
+                <div class="form-group row">
+                  <label for="example-text-input" class="col-2 col-form-label font-weight-bold">Họ và tên</label>
+                  <div class="col-6">                      
+                    <%= form.text_field :name, class: "form-control"%>  
+                  </div>
+                </div>       
+                <!-- input Birthday -->
+                <div class="form-group row">
+                  <label for="example-date-input" class="col-2 col-form-label font-weight-bold">Ngày sinh</label>
+                  <div class="col-6">
+                      <%= form.date_field :birthday, class: "form-control" %>
+                  </div>
+                </div>
+                <!-- input Email -->
+                <div class="form-group row">
+                  <label for="example-email-input" class="col-2 col-form-label font-weight-bold">Email</label>
+                  <div class="col-6">
+                    <%= form.text_field :email, class: "form-control" %>
+                  </div>
+                </div>
+                <!-- input Gender -->
+                <div class="form-group row">
+                  <label for="example-email-input" class="col-2 col-form-label font-weight-bold">Giới tính</label>
+                  <div class="col-6">
+                    <label class="container">Nam
+                      <%= form.radio_button :gender, 'male', checked: true %>
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Nữ
+                      <%= form.radio_button :gender, 'female' %>
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
+                <!-- input Phone -->
+                <div class="form-group row">
+                  <label for="example-tel-input" class="col-2 col-form-label font-weight-bold">Số điện thoại</label>
+                  <div class="col-6">
+                    <%= form.text_field :phone, class: "form-control" %>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="example-search-input" class="col-2 col-form-label font-weight-bold">Địa chỉ</label>
+                  <div class="col-6">
+                    <%= form.text_field :address, class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+                <!-- <div class="form-group row">
+                  <label for="example-color-input" class="col-2 col-form-label font-weight-bold">Color</label>
+                  <div class="col-6">
+                    <input class="form-control" type="color" value="#563d7c" id="example-color-input">
+                  </div>
+                </div> -->
+              <%= form.submit ('Lưu thay đổi'), class: 'btn btn-primary' %>
+              <%= link_to 'Trở về', users_path, class: 'btn btn-info' %>
+              <% end %>
+          </div>
+        </div>  
+      </div>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+      
+      
