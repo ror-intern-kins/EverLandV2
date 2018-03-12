@@ -15,7 +15,7 @@
   <body>
     <div class="container-fluid nav-fixed">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Everland</a>
+        <%= link_to  "Everland", root_path, class: 'navbar-brand' %> <!-- thay thẻ a thành link_to -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -44,9 +44,8 @@
             </li>
           </ul>
           <!-- Nút Post -->
-
           <% if logged_in? %>
-          <%= link_to 'Đăng tin rao', new_user_post_path(@current_user.id), class: 'btn btn-primary',
+          <%= link_to 'Đăng tin rao', new_user_post_path(@current_user), class: 'btn btn-primary',
           onclick: 'resetLoginForm()'%>
           <% else %>
             <%= link_to 'Đăng tin rao', '#loginForm', class: 'btn btn-primary',
@@ -64,7 +63,7 @@
           <!-- show username -->
             <% if logged_in? && !@current_user.nil? %>
             <div class="dropdown" >
-                <button class="btn btn-outline-info">Avatar</button>
+                <button class="btn btn-info"> <strong><%= @current_user.name.first %></strong></button>
                 <div class="dropdown-content">
                     <%= link_to  "#{@current_user.name}", edit_user_path(@current_user.id), class: 'font-weight-bold' %>
                     <div class="dropdown-divider"></div>
