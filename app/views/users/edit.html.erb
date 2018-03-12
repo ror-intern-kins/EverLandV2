@@ -63,16 +63,18 @@
                     <%= form.text_field :address, class: "form-control" %>
                   </div>
                 </div>
+                <%= form.submit ('Lưu thay đổi'), class: 'btn btn-primary' %>
+                <%= link_to 'Trở về', users_path, class: 'btn btn-info' %>
+                <% end %>
               </div>
+              
                 <!-- <div class="form-group row">
                   <label for="example-color-input" class="col-2 col-form-label font-weight-bold">Color</label>
                   <div class="col-6">
                     <input class="form-control" type="color" value="#563d7c" id="example-color-input">
                   </div>
                 </div> -->
-              <%= form.submit ('Lưu thay đổi'), class: 'btn btn-primary' %>
-              <%= link_to 'Trở về', users_path, class: 'btn btn-info' %>
-              <% end %>
+              
           </div>
         </div>  
       </div>
