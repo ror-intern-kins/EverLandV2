@@ -51,15 +51,13 @@
           <!-- login button -->
           <!-- show username -->
             <% if logged_in? && !@current_user.nil? %>
-            <div class="btn-group">
-              <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <strong><%= @current_user.name %></strong>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right">
-                    <%= link_to  "Xem thông tin", edit_user_path(@current_user.id), class: 'dropdown-item' %>
-                <div class="dropdown-divider"></div>
-                    <%= link_to  "Đăng xuất", logout_path, method: 'delete', class: 'dropdown-item' %>
-              </div>
+            <div class="dropdown" >
+                <button class="btn btn-outline-info">Avatar</button>
+                <div class="dropdown-content">
+                    <%= link_to  "#{@current_user.name}", edit_user_path(@current_user.id), class: 'font-weight-bold' %>
+                    <div class="dropdown-divider"></div>
+                    <%= link_to  "Đăng xuất", logout_path, method: 'delete' %>
+                </div>
             </div>
             <% else %>
             <%= link_to 'Đăng nhập', '#loginForm', class: 'btn btn-success',
@@ -185,12 +183,18 @@
                       
                         <p>
                             <%= form.label ('Ngày sinh ') %> <br/>
-                            <%= form.date_select :birthday, id: :user_birthday %>
+                            <%= form.date_field :birthday, class: "form-control" %>
                         </p>
                       
                         <p>
-                            <%= form.radio_button :gender, 'male', checked: true %> <label> Nam</label>
-                            <%= form.radio_button :gender, 'female' %> <label> Nữ</label>
+                            <label class="container">Nam
+                                <%= form.radio_button :gender, 'male', checked: true %>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Nữ
+                                <%= form.radio_button :gender, 'female' %>
+                                <span class="checkmark"></span>
+                            </label>                            
                         </p>
                       
                         <p>
@@ -199,8 +203,14 @@
                         </p>
                       
                         <p>
-                            <%= form.radio_button :personal, 'true', checked: true %> <label>Cá nhân</label> 
-                            <%= form.radio_button :personal, 'false' %> <label>Công ty</label> 
+                            <label class="container">Cá nhân
+                                <%= form.radio_button :personal, 'true', checked: true %>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Công ty
+                                <%= form.radio_button :personal, 'false' %>
+                                <span class="checkmark"></span>
+                            </label>                          
                         </p>
                       
                         <p class="signin button">
