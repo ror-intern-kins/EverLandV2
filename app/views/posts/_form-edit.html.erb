@@ -431,6 +431,7 @@
   //ward can be empty in db so if empty render html
   if(w_id == 0){
     $('#ward_details').html("<option>-- Phường/Xã  --</option>"); 
+    $('#street_details').html("<option>-- Đường Phố --</option>");
   } else {
     $.get("", {
       ward_id: w_id
