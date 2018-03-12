@@ -16,38 +16,51 @@ q:before,q:after {
 }
 /**** Styling the form elements **/
 
-	#wrapper p{
-		margin-bottom:15px;
-	}
-	#wrapper p:first-child{
-		margin: 0px;
-	}
-	#wrapper label{
-		color: rgb(64, 92, 96);
-		position: relative;
-	}
+/**** general text styling ****/
+#wrapper a{
+	color: rgb(95, 155, 198);
+	text-decoration: underline;
+}
 
-	label {
-		display: inline-block;
-		max-width: 100%;
-		margin-bottom: 5px;
-		font-weight: 700;
-	}
+#wrapper h1{
+	font-size: 48px;
+	color: rgb(6, 106, 117);
+	padding: 2px 0 10px 0;
+	font-family: 'FranchiseRegular','Arial Narrow',Arial,sans-serif;
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 30px;
+}
+/** For the moment only webkit supports the background-clip:text; */
+#wrapper h1{
+    background: -webkit-repeating-linear-gradient(-45deg, 
+	rgb(18, 83, 93) , 
+	rgb(18, 83, 93) 20px, 
+	rgb(64, 111, 118) 20px, 
+	rgb(64, 111, 118) 40px, 
+	rgb(18, 83, 93) 40px);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+}
+#wrapper h1:after {
+	content: ' ';
+	display: block;
+	width: 100%;
+	height: 2px;
+	margin-top: 10px;
+	background: -webkit-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%); 
+}
 
-	/**** advanced input styling ****/
-	/* placeholder */
-	::-webkit-input-placeholder  { 
-		color: rgb(190, 188, 188); 
-		font-style: italic;
-	}
-	input:-moz-placeholder,
-	textarea:-moz-placeholder{ 
-		color: rgb(190, 188, 188);
-		font-style: italic;
-	} 
-	input {
-	outline: none;
-	}
+#wrapper p{
+	margin-bottom:15px;
+}
+#wrapper p:first-child{
+	margin: 0px;
+}
+#wrapper label{
+	color: rgb(64, 92, 96);
+	position: relative;
+}
 
 label {
     display: inline;
@@ -86,26 +99,82 @@ label {
 	        box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.9) inset;
 } 
 
+/** the magic icon trick ! **/
+[data-icon]:after {
+    content: attr(data-icon);
+    font-family: 'FontomasCustomRegular';
+    color: rgb(106, 159, 171);
+    position: absolute;
+    left: 10px;
+    top: 35px;
+	width: 30px;
+}
 
-	/* styling the checkbox "keep me logged in"*/
-	.keeplogin{
-		margin-top: -5px;
-	}
-	.keeplogin input,
-	.keeplogin label{
-		display: inline-block;
-		font-size: 12px;	
-		font-style: italic;
-	}
-	.keeplogin input#loginkeeping{
-		margin-right: 5px;
-	}
-	.keeplogin label{
-		width: 80%;
-	}
+/*styling both submit buttons */
+#wrapper p.button input{
+	width: 30%;
+	cursor: pointer;	
+	background: rgb(61, 157, 179);
+	padding: 8px 5px;
+	font-family: 'BebasNeueRegular','Arial Narrow',Arial,sans-serif;
+	color: #fff;
+	font-size: 22px;	
+	border: 1px solid rgb(28, 108, 122);	
+	margin-bottom: 10px;	
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+	        border-radius: 3px;	
+	-webkit-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	        0px 0px 0px 3px rgb(254, 254, 254),
+	        0px 5px 3px 3px rgb(210, 210, 210);
+	   -moz-box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	        0px 0px 0px 3px rgb(254, 254, 254),
+	        0px 5px 3px 3px rgb(210, 210, 210);
+	        box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	        0px 0px 0px 3px rgb(254, 254, 254),
+	        0px 5px 3px 3px rgb(210, 210, 210);
+	-webkit-transition: all 0.2s linear;
+	   -moz-transition: all 0.2s linear;
+	     -o-transition: all 0.2s linear;
+	        transition: all 0.2s linear;
+}
+#wrapper p.button input:hover{
+	background: rgb(74, 179, 198);
+}
+#wrapper p.button input:active,
+#wrapper p.button input:focus{
+	background: rgb(40, 137, 154);
+	position: relative;
+	top: 1px;
+	border: 1px solid rgb(12, 76, 87);	
+	-webkit-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.2) inset;
+	   -moz-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.2) inset;
+	        box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.2) inset;
+}
+p.login.button,
+p.signin.button{
+	text-align: right;
+	margin: 5px 0;
+}
 
 
-	/*styling the links to change from one form to another */
+/* styling the checkbox "keep me logged in"*/
+.keeplogin{
+	margin-top: -5px;
+}
+.keeplogin input,
+.keeplogin label{
+	display: inline-block;
+	font-size: 12px;	
+	font-style: italic;
+}
+.keeplogin input#loginkeeping{
+	margin-right: 5px;
+}
+.keeplogin label{
+	width: 80%;
+}
 
 
 /*styling the links to change from one form to another */
