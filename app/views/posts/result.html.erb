@@ -1,0 +1,12 @@
+
+<% if !@posts.present? %>    
+    <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+<% else %>
+    <h1>Posts</h1>
+    <% @posts.each do |post|%>
+        <%= post.title %>
+        </br>
+    <% end %>
+    <%= paginate @posts, theme: 'twitter-bootstrap-4', outer_window: 3 %>
+<% end %>
+
