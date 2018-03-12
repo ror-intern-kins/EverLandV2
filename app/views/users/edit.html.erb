@@ -14,37 +14,38 @@
           <div class="col-sm-9 col-lg-9">
             <h1 class="btn btn-info col-sm-12 col-lg-12 font-weight-bold" style='text-align: left'>Thông tin cá nhân</h1>
             <div class="col-sm-12 col-lg-12" style="padding-left: 30px">
-              <%= form_with(model: @user, local: true) do |form| %>
+              <%= form_with(model: @user, id: 'update_form', local: true) do |form| %>
                 <!-- input Name -->
                 <div class="form-group row">
-                  <label for="example-text-input" class="col-2 col-form-label font-weight-bold">Họ và tên</label>
-                  <div class="col-6">                      
-                    <%= form.text_field :name, class: "form-control"%>  
+                  <label for="example-text-input" class="col-2 col-form-label font-weight-bold">Họ và tên <span class="obli">(*)</span></label>
+                  <div class="col-5">                      
+                    <%= form.text_field :name, id: :user_edit_name, onchange: 'checkEditName()', class: "form-control"%>  
                   </div>
+                  <p id="errorName" class='error'></p>
                 </div>       
                 <!-- input Birthday -->
                 <div class="form-group row">
                   <label for="example-date-input" class="col-2 col-form-label font-weight-bold">Ngày sinh</label>
-                  <div class="col-6">
+                  <div class="col-5">
                       <%= form.date_field :birthday, class: "form-control" %>
                   </div>
                 </div>
                 <!-- input Email -->
                 <div class="form-group row">
                   <label for="example-email-input" class="col-2 col-form-label font-weight-bold">Email</label>
-                  <div class="col-6">
-                    <%= form.text_field :email, class: "form-control" %>
+                  <div class="col-5">
+                    <%= form.text_field :email, class: "form-control", disabled: true %>
                   </div>
                 </div>
                 <!-- input Gender -->
                 <div class="form-group row">
                   <label for="example-email-input" class="col-2 col-form-label font-weight-bold">Giới tính</label>
-                  <div class="col-6">
-                    <label class="container">Nam
+                  <div class="col-5">
+                    <label class="container-radio">Nam
                       <%= form.radio_button :gender, 'male', checked: true %>
                       <span class="checkmark"></span>
                     </label>
-                    <label class="container">Nữ
+                    <label class="container-radio">Nữ
                       <%= form.radio_button :gender, 'female' %>
                       <span class="checkmark"></span>
                     </label>
@@ -53,17 +54,18 @@
                 <!-- input Phone -->
                 <div class="form-group row">
                   <label for="example-tel-input" class="col-2 col-form-label font-weight-bold">Số điện thoại</label>
-                  <div class="col-6">
-                    <%= form.text_field :phone, class: "form-control" %>
+                  <div class="col-5">
+                    <%= form.text_field :phone, class: "form-control", id: :user_edit_phone, onchange: 'checkEditPhone()' %>
                   </div>
+                  <p id="errorPhone" class='error'></p>
                 </div>
                 <div class="form-group row">
                   <label for="example-search-input" class="col-2 col-form-label font-weight-bold">Địa chỉ</label>
-                  <div class="col-6">
+                  <div class="col-5">
                     <%= form.text_field :address, class: "form-control" %>
                   </div>
                 </div>
-                <%= form.submit ('Lưu thay đổi'), class: 'btn btn-primary' %>
+                <%= form.submit ('Lưu thay đổi'), class: 'btn btn-primary', type: 'button', onclick: 'validateEditForm()' %>
                 <%= link_to 'Trở về', users_path, class: 'btn btn-info' %>
                 <% end %>
               </div>

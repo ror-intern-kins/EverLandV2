@@ -182,6 +182,36 @@ function resetSignupForm() {
 
         
 }
+//-------------validate Edit User----------------------
+function checkEditPhone() {
+    var checkValid = true;
+    var errorPhone = $('#errorPhone').html('');
+    var phone  = $('#user_edit_phone').val();
+    if (phone == null || phone == '') {
+        errorPhone.html('Số điện thoại di động không được để trống.');
+        checkValid = false;
+    } else if (!(/^[0]\d{9,10}$/).test(phone)) {
+        errorPhone.html('Số điện thoại không đúng. Độ dài từ 10 đến 11 số.');
+        checkValid = false;
+    }
+    return checkValid;
+}
+function checkEditName() {
+    var checkValid = true;
+    var errorName = $('#errorName').html('');
+    var name  = $('#user_edit_name').val();
+       
+    if (name == null || name == '') {
+        errorName.html('Tên không được để trống.');
+        checkValid = false;
+    }
+    return checkValid;
+}
+function validateEditForm() {
+    if (checkEditName() || checkEditPhone()) {
+        $('#update_form').submit();
+    }
+}
 //kích hoạt nhấn enter cho button
 $(document).bind('keypress', function(e) {
     if(e.keyCode == 13) {

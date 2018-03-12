@@ -43,6 +43,18 @@
               <a class="nav-link disabled" href="#">Disabled</a>
             </li>
           </ul>
+          <!-- Nút Post -->
+
+          <% if logged_in? %>
+          <%= link_to 'Đăng tin rao', new_post_path, class: 'btn btn-primary',
+          onclick: 'resetLoginForm()'%>
+          <% else %>
+            <%= link_to 'Đăng tin rao', '#loginForm', class: 'btn btn-primary',
+            onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
+          <% end %>
+            <!-- 
+                
+             -->
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -144,39 +156,39 @@
                     <%= form_with(local: true, id: 'register_form', url: users_path ) do |form| %> <!-- form đăng ký -->
                         <h1>Đăng ký</h1>
                         <p >
-                            <%= form.label ('Tên đăng nhập ') %> <span>(*)</span> <br/>
+                            <%= form.label ('Tên đăng nhập ') %> <span class="obli">(*)</span> <br/>
                             <%= form.text_field :username, id: :user_username, onchange: 'checkUsername()' %>
                             <p id="errorUser" class='error'></p>
                             <p id="successUser" class='success'></p>
                         </p>                 
                         <p>
-                            <%= form.label ('Địa chỉ email ') %> <span>(*)</span> <br/>
+                            <%= form.label ('Địa chỉ email ') %> <span class="obli">(*)</span> <br/>
                             <%= form.text_field :email, id: :user_email, onchange: 'checkEmail()' %>
                             <p id="errorEmail" class='error'></p>
                             <p id="successEmail" class='success'></p>
                         </p>
                       
                         <p>
-                            <%= form.label ('Mật khẩu ') %> <span>(*)</span> <br/>
+                            <%= form.label ('Mật khẩu ') %> <span class="obli">(*)</span> <br/>
                             <%= form.password_field :password, id: :user_password, onchange: 'checkPassword()' %>
                             <p id="errorPass" class='error'></p>
                         </p>
                       
                         <p>
-                            <%= form.label ('Xác thực mật khẩu ') %> <span>(*)</span> <br/>
+                            <%= form.label ('Xác thực mật khẩu ') %> <span class="obli">(*)</span> <br/>
                             <%= form.password_field :password_confirmation,
                              id: :user_password_confirmation, onchange: 'checkPasswordConfirm()' %>
                             <p id="errorPasswordConfirm" class='error'></p>
                         </p>
                       
                         <p>
-                            <%= form.label ('Điện thoại di động ') %> <span>(*)</span>  <br/>
+                            <%= form.label ('Điện thoại di động ') %> <span class="obli">(*)</span>  <br/>
                             <%= form.text_field :phone, id: :user_phone, onchange: 'checkPhone()' %>
                             <p id="errorPhone" class='error'></p>
                         </p>
                       
                         <p>
-                            <%= form.label ('Tên đầy đủ ') %> <span>(*)</span> <br/>
+                            <%= form.label ('Tên đầy đủ ') %> <span class="obli">(*)</span> <br/>
                             <%= form.text_field :name, id: :user_name, onchange: 'checkName()' %>
                             <p id="errorName" class='error'></p>
                         </p>
@@ -187,11 +199,11 @@
                         </p>
                       
                         <p>
-                            <label class="container">Nam
+                            <label class="container-radio">Nam
                                 <%= form.radio_button :gender, 'male', checked: true %>
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="container">Nữ
+                            <label class="container-radio">Nữ
                                 <%= form.radio_button :gender, 'female' %>
                                 <span class="checkmark"></span>
                             </label>                            
@@ -203,11 +215,11 @@
                         </p>
                       
                         <p>
-                            <label class="container">Cá nhân
+                            <label class="container-radio">Cá nhân
                                 <%= form.radio_button :personal, 'true', checked: true %>
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="container">Công ty
+                            <label class="container-radio">Công ty
                                 <%= form.radio_button :personal, 'false' %>
                                 <span class="checkmark"></span>
                             </label>                          
