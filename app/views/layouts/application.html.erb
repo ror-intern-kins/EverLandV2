@@ -44,9 +44,8 @@
             </li>
           </ul>
           <!-- Nút Post -->
-
           <% if logged_in? %>
-          <%= link_to 'Đăng tin rao', new_user_post_path(@current_user.id), class: 'btn btn-primary',
+          <%= link_to 'Đăng tin rao', new_user_post_path(@current_user), class: 'btn btn-primary',
           onclick: 'resetLoginForm()'%>
           <% else %>
             <%= link_to 'Đăng tin rao', '#loginForm', class: 'btn btn-primary',

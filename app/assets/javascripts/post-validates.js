@@ -1,4 +1,4 @@
-$(document).ready(function () {
+document.addEventListener("turbolinks:load", function(event) {
     $('#from-create-post').submit(function () {
         //alert('aaaaaaaa')        
         //messages

@@ -129,6 +129,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    
     get_category_new()
     get_data()    
   
@@ -229,7 +230,7 @@ end
     def get_category_new
       @categories = Category.where(super_id: nil) #find all category parent
       if params[:category_id]
-          @sub_cate = Category.where('super_id = ? ', params[:category_id]) #find all child
+          @sub_cate = Category.where('super_id = ? ', params[:category_id]) #find all child          
           respond_to do |format|
           format.json { render json: [@categories, @sub_cate] } 
         end
