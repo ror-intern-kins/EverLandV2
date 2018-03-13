@@ -236,7 +236,7 @@ end
       if params[:category_id]
           @sub_cate = Category.where('super_id = ? ', params[:category_id]) #find all child          
           respond_to do |format|
-          format.json { render json: [@categories, @sub_cate] } 
+          format.json { render json: @sub_cate } 
         end
       end  
     end
@@ -250,7 +250,7 @@ end
         @sCategory = Category.where('super_id = ?', @tmp[0].super_id)  #category child when load page
         @list_child_categories = Category.where('super_id = ? ', params[:category_id]) #categories child dropdown
         respond_to do |format|
-          format.json { render json: [@categories, @sCategory, @list_child_categories, @tmp] }
+          format.json { render json: [@sCategory, @list_child_categories, @tmp] }
        #categories: full list hinh thuc
        #sCategory full list loai
        #list child full list loai

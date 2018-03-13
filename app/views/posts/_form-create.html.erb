@@ -286,7 +286,7 @@
        <%= p.label :url %><br>
        <%= p.file_field :url, multiple: true, name: "images[url][]" %>
      </div>
-   <% end %>
+<% end %>
 <div class="container">
   <h3>HÌNH ẢNH</h3>
     <small>Tối đa 8 ảnh với tin thường và 16 với tin VIP. Mỗi ảnh tối đa 2MB </small>
@@ -387,97 +387,3 @@
   </div>
   
 <% end %>
-
-<script>
-  //Ajax kiểm tra Hình thức - Loại
-  $(function () {
-    $('#cate_id').change(function () {
-      var value = $(this).val();
-      $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
-      $.get("/posts/new", {
-          category_id: value
-        },
-        function (data, status) {
-          var category_detail = data[1];
-          category_detail.forEach(item => {
-            $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name +
-              "</option>")
-          });
-        })
-    });    
-  });
-  //Ajax kiểm tra TP - Quận
-  $(function () {
-    $('#city_details').change(function () {
-      var value = $(this).val();
-      $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
-      if (value > 0) {
-      $.get("/posts/new", {
-          city_id: value
-        },function (data, status) {
-          var district = data[1];
-          district.forEach(item => {
-            $('#district_details').append("<option value=" + item.id + ">" + item.name +
-              "</option>")
-          });
-        }).fail(function(data) {
-          console.log(data)     
-      });
-     } else {
-      $('select#district_details').prop('selectedIndex', 0);
-      $('#district_details').html("<option>--Quận Huyện--</option>");
-
-      $('select#ward_details').prop('selectedIndex', 0);
-      $('#ward_details').html("<option>-- Phường/Xã  --</option>"); 
-
-      $('select#street_details').prop('selectedIndex', 0);
-      $('#street_details').html("<option>-- Đường Phố --</option>");
-     }
-    });
-  });
-  //Ajax kiểm tra Quận - Phường
-  $(function () {
-    $('#district_details').change(function () {
-      var value = $(this).val();
-      $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
-
-      if (value > 0) {
-        $.get("/posts/new", { 
-          district_id: value
-        },function (data, status) {
-          data.forEach(item => {
-            $('#ward_details').append("<option value=" + item.id + ">" + item.name + "</option>")
-          });
-        })
-      }else {
-        $('select#ward_details').prop('selectedIndex', 0);
-        $('#ward_details').html("<option>-- Phường/Xã  --</option>"); 
-  
-        $('select#street_details').prop('selectedIndex', 0);
-        $('#street_details').html("<option>-- Đường Phố --</option>");
-      }
-    });
-  })
-  //Ajax kiểm tra Phường - Đường
-  $(function () {
-    $('#ward_details').change(function () {
-      var value = $(this).val();
-      $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
-      //check empty key...
-      if(value > 0) {
-        $.get("/posts/new", {
-          ward_id: value
-        },
-        function (data, status) {
-          data.forEach(item => {
-            $('#street_details').append("<option value=" + item.id + ">" + item.name +
-              "</option>")
-          });
-        })
-      }else {
-        $('select#street_details').prop('selectedIndex', 0);
-        $('#street_details').html("<option>-- Đường Phố --</option>");
-      }
-    });
-  })
-</script>
