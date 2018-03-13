@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'bcrypt', '3.1.11' #bảo mật mật khẩu
+
 gem 'jquery-validation-rails'
 # Search
 gem 'kaminari' 
@@ -35,6 +37,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem 'carrierwave'
 
 # My imported gem
 gem 'jquery-rails'
