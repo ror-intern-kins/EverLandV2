@@ -284,7 +284,7 @@
 <%= form.fields_for :images do |p| %>
      <div class="field">
        <%= p.label :url %><br>
-       <%= p.file_field :url, multiple: true, name: "images[url][]" %>
+       <%= p.file_field :url, multiple: false, name: "images[url][]" %>
      </div>
    <% end %>
 <div class="container">
