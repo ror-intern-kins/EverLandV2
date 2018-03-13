@@ -264,7 +264,26 @@ document.addEventListener("turbolinks:load", function(event) {
         }
         return flag;
     });
-
+    $(function () {
+        var unit, area, price;
+        $('#totalPrice').text('Thỏa Thuận').css({
+            'color': 'red'
+        })
+        //price lost focus event
+        $('#post_price').focusout(function () {
+            checkPrice()
+        });
+        //area lost focus event
+        $('#post_area').focusout(function () {
+            checkPrice()
+        });
+        // unit dropdown on change
+        $('#post_unit').change(function () {
+            checkPrice()
+        });
+    
+    
+    });
 });
 
 
@@ -334,23 +353,3 @@ function checkPrice() {
     }
 };
 
-$(function () {
-    var unit, area, price;
-    $('#totalPrice').text('Thỏa Thuận').css({
-        'color': 'red'
-    })
-    //price lost focus event
-    $('#post_price').focusout(function () {
-        checkPrice()
-    });
-    //area lost focus event
-    $('#post_area').focusout(function () {
-        checkPrice()
-    });
-    // unit dropdown on change
-    $('#post_unit').change(function () {
-        checkPrice()
-    });
-
-
-});

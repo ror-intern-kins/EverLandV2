@@ -272,7 +272,7 @@
       positions = [];
       initTypes();
       
-      currentPosition = { lat: 10.822082,lng: 106.763504};                
+      currentPosition = { lat: <%= @post.lat%>,lng: <%= @post.lng%>};                
       map = new google.maps.Map(document.getElementById('map'), {
           center: currentPosition,
           zoom: 17    
