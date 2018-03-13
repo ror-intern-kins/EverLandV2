@@ -196,6 +196,262 @@
       </div>
     </div>
   </div>
+  <div class="container">
+    <div class="row window window--padding-50px">
+      <div class="col-sm-12">
+        <p class="post_span--size-big">About location</p>
+        <br/>
+      </div>
+      <div class="col-sm-12">
+          <div class="checkbox">
+              <span><input class="service_type" type="checkbox" value="store" checked> Store</span>
+              <span><input class="service_type" type="checkbox" value="school" checked> School </span>
+              <span><input class="service_type" type="checkbox" value="hospital"> Hospital </span>
+              <span><input class="service_type" type="checkbox" value="health"> Sport </span>
+              <span><input class="service_type" type="checkbox" value="restaurant"> Restaurant </span>
+              <span><input class="service_type" type="checkbox" value="bus_station"> Bus Station </span>
+              <span><input class="service_type" type="checkbox" value="lodging"> Hotel/Motel </span>
+              <span><input class="service_type" type="checkbox" value="local_government_office"> Government Office </span>
+              
+          </div>
+          <div class="radius">
+                  <input id="txt_radius" type="number" placeholder="enter radius" required > 
+                  
+                  <button type="button" onclick="onChangeRadius($('#txt_radius').val())">Change</button>
+                  <p id="require_number" style="color: red"></p>       
+              
+          </div>
+      </div>
+      <div class="col-sm-12">
+        <div id="map_container"></div>
+        <div id="map">Google Map</div>
+        <div class="table-responsive" >
+            <table class="table" id="table_Info"></table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- CONFIG MAP -->
+<style>
+  #map_container{
+    position: relative;
+  }
+  #map{
+      min-height: 400px;
+      height: 0;
+      overflow: hidden;
+      padding-bottom: 22.25%;
+      padding-top: 30px;
+      position: relative;
+  }
+</style>
+<script>
+  var map; // google map component
+  var markerArray = []; // list marker , use to clear or create
+  var positions = []; // list position to create table
+  var infoWindow; // marker info window
+  var currentPosition ; // ...
+  var url = "./img/"; // config url
+  var icon = {
+      "bus_station" : "<%= asset_url "bus_station.png"   %>",
+      "hospital": "<%= asset_url "hospital.png"   %>",
+      "lodging": "<%= asset_url "lodging.png"   %>",
+      "school":"<%= asset_url "school.png"   %>",
+      "store": "<%= asset_url "store.png"   %>",
+      "restaurant": "<%= asset_url "restaurant.png"   %>",
+      "health": "<%= asset_url "health.png"   %>",
+      "local_government_office": "<%= asset_url "local_government_office.png"   %>",
+      "other": "<%= asset_url "other.png"   %>",
+  }
+  var types = []; // list type of service
+  var currentCircle; // circle
+  var radius = 200;
+  //INIT MAP
+  function initMap() {
+      positions = [];
+      initTypes();
+      
+      currentPosition = { lat: 10.822082,lng: 106.763504};                
+      map = new google.maps.Map(document.getElementById('map'), {
+          center: currentPosition,
+          zoom: 17    
+      });
+
+      infoWindow = new google.maps.InfoWindow();
+      
+      createCurrenMarker(currentPosition);
+      
+      // place service
+      if(types.length < 1) {
+          //
+      }
+      else {
+          
+          getListNearByService();
+          //create new circle
+          currentCircle = new google.maps.Circle({
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35,
+              map: map,
+              center: currentPosition,
+              radius: Number.parseFloat(radius)
+          });
+
+          
+      }
+      
+      
+  }
+
+  // GET LIST NEARBY SERVICE
+  function onChangeRadius(rad) {
+      radius = rad;
+      initMap();
+      
+  }
+  // LOOP search list nearby 
+  function getListNearByService() {
+      var service = new google.maps.places.PlacesService(map);
+      for(var i=0; i< types.length; i++) {
+          service.nearbySearch({
+              location: currentPosition, // set default
+              radius: Number.parseFloat(radius), // unit: meter
+              type: types[i]
+          }, callback);
+      }
+          
+  }
+  function createMarker(place) {
+      
+      var placeLoc = place.geometry.location;
+      var iconURL = icon["other"];
+      // console.log(place.types);
+      for(var item in icon) {
+          if(place.types[0].match(new RegExp(item))) {
+              //console.log("++++equal++++")
+              iconURL = icon[item];
+          }
+          
+      }
+      var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location,
+          icon: iconURL
+      });
+      // ADD POSITION TO ARRAY
+      positions.push(place);
+      // ADD TYPE TO MARKER
+      marker.type = place.types[0];
+      //PUSH MARKER TO ARR
+      markerArray.push(marker); 
+      // ADD INFOWINDOW TO MARKER
+      google.maps.event.addListener(marker, 'click', function(){
+          infoWindow.setContent(place.name);
+          infoWindow.open(map, this);
+      });
+  }
+  // CREATE CURRENT POSITION MARKER
+  function createCurrenMarker(place) {
+      var marker = new google.maps.Marker({
+          map: map,
+          position: place
+      });
+      
+      google.maps.event.addListener(marker, 'click', function(){
+          infoWindow.setContent("Your position");
+          infoWindow.open(map, this);
+      });
+  }
+  
+
+  function callback(results, status) {
+      if( status === google.maps.places.PlacesServiceStatus.OK) {
+          for( var i = 0; i < results.length; i++) {
+              // calculate distances here
+              var distance = Number.parseInt(getDistance(currentPosition, results[i].geometry.location));
+              results[i].distance = distance;
+              //console.log(results[i].distance);                                              
+              createMarker(results[i]);
+          }
+          initTableInfo();
+      }
+  }
+
+  function clearMap() {
+      currentCircle.setMap(null);
+      while(markerArray.length > 0) {
+          markerArray.pop().setMap(null);
+      }
+  }
+
+  // CREATE TYPE ARRAY
+  function initTypes() {
+      types = [];
+      // clear position array
+      positions = [];
+      // clear table 
+      
+      var checkedArr = $('.service_type:checkbox:checked')
+      for(var i=0; i< checkedArr.length; i++) {
+          types.push(checkedArr[i].value);
+      }
+  }
+
+  // CAL DISTANCE
+  function rad(x) {
+      return x * Math.PI / 100;
+  };
+
+  function getDistance(p1,p2) {
+      var R = 6378137; // Earth’s mean radius in meter
+      var dLat = rad(p2.lat() - p1.lat);
+      var dLong = rad(p2.lng() - p1.lng);
+      var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(rad(p1.lat)) * Math.cos(rad(p2.lat())) *
+          Math.sin(dLong / 2) * Math.sin(dLong / 2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      var d = R * c;
+      return d; // returns the distance in meter
+  }
+
+  // CREATE TABLE INFO
+  function initTableInfo() {
+      $('#table_Info').html("");
+      for(var i=0 ; i< types.length; i++) {
+          $('#table_Info').append("<thead><tr><th>"+toTitleCase(types[i])+"</th><th>Address</th><th>Distance</th></tr></thead>");
+          var tbody= $("<tbody></tbody>");
+          // LOOP postion to create table
+          for(var j=0 ; j< positions.length; j++) {
+              // check type 
+              
+              if(positions[j].types[0].match(new RegExp(types[i]))) {
+                  //console.log("====");
+                  tbody.append("<tr><td>"+positions[j].name+"</td><td>"+positions[j].vicinity+"</td><td>"+positions[j].distance+ " m"+"</td></tr>");
+              }
+          }
+          // console.log(tbody);
+          $('#table_Info').append(tbody);
+      }
+  }
+  $(document).ready(function(){
+      
+      $('.service_type').change(function(){
+          clearMap();
+          initMap();
+      });
+
+      
+  });
+  function toTitleCase(str)
+  {
+      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnFxsxcFARq6WccD-0Nm3J0qw4DpQ_F2w&libraries=places&callback=initMap" async defer></script>
 
 
 
