@@ -396,7 +396,7 @@ function getCitiesList() {
     if (value > 0) {
         str_addr[3] = $('#city_details :selected').text() //get city when onchange
         $('#post_address_number').val(str_addr[3]) //set to address
-
+        $('#post_address_number').trigger('input');
         $.get("/posts/new", {
             city_id: value
         }, function (data, status) {
@@ -427,7 +427,8 @@ function getDistrictsList() {
 
     if (value > 0) {
         str_addr[2] = $('#district_details :selected').text() //get value district
-        $('#post_address_number').val(str_addr[2] + ', ' + str_addr[3])
+        $('#post_address_number').val(str_addr[2] + ', ' + str_addr[3]);
+        $('#post_address_number').trigger('input');
         $.get("/posts/new", {
             district_id: value
         }, function (data, status) {
@@ -453,6 +454,7 @@ function getWardsList() {
     if (value > 0) {
         str_addr[1] = $('#ward_details :selected').text() //get ward onchange
         $('#post_address_number').val(str_addr[1] + ', ' + str_addr[2] + ', ' + str_addr[3])
+        $('#post_address_number').trigger('input');
         $.get("/posts/new", {
                 ward_id: value
             },
@@ -476,6 +478,7 @@ function getStreetsList() {
         str_street = $('#street_details :selected').text()
         str_addr[0] = str_street
         $('#post_address_number').val(str_addr[0] + ', ' + str_addr[1] + ', ' + str_addr[2] + ', ' + str_addr[3])
+        $('#post_address_number').trigger('input');
     } else {
         $('#post_address_number').val('') //reset if value dropdown = 0
     }
