@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#login'
   delete '/logout', to: 'sessions#destroy'
 
+  get '/index/user/:id/posts', to: 'posts#index_user_posts', as: 'index_user_posts' #liệt kê toàn bộ các bài viết của user
+  
   # add a collection search - Q
   resources :posts, except: [:destory] do
     collection do
