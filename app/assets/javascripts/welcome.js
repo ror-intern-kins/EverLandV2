@@ -2,7 +2,7 @@ document.addEventListener("turbolinks:load", function(event) {
 
     $('#search_city_id').change(function(){
         var value = $('#search_city_id').val();
-        $('#search_district_id').html("<option value=''>--Select district--</option>");
+        $('#search_district_id').html("<option value=''>--Chọn Quận/Huyện--</option>");
         $.get("posts", {
             city_id: value
         },
@@ -17,7 +17,7 @@ document.addEventListener("turbolinks:load", function(event) {
         var value = $(this).val();
         $("#category-detail").removeAttr("style").hide();
         $("#category-detail").show();
-        $('#search_category_detail_id').html("<option value=''>--Select specific category--</option>");
+        $('#search_category_detail_id').html("<option value=''>--Chọn loại nhà đất--</option>");
         $.get("posts", {
             category_id: value
         },
@@ -35,7 +35,7 @@ document.addEventListener("turbolinks:load", function(event) {
     // GET DATA TO WARD SELECT
     $('#search_district_id').change(function(){
         var value = $(this).val();
-        $('#search_ward_id').html("<option value=''>--Select ward--</option>");        
+        $('#search_ward_id').html("<option value=''>--Chọn Phường/Xã--</option>");        
         $.get("posts", {
             district_id: value
         },
@@ -48,7 +48,7 @@ document.addEventListener("turbolinks:load", function(event) {
     // GET DATA TO STREET SELECT
     $('#search_ward_id').change(function(){
         var value = $(this).val();
-        $('#search_street_id').html("<option value=''>--Select street--</option>");  
+        $('#search_street_id').html("<option value=''>--Chọn Đường/Phố--</option>");  
         $.get("posts", {
             ward_id: value
         },

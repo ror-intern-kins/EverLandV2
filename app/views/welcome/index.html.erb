@@ -1,15 +1,54 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-4 col-lg-4" style="background-color: lightslategray">
-            <button class="btn btn primary"></button>
+
+<div style="background-color: gainsboro">
+<div class="container">
+        <div id="tung-div-search" class="row">
+            <%= render 'search'%>
         </div>
-        <div class="col-sm-8 col-lg-8" style="background-color: lightcoral">
-                <button class="btn btn primary"></button>
+
+        <!-- <div class="col-sm-1 col-lg-1"></div> -->
+        <div class="container">
+            <div id="tung-div-show" class="row">
+                <% 10.times do |t| %>
+                <div class="post-member col-md-6 col-lg-4">
+                    <div class="container pmb-detail">
+                        <div class="row">
+                            <div class="pmb-header">
+                                <div class="pmb-date">
+                                    <p class="day">14</p>
+                                    <p class="month">Tháng 03</p>
+                                </div>
+                                <a href="#">
+                                    <div class="pmb-title">
+                                        <h6>Cho thuê nhà nguyên căn hẻm 4m Lê Văn Sỹ, phường phường 10, quận Phú Nhuận, DT: 5m x 5m</h6>    
+                                    </div>
+                                 </a>
+                            </div>
+                            <div class="pmb-img"
+                            style="background-image: url(<%= asset_url 'default.jpg' %>)">
+                            </div> 
+                                                         
+                            <div class="pmb-content">
+                                <div>  
+                                    <p>
+                                        <span class="">Giá:</span>
+                                        <span>90 triệu/tháng</span>
+                                    </p>
+                                    <p>
+                                        <span class="">Diện tích:</span>
+                                        <span>420 m²</span>
+                                    </p>
+                                    <p>
+                                        <span class="">Quận/Huyện:</span>
+                                        <span>Phú Nhuận, Hồ Chí Minh</span>
+                                    </p>
+                                </div>                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <% end %>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12 col-lg-12" style="background-color: lawngreen">
-                <button class="btn btn primary"></button>
-        </div>
-    </div>
+</div>
 </div>

@@ -10,16 +10,13 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/home', to: 'sessions#home'
-
   get '/check_user', to: 'users#check_existed_user' #kiểm tra user tồn tại
   get '/check_login', to: 'sessions#check_login' #kiểm tra user và pass đúng hay chưa
-
   post '/login', to: 'sessions#login'
   delete '/logout', to: 'sessions#destroy'
 
   # add a collection search - Q
-  resources :posts, except: [:destory] do
+  resources :posts, except: [:destroy] do
     collection do
       get 'search'
       get 'result'
