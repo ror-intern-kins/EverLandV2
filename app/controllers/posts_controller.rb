@@ -129,48 +129,32 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
-
-    @categories = Category.where(super_id: nil)
-    @cities = City.all
+    @image = @post.images.build
+    get_category_new()
+    get_data()    
   
-  if params[:category_id]
-      @name = Category.where('super_id = ? and super_id is not null', params[:category_id])
-    respond_to do |format|
-      format.json { render json: @name }
-    end
-  end
-  if params[:city_id]
-    @districts = City.find(params[:city_id]).districts.all
-    respond_to do |format|  
-      format.json { render json: @districts  }  
-    end
-  end
-  if params[:district_id]
-    @wards = District.find(params[:district_id]).wards.all
-    respond_to do |format|
-      format.json { render json: @wards }
-    end
-  end
-  if params[:ward_id]
-    @streets = Ward.find(params[:ward_id]).streets.all
-    respond_to do |format|
-      format.json { render json: @streets }
-    end
-  end
 end
 
   # GET /posts/1/edit
   def edit
+    @user = User.find(params[:user_id])
+    @post = @user.posts.find(params[:id])
+    get_category_edit()    
+    get_data()
+    
   end
 
-  # POST /posts
-  # POST /posts.json
+  # POST users/id/posts
+  # POST users/id/posts.json
   def create
-
     @user = User.find(params[:user_id])
     @post = @user.posts.build(post_params)
+    
     respond_to do |format|
       if @post.save
+        params[:images]['url'].each do |a|
+          @image = @post.images.create!(url: a, post_id: @post.id)
+        end
         format.html { redirect_to post_path(@post), notice: 'Bài viết đã được đăng thành công.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -183,9 +167,12 @@ end
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    @user = User.find(params[:user_id])    
+    @post = @user.posts.find(params[:id])
+
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to @post, notice: 'Bài viết đã được chỉnh sửa thành công.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -218,6 +205,9 @@ end
 
     return @posts
   end
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -236,6 +226,57 @@ end
       :lng, :lat, 
       :house_direction, :balcony_direction, 
       :floor, :bedroom, :toilet, :furniture, 
-      :contact_name, :contact_address, :contact_phone, :contact_mobile, :contact_mail)
+      :contact_name, :contact_address, :contact_phone, :contact_mobile, :contact_mail,
+      images_attributes: [:id, :post_id, :url])
+    end
+
+    #NEW
+    def get_category_new
+      @categories = Category.where(super_id: nil) #find all category parent
+      if params[:category_id]
+          @sub_cate = Category.where('super_id = ? ', params[:category_id]) #find all child          
+          respond_to do |format|
+          format.json { render json: @sub_cate } 
+        end
+      end  
+    end
+
+    #EDIT
+    def get_category_edit
+      @categories = Category.where(super_id: nil) #categories dropdown (all load)
+      if params[:category_id]
+        #get super id in post edit
+        @tmp = Category.where('id = ?', params[:category_id]) #category in post edit
+        @sCategory = Category.where('super_id = ?', @tmp[0].super_id)  #category child when load page
+        @list_child_categories = Category.where('super_id = ? ', params[:category_id]) #categories child dropdown
+        respond_to do |format|
+          format.json { render json: [@sCategory, @list_child_categories, @tmp] }
+       #categories: full list hinh thuc
+       #sCategory full list loai
+       #list child full list loai
+        end  
+      end
+    end
+    #get data select option in view
+    def get_data 
+      @cities = City.all
+    if params[:city_id]
+      @districts = City.find(params[:city_id]).districts.all
+      respond_to do |format|  
+        format.json { render json: [@cities, @districts] }  
+      end
+    end
+    if params[:district_id]
+      @wards = District.find(params[:district_id]).wards.all
+      respond_to do |format|
+        format.json { render json: @wards }
+      end
+    end
+    if params[:ward_id]
+      @streets = Ward.find(params[:ward_id]).streets.all
+      respond_to do |format|
+        format.json { render json: @streets }
+      end
+    end 
     end
 end

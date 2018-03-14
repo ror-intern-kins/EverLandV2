@@ -1,3 +1,4 @@
+//-------------DROP HOVER------------------
 .dropdown {
     position: relative;
     display: inline-block;
@@ -29,13 +30,14 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+//-------------DROP HOVER------------------
 
 // -----------RADIO--------------------
 .container-radio {
     display: inline;
     position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    padding-left: 25px;
+    margin-right: 20px;
     cursor: pointer;
     font-size: 15px;
     -webkit-user-select: none;
@@ -45,7 +47,7 @@
 }
 
 /* Hide the browser's default radio button */
-.container input {
+.container-radio input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -63,12 +65,12 @@
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.container-radio:hover input ~ .checkmark {
     background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.container-radio input:checked ~ .checkmark {
     background-color: #2196F3;
 }
 
@@ -80,12 +82,12 @@
 }
 
 /* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
+.container-radio input:checked ~ .checkmark:after {
     display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.container .checkmark:after {
+.container-radio .checkmark:after {
  	top: 6px;
 	left: 6px;
 	width: 8px;

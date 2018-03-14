@@ -46,7 +46,9 @@ Category.create!([
     {name: "Nhà đất bán"},
     {name: "Nhà đất cho thuê"},
     {name: "Bán căn hộ chung cư", super_id: 1},
-    {name: "Bán nhà riêng", super_id: 1}
+    {name: "Bán nhà riêng", super_id: 1},
+    {name: "Thuê nhà riêng", super_id: 2},
+    {name: "Thuê căn hộ chung cư", super_id: 2}
 ])
 
 5.times do |i|
@@ -56,7 +58,7 @@ Category.create!([
         user.posts.create!([
             {
                 title: "Post #{i} #{j} lorem lorem lorem lorem",
-                category_id: 2,
+                category_id: 3,
                 city_id: 1,
                 district_id: 1,
                 ward_id: 1,

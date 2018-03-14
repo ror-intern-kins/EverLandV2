@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
     belongs_to :user
     has_many :images
+    accepts_nested_attributes_for :images
 
     #Check foreign key exists
     validate :category_id_exists
@@ -19,27 +20,27 @@ class Post < ApplicationRecord
     #Length
     validates :title, length: {minimum:30, maximum:99, 
         message: 'Tiêu đề phải có độ dài tối thiểu 30 ký tự và tối đa 99 ký tự.'}
-    validates :description, length: {minimum:50, maximum:3000,
-        message: 'Mô tả phải có độ dài tối thiểu 50 ký tự và tối đa 3000 ký tự.'}
+    validates :description, length: {minimum:30, maximum:3000,
+        message: 'Mô tả phải có độ dài tối thiểu 30 ký tự và tối đa 3000 ký tự.'}
     validates :address_number,length: {maximum:200,
-        message: 'Địa chỉ phải có độ dài tối đa 200 ký tự.'}
+        message: 'Địa chỉ có độ dài tối đa 200 ký tự.'}
     validates :furniture, length: {maximum:200, allow_blank: true,
-        message: 'Mô tả nội thất phải có độ dài tối đa 200 ký tự.'}  
+        message: 'Mô tả nội thất có độ dài tối đa 200 ký tự.'}  
     validates :contact_address, length: {maximum:200, allow_blank: true,
-        message: 'Địa chỉ liên hệ phải có độ dài tối đa 200 ký tự.'}    
+        message: 'Địa chỉ liên hệ có độ dài tối đa 200 ký tự.'}    
         #Format
-    validates :contact_mobile, length: {minimum:10, maximum:14,
-        message: 'Di động phải có độ dài tối thiểu 10 ký tự và tối đa 14 ký tự.'}, 
-    format: {with: /\A[0]\d{9,10}\z/, message: "Số di động không đúng."}
-    validates :contact_phone, length: {minimum:10, maximum:14,
-        message: 'Điện thoại phải có độ dài tối thiểu 10 ký tự và tối đa 14 ký tự.'},  
-    format: {with: /\d{9,10}\z/, message: 'Số điện thoại không đúng.'}, allow_blank:true
+    validates :contact_mobile, length: {minimum:10, maximum:11,
+        message: 'Di động phải có độ dài tối thiểu 10 ký tự và tối đa 11 ký tự.'}, 
+    format: {with: /\d{10,11}/, message: "Số di động không đúng."}
+    validates :contact_phone, length: {minimum:10, maximum:11,
+        message: 'Điện thoại phải có độ dài tối thiểu 10 ký tự và tối đa 11 ký tự.'},  
+    format: {with: /\d{10,11}\z/, message: 'Số điện thoại không đúng.'}, allow_blank:true
     validates :contact_mail, allow_blank:true, 
-    length: {maximum: 100, message: 'Mail liên hệ phải có độ dài tối đa 100 ký tự.'}, 
+    length: {maximum: 100, message: 'Mail liên hệ có độ dài tối đa 100 ký tự.'}, 
     format: { with: /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info))\z/i, 
         message: "Địa chỉ email không hợp lệ."}
     validates :contact_name, allow_blank:true,
-    length: {maximum:200, message: 'Tên phải có độ dài tối đa 200 ký tự.'}, 
+    length: {maximum:200, message: 'Tên có độ dài tối đa 200 ký tự.'}, 
     format: {with: /\A[a-zA-Z]+\z?/, message: 'Tên không hợp lệ.'}
     validates :project, allow_blank:true,
     length: {maximum:200, message: 'Dự án có độ dài tối đa 200 ký tự.'}, 
