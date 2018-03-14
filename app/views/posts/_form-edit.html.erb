@@ -1,3 +1,19 @@
+<style>
+  #map {
+    height: 100%;
+    width: 100%;
+    }
+#map_container{
+    position: relative;
+}
+#map{
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 22.25%;
+    padding-top: 30px;
+    position: relative;
+}
+ </style>
 <%= form_with model: @post, url: {action: "update"}, local:true, id:'from-create-post' do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
@@ -295,15 +311,13 @@
   hãy sửa vị trí tin rao của bạn trên bản đồ bằng cách kéo icon tới đúng vị trí của tin rao.</small>
   <small>Có thể dữ liệu bản đồ không chính xác. 
     Vì vậy nếu có bất kỳ sai xót nào xin bạn hãy báo cho chúng tôi để khắc phục kịp thời.</small>
-<!-- <div class="field">
-    <%= form.label :lng %>
-    <%= form.text_field :lng, id: :post_lng %>
+    <div>
+      <input type="text" id="address_formated" class="form-control">
+      <%= form.hidden_field :lat, id: :post_lat %>
+      <%= form.hidden_field :lng, id: :post_lng %>
   </div>
-
-  <div class="field">
-    <%= form.label :lat %>
-    <%= form.text_field :lat, id: :post_lat %>
-  </div> -->
+  <div id="map_container"></div>
+  <div id="map"></div>
 </div>
 
   <!-- LIÊN HỆ -->
@@ -445,3 +459,149 @@
     }
   });
 </script>
+<script>
+
+  var position = [ <%= @post.lat%>, <%= @post.lng %>];
+  console.log(position);
+  var address = {} // object store address
+  var map;
+  var currentPosition ; // ...
+  var infoWindow; // marker info window
+  function initMap() {
+      var latlng = new google.maps.LatLng(position[0], position[1]);
+      var input = document.getElementById('address_formated');
+      infoWindow = new google.maps.InfoWindow();
+
+      // init map
+      map = new google.maps.Map(document.getElementById('map'), {
+          center: latlng,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+
+      marker = new google.maps.Marker({
+          map: map,
+          position: latlng,
+          title: "Latitude:"+position[0]+" | Longitude:"+position[1]
+      })
+      // init marker
+      google.maps.event.addListener(marker, 'click', function(){
+          infoWindow.open(map, this);
+      });
+     // console.log(latlng);
+     $('#post_lat').val(position[0]);
+     $('#post_lng').val(position[1]);
+      google.maps.event.addListener(map, 'click', function(event) {
+         // console.log(event);
+          var result = [event.latLng.lat(), event.latLng.lng()];
+          transition(result);
+      });
+
+      // config autocomplete
+      var autocomplete = new google.maps.places.Autocomplete(input);
+      autocomplete.bindTo('bounds', map);
+      autocomplete.addListener('place_changed', function() {
+          infoWindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+              // User entered the name of a Place that was not suggested and
+              // pressed the Enter key, or the Place Details request failed.
+              window.alert("No details available for input: '" + place.name + "'");
+              return;
+          }
+
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+              map.fitBounds(place.geometry.viewport);
+          } else {
+              map.setCenter(place.geometry.location);
+              map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+          infoWindow.setContent(place.name);
+          infoWindow.open(map, marker);
+          passData(place.address_components);
+      });
+
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      infoWindow.setPosition(pos);
+      infoWindow.setContent(browserHasGeolocation ?
+                            'Error: The Geolocation service failed.' :
+                            'Error: Your browser doesn\'t support geolocation.');
+      infoWindow.open(map);
+    }
+
+
+  var numDeltas = 100;
+  var delay = 0; //milliseconds
+  var i = 0;
+  var deltaLat;
+  var deltaLng;
+
+  function transition(result){
+
+      // CONFIG GEOCODER
+      var geocoder = new google.maps.Geocoder;
+      var latlng = new google.maps.LatLng(result[0], result[1]);
+      geocoder.geocode({'location': latlng}, function(results, status) {                
+          if( status === 'OK') {
+              $('#address_formated').val("");
+              $('#address_formated').val(results[0].formatted_address);                    
+              infoWindow.setContent(results[0].formatted_address);
+              passData(results[0].address_components);
+          }
+      })
+      i = 0;
+      deltaLat = (result[0] - position[0])/numDeltas;
+      deltaLng = (result[1] - position[1])/numDeltas;
+      moveMarker();
+  }
+  
+  function moveMarker(){
+      position[0] += deltaLat;
+      position[1] += deltaLng;
+      // parse location to hidden input
+      $('#post_lat').val(position[0]);
+      $('#post_lng').val(position[1]);
+      var latlng = new google.maps.LatLng(position[0], position[1]);
+      marker.setTitle("Latitude:"+position[0]+" | Longitude:"+position[1]);
+      marker.setPosition(latlng);
+      if(i!=numDeltas){
+          i++;
+          setTimeout(moveMarker, delay);
+      }
+  }
+
+  // convert place to object
+  function passData(model) {
+      //console.log(model);
+      for(var i = 0; i < model.length; i++) {
+          var addressType = model[i].types[0];
+          if (addressType === 'administrative_area_level_1') {
+              address.city = model[i].long_name;
+            }
+            if(addressType == "administrative_area_level_2")
+            {
+              address.district = model[i].long_name;
+            }
+            if(addressType == "administrative_area_level_3")
+            {
+              address.ward = model[i].long_name;
+            }
+            if(addressType == "route")
+            {
+              address.street = model[i].long_name;
+            }
+            if(addressType == "street_number")
+            {
+              address.add = model[i].long_name;
+            }
+      } // end for
+        //console.log(address);
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnFxsxcFARq6WccD-0Nm3J0qw4DpQ_F2w&libraries=places&callback=initMap" async defer></script>
