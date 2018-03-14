@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
     belongs_to :user
     has_many :images
+    accepts_nested_attributes_for :images
 
     #Check foreign key exists
     validate :category_id_exists

@@ -16,3 +16,40 @@ footer {
 #notice{
     margin: 0;
 }
+
+.file_field{
+position: relative;
+margin: 10px;
+}
+
+.btn-image{
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+.image-input{
+    cursor: pointer;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+.image-output {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 0;
+    top: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: none;
+}
+
+.image-remove {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}

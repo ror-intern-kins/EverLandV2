@@ -129,6 +129,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @image = @post.images.build
     get_category_new()
     get_data()    
   
@@ -143,14 +144,17 @@ end
     
   end
 
-  # POST /posts
-  # POST /posts.json
+  # POST users/id/posts
+  # POST users/id/posts.json
   def create
     @user = User.find(params[:user_id])
     @post = @user.posts.build(post_params)
     
     respond_to do |format|
       if @post.save
+        params[:images]['url'].each do |a|
+          @image = @post.images.create!(url: a, post_id: @post.id)
+        end
         format.html { redirect_to post_path(@post), notice: 'Bài viết đã được đăng thành công.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -222,16 +226,17 @@ end
       :lng, :lat, 
       :house_direction, :balcony_direction, 
       :floor, :bedroom, :toilet, :furniture, 
-      :contact_name, :contact_address, :contact_phone, :contact_mobile, :contact_mail)
+      :contact_name, :contact_address, :contact_phone, :contact_mobile, :contact_mail,
+      images_attributes: [:id, :post_id, :url])
     end
 
     #NEW
     def get_category_new
       @categories = Category.where(super_id: nil) #find all category parent
       if params[:category_id]
-          @sub_cate = Category.where('super_id = ? ', params[:category_id]) #find all child
+          @sub_cate = Category.where('super_id = ? ', params[:category_id]) #find all child          
           respond_to do |format|
-          format.json { render json: [@categories, @sub_cate] } 
+          format.json { render json: @sub_cate } 
         end
       end  
     end
@@ -245,7 +250,7 @@ end
         @sCategory = Category.where('super_id = ?', @tmp[0].super_id)  #category child when load page
         @list_child_categories = Category.where('super_id = ? ', params[:category_id]) #categories child dropdown
         respond_to do |format|
-          format.json { render json: [@categories, @sCategory, @list_child_categories, @tmp] }
+          format.json { render json: [@sCategory, @list_child_categories, @tmp] }
        #categories: full list hinh thuc
        #sCategory full list loai
        #list child full list loai

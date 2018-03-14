@@ -1,4 +1,5 @@
-$(document).ready(function () {
+document.addEventListener("turbolinks:load", function (event) {
+    //-------Validate form-------
     $('#from-create-post').submit(function () {
         //alert('aaaaaaaa')        
         //messages
@@ -260,15 +261,52 @@ $(document).ready(function () {
             $('#notice_error').text('Vui lòng kiểm tra lại thông tin đã nhập.').css({
                 "color": "red"
             });
-            console.log(flag)
         }
         return flag;
     });
 
+    //-------Calculate Price-------
+    $(function calPrice() {
+        $('#totalPrice').text('Thỏa Thuận').css({
+            'color': 'red'
+        })
+        //price lost focus event
+        $('#post_price').focusout(function () {
+            checkPrice()
+        });
+        //area lost focus event
+        $('#post_area').focusout(function () {
+            checkPrice()
+        });
+        // unit dropdown on change
+        $('#post_unit').change(function () {
+            checkPrice()
+        });
+    });
+    //-------Event onchange of dropdown-------
+    $(function loadDataDropDown() {
+        $('#cate_id').change(function () {
+            getCategoriesList()
+        });
+        $('#city_details').change(function () {
+            getCitiesList()
+        })
+        $('#district_details').change(function () {
+            getDistrictsList()
+        })
+        $('#ward_details').change(function () {
+            getWardsList()
+        });
+        $('#street_details').change(function () {
+            getStreetsList()
+        })
+    });
+    
 });
 
-
+//--------support calPrice function--------
 function checkPrice() {
+    var unit, area, price;
     price = $('#post_price').val()
     area = $('#post_area').val()
     unit = $('#post_unit :selected').text()
@@ -334,23 +372,111 @@ function checkPrice() {
     }
 };
 
-$(function () {
-    var unit, area, price;
-    $('#totalPrice').text('Thỏa Thuận').css({
-        'color': 'red'
-    })
-    //price lost focus event
-    $('#post_price').focusout(function () {
-        checkPrice()
-    });
-    //area lost focus event
-    $('#post_area').focusout(function () {
-        checkPrice()
-    });
-    // unit dropdown on change
-    $('#post_unit').change(function () {
-        checkPrice()
-    });
+//----------------Get category list ----------------
+function getCategoriesList() {
+    var value = $('#cate_id').val();
+    $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option     
+    $.get("/posts/new", {
+            category_id: value
+        },
+        function (data, status) {
+            data.forEach(item => {
+                $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name + "</option>")
+            });
+        })
+}
 
+//----------------Get city list ----------------
+var str_addr = [3];
 
-});
+function getCitiesList() {
+    var value = $('#city_details').val();
+    $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
+
+    if (value > 0) {
+        str_addr[3] = $('#city_details :selected').text() //get city when onchange
+        $('#post_address_number').val(str_addr[3]) //set to address
+
+        $.get("/posts/new", {
+            city_id: value
+        }, function (data, status) {
+            var district = data[1];
+            district.forEach(item => {
+                $('#district_details').append("<option value=" + item.id + ">" + item.name +
+                    "</option>")
+            });
+        })
+    } else {
+        $('select#district_details').prop('selectedIndex', 0);
+        $('#district_details').html("<option>--Quận Huyện--</option>");
+
+        $('select#ward_details').prop('selectedIndex', 0);
+        $('#ward_details').html("<option>-- Phường/Xã  --</option>");
+
+        $('select#street_details').prop('selectedIndex', 0);
+        $('#street_details').html("<option>-- Đường Phố --</option>");
+
+        $('#post_address_number').val('') //reset if value dropdown = 0
+    }
+}
+
+//----------------Get districts list ----------------
+function getDistrictsList() {
+    var value = $('#district_details').val();
+    $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
+
+    if (value > 0) {
+        str_addr[2] = $('#district_details :selected').text() //get value district
+        $('#post_address_number').val(str_addr[2] + ', ' + str_addr[3])
+        $.get("/posts/new", {
+            district_id: value
+        }, function (data, status) {
+            data.forEach(item => {
+                $('#ward_details').append("<option value=" + item.id + ">" + item.name + "</option>")
+            });
+        })
+    } else {
+        $('select#ward_details').prop('selectedIndex', 0);
+        $('#ward_details').html("<option>-- Phường/Xã  --</option>");
+
+        $('select#street_details').prop('selectedIndex', 0);
+        $('#street_details').html("<option>-- Đường Phố --</option>");
+
+        $('#post_address_number').val('') //reset if value dropdown = 0
+    }
+};
+
+//----------------Get wards list ----------------
+function getWardsList() {
+    var value = $('#ward_details').val();
+    $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
+    if (value > 0) {
+        str_addr[1] = $('#ward_details :selected').text() //get ward onchange
+        $('#post_address_number').val(str_addr[1] + ', ' + str_addr[2] + ', ' + str_addr[3])
+        $.get("/posts/new", {
+                ward_id: value
+            },
+            function (data, status) {
+                data.forEach(item => {
+                    $('#street_details').append("<option value=" + item.id + ">" + item.name + "</option>")
+                });
+            })
+    } else {
+        $('select#street_details').prop('selectedIndex', 0);
+        $('#street_details').html("<option>-- Đường Phố --</option>");
+
+        $('#post_address_number').val('') //reset if value dropdown = 0
+    }
+}
+//----------------Get streets list ----------------
+
+function getStreetsList() {
+    var value = $('#street_details').val();
+    if (value > 0) {
+        str_street = $('#street_details :selected').text()
+        str_addr[0] = str_street
+        $('#post_address_number').val(str_addr[0] + ', ' + str_addr[1] + ', ' + str_addr[2] + ', ' + str_addr[3])
+    } else {
+        $('#post_address_number').val('') //reset if value dropdown = 0
+    }
+}
