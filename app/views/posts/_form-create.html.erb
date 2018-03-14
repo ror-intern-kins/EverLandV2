@@ -88,7 +88,7 @@
     </div>
   </div>
   <!-- End Row Quận-->
-
+  
   <!-- Row Phường  -->
   <div class="form-group row">
     <div class="col-sm-6 row">
@@ -416,6 +416,7 @@
   var map;
   var currentPosition ; // ...
   var infoWindow; // marker info window
+  var marker;
   function initMap() {
       var latlng = new google.maps.LatLng(position[0], position[1]);
       var input = document.getElementById('address_formated');
@@ -466,7 +467,12 @@
               map.setCenter(place.geometry.location);
               map.setZoom(17);  // Why 17? Because it looks good.
           }
-          marker.setPosition(place.geometry.location);
+
+          // edit transition marker add value to hidden input
+          var result = [];
+          result[0] = place.geometry.location.lat();
+          result[1] = place.geometry.location.lng();
+          transition(result);
           marker.setVisible(true);
           infoWindow.setContent(place.name);
           infoWindow.open(map, marker);
@@ -571,6 +577,29 @@
             }
       } // end for
         //console.log(address);
+    }
+
+      $('#post_address_number').on('input', function() {
+        onAddressChange();
+      });
+
+    function onAddressChange() {
+      
+      var x = $('#post_address_number').val();
+      console.log(x);
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode( { 'address': x}, function(results, status) {
+        if (status == 'OK') {
+          var result = [];
+          result[0] = results[0].geometry.location.lat();
+          result[1] = results[0].geometry.location.lng();
+          map.setCenter(results[0].geometry.location);
+          transition(result);
+            
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnFxsxcFARq6WccD-0Nm3J0qw4DpQ_F2w&libraries=places&callback=initMap" async defer></script>
