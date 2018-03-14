@@ -297,36 +297,42 @@
 </div>
 <!-- THÔNG TIN KHÁC -->
 
-<!-- HÌNH ẢNH VÀ VIDEO chưa làm -->
-<%= form.fields_for :images do |p| %>
-     <div class="field">
-       <%= p.label :url %><br>
-       <%= p.file_field :url, multiple: true, name: "images[url][]" %>
-     </div>
-   <% end %>
+<!-- HÌNH ẢNH -->
 <div class="container">
   <h3>HÌNH ẢNH</h3>
-    <small>Tối đa 8 ảnh với tin thường và 16 với tin VIP. Mỗi ảnh tối đa 2MB </small>
+    <small>Tối đa 8 ảnh. </small>
     <br><small>Tin rao có ảnh sẽ được xem nhiều hơn gấp 10 lần và được nhiều người gọi 
       gấp 5 lần so với tin rao không có ảnh. Hãy đăng ảnh để được giao dịch nhanh chóng!</small>
+  <div class="row" id="file_field_container">
+  <%= form.fields_for :images do |p| %>
+    <div class="file_field">
+      <button class='btn btn-info btn-image'><i class="fa fa-plus-circle fa-3x"></i><br>Add Image</button>
+      <%= p.file_field :url, multiple: false, name: "images[url][]", class: "image-input",onchange:"preview_image(event)" %>
+      <div class="image-output">
+        <div class='btn btn-danger image-remove' onclick='remove_image(event)'><i class="fa fa-trash"></i></div>
+      </div>
+    </div>
+  <% end %>
+  </div>
 </div>
+<!-- HÌNH ẢNH -->
 
-<!-- BẢN ĐỒ  chưa làm-->
+<!-- BẢN ĐỒ  -->
 <div class="container">
-<h3>BẢN ĐỒ</h3>
-<small>Để tăng độ tin cậy và tin rao được nhiều người quan tâm hơn, 
+  <h3>BẢN ĐỒ</h3>
+  <small>Để tăng độ tin cậy và tin rao được nhiều người quan tâm hơn, 
   hãy sửa vị trí tin rao của bạn trên bản đồ bằng cách kéo icon tới đúng vị trí của tin rao.</small>
   <small>Có thể dữ liệu bản đồ không chính xác. 
     Vì vậy nếu có bất kỳ sai xót nào xin bạn hãy báo cho chúng tôi để khắc phục kịp thời.</small>
-
-        <div>
-            <input type="text" id="address_formated" class="form-control">
-            <%= form.hidden_field :lat, id: :post_lat %>
-            <%= form.hidden_field :lng, id: :post_lng %>
-        </div>
-        <div id="map_container"></div>
-        <div id="map"></div>
+    <div>
+      <input type="text" id="address_formated" class="form-control">
+      <%= form.hidden_field :lat, id: :post_lat %>
+      <%= form.hidden_field :lng, id: :post_lng %>
     </div>
+    <div id="map_container"></div>
+    <div id="map"></div>
+</div>
+<!-- BẢN ĐỒ  -->
 
   <!-- LIÊN HỆ -->
   <div class="container">
@@ -403,102 +409,8 @@
   </div>
   
 <% end %>
-
+<!--  Google Map  -->
 <script>
-  //Ajax kiểm tra Hình thức - Loại
-  $(function () {
-    $('#cate_id').change(function () {
-      var value = $(this).val();
-      $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option 
-      $.get("/posts/new", {
-          category_id: value
-        },
-        function (data, status) {
-          var category_detail = data[1];
-          category_detail.forEach(item => {
-            $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name +
-              "</option>")
-          });
-        })
-    });    
-  });
-  //Ajax kiểm tra TP - Quận
-  $(function () {
-    $('#city_details').change(function () {
-      var value = $(this).val();
-      $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
-      if (value > 0) {
-      $.get("/posts/new", {
-          city_id: value
-        },function (data, status) {
-          var district = data[1];
-          district.forEach(item => {
-            $('#district_details').append("<option value=" + item.id + ">" + item.name +
-              "</option>")
-          });
-        }).fail(function(data) {
-          console.log(data)     
-      });
-     } else {
-      $('select#district_details').prop('selectedIndex', 0);
-      $('#district_details').html("<option>--Quận Huyện--</option>");
-
-      $('select#ward_details').prop('selectedIndex', 0);
-      $('#ward_details').html("<option>-- Phường/Xã  --</option>"); 
-
-      $('select#street_details').prop('selectedIndex', 0);
-      $('#street_details').html("<option>-- Đường Phố --</option>");
-     }
-    });
-  });
-  //Ajax kiểm tra Quận - Phường
-  $(function () {
-    $('#district_details').change(function () {
-      var value = $(this).val();
-      $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
-
-      if (value > 0) {
-        $.get("/posts/new", { 
-          district_id: value
-        },function (data, status) {
-          data.forEach(item => {
-            $('#ward_details').append("<option value=" + item.id + ">" + item.name + "</option>")
-          });
-        })
-      }else {
-        $('select#ward_details').prop('selectedIndex', 0);
-        $('#ward_details').html("<option>-- Phường/Xã  --</option>"); 
-  
-        $('select#street_details').prop('selectedIndex', 0);
-        $('#street_details').html("<option>-- Đường Phố --</option>");
-      }
-    });
-  })
-  //Ajax kiểm tra Phường - Đường
-  $(function () {
-    $('#ward_details').change(function () {
-      var value = $(this).val();
-      $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
-      //check empty key...
-      if(value > 0) {
-        $.get("/posts/new", {
-          ward_id: value
-        },
-        function (data, status) {
-          data.forEach(item => {
-            $('#street_details').append("<option value=" + item.id + ">" + item.name +
-              "</option>")
-          });
-        })
-      }else {
-        $('select#street_details').prop('selectedIndex', 0);
-        $('#street_details').html("<option>-- Đường Phố --</option>");
-      }
-    });
-  })
-</script>
-<script>
-
   var position = [ 10.822082, 106.763504];
   var address = {} // object store address
   var map;
@@ -593,7 +505,6 @@
       infoWindow.open(map);
     }
 
-
   var numDeltas = 100;
   var delay = 0; //milliseconds
   var i = 0;
@@ -663,3 +574,4 @@
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnFxsxcFARq6WccD-0Nm3J0qw4DpQ_F2w&libraries=places&callback=initMap" async defer></script>
+
