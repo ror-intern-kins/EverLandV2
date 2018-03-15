@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get '/index/user/:id/posts', to: 'posts#index_user_posts', as: 'index_user_posts' #liệt kê toàn bộ các bài viết của user
   
   # add a collection search - Q
-  resources :posts, except: [:new, :edit, :update, :destroy, :create] do
+  resources :posts, except: [:destroy] do
     collection do
       get 'search'
       get 'result'
