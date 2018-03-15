@@ -1,7 +1,6 @@
 document.addEventListener("turbolinks:load", function (event) {
     //-------Validate form-------
     $('#from-create-post').submit(function () {
-        //alert('aaaaaaaa')        
         //messages
         $('#title_error').text('').css({
             "color": "red"
@@ -426,7 +425,8 @@ function getDistrictsList() {
     $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
 
     if (value > 0) {
-        str_addr[2] = $('#district_details :selected').text() //get value district
+        str_addr[3] = $('#city_details :selected').text() //get value if onchange any dropdown
+        str_addr[2] = $('#district_details :selected').text() 
         $('#post_address_number').val(str_addr[2] + ', ' + str_addr[3]);
         $('#post_address_number').trigger('input');
         $.get("/posts/new", {
@@ -452,6 +452,8 @@ function getWardsList() {
     var value = $('#ward_details').val();
     $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
     if (value > 0) {
+        str_addr[3] = $('#city_details :selected').text() 
+        str_addr[2] = $('#district_details :selected').text() 
         str_addr[1] = $('#ward_details :selected').text() //get ward onchange
         $('#post_address_number').val(str_addr[1] + ', ' + str_addr[2] + ', ' + str_addr[3])
         $('#post_address_number').trigger('input');
@@ -475,8 +477,10 @@ function getWardsList() {
 function getStreetsList() {
     var value = $('#street_details').val();
     if (value > 0) {
-        str_street = $('#street_details :selected').text()
-        str_addr[0] = str_street
+        str_addr[3] = $('#city_details :selected').text() 
+        str_addr[2] = $('#district_details :selected').text() 
+        str_addr[1] = $('#ward_details :selected').text()
+        str_addr[0] = $('#street_details :selected').text()
         $('#post_address_number').val(str_addr[0] + ', ' + str_addr[1] + ', ' + str_addr[2] + ', ' + str_addr[3])
         $('#post_address_number').trigger('input');
     } else {

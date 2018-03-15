@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   #GET /user_posts.json
   def index_user_posts
     @user = current_user
-    @posts = @user.posts.page(params[:page]).per(5)  #phân trang 
+    @posts = @user.posts.order("created_at DESC").page(params[:page]).per(5)  #phân trang 
   end
 
   # GET /posts
