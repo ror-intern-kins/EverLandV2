@@ -140,8 +140,7 @@ class PostsController < ApplicationController
     @image = @post.images.build
     get_category_new()
     get_data()    
-  
-end
+  end
 
   # GET /posts/1/edit
   def edit
@@ -149,8 +148,7 @@ end
     @user = current_user
     @post = @user.posts.find(params[:id])
     get_category_edit()    
-    get_data()
-    
+    get_data()  
   end
 
   # POST users/id/posts
@@ -185,6 +183,11 @@ end
 
     respond_to do |format|
       if @post.update(post_params)
+        if !(params[:images].nil?)
+          params[:images]['url'].each do |a|
+            @image = @post.images.create!(url: a, post_id: @post.id)
+          end
+        end
         format.html { redirect_to @post, notice: 'Bài viết đã được chỉnh sửa thành công.' }
         format.json { render :show, status: :ok, location: @post }
       else
