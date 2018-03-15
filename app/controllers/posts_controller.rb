@@ -188,6 +188,12 @@ class PostsController < ApplicationController
             @image = @post.images.create!(url: a, post_id: @post.id)
           end
         end
+        if !(params[:images_delete].nil?)
+          params[:images_delete].each do |i|
+            image = Image.find(i['id']);
+            @post.images.destroy(image);
+          end
+        end
         format.html { redirect_to @post, notice: 'Bài viết đã được chỉnh sửa thành công.' }
         format.json { render :show, status: :ok, location: @post }
       else
