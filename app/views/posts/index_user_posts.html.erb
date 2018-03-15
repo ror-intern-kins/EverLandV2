@@ -23,7 +23,7 @@
                         <td><%= post.created_at.strftime("%I:%M %p, %d/%m/%Y") %></td>
                         <td><%= link_to '<i class="fa fa-eye" aria-hidden="true"></i>'.html_safe, post_path(post) %></td>
                         <td><%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_user_post_path(@user.id ,post) %></td>
-                        <td><%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i>'.html_safe, post, method: :delete, data: { confirm: 'Bạn có chắc muốn xóa bài viết này không?' } %> </td>
+                        <td><%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i>'.html_safe, user_post_path(@user.id ,post), method: :delete, data: { confirm: 'Bạn có chắc muốn xóa bài viết này không?' } %> </td>
                     </tr>
                 <%end%>
             </tbody>
