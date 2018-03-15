@@ -152,8 +152,10 @@ end
     
     respond_to do |format|
       if @post.save
-        params[:images]['url'].each do |a|
-          @image = @post.images.create!(url: a, post_id: @post.id)
+        if !(params[:images].nil?)
+          params[:images]['url'].each do |a|
+            @image = @post.images.create!(url: a, post_id: @post.id)
+          end
         end
         format.html { redirect_to post_path(@post), notice: 'Bài viết đã được đăng thành công.' }
         format.json { render :show, status: :created, location: @post }
