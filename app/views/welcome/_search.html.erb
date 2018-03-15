@@ -42,35 +42,37 @@
         color: white;
       }
       #full-search {
-        padding-top: 30px;
-        padding-bottom: 30px;
+        padding: 30px;
+        <%# padding-top: 30px;
+        padding-bottom: 30px; %>
       }
       #advance-search {
-        padding-left: 30px
+        padding-left: 45px
       }
     </style>
 
-<div class="container">
+<div class="container" style="padding-left:25px; padding-right:25px">
   <div style="background-color: white">
-  <div id="full-search">
-    <%= form_tag("/posts/result", method: "get", class: "row", style: 'text-align: center') do %>
+  <div id="full-search" class="container">
+    <%= form_tag("/", method: "get", class: "row") do %>
     <%= hidden_field_tag(:search_type, "full") %>
-    <div class="col-md-1"></div>
+    <%# <div class="col-md-1"></div> %>
     <div class="col-md-5">
       <%= text_field_tag(:query, "", class: "form-control", placeholder: 'Nhập địa điểm') %>
     </div>
-      <a href="#all-search" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="advance-search"
-      id='all-advance' class="btn btn-primary col-md-2">Tìm kiếm nâng cao</a> 
-    <div class="col-md-2">
+    <div class="col-md-4">
+    <%= link_to 'Tìm kiếm nâng cao', '#all-search', 
+    class: 'btn btn-primary col-md-12', data: {toggle: 'collapse'}  %> 
+  </div>
+    <div class="col-md-3">
       <%= submit_tag("Tìm kiếm", class: "btn btn-success col-md-12") %>
     </div>
-    <div class="col-md-1"></div>
     <% end %>     
   </div>
 
-  <div id="all-search" class="collapse col-sm-12" style="background-color: white">
+  <div id="all-search" class="collapse col-md-12" style="background-color: white">
     <div class="row">
-      <div id="advance-search" class="col-sm-6">
+      <div id="advance-search" class="col-md-6">
         <!-- LOAD GGMAP LIBRARY -->
         <%= form_for(:search, url:"/posts/result", method: "get") do |f| %>
           <%= f.hidden_field :search_type, :value => "advance" %>
@@ -96,22 +98,22 @@
             <!-- AREA  -->
             <div class="field row margin-form">
               <div class="col-sm-4 col-lg-4">Diện tích nhỏ từ</div>
-              <%= f.text_field :area_bottom, id: :area_bottom, class: 'form-control col-sm-3 col-lg-3' %>
+              <%= f.text_field :area_bottom, id: :area_bottom, class: 'form-control col-md-3' %>
               <div class="col-sm-2 col-lg-2">đến</div>
-              <%= f.text_field :area_top, id: :area_top, class: 'form-control col-sm-3 col-lg-3' %>
+              <%= f.text_field :area_top, id: :area_top, class: 'form-control col-md-3' %>
             </div>
             <div class="field row margin-form">
               <div class="col-sm-4 col-lg-4">Giá cả từ</div>   
-              <%= f.text_field :price_bottom, id: :price_bottom, class: 'form-control col-sm-3 col-lg-3' %>
+              <%= f.text_field :price_bottom, id: :price_bottom, class: 'form-control col-md-3' %>
               <div class="col-sm-2 col-lg-2">đến</div>   
-                <%= f.text_field :price_top, id: :price_top, class: 'form-control col-sm-3 col-lg-' %>
+                <%= f.text_field :price_top, id: :price_top, class: 'form-control col-md-3' %>
             </div>
 
             <%= link_to  "Thêm chi tiết", '#super_advance', data: {toggle: 'collapse'}, style: 'text-decoration: underline;' %>
       </div>    
 
     <!-- SUPER ADVANCE -->
-      <div id="super_advance" class="collapse col-sm-6 col-lg-6">
+      <div id="super_advance" class="collapse col-md-6" style="padding: 0px 30px 0px 30px">
           <!-- WARD -->
         <div class="ward margin-form">
           <%= f.select :ward_id,"<option></option>", {prompt: "--Chọn Phường/Xã--"}, {class: 'form-control'} %>
@@ -134,11 +136,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-5 col-lg-5"></div>
-      <div class="col-sm-2 col-lg-2">
-          <%= f.submit ('Tìm kiếm'), class: 'btn btn-info col-sm-12 col-lg-12', style: 'margin-top: 20px' %>
+      <div class="col-md-4"></div>
+      <div class="col-md-4" style="padding: 0px 30px 0px 30px">
+          <%= f.submit ('Tìm kiếm'), class: 'btn btn-info col-md-12', style: 'margin-top: 20px' %>
       </div>
-      <div class="col-sm-5 col-lg-5"></div>
+      <div class="col-md-4"></div>
     </div>
     <% end %>
   </div>

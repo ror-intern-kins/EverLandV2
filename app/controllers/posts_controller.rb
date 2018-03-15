@@ -124,7 +124,6 @@ class PostsController < ApplicationController
       end
       
     end #end else
-    
   end
   # GET /posts/new
   def new

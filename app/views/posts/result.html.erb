@@ -4,7 +4,7 @@
 <% else %>
     <h1>Posts</h1>
     <% @posts.each do |post|%>
-        <%= post.title %>
+        <%= post.title %> <%= post.created_at %>
         </br>
     <% end %>
     <%= paginate @posts, theme: 'twitter-bootstrap-4', outer_window: 3 %>
