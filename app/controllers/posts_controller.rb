@@ -214,7 +214,6 @@ end
       text = params[:query]
       @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   )   
     end
-
     return @posts
   end
 

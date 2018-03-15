@@ -2,7 +2,7 @@ function onChangeForm(id, text) {
     // show element
     document.getElementById(id).style.display = 'block';
     // hide element
-    document.getElementById(text).style.display = 'none';
+    // document.getElementById(text).style.display = 'none';
 };
 
 const new_image_feild = '<div class="file_field"><button class="btn btn-info btn-image"><i class="fa fa-plus-circle fa-3x"></i><br>Add Image</button><input name="images[url][]" class="image-input" onchange="preview_image(event)" type="file" id="post_images_attributes_0_url"><div class="image-output"><div class="btn btn-danger image-remove" onclick="remove_image(event)"><i class="fa fa-trash"></i></div></div></div>'
