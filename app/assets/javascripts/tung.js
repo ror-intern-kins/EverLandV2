@@ -1,1 +1,5 @@
-//------SEARCH AJAX--------
+//------SHOW CATEGORY--------
+
+function showCategory() {
+    
+}

@@ -4,7 +4,7 @@
     <div id="tung-div-search" class="row">
         <%= render 'search'%>
     </div>
-    
+
 <% if !@posts.present? %>    
 <div class="container">
     <div class="row">
@@ -22,13 +22,11 @@
                         <div class="pmb-header">
                             <div class="pmb-date">
                                 <p class="day"><%= post.created_at.day %></p>
-                                <p class="month">Tháng <%= post.created_at.month %></p>
+                                <p class="month">Tháng <%= post.created_at.month  %></p>
                             </div>
-                            <a href="#">
-                                <div class="pmb-title">
-                                    <h6><%= post.title %></h6>    
-                                </div>
-                                </a>
+                            <div>
+                            <%= link_to post.title, post_path(post.id), class: 'pmb-title'%>
+                            </div>
                         </div>
                         <div class="pmb-img"
                         style="background-image: url(<%= asset_url !(post.images.empty?)?(post.images.first.url):("default.jpg") %>)">
@@ -38,7 +36,7 @@
                             <div>  
                                 <p>
                                     <span class="">Giá:</span>
-                                    <span><%= post.price %></span>
+                                    <span><%= post.price %> VND</span>
                                 </p>
                                 <p>
                                     <span class="">Diện tích:</span>

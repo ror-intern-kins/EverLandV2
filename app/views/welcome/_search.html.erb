@@ -74,7 +74,7 @@
     <div class="row">
       <div id="advance-search" class="col-md-6">
         <!-- LOAD GGMAP LIBRARY -->
-        <%= form_for(:search, url:"/posts/result", method: "get") do |f| %>
+        <%= form_for(:search, url:"/", method: "get") do |f| %>
           <%= f.hidden_field :search_type, :value => "advance" %>
           <!-- CATEGORY select -->
             <div class="category">

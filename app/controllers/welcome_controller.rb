@@ -40,11 +40,10 @@ class WelcomeController < ApplicationController
     #-------------------Search-----------
     if (params[:search_type])
       search_type = params[:search_type] # get params search type
-      case search_type # switch case search type
-      when "full"
-        text = params[:query]
+      text = params[:query]
         @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   ).all.page(params[:page]).per(12)
-      else
+    end
+    if (params[:search])
         query = params.require(:search).permit(:category_id,:area_top, :area_bottom,:price_top, :price_bottom, :category_detail_id,:area,:price,:city_id, :district_id, :ward_id, :street_id, :house_direction, :bedroom)  
         @h = Array.new # search array only for area and price
         @s = "" # search string
@@ -113,7 +112,7 @@ class WelcomeController < ApplicationController
           @posts = Post.where(query).page(params[:page]).per(12)
         end
         
-      end #end else
+    
     end #end if
 
   end
