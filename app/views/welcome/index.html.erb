@@ -1,54 +1,66 @@
 
 <div style="background-color: gainsboro">
 <div class="container">
-        <div id="tung-div-search" class="row">
-            <%= render 'search'%>
-        </div>
-
-        <!-- <div class="col-sm-1 col-lg-1"></div> -->
-        <div class="container">
-            <div id="tung-div-show" class="row">
-                <% 10.times do |t| %>
+    <div id="tung-div-search" class="row">
+        <%= render 'search'%>
+    </div>
+    <div class="container">
+    <div class="row">
+        <h3 class="post-noti col-md-12"><%= flash[:noti] %></h3> 
+    </div>
+</div>
+<% if !@posts.present? %>    
+<div class="container">
+    <div class="row">
+        <h3 class="post-noti col-md-12">Không tìm thấy kết quả nào</h3> 
+    </div>
+</div>
+<% else %>
+    <div class="container">
+        <div id="tung-div-show" class="row">
+            <% @posts.each do |post|%>
                 <div class="post-member col-md-6 col-lg-4">
                     <div class="container pmb-detail">
                         <div class="row">
                             <div class="pmb-header">
                                 <div class="pmb-date">
-                                    <p class="day">14</p>
-                                    <p class="month">Tháng 03</p>
+                                    <p class="day"><%= post.created_at.day %></p>
+                                    <p class="month">Tháng <%= post.created_at.month  %></p>
                                 </div>
-                                <a href="#">
-                                    <div class="pmb-title">
-                                        <h6>Cho thuê nhà nguyên căn hẻm 4m Lê Văn Sỹ, phường phường 10, quận Phú Nhuận, DT: 5m x 5m</h6>    
-                                    </div>
-                                 </a>
+                                <div>
+                                <%= link_to post.title, post_path(post.id), class: 'pmb-title'%>
+                                </div>
                             </div>
                             <div class="pmb-img"
-                            style="background-image: url(<%= asset_url 'default.jpg' %>)">
+                            style="background-image: url(<%= asset_url !(post.images.empty?)?(post.images.first.url):("default.jpg") %>)">
                             </div> 
-                                                         
+                                                            
                             <div class="pmb-content">
                                 <div>  
                                     <p>
                                         <span class="">Giá:</span>
-                                        <span>90 triệu/tháng</span>
+                                        <span><%= post.price %> VND</span>
                                     </p>
                                     <p>
                                         <span class="">Diện tích:</span>
-                                        <span>420 m²</span>
+                                        <span><%= post.area %> m²</span>
                                     </p>
                                     <p>
-                                        <span class="">Quận/Huyện:</span>
-                                        <span>Phú Nhuận, Hồ Chí Minh</span>
+                                        <span class="">Địa chỉ:</span>
+                                        <span><%= post.address_number %></span>
                                     </p>
                                 </div>                    
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <% end %>
-            </div>
+                </div>     
+            <% end %>
         </div>
+    </div>
+    <% if @posts.size > 6 %>
+    <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
+    <% end %>
+<% end %>
 </div>
+
 </div>

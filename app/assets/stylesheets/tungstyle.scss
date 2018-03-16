@@ -30,7 +30,12 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+.dropdown-item {
+    text-align: left;
+}
 //-------------DROP HOVER------------------
+
+
 
 // -----------RADIO--------------------
 .container-radio {
@@ -114,14 +119,24 @@
     min-height: 200px;
     margin-bottom: 30px;
   }
-  //-------------------SEARCH---------------------
+  //-------------------NOTIFY---------------------
+  .post-noti  {
+    margin-bottom: 40px;
+    text-align: center;
+  }
 
   .margin-form {
       margin-bottom: 10px;
   }
+  //-------------PAGINATE---------------
+
+  .pagination {
+      padding-left: 10px;
+      margin-bottom: 0px;
+  }
   //-------------------INDEX MAIN------------------
   #tung-div-search {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
   }
   #tung-div-show {
       td {
@@ -151,17 +166,24 @@
   .pmb-header {
     position: relative;
     padding-left: 70px;
+    min-height: 60px;
   }
   .pmb-title {
     float: left;
-    color: black
+    color: black;
+    font-weight: bold;
 
   }
   .pmb-content {
+      width: 100%;
       margin-top: 10px;
       font-size: 0.9em;
       p {
           margin: 0;
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
       }
       p>span:first-child {
           color: #888888;
@@ -172,7 +194,7 @@
   .pmb-date {
     text-align: center;
     width: 60px;
-    height: 50px;
+    height: 60px;
     position: absolute;
     top: 0;
     left: 0;

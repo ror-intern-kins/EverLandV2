@@ -58,13 +58,13 @@ class PostsController < ApplicationController
   end
 
   def result
-    search_type = params[:search_type] # get params search type
-    case search_type # switch case search type
-    when "full"
+    if (params[:search_type])
+      search_type = params[:search_type] # get params search type
       text = params[:query]
-      @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   ).all.page(params[:page]).per(5)
-    else
-      query = params.require(:search).permit(:category_id,:area_top, :area_bottom,:price_top, :price_bottom, :category_detail_id,:area,:price,:city_id, :district_id, :ward_id, :street_id, :house_direction, :bedroom)  
+        @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   ).all.page(params[:page]).per(12)
+    end
+    if (params[:search])
+        query = params.require(:search).permit(:category_id,:area_top, :area_bottom,:price_top, :price_bottom, :category_detail_id,:area,:price,:city_id, :district_id, :ward_id, :street_id, :house_direction, :bedroom)  
       @h = Array.new # search array only for area and price
       @s = "" # search string
       @h[0] = @s # h => [""]
@@ -131,10 +131,9 @@ class PostsController < ApplicationController
       elsif
         @posts = Post.where(query).page(params[:page]).per(5)
       end
-      
-    end #end else
-    
+        
   end
+end
   # GET /posts/new
   def new
     @post = Post.new
@@ -160,8 +159,10 @@ end
     
     respond_to do |format|
       if @post.save
-        params[:images]['url'].each do |a|
-          @image = @post.images.create!(url: a, post_id: @post.id)
+        if !(params[:images].nil?)
+          params[:images]['url'].each do |a|
+            @image = @post.images.create!(url: a, post_id: @post.id)
+          end
         end
         format.html { redirect_to post_path(@post), notice: 'Bài viết đã được đăng thành công.' }
         format.json { render :show, status: :created, location: @post }
@@ -181,6 +182,17 @@ end
 
     respond_to do |format|
       if @post.update(post_params)
+        if !(params[:images].nil?)
+          params[:images]['url'].each do |a|
+            @image = @post.images.create!(url: a, post_id: @post.id)
+          end
+        end
+        if !(params[:images_delete].nil?)
+          params[:images_delete].each do |i|
+            image = Image.find(i['id']);
+            @post.images.destroy(image);
+          end
+        end
         format.html { redirect_to @post, notice: 'Bài viết đã được chỉnh sửa thành công.' }
         format.json { render :show, status: :ok, location: @post }
       else

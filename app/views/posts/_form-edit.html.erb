@@ -299,9 +299,39 @@
 <!-- HÌNH ẢNH VÀ VIDEO chưa làm -->
 <div class="container">
   <h3>HÌNH ẢNH</h3>
-    <small>Tối đa 8 ảnh với tin thường và 16 với tin VIP. Mỗi ảnh tối đa 2MB </small>
+    <small>Tối đa 8 ảnh. </small>
     <br><small>Tin rao có ảnh sẽ được xem nhiều hơn gấp 10 lần và được nhiều người gọi 
       gấp 5 lần so với tin rao không có ảnh. Hãy đăng ảnh để được giao dịch nhanh chóng!</small>
+  <div class="row" id="file_field_container">
+  <% if @post.images.length == 8 %>
+    <%= form.fields_for :images do |p| %>
+      <div class="file_field">
+        <button class='btn btn-info btn-image'><i class="fa fa-plus-circle fa-3x"></i><br>Add Image</button>
+        <%= p.file_field :url, multiple: false, name: "images[url][]", class: "image-input",onchange:"preview_image(event)" %>
+        <div class="image-output" style="background-image:url('<%= asset_url p.object.url %>');display:block;">
+          <div class='btn btn-danger image-remove' onclick='remove_image(event,<%= p.object.id %>)'><i class="fa fa-trash"></i></div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <%= form.fields_for :images do |p| %>
+      <div class="file_field">
+        <button class='btn btn-info btn-image'><i class="fa fa-plus-circle fa-3x"></i><br>Add Image</button>
+        <%= p.file_field :url, multiple: false, name: "images[url][]", class: "image-input",onchange:"preview_image(event)" %>
+        <div class="image-output" style="background-image:url('<%= asset_url p.object.url %>');display:block;">
+          <div class='btn btn-danger image-remove' onclick='remove_image(event,<%= p.object.id %>)'><i class="fa fa-trash"></i></div>
+        </div>
+      </div>
+    <% end %>
+    <div class="file_field">
+      <button class='btn btn-info btn-image'><i class="fa fa-plus-circle fa-3x"></i><br>Add Image</button>
+      <%= form.file_field :images, multiple: false, name: "images[url][]", class: "image-input",onchange:"preview_image(event)" %>
+      <div class="image-output">
+        <div class='btn btn-danger image-remove' onclick='remove_image(event)'><i class="fa fa-trash"></i></div>
+      </div>
+    </div>
+  <% end %>
+  </div>
 </div>
 
 <!-- BẢN ĐỒ  chưa làm-->

@@ -30,17 +30,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :images, except: [:create, :edit, :update, :show, :destory]
+  resources :images, except: [:create, :edit, :update, :show, :destroy]
 
   resources :cities do
-    resources :districts, only: [:create, :edit, :update, :show, :destory] do
-      resources :wards, only: [:create, :edit, :update, :show, :destory] do
-        resources :streets, only: [:create, :edit, :update, :show, :destory]
+    resources :districts, only: [:create, :edit, :update, :show, :destroy] do
+      resources :wards, only: [:create, :edit, :update, :show, :destroy] do
+        resources :streets, only: [:create, :edit, :update, :show, :destroy]
       end
     end
   end
-  resources :districts, except: [:create, :edit, :update, :show, :destory]
-  resources :wards, except: [:create, :edit, :update, :show, :destory]
-  resources :streets, except: [:create, :edit, :update, :show, :destory]
+  resources :districts, except: [:create, :edit, :update, :show, :destroy]
+  resources :wards, except: [:create, :edit, :update, :show, :destroy]
+  resources :streets, except: [:create, :edit, :update, :show, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

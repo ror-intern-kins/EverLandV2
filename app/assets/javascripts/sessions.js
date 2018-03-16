@@ -46,17 +46,22 @@ function validateSignupForm() {
 function checkExistedUser(username) {
     var checkValid = true;
     var errorUsername = $('#errorUser').html('');
+    var successUsername = $('#successUser').html('');
     $.ajax({
         url: '/check_user',
         method: 'get',
         data: {current_user_id: username},
         success: function(data) {
             if (data.check === true) {
-                errorUsername.html('Tên tài khoản đã tồn tại.')
+                errorUsername.html('Tên tài khoản đã tồn tại.');
                 checkValid = false;
-            }           
+            }       
+            else {
+                successUsername.html('Tên đăng nhập có thể sử dụng.');
+            }    
         }
     })
+
     return checkValid;
 }
 function checkUsername() {
@@ -77,10 +82,6 @@ function checkUsername() {
     } else {
         checkValid = checkExistedUser(username);
     }
-    if (checkValid) {
-        successUsername.html('Tên đăng nhập có thể sử dụng.');
-    }
-
     return checkValid;
 }
 function checkEmail() {
