@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :set_post_to_show, only: [:show]
   before_action :checkCurrentId, only: [:new, :create, :edit, :update, :index_user_posts] 
+
   #GET /user_posts
   #GET /user_posts.json
   def index_user_posts
@@ -138,19 +139,16 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @image = @post.images.build
-    get_category_new()
-    get_data()   
-    
+    @categories = Category.where(super_id: nil) #find all category parent
+    @cities = City.all
 end
 
   # GET /posts/1/edit
   def edit
-    #@user = User.find(params[:user_id])
     @user = current_user
-    @post = @user.posts.find(params[:id])
-    get_category_edit()    
-    get_data()
-    
+    @post = @user.posts.find(params[:id])    
+    @categories = Category.where(super_id: nil) #find all category parent
+    @cities = City.all
   end
 
   # POST users/id/posts
@@ -217,7 +215,43 @@ end
     return @posts
   end
 
-
+ #NEW
+ def get_category_new
+    @sub_cate = Category.where('super_id = ? ', params[:category_id]) #find all child          
+    respond_to do |format|
+      format.json { render json: @sub_cate } 
+    end
+  end
+  #EDIT
+  def get_category_edit
+      #get super id in post edit
+      @tmp = Category.where('id = ?', params[:category_id]) #category in post edit
+      @sCategory = Category.where('super_id = ?', @tmp[0].super_id)  #category child when load page
+      @list_child_categories = Category.where('super_id = ? ', params[:category_id]) #categories child dropdown
+      respond_to do |format|
+        format.json { render json: [@sCategory, @list_child_categories, @tmp] }
+      end
+  end
+  def get_data 
+    if params[:city_id]
+      @districts = City.find(params[:city_id]).districts.all
+      respond_to do |format|  
+        format.json { render json: [@cities, @districts] }  
+      end
+    end
+    if params[:district_id]
+      @wards = District.find(params[:district_id]).wards.all
+      respond_to do |format|
+        format.json { render json: @wards }
+      end
+    end
+    if params[:ward_id]
+      @streets = Ward.find(params[:ward_id]).streets.all
+      respond_to do |format|
+        format.json { render json: @streets }
+      end
+    end 
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -239,62 +273,11 @@ end
       :floor, :bedroom, :toilet, :furniture, 
       :contact_name, :contact_address, :contact_phone, :contact_mobile, :contact_mail,
       images_attributes: [:id, :post_id, :url])
-    end
-
-    #NEW
-    def get_category_new
-      @categories = Category.where(super_id: nil) #find all category parent
-      if params[:category_id]
-          @sub_cate = Category.where('super_id = ? ', params[:category_id]) #find all child          
-          respond_to do |format|
-          format.json { render json: @sub_cate } 
-        end
-      end  
-    end
-
-    #EDIT
-    def get_category_edit
-      @categories = Category.where(super_id: nil) #categories dropdown (all load)
-      if params[:category_id]
-        #get super id in post edit
-        @tmp = Category.where('id = ?', params[:category_id]) #category in post edit
-        @sCategory = Category.where('super_id = ?', @tmp[0].super_id)  #category child when load page
-        @list_child_categories = Category.where('super_id = ? ', params[:category_id]) #categories child dropdown
-        respond_to do |format|
-          format.json { render json: [@sCategory, @list_child_categories, @tmp] }
-       #categories: full list hinh thuc
-       #sCategory full list loai
-       #list child full list loai
-        end  
-      end
-    end
-    #get data select option in view
-    def get_data 
-      @cities = City.all
-    if params[:city_id]
-      @districts = City.find(params[:city_id]).districts.all
-      respond_to do |format|  
-        format.json { render json: [@cities, @districts] }  
-      end
-    end
-    if params[:district_id]
-      @wards = District.find(params[:district_id]).wards.all
-      respond_to do |format|
-        format.json { render json: @wards }
-      end
-    end
-    if params[:ward_id]
-      @streets = Ward.find(params[:ward_id]).streets.all
-      respond_to do |format|
-        format.json { render json: @streets }
-      end
-    end 
-  end
+    end  
 
   #check current user id
   def checkCurrentId 
     @user = User.find(params[:user_id])
     redirect_to not_found_path if current_user.id != @user.id 
   end
-
 end

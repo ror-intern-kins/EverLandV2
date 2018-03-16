@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   #error pages
   match '/404', to: 'error/errors#not_found', via: :all, as: 'not_found'
   match '/500', to: 'error/errors#internal_error', via: :all, as: 'internal_error'
-
   resources :categories
 
+  post '/getcate', to: 'posts#get_category_new', as: 'get_cate'
+  post '/getcate_edit', to: 'posts#get_category_edit', as: 'get_cate_edit'
+  post '/getdata', to: 'posts#get_data', as: 'get_data'
   #Add action new 5.3
   resources :users do
     resources :posts, only: [:new, :edit, :update, :destory, :create]  do

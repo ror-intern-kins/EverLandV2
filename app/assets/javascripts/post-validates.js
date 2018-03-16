@@ -375,14 +375,14 @@ function checkPrice() {
 function getCategoriesList() {
     var value = $('#cate_id').val();
     $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option     
-    $.get("/posts/new", {
+    $.post("/getcate.json", {
             category_id: value
         },
         function (data, status) {
             data.forEach(item => {
                 $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name + "</option>")
             });
-        })
+    })
 }
 
 //----------------Get city list ----------------
@@ -396,7 +396,7 @@ function getCitiesList() {
         str_addr[3] = $('#city_details :selected').text() //get city when onchange
         $('#post_address_number').val(str_addr[3]) //set to address
         $('#post_address_number').trigger('input');
-        $.get("/posts/new", {
+        $.post("/getdata.json", {
             city_id: value
         }, function (data, status) {
             var district = data[1];
@@ -429,7 +429,7 @@ function getDistrictsList() {
         str_addr[2] = $('#district_details :selected').text() 
         $('#post_address_number').val(str_addr[2] + ', ' + str_addr[3]);
         $('#post_address_number').trigger('input');
-        $.get("/posts/new", {
+        $.post("/getdata.json", {
             district_id: value
         }, function (data, status) {
             data.forEach(item => {
@@ -457,7 +457,7 @@ function getWardsList() {
         str_addr[1] = $('#ward_details :selected').text() //get ward onchange
         $('#post_address_number').val(str_addr[1] + ', ' + str_addr[2] + ', ' + str_addr[3])
         $('#post_address_number').trigger('input');
-        $.get("/posts/new", {
+        $.post("/getdata.json", {
                 ward_id: value
             },
             function (data, status) {

@@ -405,7 +405,7 @@
     var w_id = '<%= @post.ward_id %>' //get ward id
     var s_id = '<%= @post.street_id %>' //get street id
     //category dropdown
-    $.get("", { 
+    $.post("/getcate_edit.json", { 
       category_id: ca_id
     }, function (data, status) { 
       console.log(data)         
@@ -419,7 +419,7 @@
         }})
     });
     //city dropdown
-    $.get("", {
+    $.post("/getdata.json", {
       city_id: c_id
     },function (data, status) {
       //data[1] : districts json
@@ -431,7 +431,7 @@
       }});
     });
     //district dropdown
-    $.get("", {
+    $.post("/getdata.json", {
       district_id: dis_id
     },function (data, status) {    
       data.forEach(item => {
@@ -446,7 +446,7 @@
       $('#ward_details').html("<option>-- Phường/Xã  --</option>"); 
       $('#street_details').html("<option>-- Đường Phố --</option>");
     } else {
-      $.get("", {
+      $.post("/getdata.json", {
         ward_id: w_id
       },function (data, status) {    
         data.forEach(item => {
