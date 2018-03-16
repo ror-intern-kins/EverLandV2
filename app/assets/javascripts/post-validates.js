@@ -1,7 +1,6 @@
 document.addEventListener("turbolinks:load", function (event) {
     //-------Validate form-------
     $('#from-create-post').submit(function () {
-        //alert('aaaaaaaa')        
         //messages
         $('#title_error').text('').css({
             "color": "red"
@@ -426,7 +425,8 @@ function getDistrictsList() {
     $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
 
     if (value > 0) {
-        str_addr[2] = $('#district_details :selected').text() //get value district
+        str_addr[3] = $('#city_details :selected').text() //get value if onchange any dropdown
+        str_addr[2] = $('#district_details :selected').text() 
         $('#post_address_number').val(str_addr[2] + ', ' + str_addr[3]);
         $('#post_address_number').trigger('input');
         $.get("/posts/new", {
@@ -452,6 +452,8 @@ function getWardsList() {
     var value = $('#ward_details').val();
     $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
     if (value > 0) {
+        str_addr[3] = $('#city_details :selected').text() 
+        str_addr[2] = $('#district_details :selected').text() 
         str_addr[1] = $('#ward_details :selected').text() //get ward onchange
         $('#post_address_number').val(str_addr[1] + ', ' + str_addr[2] + ', ' + str_addr[3])
         $('#post_address_number').trigger('input');
@@ -475,11 +477,58 @@ function getWardsList() {
 function getStreetsList() {
     var value = $('#street_details').val();
     if (value > 0) {
-        str_street = $('#street_details :selected').text()
-        str_addr[0] = str_street
+        str_addr[3] = $('#city_details :selected').text() 
+        str_addr[2] = $('#district_details :selected').text() 
+        str_addr[1] = $('#ward_details :selected').text()
+        str_addr[0] = $('#street_details :selected').text()
         $('#post_address_number').val(str_addr[0] + ', ' + str_addr[1] + ', ' + str_addr[2] + ', ' + str_addr[3])
         $('#post_address_number').trigger('input');
     } else {
         $('#post_address_number').val('') //reset if value dropdown = 0
+    }
+}
+
+//----------------Image show ----------------
+
+const new_image_feild = '<div class="file_field"><button class="btn btn-info btn-image"><i class="fa fa-plus-circle fa-3x"></i><br>Add Image</button><input name="images[url][]" class="image-input" onchange="preview_image(event)" type="file" id="post_images_attributes_0_url"><div class="image-output"><div class="btn btn-danger image-remove" onclick="remove_image(event)"><i class="fa fa-trash"></i></div></div></div>'
+const delete_image_feild = '<input type="hidden" value="7" name="image_delete[][id]"">'
+var is_max_image_num = false;
+
+function append_new_image_input() {
+    if ($("#file_field_container").children(".file_field").length < 8) {
+        $("#file_field_container").append(new_image_feild);
+    } else {
+        is_max_image_num = true;
+    }
+}
+
+function preview_image(event) {
+    let reader = new FileReader();
+    reader.onload = function () {
+        let output = $(event.target).next();
+        output.css("backgroundImage", 'url(' + reader.result + ')');
+        output.css("display", "block");
+        append_new_image_input();
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+
+function remove_image(event) {
+    let file_field = $(event.target).parents(".file_field");
+    // console.log(file_field);
+    file_field.remove();
+    if (is_max_image_num) {
+        append_new_image_input();
+        is_max_image_num = false;
+    }
+}
+function remove_image(event,id) {
+    let file_field = $(event.target).parents(".file_field");
+    $("#file_field_container").append('<input type="hidden" value=' + id + ' name="images_delete[][id]"">');
+    file_field.remove();
+    if (is_max_image_num) {
+        append_new_image_input();
+        is_max_image_num = false;
     }
 }

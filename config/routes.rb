@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   #Add action new 5.3
   resources :users do
-    resources :posts, only: [:new, :edit, :update, :destory, :create]  do
-      resources :images,only: [:create, :edit, :update, :show, :destory]
+    resources :posts, only: [:new, :edit, :update, :destroy, :create]  do
+      resources :images,only: [:create, :edit, :update, :show, :destroy]
     end
   end
 
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#login'
   delete '/logout', to: 'sessions#destroy'
 
+  get '/index/user/:id/posts', to: 'posts#index_user_posts', as: 'index_user_posts' #liệt kê toàn bộ các bài viết của user
+  
   # add a collection search - Q
   resources :posts, except: [:destroy] do
     collection do
@@ -23,17 +25,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :images, except: [:create, :edit, :update, :show, :destory]
+  resources :images, except: [:create, :edit, :update, :show, :destroy]
 
   resources :cities do
-    resources :districts, only: [:create, :edit, :update, :show, :destory] do
-      resources :wards, only: [:create, :edit, :update, :show, :destory] do
-        resources :streets, only: [:create, :edit, :update, :show, :destory]
+    resources :districts, only: [:create, :edit, :update, :show, :destroy] do
+      resources :wards, only: [:create, :edit, :update, :show, :destroy] do
+        resources :streets, only: [:create, :edit, :update, :show, :destroy]
       end
     end
   end
-  resources :districts, except: [:create, :edit, :update, :show, :destory]
-  resources :wards, except: [:create, :edit, :update, :show, :destory]
-  resources :streets, except: [:create, :edit, :update, :show, :destory]
+  resources :districts, except: [:create, :edit, :update, :show, :destroy]
+  resources :wards, except: [:create, :edit, :update, :show, :destroy]
+  resources :streets, except: [:create, :edit, :update, :show, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

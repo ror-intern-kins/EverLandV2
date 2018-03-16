@@ -54,9 +54,11 @@
                     <!-- show username -->
                     <% if logged_in? && !@current_user.nil? %>
                         <div class="dropdown" >
-                            <button class="btn btn-info"> <strong><%= @current_user.name.first %></strong></button>
+                         <button class="btn btn-info"> <strong><%= @current_user.name.first %></strong></button>
                             <div class="dropdown-content">
                                 <%= link_to  "#{@current_user.name}", edit_user_path(@current_user.id), class: 'font-weight-bold' %>
+                                <div class="dropdown-divider"></div>
+                                <%= link_to  "Bài viết của tôi", index_user_posts_path(@current_user.id) %>
                                 <div class="dropdown-divider"></div>
                                 <%= link_to  "Đăng xuất", logout_path, method: 'delete' %>
                             </div>
