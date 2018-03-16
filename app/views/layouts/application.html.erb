@@ -25,7 +25,7 @@
                 <ul class="navbar-nav mr-auto">
                     <% @menu_category.each do |item| %>
                         <div class="dropdown btn btn-light" style="float:left" >
-                            <a href="/?search[category_id]=<%= item[:super_cate].id%>" style="color:black; text-decoration: none;">
+                            <a href="/?search[category_id]=<%= item[:super_cate].id%>&search[category_detail_id]" style="color:black; text-decoration: none;">
                                 <%= item[:super_cate].name %>
                             </a>                             
                             <div class="dropdown-content" style="left:0; min-width: 200px" >
@@ -35,7 +35,6 @@
                                 <% end %>
                             </div>
                         </div>
-
                     <% end %> <!-- end for -->
                 </ul>
             <% end %> <!-- end if -->
