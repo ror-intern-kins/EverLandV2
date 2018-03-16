@@ -2,14 +2,13 @@
         <div class="row">  
           <!-- show personal -->
           <div class="col-md-4 col-lg-4">
-              <h1 class="btn btn-info col-sm-12 col-lg-12 font-weight-bold">Trang cá nhân</h1>
-              <div class="card col-sm-12 ">
-                <%= image_tag("default.jpg", class: 'avatar-img')%>
-                <h1 style="margin-bottom: 30px"><%= @user.name %></h1>
-                <button class="btn btn-danger">Thay đổi mật khẩu</button>
-              </div>
-
+            <h1 class="btn btn-info col-sm-12 col-lg-12 font-weight-bold">Trang cá nhân</h1>
+            <div class="card col-sm-12 ">
+              <%= image_tag("login-icon.png", class: 'avatar-img')%>
+              <h1 style="margin-bottom: 30px"><%= @user.name %></h1>
+              <button class="btn btn-danger">Thay đổi mật khẩu</button>
           </div>
+        </div>
           <!-- show info -->
           <div class="col-md-8 col-lg-8">
             <h1 class="btn btn-info col-sm-12 col-lg-12 font-weight-bold" style='text-align: left'>Thông tin cá nhân</h1>

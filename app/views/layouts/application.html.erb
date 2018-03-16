@@ -13,7 +13,6 @@
 		
   </head>
   <body>
-
     <div class="container-fluid nav-fixed">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <%= link_to  "Everland", root_path, class: 'navbar-brand'%>
@@ -24,52 +23,53 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <% if @menu_category.present?%>
                 <ul class="navbar-nav mr-auto">
-                    <% @menu_category.each do |item|  %>
-                        <li class="nav-item nav-link-not-dropdown" ><a href="/?search[category_id]=<%= item[:super_cate].id%>"><%= item[:super_cate].name %></a></li>
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" 
-                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <% item[:sub_cate].each do |category| %>
-                            <a class="dropdown-item" href="/?search[category_id]=<%= item[:super_cate].id%>&search[category_detail_id]=<%= category.id %>"><%= category.name %></a>
-                        <% end %>
+                    <% @menu_category.each do |item| %>
+                        <div class="dropdown btn btn-light" style="float:left" >
+                            <a href="/?search[category_id]=<%= item[:super_cate].id%>" style="color:black; text-decoration: none;">
+                                <%= item[:super_cate].name %>
+                            </a>                         
+                            <div class="dropdown-content" style="left:0; min-width: 200px" >
+                                <% item[:sub_cate].each do |category| %>
+                                    <a class="dropdown-item"
+                                    href="/?search[category_id]=<%= item[:super_cate].id%>&search[category_detail_id]=<%= category.id %>"><%= category.name %></a>
+                                <% end %>
+                            </div>
                         </div>
-                        </li>
+
                     <% end %> <!-- end for -->
                 </ul>
             <% end %> <!-- end if -->
 
                 <!-- Nút Post -->
-                    <% if logged_in? %>
-                    <%= link_to 'Đăng tin rao', new_user_post_path(@current_user), class: 'btn btn-primary',
-                    onclick: 'resetLoginForm()'%>
-                    <% else %>
-                        <%= link_to 'Đăng tin rao', '#loginForm', class: 'btn btn-primary',
-                        onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
-                    <% end %>
-                    <!-- -xử lý đăng nhập/ đăng xuất- -->
-                    <!-- login button -->
-                    <!-- show username -->
-                    <% if logged_in? && !@current_user.nil? %>
-                        <div class="dropdown" >
-                         <button class="btn btn-info"> <strong><%= @current_user.name.first %></strong></button>
-                            <div class="dropdown-content">
-                                <%= link_to  "#{@current_user.name}", edit_user_path(@current_user.id), class: 'font-weight-bold' %>
-                                <div class="dropdown-divider"></div>
-                                <%= link_to  "Bài viết của tôi", index_user_posts_path(@current_user.id) %>
-                                <div class="dropdown-divider"></div>
-                                <%= link_to  "Đăng xuất", logout_path, method: 'delete' %>
-                            </div>
-                        </div>
-                    <% else %>
-                        <%= link_to 'Đăng nhập', '#loginForm', class: 'btn btn-success',
-                        onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
-                    <% end %> 
+            <% if logged_in? %>
+                <%= link_to 'Đăng tin rao', new_user_post_path(@current_user), class: 'btn btn-primary',
+                onclick: 'resetLoginForm()'%>
+            <% else %>
+                <%= link_to 'Đăng tin rao', '#loginForm', class: 'btn btn-primary',
+                onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
+            <% end %>
+            <!-- -xử lý đăng nhập/ đăng xuất- -->
+            <!-- login button -->
+            <!-- show username -->
+            <% if logged_in? && !@current_user.nil? %>
+                <div class="dropdown" >
+                    <button class="btn btn-info"> <strong><%= @current_user.name.first %></strong></button>
+                    <div class="dropdown-content">
+                        <%= link_to  "#{@current_user.name}", edit_user_path(@current_user.id), class: 'font-weight-bold' %>
+                        <div class="dropdown-divider"></div>
+                        <%= link_to  "Bài viết của tôi", index_user_posts_path(@current_user.id) %>
+                        <div class="dropdown-divider"></div>
+                        <%= link_to  "Đăng xuất", logout_path, method: 'delete' %>
+                    </div>
+                </div>
+            <% else %>
+                <%= link_to 'Đăng nhập', '#loginForm', class: 'btn btn-success',
+                onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
+            <% end %> 
             <!-- ........................................................... -->
             </div> 
             <%# end container bọc nav %>
+
         </nav>
     </div>
 

@@ -2,7 +2,6 @@ class WelcomeController < ApplicationController
   def index
     @posts = newest_posts
 
-
     @search 
     @categories = Category.where(super_id: nil)
     puts @categories

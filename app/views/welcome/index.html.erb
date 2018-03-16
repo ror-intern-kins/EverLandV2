@@ -4,54 +4,52 @@
     <div id="tung-div-search" class="row">
         <%= render 'search'%>
     </div>
-
 <% if !@posts.present? %>    
 <div class="container">
     <div class="row">
-        <h3 class="post-noti col-md-12">Không tìm thấy bài đăng nào.</h3>   
-        <%# <h3 class="post-noti col-md-12">Kết quả tìm kiếm cho 'xxxxxxxxxxxxx'</h3>    %>
+        <h3 class="post-noti col-md-12">Không tìm thấy kết quả nào</h3> 
     </div>
 </div>
 <% else %>
     <div class="container">
         <div id="tung-div-show" class="row">
             <% @posts.each do |post|%>
-            <div class="post-member col-md-6 col-lg-4">
-                <div class="container pmb-detail">
-                    <div class="row">
-                        <div class="pmb-header">
-                            <div class="pmb-date">
-                                <p class="day"><%= post.created_at.day %></p>
-                                <p class="month">Tháng <%= post.created_at.month  %></p>
+                <div class="post-member col-md-6 col-lg-4">
+                    <div class="container pmb-detail">
+                        <div class="row">
+                            <div class="pmb-header">
+                                <div class="pmb-date">
+                                    <p class="day"><%= post.created_at.day %></p>
+                                    <p class="month">Tháng <%= post.created_at.month  %></p>
+                                </div>
+                                <div>
+                                <%= link_to post.title, post_path(post.id), class: 'pmb-title'%>
+                                </div>
                             </div>
-                            <div>
-                            <%= link_to post.title, post_path(post.id), class: 'pmb-title'%>
+                            <div class="pmb-img"
+                            style="background-image: url(<%= asset_url !(post.images.empty?)?(post.images.first.url):("default.jpg") %>)">
+                            </div> 
+                                                            
+                            <div class="pmb-content">
+                                <div>  
+                                    <p>
+                                        <span class="">Giá:</span>
+                                        <span><%= post.price %> VND</span>
+                                    </p>
+                                    <p>
+                                        <span class="">Diện tích:</span>
+                                        <span><%= post.area %> m²</span>
+                                    </p>
+                                    <p>
+                                        <span class="">Địa chỉ:</span>
+                                        <span><%= post.address_number %></span>
+                                    </p>
+                                </div>                    
                             </div>
-                        </div>
-                        <div class="pmb-img"
-                        style="background-image: url(<%= asset_url !(post.images.empty?)?(post.images.first.url):("default.jpg") %>)">
-                        </div> 
-                                                        
-                        <div class="pmb-content">
-                            <div>  
-                                <p>
-                                    <span class="">Giá:</span>
-                                    <span><%= post.price %> VND</span>
-                                </p>
-                                <p>
-                                    <span class="">Diện tích:</span>
-                                    <span><%= post.area %> m²</span>
-                                </p>
-                                <p>
-                                    <span class="">Địa chỉ:</span>
-                                    <span><%= post.address_number %></span>
-                                </p>
-                            </div>                    
                         </div>
                     </div>
-                </div>
-            </div>     
-        <% end %>
+                </div>     
+            <% end %>
         </div>
     </div>
     <% if @posts.size > 6 %>
