@@ -45,7 +45,10 @@ class WelcomeController < ApplicationController
         @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   ).all.page(params[:page]).per(12)
     end
     if (params[:search])
-        query = params.require(:search).permit(:category_id,:area_top, :area_bottom,:price_top, :price_bottom, :category_detail_id,:area,:price,:city_id, :district_id, :ward_id, :street_id, :house_direction, :bedroom)  
+
+      super_category = false;
+
+      query = params.require(:search).permit(:category_id,:area_top, :area_bottom,:price_top, :price_bottom, :category_detail_id,:area,:price,:city_id, :district_id, :ward_id, :street_id, :house_direction, :bedroom)  
       @h = Array.new # search array only for area and price
       @s = "" # search string
       @h[0] = @s # h => [""]
@@ -54,6 +57,7 @@ class WelcomeController < ApplicationController
         # If query have a area top value
         if !value.blank? # value not blank
           case key
+     
           when "area_bottom"
             if(@s != "") # string not blank , add ' AND '
              @s += ' AND '  # ex: @s => "area < ? AND "
@@ -97,8 +101,13 @@ class WelcomeController < ApplicationController
 
         if key == "category_detail_id" && !value.blank?
           query[:category_id] = query[:category_detail_id]
+          super_category = true;
           query.delete(key)
         end
+        if key == "category_detail_id" && value.blank?
+          query[:category_id] = Category.where(super_id: query[:category_id])
+        end
+
       end
       @h[0] = @s
       query.each do |key, value|
@@ -108,9 +117,9 @@ class WelcomeController < ApplicationController
       end #end foreach
 
       if(!@s.blank?) # check array , prevent where null 
-        @posts = Post.where(query).where(@h).page(params[:page]).per(5)
+        @posts = Post.where(query).where(@h).page(params[:page]).per(9)
       elsif
-        @posts = Post.where(query).page(params[:page]).per(5)
+        @posts = Post.where(query).page(params[:page]).per(9)
       end
         
     
