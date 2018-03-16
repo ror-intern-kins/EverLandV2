@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     @posts = newest_posts
-
+    flash[:noti] = '6 bài đăng mới nhất'
     @search 
     @categories = Category.where(super_id: nil)
     puts @categories
@@ -41,7 +41,8 @@ class WelcomeController < ApplicationController
     if (params[:search_type])
       search_type = params[:search_type] # get params search type
       text = params[:query]
-        @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   ).all.page(params[:page]).per(12)
+      @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   ).all.page(params[:page]).per(12)
+      flash[:noti] = 'Kết quả tìm kiếm cho từ khóa "' + text + '"'
     end
     if (params[:search])
         query = params.require(:search).permit(:category_id,:area_top, :area_bottom,:price_top, :price_bottom, :category_detail_id,:area,:price,:city_id, :district_id, :ward_id, :street_id, :house_direction, :bedroom)  
@@ -112,7 +113,7 @@ class WelcomeController < ApplicationController
         @posts = Post.where(query).page(params[:page]).per(5)
       end
         
-    
+      flash[:noti] = 'Kết quả tìm kiếm cho tìm kiếm nâng cao'
     end #end if
 
   end
@@ -121,4 +122,5 @@ class WelcomeController < ApplicationController
     @posts = Post.order(created_at: :desc).limit(6)
     return @posts
   end
+
 end

@@ -27,7 +27,7 @@
                         <div class="dropdown btn btn-light" style="float:left" >
                             <a href="/?search[category_id]=<%= item[:super_cate].id%>" style="color:black; text-decoration: none;">
                                 <%= item[:super_cate].name %>
-                            </a>                         
+                            </a>                             
                             <div class="dropdown-content" style="left:0; min-width: 200px" >
                                 <% item[:sub_cate].each do |category| %>
                                     <a class="dropdown-item"

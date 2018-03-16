@@ -4,6 +4,11 @@
     <div id="tung-div-search" class="row">
         <%= render 'search'%>
     </div>
+    <div class="container">
+    <div class="row">
+        <h3 class="post-noti col-md-12"><%= flash[:noti] %></h3> 
+    </div>
+</div>
 <% if !@posts.present? %>    
 <div class="container">
     <div class="row">

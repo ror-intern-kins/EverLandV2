@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-
   resources :categories
 
   #Add action new 5.3
