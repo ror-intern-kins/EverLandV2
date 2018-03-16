@@ -280,4 +280,6 @@ end
     @user = User.find(params[:user_id])
     redirect_to not_found_path if current_user.id != @user.id 
   end
+
+
 end

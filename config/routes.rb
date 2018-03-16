@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   post '/getdata', to: 'posts#get_data', as: 'get_data'
   #Add action new 5.3
   resources :users do
-    resources :posts, only: [:new, :edit, :update, :destory, :create]  do
-      resources :images,only: [:create, :edit, :update, :show, :destory]
+    resources :posts, only: [:new, :edit, :update, :destroy, :create]  do
+      resources :images,only: [:create, :edit, :update, :show, :destroy]
     end
   end
 
