@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def show_category
-    @categories = Category.where(super_id: nil)
+    @menu_category = Array.new
+    super_categories = Category.where(super_id: nil)
+    super_categories.each do |cate|      
+      item = Category.where(super_id: cate.id)
+      elem = {super_cate: cate, sub_cate: item}
+      @menu_category.push(elem);
+    end
   end
 end

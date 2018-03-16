@@ -71,11 +71,13 @@
   </div>
 
   <div id="all-search" class="collapse col-md-12" style="background-color: white">
+  <%= form_for(:search, url:"/", method: "get") do |f| %>
+    <%= f.hidden_field :search_type, :value => "advance" %>
     <div class="row">
+    
       <div id="advance-search" class="col-md-6">
         <!-- LOAD GGMAP LIBRARY -->
-        <%= form_for(:search, url:"/", method: "get") do |f| %>
-          <%= f.hidden_field :search_type, :value => "advance" %>
+        
           <!-- CATEGORY select -->
             <div class="category">
                 <%= f.select :category_id, options_from_collection_for_select(@categories, "id", "name"),
@@ -142,7 +144,7 @@
       </div>
       <div class="col-md-4"></div>
     </div>
-    <% end %>
+  <% end %>
   </div>
 </div>
 </div>
