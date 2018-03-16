@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root 'welcome#index'
+  #error pages
+  match '/404', to: 'error/errors#not_found', via: :all, as: 'not_found'
+  match '/500', to: 'error/errors#internal_error', via: :all, as: 'internal_error'
 
   resources :categories
 
@@ -15,7 +18,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#login'
   delete '/logout', to: 'sessions#destroy'
 
-  get '/index/user/:id/posts', to: 'posts#index_user_posts', as: 'index_user_posts' #liệt kê toàn bộ các bài viết của user
+  get '/index/user/:user_id/posts', to: 'posts#index_user_posts', as: 'index_user_posts' #liệt kê toàn bộ các bài viết của user
   
   # add a collection search - Q
   resources :posts, except: [:destroy] do

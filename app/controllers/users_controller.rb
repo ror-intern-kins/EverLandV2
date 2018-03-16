@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :checkCurrentId, only: [:edit, :update]
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    #@users = User.all
   end
 
   # GET /users/1
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find(params[:id]) or not_found or internal_server_error
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -68,5 +68,9 @@ class UsersController < ApplicationController
     def user_params
       # bỏ require(:user) đi vì dữ liệu truyền về từ data
       params.require(:user).permit(:name, :username, :password, :password_confirmation, :birthday, :gender, :email, :phone, :address, :personal)
+    end
+    def checkCurrentId 
+      @user = User.find(params[:id])
+      redirect_to not_found_path if current_user.id != @user.id 
     end
 end

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :set_post_to_show, only: [:show]
-
+  before_action :checkCurrentId, only: [:new, :create, :edit, :update, :index_user_posts] 
   #GET /user_posts
   #GET /user_posts.json
   def index_user_posts
@@ -139,8 +139,8 @@ class PostsController < ApplicationController
     @post = Post.new
     @image = @post.images.build
     get_category_new()
-    get_data()    
-  
+    get_data()   
+    
 end
 
   # GET /posts/1/edit
@@ -222,7 +222,7 @@ end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.find(params[:id]) or not_found or internal_server_error
     end
     def set_post_to_show
       @post = Post.includes(:images).find(params[:id])
@@ -289,5 +289,12 @@ end
         format.json { render json: @streets }
       end
     end 
-    end
+  end
+
+  #check current user id
+  def checkCurrentId 
+    @user = User.find(params[:user_id])
+    redirect_to not_found_path if current_user.id != @user.id 
+  end
+
 end
