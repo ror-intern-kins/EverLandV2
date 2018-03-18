@@ -99,6 +99,9 @@ class WelcomeController < ApplicationController
           query[:category_id] = query[:category_detail_id]
           query.delete(key)
         end
+        if key == "category_detail_id" && value.blank?
+          query[:category_id] = Category.where(super_id: query[:category_id])
+        end
       end
       @h[0] = @s
       query.each do |key, value|
@@ -108,9 +111,9 @@ class WelcomeController < ApplicationController
       end #end foreach
 
       if(!@s.blank?) # check array , prevent where null 
-        @posts = Post.where(query).where(@h).page(params[:page]).per(5)
+        @posts = Post.where(query).where(@h).page(params[:page]).per(9)
       elsif
-        @posts = Post.where(query).page(params[:page]).per(5)
+        @posts = Post.where(query).page(params[:page]).per(9)
       end
         
       flash[:noti] = 'Kết quả tìm kiếm cho tìm kiếm nâng cao'
