@@ -39,7 +39,11 @@
                                 <div>  
                                     <p>
                                         <span class="">Giá:</span>
-                                        <span><%= post.price %> VND</span>
+                                        <% if post.unit == 'Thỏa thuận'%>
+                                            <span>Thỏa thuận</span>
+                                        <% else %>
+                                            <span><%= post.price %> <%= post.unit%></span>
+                                        <% end %>
                                     </p>
                                     <p>
                                         <span class="">Diện tích:</span>
