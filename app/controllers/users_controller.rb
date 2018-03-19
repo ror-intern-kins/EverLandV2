@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :checkCurrentId, only: [:edit, :update]
+
   # GET /users
   # GET /users.json
   def index
-    #@users = User.all
+    @users = User.all
   end
 
   # GET /users/1
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
       if @user.update(user_params)
-        render 'edit'
+        redirect_to edit_user_path (@user)
       end
   end
 
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id]) or not_found or internal_server_error
+      @user = User.find(params[:id])
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def data_params
@@ -94,9 +94,5 @@ class UsersController < ApplicationController
     end
     def user_params
       params.require(:user).permit(:name, :username, :password, :password_confirmation, :birthday, :gender, :email, :phone, :address, :personal)
-    end
-    def checkCurrentId 
-      @user = User.find(params[:id])
-      redirect_to not_found_path if current_user.id != @user.id 
     end
 end

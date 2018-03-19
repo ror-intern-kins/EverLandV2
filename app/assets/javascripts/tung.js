@@ -30,7 +30,7 @@ function checkPwdConfirm() {
 }
 
 function confirmOldPwd() {
-
+    $('#noti_pwd').html('');
     var old_password  = $('#old_password').val();
     if (old_password == null || old_password == '') {
         $('#oldPwd').html('Mật khẩu không được để trống!')
