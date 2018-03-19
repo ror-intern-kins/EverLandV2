@@ -218,5 +218,7 @@ $(document).bind('keypress', function(e) {
     if(e.keyCode == 13) {
         $('#login_btn').trigger('click');
         $('#signup_btn').trigger('click');
+        // $('#btnConfirm').trigger('click');
+        $('#btnChangePwd').trigger('click');
     }
 })   

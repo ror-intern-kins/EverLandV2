@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     @posts = newest_posts
-    flash[:noti] = '6 bài đăng mới nhất'
+    flash[:noti] = 'Các bài đăng mới nhất'
     @search 
     @categories = Category.where(super_id: nil)
     puts @categories
@@ -122,7 +122,7 @@ class WelcomeController < ApplicationController
   end
 
   def newest_posts
-    @posts = Post.order(created_at: :desc).limit(6)
+    @posts = Post.order(created_at: :desc).page(params[:page]).per(9)
     return @posts
   end
 
