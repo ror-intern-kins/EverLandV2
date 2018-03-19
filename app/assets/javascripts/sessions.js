@@ -39,7 +39,8 @@ function checkInvalid(username, password) {
 
 //----------------------check valid form signup-----------------------
 function validateSignupForm() {
-    if (checkUsername() || checkEmail() || checkPassword() || checkPasswordConfirm() || checkPhone() || checkName()) {
+
+    if (checkUsername() && checkEmail() && checkPassword() && checkPasswordConfirm() && checkPhone() && checkName()) {
         $('#register_form').submit();
     }
 }
@@ -158,6 +159,7 @@ function checkName() {
 function resetLoginForm() {
     $('#errorUsername').html('');
     $('#errorPassword').html('');
+    $('#invalid').html('');
     $('#session_username').val('');
     $('#session_password').val('');
 }
