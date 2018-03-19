@@ -269,6 +269,7 @@ document.addEventListener("turbolinks:load", function (event) {
         $('#totalPrice').text('Thỏa Thuận').css({
             'color': 'red'
         })
+        checkPrice()
         //price lost focus event
         $('#post_price').focusout(function () {
             checkPrice()

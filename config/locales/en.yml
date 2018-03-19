@@ -36,3 +36,4 @@ en:
   helpers:
     submit: 
       create: 'Đăng Tin'
+      update: 'Cập Nhật Tin'
