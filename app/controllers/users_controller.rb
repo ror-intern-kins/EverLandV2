@@ -33,7 +33,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         render 'edit'
       end
-    end
+  end
 
   # DELETE /users/1
   # DELETE /users/1.json
@@ -53,20 +53,46 @@ class UsersController < ApplicationController
     end
   end
 
-  private
+  def edit_change_password
+    @user = User.new
+  end
+  # kiểm tra mật khẩu cũ
+  def confirm_old_password
+    @user = User.find_by_id(current_user.id)
+    old_password = params[:old_password]
+    respond_to do |format|
+      if @user.authenticate(old_password)
+        format.json { render :json => { checkPwd: true }}
+      else
+        format.json { render :json => { checkPwd: false }}
+      end
+    end
+  end
 
+  def change_password
+    @user = User.find_by_id(current_user.id)
+    if @user.update_attributes(:password => params[:user][:change_password])
+      log_in @user
+      flash[:noti_pwd] = 'Thay đổi mật khẩu thành công'    
+    else
+      flash[:noti_pwd] = 'Thay đổi mật khẩu thất bại'
+    end
+    render 'edit_change_password'
+    
+  end
+
+
+  private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
     end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def data_params
       # bỏ require(:user) đi vì dữ liệu truyền về từ data
       params.permit(:name, :username, :password, :password_confirmation, :birthday, :gender, :email, :phone, :address, :personal)
     end
     def user_params
-      # bỏ require(:user) đi vì dữ liệu truyền về từ data
       params.require(:user).permit(:name, :username, :password, :password_confirmation, :birthday, :gender, :email, :phone, :address, :personal)
     end
 end

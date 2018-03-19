@@ -9,6 +9,11 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/confirm_password', to: 'users#confirm_old_password'
+  post '/change_password', to: 'users#change_password'
+  get '/change_password', to: 'users#edit_change_password'
+  get '/edit_change_password', to: 'users#edit_change_password'
+  # ---------------------change password---------------------
   get '/check_user', to: 'users#check_existed_user' #kiểm tra user tồn tại
   get '/check_login', to: 'sessions#check_login' #kiểm tra user và pass đúng hay chưa
   post '/login', to: 'sessions#login'
