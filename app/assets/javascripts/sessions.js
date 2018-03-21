@@ -69,7 +69,7 @@ function checkUsername() {
     var checkValid = true;
     var errorUsername = $('#errorUser').html('');
     var successUsername = $('#successUser').html('');
-    var username  = $('#user_username').val();
+    var username  = $('#signup_username').val();
 
     if (username == null || username == '') {
         errorUsername.html('Tên đăng nhập không được để trống.');
@@ -89,7 +89,7 @@ function checkEmail() {
     var checkValid = true;
     var errorEmail = $('#errorEmail').html('');
     var successEmail = $('#successEmail').html('');
-    var email  = $('#user_email').val();
+    var email  = $('#signup_email').val();
     if (email == null || email == '') {
         errorEmail.html('Địa chỉ email không được để trống.');
         checkValid = false;
@@ -105,7 +105,7 @@ function checkEmail() {
 function checkPassword() {
     var checkValid = true;
     var errorPassword = $('#errorPass').html('');
-    var password  = $('#user_password').val();
+    var password  = $('#signup_password').val();
 
     if (password == null || password == '') {
         errorPassword.html('Mật khẩu không được để trống.');
@@ -119,8 +119,8 @@ function checkPassword() {
 function checkPasswordConfirm() {
     var checkValid = true;
     var errorPasswordConfirm = $('#errorPasswordConfirm').html('');
-    var passwordConfirm  = $('#user_password_confirmation').val();
-    var password  = $('#user_password').val();
+    var passwordConfirm  = $('#signup_password_confirmation').val();
+    var password  = $('#signup_password').val();
     if (passwordConfirm == null || passwordConfirm == '') {
         errorPasswordConfirm.html('Xác thực mật khẩu không được để trống.');
         checkValid = false;
@@ -133,7 +133,7 @@ function checkPasswordConfirm() {
 function checkPhone() {
     var checkValid = true;
     var errorPhone = $('#errorPhone').html('');
-    var phone  = $('#user_phone').val();
+    var phone  = $('#signup_phone').val();
     if (phone == null || phone == '') {
         errorPhone.html('Số điện thoại di động không được để trống.');
         checkValid = false;
@@ -146,7 +146,7 @@ function checkPhone() {
 function checkName() {
     var checkValid = true;
     var errorName = $('#errorName').html('');
-    var name  = $('#user_name').val();
+    var name  = $('#signup_name').val();
        
     if (name == null || name == '') {
         errorName.html('Tên không được để trống.');

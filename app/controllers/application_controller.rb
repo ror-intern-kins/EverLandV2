@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   #protect_from_forgery with: :exception
   protect_from_forgery prepend: true
-  before_action :show_category, :authenticate_user!
-
+  before_action :show_category
+  before_action :configure_permitted_parameters, if: :devise_controller?
   # include SessionsHelper
 
   def show_category
@@ -14,12 +14,14 @@ class ApplicationController < ActionController::Base
       @menu_category.push(elem);
     end
   end
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  
  
   protected
  
   def configure_permitted_parameters
-    added_attrs = [:username, :email, :password, :password_confirmation, :remember_me]
+    added_attrs = [:username, :email, :password, :password_confirmation,
+     :remember_me, :name, :phone, :gender, :birthday, :address, :personal]
+    devise_parameter_sanitizer.permit :sign_in, keys: added_attrs
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end

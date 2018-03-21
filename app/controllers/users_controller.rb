@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     @user = User.find_by_id(current_user.id)
     old_password = params[:old_password]
     respond_to do |format|
-      if @user.authenticate(old_password)
+      if BCrypt::Password.new(@user.encrypted_password) == old_password
         format.json { render :json => { checkPwd: true }}
       else
         format.json { render :json => { checkPwd: false }}
@@ -73,7 +73,6 @@ class UsersController < ApplicationController
   def change_password
     @user = User.find_by_id(current_user.id)
     if @user.update_attributes(:password => params[:user][:change_password])
-      log_in @user
       flash[:noti_pwd] = 'Thay đổi mật khẩu thành công'    
     else
       flash[:noti_pwd] = 'Thay đổi mật khẩu thất bại'
@@ -99,6 +98,8 @@ class UsersController < ApplicationController
     #----Check url
     def checkCurrentId 
       @user = User.find(params[:id])
+      puts current_user.id
+      puts @user
       redirect_to not_found_path if current_user.id != @user.id 
     end
 end

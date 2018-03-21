@@ -1,32 +1,17 @@
 class SessionsController < ApplicationController
 
-  # def login
-  #   @user = User.find_by_username(params[:session][:username].downcase)
-  #   if @user
-  #     log_in @user
-  #     # render html: [logged_in?, session[:user_id], user]
-  #     redirect_to root_path
-  #   else
-  #     flash.now[:invalid] = 'Tên đăng nhập hoặc mật khẩu không đúng.'
-  #     render 'root'
-  #   end
-  # end
-
-  # #check username&password
-  # def check_login
-  #   user = User.find_by_username(params[:txtUsername].downcase)
-  #   respond_to do |format|
-  #     if user
-  #       format.json { render :json => { checkAll: true }}
-  #     else
-  #       format.json { render :json => { checkAll: false }} #false nghĩa là user or password ko đúng
-  #     end
-  #   end
-  # end
-
-  # def destroy
-  #   log_out
-  #   redirect_to root_url
-  # end
+  #check username&password
+  def check_login
+    user = User.find_by_username(params[:txtUsername].downcase)
+    if (user)  && BCrypt::Password.new(user.encrypted_password) == params[:txtPassword].downcase
+      respond_to do |format|
+        if user
+          format.json { render :json => { checkAll: true }}
+        else
+          format.json { render :json => { checkAll: false }} #false nghĩa là user or password ko đúng
+        end
+      end
+    end
+  end
 
 end
