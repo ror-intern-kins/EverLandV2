@@ -4,8 +4,8 @@ function validateLoginForm() {
     var checkValid = true;
     var errorU = $('#errorUsername').html('');
     var errorP = $('#errorPassword').html('');
-    var username  = $('#session_username').val()
-    var password = $('#session_password').val();
+    var username  = $('#username').val()
+    var password = $('#password').val();
 
     if (username == null || username == '') {
         errorU.html('Tên đăng nhập không được để trống.');
@@ -29,7 +29,7 @@ function checkInvalid(username, password) {
             if (!data.checkAll) {
                 $('#invalid').html('Tên đăng nhập hoặc mật khẩu không đúng.');
             } else {
-                $('#login_form').submit();
+                $('#new_user').submit();
             }
         }
     })
@@ -211,7 +211,7 @@ function checkEditName() {
     return checkValid;
 }
 function validateEditForm() {
-    if (checkEditName() || checkEditPhone()) {
+    if (checkEditName() && checkEditPhone()) {
         $('#update_form').submit();
     }
 }

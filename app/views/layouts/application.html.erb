@@ -40,9 +40,9 @@
             <% end %> <!-- end if -->
 
                 <!-- Nút Post -->
-            <% if logged_in? %>
-                <%= link_to 'Đăng tin rao', new_user_post_path(@current_user), class: 'btn btn-primary',
-                onclick: 'resetLoginForm()'%>
+            <% if user_signed_in? %>
+                <%= link_to 'Đăng tin rao', new_user_post_path(current_user), class: 'btn btn-primary',
+                onclick: 'resetLoginForm()'%>                
             <% else %>
                 <%= link_to 'Đăng tin rao', '#loginForm', class: 'btn btn-primary',
                 onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
@@ -50,15 +50,16 @@
             <!-- -xử lý đăng nhập/ đăng xuất- -->
             <!-- login button -->
             <!-- show username -->
-            <% if logged_in? && !@current_user.nil? %>
+            
+            <% if user_signed_in? && !current_user.nil? %>
                 <div class="dropdown" >
-                    <button class="btn btn-info"> <strong><%= @current_user.name.first %></strong></button>
+                    <button class="btn btn-info"> <strong><%= current_user.name.first %></strong></button>
                     <div class="dropdown-content">
-                        <%= link_to  "#{@current_user.name}", edit_user_path(@current_user.id), class: 'font-weight-bold' %>
+                        <%= link_to  "#{current_user.name}", edit_user_path(current_user.id), class: 'font-weight-bold' %>
                         <div class="dropdown-divider"></div>
-                        <%= link_to  "Bài viết của tôi", index_user_posts_path(@current_user.id) %>
+                        <%= link_to  "Bài viết của tôi", index_user_posts_path(current_user.id) %>
                         <div class="dropdown-divider"></div>
-                        <%= link_to  "Đăng xuất", logout_path, method: 'delete' %>
+                        <%= link_to  "Đăng xuất", destroy_user_session_path, method: 'delete' %>
                     </div>
                 </div>
             <% else %>
@@ -98,6 +99,7 @@
     </footer>
 <div class="tung-modal">
 <!-- Modal login -->
+
 <div class="modal fade" id="loginForm">
     <div class="modal-dialog">
         <div class="modal-content" style="border: 0px; background-color: inherit">
@@ -106,36 +108,47 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="closeB" aria-hidden="true">&times;</span>
                     </button>
-                    <%= form_for(:session, url: login_path, html: {id: 'login_form'}, method: 'post') do |form| %>   <!-- form đăng nhập -->
+                    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |form| %>
                         <h1>Đăng nhập </h1>                                 
-                    <p>
-                        <%= form.label ('Tên đăng nhập:'), class: 'uname' %> <br/>
-                        <%= form.text_field :username %> <br/>
-                        <p id="errorUsername" class='error' ></p>
-                    </p>   
-                    <p>
-                        <%= form.label ('Mật khẩu:'), class: 'youpasswd' %> <br/>
-                        <%= form.password_field :password %> <br/>
-                        <p id="errorPassword" class='error'></p>
-                    </p>
-                    <p id="invalid" class='error'>
-                       
-                    </p>
-                    <p class="login button"> 
-                        <%= form.submit ('Đăng nhập'),  id: 'login_btn', :type => 'button', onclick: 'validateLoginForm()' %>
-                    </p>
+                        <p>
+                            <%= form.label ('Tên đăng nhập:') %> <br/>
+                            <%= form.text_field :username %> <br/>
+                            <p id="errorUsername" class='error' ></p>
+                        </p>   
+                        <p>
+                            <%= form.label ('Mật khẩu:') %> <br/>
+                            <%= form.password_field :password %> <br/>
+                            <p id="errorPassword" class='error'></p>
+                        </p>
+                        <% if devise_mapping.rememberable? -%>
+                            <div class="field">
+                            <%= form.check_box :remember_me %>
+                            <%= form.label :remember_me %>
+                            </div>
+                        <% end %>
 
-                    <p class="change_link">
-                        Bạn đã đăng kí thành viên chưa?
-                        <%= link_to  "Đăng kí", '#', id: 'signupl', onclick: 'resetSignupForm()',
-                            data: { toggle: 'modal', dismiss: 'modal', target: '#signupForm' } %>
-                    </p>
+                        <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+                            <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+                        <% end %>
+                        <p id="invalid" class='error'>
+                        
+                        </p>
+                        <p class="login button"> 
+                            <%= form.submit ('Đăng nhập'),  id: 'login_btn' %>
+                        </p>
+                        <!-- , type: 'button', onclick: 'validateLoginForm()' -->
+
+                        <p class="change_link">
+                            Bạn đã đăng kí thành viên chưa?
+                            <%= link_to  "Đăng kí", '#', id: 'signupl', onclick: 'resetSignupForm()',
+                                data: { toggle: 'modal', dismiss: 'modal', target: '#signupForm' } %>
+                        </p>
                     <% end %>            
                 </div>                    
             </div>
         </div>             
     </div>
-</div>  
+</div>    
 <!-- Modal signup -->
 <div class="modal fade" id="signupForm">
     <div class="modal-dialog">

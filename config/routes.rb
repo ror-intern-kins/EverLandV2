@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   root 'welcome#index'
+  devise_for :users
+
+
   #----------Error page----------
-  match '/404', to: 'error/errors#not_found', via: :all, as: 'not_found'
-  match '/500', to: 'error/errors#internal_error', via: :all, as: 'internal_error'
+  # match '/404', to: 'error/errors#not_found', via: :all, as: 'not_found'
+  # match '/500', to: 'error/errors#internal_error', via: :all, as: 'internal_error'
   #----------Load data ajax-------------
   post '/getcate', to: 'posts#get_category_new', as: 'get_cate'
   post '/getcate_edit', to: 'posts#get_category_edit', as: 'get_cate_edit'
