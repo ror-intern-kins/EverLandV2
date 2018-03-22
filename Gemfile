@@ -6,7 +6,6 @@ git_source(:github) do |repo_name|
 end
 
 gem 'devise'
-gem 'pg', '0.20.0'
 gem 'bcrypt', '3.1.11' #bảo mật mật khẩu
 
 gem 'jquery-validation-rails'
@@ -69,6 +68,7 @@ end
 
 group :production do
   gem 'pg', '0.20.0'
+  gem 'rails_12factor'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
