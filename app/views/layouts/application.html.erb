@@ -49,7 +49,6 @@
             <!-- -xử lý đăng nhập/ đăng xuất- -->
             <!-- login button -->
             <!-- show username -->
-            
             <% if user_signed_in? && !current_user.nil? %>
                 <div class="dropdown" >
                     <button class="btn btn-info"> <strong><%= current_user.name.first %></strong></button>
@@ -65,7 +64,7 @@
                 <%= link_to 'Đăng nhập', '#loginForm', class: 'btn btn-success',
                 onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
             <% end %> 
-            <!-- ........................................................... -->
+            <!-- .............................................................. -->
             </div> 
             <%# end container bọc nav %>
 
@@ -107,7 +106,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="closeB" aria-hidden="true">&times;</span>
                     </button>
-                    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |form| %>
+                    <%= form_for resource, as: resource_name, url: session_path(resource_name), :html => {:id => "form_login"} do |form| %>
                         <h1>Đăng nhập </h1>                                 
                         <p>
                             <%= form.label ('Tên đăng nhập:') %> <br/>
@@ -133,7 +132,7 @@
                         
                         </p>
                         <p class="login button"> 
-                            <%= form.submit ('Đăng nhập'),  id: 'login_btn'%>
+                            <%= form.submit ('Đăng nhập'),  id: 'login_btn', type: 'button', onclick: 'validateLoginForm()'%>
                         </p>
                         <!-- , type: 'button', onclick: 'validateLoginForm()' -->
 
@@ -157,7 +156,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="closeB" aria-hidden="true">&times;</span>
                     </button>
-                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %> <!-- form đăng ký -->
+                    <%= form_for resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "form_register"} do |form| %> <!-- form đăng ký -->
                         <h1>Đăng ký</h1>
                         <p >
                             <%= form.label ('Tên đăng nhập ') %> <span class="obli">(*)</span> <br/>
@@ -230,7 +229,7 @@
                         </p>
                       
                         <p class="signin button">
-                            <%= form.submit ('Đăng ký'), id: 'signup_btn' %>
+                            <%= form.submit ('Đăng ký'), id: 'signup_btn', :type => 'button', onclick: 'validateSignupForm()' %>
                             <!-- , :type => 'button', onclick: 'validateSignupForm()' -->
                         </p>
                         <p class="change_link">  

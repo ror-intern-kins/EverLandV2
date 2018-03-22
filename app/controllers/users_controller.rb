@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :checkCurrentId, only: [:edit, :update]
+  # before_action :checkCurrentId, only: [:edit, :update]
 
   # GET /users
   # GET /users.json
@@ -53,7 +53,25 @@ class UsersController < ApplicationController
       format.json { render :json => { check: !@user.nil? }} #check true thì có tồn tại user
     end
   end
-
+  #kiểm tra tk vs mk
+  def check_login
+    user = User.find_by_username(params[:txtUsername].downcase)
+      respond_to do |format|
+        if user && BCrypt::Password.new(user.encrypted_password) == params[:txtPassword]
+          format.json { render :json => { checkAll: true }}
+        else
+          format.json { render :json => { checkAll: false }} #false nghĩa là user or password ko đúng
+        end
+      end
+  end
+  #check mail có tồn tại hay ko
+  def check_email
+    email = params[:txt_email].downcase
+    user = User.find_by_email (email)
+    respond_to do |format|
+      format.json { render :json => { checkEmail: !user.nil? }} #check true thì có tồn tại email
+    end
+  end
   def edit_change_password
     @user = User.new
   end
@@ -74,16 +92,18 @@ class UsersController < ApplicationController
     @user = User.find_by_id(current_user.id)
     if @user.update_attributes(:password => params[:user][:change_password])
       flash[:noti_pwd] = 'Thay đổi mật khẩu thành công'    
+      redirect_to root_path
     else
       flash[:noti_pwd] = 'Thay đổi mật khẩu thất bại'
     end
-    render 'edit_change_password'
+    # render 'edit_change_password'
     
   end
 
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    #or not_found or internal_server_error
     def set_user
       @user = User.find(params[:id]) or not_found or internal_server_error
     end
@@ -96,10 +116,10 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :username, :password, :password_confirmation, :birthday, :gender, :email, :phone, :address, :personal)
     end
     #----Check url
-    def checkCurrentId 
-      @user = User.find(params[:id])
-      puts current_user.id
-      puts @user
-      redirect_to not_found_path if current_user.id != @user.id 
-    end
+    # def checkCurrentId 
+    #   @user = User.find(params[:id])
+    #   # puts current_user.id
+    #   puts @user
+    #   redirect_to not_found_path if current_user.id != @user.id 
+    # end
 end

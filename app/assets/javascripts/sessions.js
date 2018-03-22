@@ -29,7 +29,7 @@ function checkInvalid(username, password) {
             if (!data.checkAll) {
                 $('#invalid').html('Tên đăng nhập hoặc mật khẩu không đúng.');
             } else {
-                $('#new_user').submit();
+                $('#form_login').submit();
             }
         }
     })
@@ -41,7 +41,7 @@ function checkInvalid(username, password) {
 function validateSignupForm() {
 
     if (checkUsername() && checkEmail() && checkPassword() && checkPasswordConfirm() && checkPhone() && checkName()) {
-        $('#register_form').submit();
+        $('#form_register').submit();
     }
 }
 function checkExistedUser(username) {
@@ -98,7 +98,21 @@ function checkEmail() {
         checkValid = false;
     }
     if (checkValid) {
-        successEmail.html('Email có thể sử dụng.');
+        $.ajax({
+            url: '/check_email',
+            method: 'get',
+            data: {txt_email: email},
+            success: function(data) {
+                if (data.checkEmail) {
+                    errorEmail.html('Địa chỉ email đã tồn tại.');
+                    checkValid = false;
+                } else {
+                    errorEmail.html('');
+                    successEmail.html('Email có thể sử dụng.');
+                }
+            }        
+        })
+        
     }
     return checkValid;
 }
@@ -216,11 +230,11 @@ function validateEditForm() {
     }
 }
 //kích hoạt nhấn enter cho button
-$(document).bind('keypress', function(e) {
-    if(e.keyCode == 13) {
-        $('#login_btn').trigger('click');
-        $('#signup_btn').trigger('click');
-        // $('#btnConfirm').trigger('click');
-        $('#btnChangePwd').trigger('click');
-    }
-})   
+// $(document).bind('keypress', function(e) {
+//     if(e.keyCode == 13) {
+//         $('#login_btn').trigger('click');
+//         $('#signup_btn').trigger('click');
+//         // $('#btnConfirm').trigger('click');
+//         $('#btnChangePwd').trigger('click');
+//     }
+// })   

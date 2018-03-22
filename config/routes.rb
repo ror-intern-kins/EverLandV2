@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   get '/edit_change_password', to: 'users#edit_change_password'
   #----------Login/ sign up/ logout------------
   get '/check_user', to: 'users#check_existed_user' #kiểm tra user tồn tại
-  get '/check_login', to: 'sessions#check_login' #kiểm tra user và pass đúng hay chưa
+  get '/check_email', to: 'users#check_email' #kiểm tra user tồn tại
+  get '/check_login', to: 'users#check_login' #kiểm tra user và pass đúng hay chưa
   post '/login', to: 'sessions#login'
   delete '/logout', to: 'sessions#destroy'
   #----------Role User >> Post----------
