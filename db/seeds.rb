@@ -1021,19 +1021,16 @@ dataset = {
   }
 }
 dataset.each do |key,value|
-    city = City.create!({name: value[:name]})
+    city = City.create!(name: value[:name])
     value[:districts].each do |k, v|
         d = city.districts.create!(name: v)
         wards = d.wards.create!([
             {name: "Phường Bến Nghé"},
-            {name: "Phường Bến Thành"},
-            {name: "Phường Đa Kao"},
-            {name: "Phường Trương Định"},
-            {name: "Phường Phạm Ngũ Lão"}
+            {name: "Phường Bến Thành"}
         ])
         wards.each do |w|
-            5.times do |i|
-                w.streets.create!({name: "Đường #{i}"})
+            2.times do |i|
+                w.streets.create!(name: "Đường #{i}")
             end
         end
     end
