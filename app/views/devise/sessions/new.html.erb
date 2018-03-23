@@ -1,26 +1,54 @@
-<h2>Log in</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EverLandV2</title>   
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+		
+  </head>
+  <body>
+    <div class="container">
+        <div class="row tung-modal">
+            <div id="wrapper">
+            <div id="login">                    
+                <%= form_for resource, as: resource_name, url: session_path(resource_name), :html => {:id => "form_login"} do |form| %>
+                    <h1>Đăng nhập </h1>                                 
+                    <p>
+                        <%= form.label ('Tên đăng nhập:') %> <br/>
+                        <%= form.text_field :username, id: :username %> <br/>
+                        <p id="errorUsername" class='error' ></p>
+                    </p>   
+                    <p>
+                        <%= form.label ('Mật khẩu:') %> <br/>
+                        <%= form.password_field :password , id: :password%> <br/>
+                        <p id="errorPassword" class='error'></p>
+                    </p>
+                    <% if devise_mapping.rememberable? -%>
+                        <div class="field">
+                        <%= form.check_box :remember_me %>
+                        <%= form.label :remember_me %>
+                        </div>
+                    <% end %>
+                        
+                        <%= render "devise/shared/links" %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+                    <p id="invalid" class='error'>
+                    
+                    </p>
+                    <p class="login button"> 
+                        <%= form.submit ('Đăng nhập'),  id: 'login_btn', type: 'button', onclick: 'validateLoginForm()'%>
+                    </p>
+                    <!-- , type: 'button', onclick: 'validateLoginForm()' -->
+                    <p class="change_link">
+                        Bạn đã đăng kí thành viên chưa?
+                        <%= link_to  "Đăng kí", new_registration_path(resource_name), id: 'signupl' %>
+                    </p>
+                <% end %>            
+            </div>   
+            </div>
+        </div>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  </body>
+</html>

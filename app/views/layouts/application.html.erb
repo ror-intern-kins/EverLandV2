@@ -61,13 +61,14 @@
                     </div>
                 </div>
             <% else %>
-                <%= link_to 'Đăng nhập', '#loginForm', class: 'btn btn-success',
-                onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
+               <!-- <%= link_to 'Đăng nhập', '#loginForm', class: 'btn btn-success',
+                onclick: 'resetLoginForm()', data: { toggle: 'modal' } %> -->
+                <%= link_to 'Đăng nhập', new_user_session_path, class: 'btn btn-success',
+                onclick: 'resetLoginForm()' %>
             <% end %> 
             <!-- .............................................................. -->
             </div> 
             <%# end container bọc nav %>
-
         </nav>
     </div>
 
@@ -95,154 +96,5 @@
         </div>
       </div>
     </footer>
-<div class="tung-modal">
-<!-- Modal login -->
-
-<div class="modal fade" id="loginForm">
-    <div class="modal-dialog">
-        <div class="modal-content" style="border: 0px; background-color: inherit">
-            <div id="wrapper">
-                <div id="login">                    
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span class="closeB" aria-hidden="true">&times;</span>
-                    </button>
-                    <%= form_for resource, as: resource_name, url: session_path(resource_name), :html => {:id => "form_login"} do |form| %>
-                        <h1>Đăng nhập </h1>                                 
-                        <p>
-                            <%= form.label ('Tên đăng nhập:') %> <br/>
-                            <%= form.text_field :username, id: :username %> <br/>
-                            <p id="errorUsername" class='error' ></p>
-                        </p>   
-                        <p>
-                            <%= form.label ('Mật khẩu:') %> <br/>
-                            <%= form.password_field :password , id: :password%> <br/>
-                            <p id="errorPassword" class='error'></p>
-                        </p>
-                        <% if devise_mapping.rememberable? -%>
-                            <div class="field">
-                            <%= form.check_box :remember_me %>
-                            <%= form.label :remember_me %>
-                            </div>
-                        <% end %>
-
-                        <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-                            <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-                        <% end %>
-                        <p id="invalid" class='error'>
-                        
-                        </p>
-                        <p class="login button"> 
-                            <%= form.submit ('Đăng nhập'),  id: 'login_btn', type: 'button', onclick: 'validateLoginForm()'%>
-                        </p>
-                        <!-- , type: 'button', onclick: 'validateLoginForm()' -->
-
-                        <p class="change_link">
-                            Bạn đã đăng kí thành viên chưa?
-                            <%= link_to  "Đăng kí", '#', id: 'signupl', onclick: 'resetSignupForm()',
-                                data: { toggle: 'modal', dismiss: 'modal', target: '#signupForm' } %>
-                        </p>
-                    <% end %>            
-                </div>                    
-            </div>
-        </div>             
-    </div>
-</div>    
-<!-- Modal signup -->
-<div class="modal fade" id="signupForm">
-    <div class="modal-dialog">
-        <div class="modal-content" style="border: 0px; background-color: inherit">
-            <div id="wrapper"> 
-                <div id="register">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span class="closeB" aria-hidden="true">&times;</span>
-                    </button>
-                    <%= form_for resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "form_register"} do |form| %> <!-- form đăng ký -->
-                        <h1>Đăng ký</h1>
-                        <p >
-                            <%= form.label ('Tên đăng nhập ') %> <span class="obli">(*)</span> <br/>
-                            <%= form.text_field :username, id: :signup_username, onchange: 'checkUsername()' %>
-                            <p id="errorUser" class='error'></p>
-                            <p id="successUser" class='success'></p>
-                        </p>                 
-                        <p>
-                            <%= form.label ('Địa chỉ email ') %> <span class="obli">(*)</span> <br/>
-                            <%= form.text_field :email, id: :signup_email, onchange: 'checkEmail()' %>
-                            <p id="errorEmail" class='error'></p>
-                            <p id="successEmail" class='success'></p>
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Mật khẩu ') %> <span class="obli">(*)</span> <br/>
-                            <%= form.password_field :password, id: :signup_password, onchange: 'checkPassword()' %>
-                            <p id="errorPass" class='error'></p>
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Xác thực mật khẩu ') %> <span class="obli">(*)</span> <br/>
-                            <%= form.password_field :password_confirmation,
-                             id: :signup_password_confirmation, onchange: 'checkPasswordConfirm()' %>
-                            <p id="errorPasswordConfirm" class='error'></p>
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Điện thoại di động ') %> <span class="obli">(*)</span>  <br/>
-                            <%= form.text_field :phone, id: :signup_phone, onchange: 'checkPhone()' %>
-                            <p id="errorPhone" class='error'></p>
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Tên đầy đủ ') %> <span class="obli">(*)</span> <br/>
-                            <%= form.text_field :name, id: :signup_name, onchange: 'checkName()' %>
-                            <p id="errorName" class='error'></p>
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Ngày sinh ') %> <br/>
-                            <%= form.date_field :birthday, class: "form-control" %>
-                        </p>
-                      
-                        <p>
-                            <label class="container-radio">Nam
-                                <%= form.radio_button :gender, 'male', checked: true %>
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container-radio">Nữ
-                                <%= form.radio_button :gender, 'female' %>
-                                <span class="checkmark"></span>
-                            </label>                            
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Địa chỉ ') %> <br/>
-                            <%= form.text_field :address, id: :user_address %>
-                        </p>
-                      
-                        <p>
-                            <label class="container-radio">Cá nhân
-                                <%= form.radio_button :personal, 'true', checked: true %>
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container-radio">Công ty
-                                <%= form.radio_button :personal, 'false' %>
-                                <span class="checkmark"></span>
-                            </label>                          
-                        </p>
-                      
-                        <p class="signin button">
-                            <%= form.submit ('Đăng ký'), id: 'signup_btn', :type => 'button', onclick: 'validateSignupForm()' %>
-                            <!-- , :type => 'button', onclick: 'validateSignupForm()' -->
-                        </p>
-                        <p class="change_link">  
-                            Bạn đã là thành viên?
-                        <%= link_to  " Trở lại đăng nhập ", '#', onclick: 'resetLoginForm()',
-                            data: { toggle: 'modal', dismiss: 'modal', target: '#loginForm' } %>
-                        </p>
-                    <% end %>
-                </div>
-            </div>                    
-        </div>
-    </div>
-</div>
-</div>
 </body>
 </html>

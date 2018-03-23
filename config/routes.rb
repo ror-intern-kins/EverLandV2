@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-  devise_for :users
+  devise_for :users, :controllers => { 
+    :sessions => "user/sessions", 
+    :registrations => "user/registrations" 
+  }
 
 
   #----------Error page----------
@@ -19,8 +22,6 @@ Rails.application.routes.draw do
   get '/check_user', to: 'users#check_existed_user' #kiểm tra user tồn tại
   get '/check_email', to: 'users#check_email' #kiểm tra user tồn tại
   get '/check_login', to: 'users#check_login' #kiểm tra user và pass đúng hay chưa
-  post '/login', to: 'sessions#login'
-  delete '/logout', to: 'sessions#destroy'
   #----------Role User >> Post----------
   resources :users, except: [:index] do
     resources :posts, only: [:new, :edit, :update, :destroy, :create]  do

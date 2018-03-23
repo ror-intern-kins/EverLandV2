@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class User::SessionsController < Devise::SessionsController
+  layout false
   before_action :configure_sign_in_params, only: [:create]
   before_action :authenticate_user!
+
 
   # GET /resource/sign_in
   def new

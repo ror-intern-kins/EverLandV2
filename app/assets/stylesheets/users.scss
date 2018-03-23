@@ -251,7 +251,7 @@ p.change_link{
 /** Styling both forms **/
 #login, #register{
 	position: absolute;
-	top: 0px;
+	top: 80px;
 	width: 88%;	
 	padding: 18px 6% 60px 6%;
 	margin:0  35px;
@@ -263,12 +263,6 @@ p.change_link{
 	-webkit-box-shadow: 5px;
 	-moz-border-radius: 5px;
 		 border-radius: 5px;
-}
-#register{
-	z-index: 21;
-}
-#login{
-	z-index: 22;
 }
 }
 // -------------------------Tung style-------------------------------
