@@ -9,6 +9,8 @@
 		
   </head>
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <div class="container">
         <div class="row tung-modal">
             <div id="wrapper"> 
@@ -84,9 +86,9 @@
                             <span class="checkmark"></span>
                         </label>                          
                     </p>
-                    
+                    <%= render "devise/shared/links" %>
                     <p class="signin button">
-                        <%= form.submit ('Đăng ký'), id: 'signup_btn', :type => 'button', onclick: 'validateSignupForm()' %>
+                        <%= form.submit ('Đăng ký'), id: 'signup_btn'%>
                         <!-- , :type => 'button', onclick: 'validateSignupForm()' -->
                     </p>
                     <p class="change_link">  
@@ -98,7 +100,7 @@
             </div>  
         </div>
     </div>
-    <%= render "devise/shared/links" %>
+
   </body>
 </html>
 
