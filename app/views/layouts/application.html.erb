@@ -74,27 +74,32 @@
 
     <div style="padding-top:56px">
     </div>
-
+    <% if notice %>                             
+        <p class="notice success" style="padding: 0px"><%= notice %></p>
+    <% end %>
+    <% if alert %>                             
+        <p class="alert error" style="padding: 0px"><%= alert %></p>
+    <% end %>
     <%= yield %>
     <footer class="container-fluid">
-    <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <p class="post_span--size-big">About us</p>
-          </div>
+        <div class="container">
+            <div class="row">
+            <div class="col-sm-12">
+                <p class="post_span--size-big">About us</p>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <p><i class="fa fa-map-marker"></i> 225 Võ Văn Kiệt, Quận 1, Hồ Chí Minh</p>
+                <p><i class="fa fa-map-marker"></i> 432/2 Quang Trung, Quận Gò Vấp, Hồ Chí Minh</p>
+                <p><i class="fa fa-phone"></i> 0280456214</p>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <p><a href="#"><i class="fa fa-facebook-official"></i> /everland</a></p>
+                <p><a href="#"><i class="fa fa-google-plus-square"></i> /everland</a></p>
+            </div>
+            </div>
         </div>
-        <div class="row">
-          <div class="col-sm-12 col-md-6">
-            <p><i class="fa fa-map-marker"></i> 225 Võ Văn Kiệt, Quận 1, Hồ Chí Minh</p>
-            <p><i class="fa fa-map-marker"></i> 432/2 Quang Trung, Quận Gò Vấp, Hồ Chí Minh</p>
-            <p><i class="fa fa-phone"></i> 0280456214</p>
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <p><a href="#"><i class="fa fa-facebook-official"></i> /everland</a></p>
-            <p><a href="#"><i class="fa fa-google-plus-square"></i> /everland</a></p>
-          </div>
-        </div>
-      </div>
     </footer>
 </body>
 </html>

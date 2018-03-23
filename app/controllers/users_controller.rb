@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  # before_action :checkCurrentId, only: [:edit, :update]
+  before_action :checkCurrentId, only: [:edit, :update]
 
   # GET /users
   # GET /users.json
@@ -92,7 +92,7 @@ class UsersController < ApplicationController
     @user = User.find_by_id(current_user.id)
     if @user.update_attributes(:password => params[:user][:change_password])
       flash[:noti_pwd] = 'Thay đổi mật khẩu thành công'    
-      redirect_to root_path
+      redirect_to new_user_session_path
     else
       flash[:noti_pwd] = 'Thay đổi mật khẩu thất bại'
     end
@@ -116,10 +116,10 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :username, :password, :password_confirmation, :birthday, :gender, :email, :phone, :address, :personal)
     end
     #----Check url
-    # def checkCurrentId 
-    #   @user = User.find(params[:id])
-    #   # puts current_user.id
-    #   puts @user
-    #   redirect_to not_found_path if current_user.id != @user.id 
-    # end
+    def checkCurrentId 
+      @user = User.find(params[:id])
+      # puts current_user.id
+      puts @user
+      redirect_to not_found_path if current_user.id != @user.id 
+    end
 end

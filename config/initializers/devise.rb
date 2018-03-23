@@ -3,6 +3,15 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  config.lock_strategy = :failed_attempts
+  config.unlock_keys = [ :email ]
+  config.unlock_strategy = :both
+  config.maximum_attempts = 5
+  config.unlock_in = 1.hour
+  config.last_attempt_warning = true
+
+
+
   config.authentication_keys = [:username]
   # config.scoped_views = true
   # The secret key used by Devise. Devise uses this key to generate

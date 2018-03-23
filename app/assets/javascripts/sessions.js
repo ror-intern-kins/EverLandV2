@@ -17,8 +17,11 @@ function validateLoginForm() {
         checkValid = false;
     }
     if (checkValid) {
-        checkInvalid(username, password)      
+        $('#form_login').submit();
     }
+    // if (checkValid) {
+    //     checkInvalid(username, password)      
+    // }
 }
 function checkInvalid(username, password) {
     $.ajax({
@@ -80,7 +83,8 @@ function checkUsername() {
     } else if (username.length < 6 || username.length > 20) {
         errorUsername.html('Tên tài khoản phải có độ dài tối thiểu 6 ký tự và tối đa 20 ký tự.');
         checkValid = false;
-    } else {
+    } 
+    else {
         checkValid = checkExistedUser(username);
     }
     return checkValid;
@@ -230,11 +234,11 @@ function validateEditForm() {
     }
 }
 //kích hoạt nhấn enter cho button
-// $(document).bind('keypress', function(e) {
-//     if(e.keyCode == 13) {
-//         $('#login_btn').trigger('click');
-//         $('#signup_btn').trigger('click');
-//         // $('#btnConfirm').trigger('click');
-//         $('#btnChangePwd').trigger('click');
-//     }
-// })   
+$(document).bind('keypress', function(e) {
+    if(e.keyCode == 13) {
+        $('#login_btn').trigger('click');
+        $('#signup_btn').trigger('click');
+        // $('#btnConfirm').trigger('click');
+        $('#btnChangePwd').trigger('click');
+    }
+})   

@@ -9,14 +9,14 @@
 		
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <div class="container">
         <div class="row tung-modal">
             <div id="wrapper"> 
                 <div id="register">        
                 <%= form_for resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "form_register"} do |form| %> <!-- form đăng ký -->
                     <h1>Đăng ký</h1>
+                    <p class="notice"><%= notice %></p>
+                    <p class="alert"><%= alert %></p>
                     <p >
                         <%= form.label ('Tên đăng nhập ') %> <span class="obli">(*)</span> <br/>
                         <%= form.text_field :username, id: :signup_username, onchange: 'checkUsername()' %>
@@ -86,11 +86,11 @@
                             <span class="checkmark"></span>
                         </label>                          
                     </p>
-                    <%= render "devise/shared/links" %>
                     <p class="signin button">
-                        <%= form.submit ('Đăng ký'), id: 'signup_btn'%>
+                        <%= form.submit ('Đăng ký'), id: 'signup_btn', :type => 'button', onclick: 'validateSignupForm()'%>
                         <!-- , :type => 'button', onclick: 'validateSignupForm()' -->
                     </p>
+                    <%= link_to 'Về trang chủ', root_path %>
                     <p class="change_link">  
                         Bạn đã là thành viên?
                     <%= link_to  " Trở lại đăng nhập ", new_user_session_path, onclick: 'resetLoginForm()'%>
