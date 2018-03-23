@@ -380,7 +380,7 @@ function getCategoriesList() {
             category_id: value
         },
         function (data, status) {
-            data.forEach(item => {
+            data.forEach(function(item) {
                 $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name + "</option>")
             });
     })
@@ -401,7 +401,7 @@ function getCitiesList() {
             city_id: value
         }, function (data, status) {
             var district = data[1];
-            district.forEach(item => {
+            district.forEach(function(item) {
                 $('#district_details').append("<option value=" + item.id + ">" + item.name +
                     "</option>")
             });
@@ -433,7 +433,7 @@ function getDistrictsList() {
         $.post("/getdata.json", {
             district_id: value
         }, function (data, status) {
-            data.forEach(item => {
+            data.forEach(function(item) {
                 $('#ward_details').append("<option value=" + item.id + ">" + item.name + "</option>")
             });
         })
@@ -462,7 +462,7 @@ function getWardsList() {
                 ward_id: value
             },
             function (data, status) {
-                data.forEach(item => {
+                data.forEach(function(item) {
                     $('#street_details').append("<option value=" + item.id + ">" + item.name + "</option>")
                 });
             })
@@ -491,8 +491,8 @@ function getStreetsList() {
 
 //----------------Image show ----------------
 
-const new_image_feild = '<div class="file_field"><button class="btn btn-info btn-image"><i class="fa fa-plus-circle fa-3x"></i><br>Add Image</button><input name="images[url][]" class="image-input" onchange="preview_image(event)" type="file" id="post_images_attributes_0_url"><div class="image-output"><div class="btn btn-danger image-remove" onclick="remove_image(event)"><i class="fa fa-trash"></i></div></div></div>'
-const delete_image_feild = '<input type="hidden" value="7" name="image_delete[][id]"">'
+var new_image_feild = '<div class="file_field"><button class="btn btn-info btn-image"><i class="fa fa-plus-circle fa-3x"></i><br>Add Image</button><input name="images[url][]" class="image-input" onchange="preview_image(event)" type="file" id="post_images_attributes_0_url"><div class="image-output"><div class="btn btn-danger image-remove" onclick="remove_image(event)"><i class="fa fa-trash"></i></div></div></div>'
+var delete_image_feild = '<input type="hidden" value="7" name="image_delete[][id]"">'
 var is_max_image_num = false;
 
 function append_new_image_input() {
@@ -504,9 +504,9 @@ function append_new_image_input() {
 }
 
 function preview_image(event) {
-    let reader = new FileReader();
+    var reader = new FileReader();
     reader.onload = function () {
-        let output = $(event.target).next();
+        var output = $(event.target).next();
         output.css("backgroundImage", 'url(' + reader.result + ')');
         output.css("display", "block");
         append_new_image_input();
@@ -516,7 +516,7 @@ function preview_image(event) {
 
 
 function remove_image(event) {
-    let file_field = $(event.target).parents(".file_field");
+    var file_field = $(event.target).parents(".file_field");
     // console.log(file_field);
     file_field.remove();
     if (is_max_image_num) {
@@ -525,7 +525,7 @@ function remove_image(event) {
     }
 }
 function remove_image(event,id) {
-    let file_field = $(event.target).parents(".file_field");
+    var file_field = $(event.target).parents(".file_field");
     $("#file_field_container").append('<input type="hidden" value=' + id + ' name="images_delete[][id]"">');
     file_field.remove();
     if (is_max_image_num) {

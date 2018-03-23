@@ -7,7 +7,7 @@ document.addEventListener("turbolinks:load", function(event) {
             city_id: value
         },
         function(data, status){
-            data.forEach(item => {
+            data.forEach(function(item) {
                 $('#search_district_id').append("<option value="+item.id+ ">"+ item.name + "</option>")
             });
         })
@@ -22,7 +22,7 @@ document.addEventListener("turbolinks:load", function(event) {
             category_id: value
         },
         function(data, status){
-            data.forEach(item => {
+            data.forEach(function(item) {
                 $('#search_category_detail_id').append("<option value="+item.id+ ">"+ item.name + "</option>")
             });
         })
@@ -40,7 +40,7 @@ document.addEventListener("turbolinks:load", function(event) {
             district_id: value
         },
         function(data, status){
-            data.forEach(item => {
+            data.forEach(function(item) {
                 $('#search_ward_id').append("<option value="+item.id+ ">"+ item.name + "</option>")
             });
         })
@@ -53,7 +53,7 @@ document.addEventListener("turbolinks:load", function(event) {
             ward_id: value
         },
         function(data, status){
-            data.forEach(item => {
+            data.forEach(function(item) {
                 $('#search_street_id').append("<option value="+item.id+ ">"+ item.name + "</option>")
             });
         })

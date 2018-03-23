@@ -441,7 +441,7 @@
       console.log(data)         
       var t = data[2][0].super_id //get super_id in category have post edit
       $("select#cate_id").val(t); 
-      data[0].forEach(item => {
+      data[0].forEach(function(item) {
         if (item.id == ca_id) {
           $('#cate_detail_id').append("<option selected='selected' value=" + item.id + ">" + item.name +"</option>")
         } else {
@@ -453,7 +453,7 @@
       city_id: c_id
     },function (data, status) {
       //data[1] : districts json
-      data[1].forEach(item => {
+      data[1].forEach(function(item) {
       if(item.id == dis_id){
         $('#district_details').append("<option selected='selected' value=" + item.id + ">" + item.name +"</option>")
       }else {
@@ -464,7 +464,7 @@
     $.post("/getdata.json", {
       district_id: dis_id
     },function (data, status) {    
-      data.forEach(item => {
+      data.forEach(function(item) {
       if(item.id == w_id){
         $('#ward_details').append("<option selected='selected' value=" + item.id + ">" + item.name +"</option>")
       }else {
@@ -479,7 +479,7 @@
       $.post("/getdata.json", {
         ward_id: w_id
       },function (data, status) {    
-        data.forEach(item => {
+        data.forEach(function(item) {
         if (item.id == s_id){
           $('#street_details').append("<option selected='selected' value=" + item.id + ">" + item.name +"</option>")
         }else {
