@@ -4,8 +4,8 @@ function validateLoginForm() {
     var checkValid = true;
     var errorU = $('#errorUsername').html('');
     var errorP = $('#errorPassword').html('');
-    var username  = $('#session_username').val()
-    var password = $('#session_password').val();
+    var username  = $('#username').val()
+    var password = $('#password').val();
 
     if (username == null || username == '') {
         errorU.html('Tên đăng nhập không được để trống.');
@@ -17,8 +17,11 @@ function validateLoginForm() {
         checkValid = false;
     }
     if (checkValid) {
-        checkInvalid(username, password)      
+        $('#form_login').submit();
     }
+    // if (checkValid) {
+    //     checkInvalid(username, password)      
+    // }
 }
 function checkInvalid(username, password) {
     $.ajax({
@@ -29,7 +32,7 @@ function checkInvalid(username, password) {
             if (!data.checkAll) {
                 $('#invalid').html('Tên đăng nhập hoặc mật khẩu không đúng.');
             } else {
-                $('#login_form').submit();
+                $('#form_login').submit();
             }
         }
     })
@@ -39,8 +42,9 @@ function checkInvalid(username, password) {
 
 //----------------------check valid form signup-----------------------
 function validateSignupForm() {
-    if (checkUsername() || checkEmail() || checkPassword() || checkPasswordConfirm() || checkPhone() || checkName()) {
-        $('#register_form').submit();
+
+    if (checkUsername() && checkEmail() && checkPassword() && checkPasswordConfirm() && checkPhone() && checkName()) {
+        $('#form_register').submit();
     }
 }
 function checkExistedUser(username) {
@@ -68,7 +72,7 @@ function checkUsername() {
     var checkValid = true;
     var errorUsername = $('#errorUser').html('');
     var successUsername = $('#successUser').html('');
-    var username  = $('#user_username').val();
+    var username  = $('#signup_username').val();
 
     if (username == null || username == '') {
         errorUsername.html('Tên đăng nhập không được để trống.');
@@ -79,7 +83,8 @@ function checkUsername() {
     } else if (username.length < 6 || username.length > 20) {
         errorUsername.html('Tên tài khoản phải có độ dài tối thiểu 6 ký tự và tối đa 20 ký tự.');
         checkValid = false;
-    } else {
+    } 
+    else {
         checkValid = checkExistedUser(username);
     }
     return checkValid;
@@ -88,7 +93,7 @@ function checkEmail() {
     var checkValid = true;
     var errorEmail = $('#errorEmail').html('');
     var successEmail = $('#successEmail').html('');
-    var email  = $('#user_email').val();
+    var email  = $('#signup_email').val();
     if (email == null || email == '') {
         errorEmail.html('Địa chỉ email không được để trống.');
         checkValid = false;
@@ -97,14 +102,28 @@ function checkEmail() {
         checkValid = false;
     }
     if (checkValid) {
-        successEmail.html('Email có thể sử dụng.');
+        $.ajax({
+            url: '/check_email',
+            method: 'get',
+            data: {txt_email: email},
+            success: function(data) {
+                if (data.checkEmail) {
+                    errorEmail.html('Địa chỉ email đã tồn tại.');
+                    checkValid = false;
+                } else {
+                    errorEmail.html('');
+                    successEmail.html('Email có thể sử dụng.');
+                }
+            }        
+        })
+        
     }
     return checkValid;
 }
 function checkPassword() {
     var checkValid = true;
     var errorPassword = $('#errorPass').html('');
-    var password  = $('#user_password').val();
+    var password  = $('#signup_password').val();
 
     if (password == null || password == '') {
         errorPassword.html('Mật khẩu không được để trống.');
@@ -118,8 +137,8 @@ function checkPassword() {
 function checkPasswordConfirm() {
     var checkValid = true;
     var errorPasswordConfirm = $('#errorPasswordConfirm').html('');
-    var passwordConfirm  = $('#user_password_confirmation').val();
-    var password  = $('#user_password').val();
+    var passwordConfirm  = $('#signup_password_confirmation').val();
+    var password  = $('#signup_password').val();
     if (passwordConfirm == null || passwordConfirm == '') {
         errorPasswordConfirm.html('Xác thực mật khẩu không được để trống.');
         checkValid = false;
@@ -132,7 +151,7 @@ function checkPasswordConfirm() {
 function checkPhone() {
     var checkValid = true;
     var errorPhone = $('#errorPhone').html('');
-    var phone  = $('#user_phone').val();
+    var phone  = $('#signup_phone').val();
     if (phone == null || phone == '') {
         errorPhone.html('Số điện thoại di động không được để trống.');
         checkValid = false;
@@ -145,7 +164,7 @@ function checkPhone() {
 function checkName() {
     var checkValid = true;
     var errorName = $('#errorName').html('');
-    var name  = $('#user_name').val();
+    var name  = $('#signup_name').val();
        
     if (name == null || name == '') {
         errorName.html('Tên không được để trống.');
@@ -158,6 +177,7 @@ function checkName() {
 function resetLoginForm() {
     $('#errorUsername').html('');
     $('#errorPassword').html('');
+    $('#invalid').html('');
     $('#session_username').val('');
     $('#session_password').val('');
 }
@@ -209,7 +229,7 @@ function checkEditName() {
     return checkValid;
 }
 function validateEditForm() {
-    if (checkEditName() || checkEditPhone()) {
+    if (checkEditName() && checkEditPhone()) {
         $('#update_form').submit();
     }
 }

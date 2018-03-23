@@ -70,12 +70,11 @@ label {
 }
 
 /* all the input except submit and checkbox */
-#wrapper input:not([type="radio"]){
+#wrapper input:not([type="checkbox"]) {
 	width: 90%;
 	margin-top: 4px;
 	padding: 10px 5px 10px 32px;	
 	border: 1px solid rgb(178, 178, 178);
-	-webkit-appearance: textfield;
 	-webkit-box-sizing: content-box;
 	  -moz-box-sizing : content-box;
 	       box-sizing : content-box;
@@ -252,7 +251,7 @@ p.change_link{
 /** Styling both forms **/
 #login, #register{
 	position: absolute;
-	top: 0px;
+	top: 50px;
 	width: 88%;	
 	padding: 18px 6% 60px 6%;
 	margin:0  35px;
@@ -264,12 +263,6 @@ p.change_link{
 	-webkit-box-shadow: 5px;
 	-moz-border-radius: 5px;
 		 border-radius: 5px;
-}
-#register{
-	z-index: 21;
-}
-#login{
-	z-index: 22;
 }
 }
 // -------------------------Tung style-------------------------------

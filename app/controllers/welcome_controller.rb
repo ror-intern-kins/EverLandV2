@@ -111,9 +111,9 @@ class WelcomeController < ApplicationController
       end #end foreach
 
       if(!@s.blank?) # check array , prevent where null 
-        @posts = Post.where(query).where(@h).page(params[:page]).per(9)
+        @posts = Post.where(query).where(@h).order(created_at: :desc).page(params[:page]).per(9)
       elsif
-        @posts = Post.where(query).page(params[:page]).per(9)
+        @posts = Post.where(query).order(created_at: :desc).page(params[:page]).per(9)
       end
         
       flash[:noti] = 'Kết quả tìm kiếm cho tìm kiếm nâng cao'

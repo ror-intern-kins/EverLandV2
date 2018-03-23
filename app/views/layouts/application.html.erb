@@ -38,11 +38,10 @@
                     <% end %> <!-- end for -->
                 </ul>
             <% end %> <!-- end if -->
-
                 <!-- Nút Post -->
-            <% if logged_in? %>
-                <%= link_to 'Đăng tin rao', new_user_post_path(@current_user), class: 'btn btn-primary',
-                onclick: 'resetLoginForm()'%>
+            <% if user_signed_in? %>
+                <%= link_to 'Đăng tin rao', new_user_post_path(current_user), class: 'btn btn-primary',
+                onclick: 'resetLoginForm()'%>                
             <% else %>
                 <%= link_to 'Đăng tin rao', '#loginForm', class: 'btn btn-primary',
                 onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
@@ -50,187 +49,57 @@
             <!-- -xử lý đăng nhập/ đăng xuất- -->
             <!-- login button -->
             <!-- show username -->
-            <% if logged_in? && !@current_user.nil? %>
+            <% if user_signed_in? && !current_user.nil? %>
                 <div class="dropdown" >
-                    <button class="btn btn-info"> <strong><%= @current_user.name.first %></strong></button>
+                    <button class="btn btn-info"> <strong><%= current_user.name.first %></strong></button>
                     <div class="dropdown-content">
-                        <%= link_to  "#{@current_user.name}", edit_user_path(@current_user.id), class: 'font-weight-bold' %>
+                        <%= link_to  "#{current_user.name}", edit_user_path(current_user.id), class: 'font-weight-bold' %>
                         <div class="dropdown-divider"></div>
-                        <%= link_to  "Bài viết của tôi", index_user_posts_path(@current_user.id) %>
+                        <%= link_to  "Bài viết của tôi", index_user_posts_path(current_user.id) %>
                         <div class="dropdown-divider"></div>
-                        <%= link_to  "Đăng xuất", logout_path, method: 'delete' %>
+                        <%= link_to  "Đăng xuất", destroy_user_session_path, method: 'delete' %>
                     </div>
                 </div>
             <% else %>
-                <%= link_to 'Đăng nhập', '#loginForm', class: 'btn btn-success',
-                onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
+               <!-- <%= link_to 'Đăng nhập', '#loginForm', class: 'btn btn-success',
+                onclick: 'resetLoginForm()', data: { toggle: 'modal' } %> -->
+                <%= link_to 'Đăng nhập', new_user_session_path, class: 'btn btn-success',
+                onclick: 'resetLoginForm()' %>
             <% end %> 
-            <!-- ........................................................... -->
+            <!-- .............................................................. -->
             </div> 
             <%# end container bọc nav %>
-
         </nav>
     </div>
 
     <div style="padding-top:56px">
     </div>
-
+    <% if notice %>                             
+        <p class="notice success" style="padding: 0px"><%= notice %></p>
+    <% end %>
+    <% if alert %>                             
+        <p class="alert error" style="padding: 0px"><%= alert %></p>
+    <% end %>
     <%= yield %>
     <footer class="container-fluid">
-    <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <p class="post_span--size-big">About us</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-md-6">
-            <p><i class="fa fa-map-marker"></i> 225 Võ Văn Kiệt, Quận 1, Hồ Chí Minh</p>
-            <p><i class="fa fa-map-marker"></i> 432/2 Quang Trung, Quận Gò Vấp, Hồ Chí Minh</p>
-            <p><i class="fa fa-phone"></i> 0280456214</p>
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <p><a href="#"><i class="fa fa-facebook-official"></i> /everland</a></p>
-            <p><a href="#"><i class="fa fa-google-plus-square"></i> /everland</a></p>
-          </div>
-        </div>
-      </div>
-    </footer>
-<div class="tung-modal">
-<!-- Modal login -->
-<div class="modal fade" id="loginForm">
-    <div class="modal-dialog">
-        <div class="modal-content" style="border: 0px; background-color: inherit">
-            <div id="wrapper">
-                <div id="login">                    
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span class="closeB" aria-hidden="true">&times;</span>
-                    </button>
-                    <%= form_for(:session, url: login_path, html: {id: 'login_form'}, method: 'post') do |form| %>   <!-- form đăng nhập -->
-                        <h1>Đăng nhập </h1>                                 
-                    <p>
-                        <%= form.label ('Tên đăng nhập:'), class: 'uname' %> <br/>
-                        <%= form.text_field :username %> <br/>
-                        <p id="errorUsername" class='error' ></p>
-                    </p>   
-                    <p>
-                        <%= form.label ('Mật khẩu:'), class: 'youpasswd' %> <br/>
-                        <%= form.password_field :password %> <br/>
-                        <p id="errorPassword" class='error'></p>
-                    </p>
-                    <p id="invalid" class='error'>
-                       
-                    </p>
-                    <p class="login button"> 
-                        <%= form.submit ('Đăng nhập'),  id: 'login_btn', :type => 'button', onclick: 'validateLoginForm()' %>
-                    </p>
-
-                    <p class="change_link">
-                        Bạn đã đăng kí thành viên chưa?
-                        <%= link_to  "Đăng kí", '#', id: 'signupl', onclick: 'resetSignupForm()',
-                            data: { toggle: 'modal', dismiss: 'modal', target: '#signupForm' } %>
-                    </p>
-                    <% end %>            
-                </div>                    
+        <div class="container">
+            <div class="row">
+            <div class="col-sm-12">
+                <p class="post_span--size-big">About us</p>
             </div>
-        </div>             
-    </div>
-</div>  
-<!-- Modal signup -->
-<div class="modal fade" id="signupForm">
-    <div class="modal-dialog">
-        <div class="modal-content" style="border: 0px; background-color: inherit">
-            <div id="wrapper"> 
-                <div id="register">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span class="closeB" aria-hidden="true">&times;</span>
-                    </button>
-                    <%= form_with(local: true, id: 'register_form', url: users_path ) do |form| %> <!-- form đăng ký -->
-                        <h1>Đăng ký</h1>
-                        <p >
-                            <%= form.label ('Tên đăng nhập ') %> <span class="obli">(*)</span> <br/>
-                            <%= form.text_field :username, id: :user_username, onchange: 'checkUsername()' %>
-                            <p id="errorUser" class='error'></p>
-                            <p id="successUser" class='success'></p>
-                        </p>                 
-                        <p>
-                            <%= form.label ('Địa chỉ email ') %> <span class="obli">(*)</span> <br/>
-                            <%= form.text_field :email, id: :user_email, onchange: 'checkEmail()' %>
-                            <p id="errorEmail" class='error'></p>
-                            <p id="successEmail" class='success'></p>
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Mật khẩu ') %> <span class="obli">(*)</span> <br/>
-                            <%= form.password_field :password, id: :user_password, onchange: 'checkPassword()' %>
-                            <p id="errorPass" class='error'></p>
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Xác thực mật khẩu ') %> <span class="obli">(*)</span> <br/>
-                            <%= form.password_field :password_confirmation,
-                             id: :user_password_confirmation, onchange: 'checkPasswordConfirm()' %>
-                            <p id="errorPasswordConfirm" class='error'></p>
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Điện thoại di động ') %> <span class="obli">(*)</span>  <br/>
-                            <%= form.text_field :phone, id: :user_phone, onchange: 'checkPhone()' %>
-                            <p id="errorPhone" class='error'></p>
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Tên đầy đủ ') %> <span class="obli">(*)</span> <br/>
-                            <%= form.text_field :name, id: :user_name, onchange: 'checkName()' %>
-                            <p id="errorName" class='error'></p>
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Ngày sinh ') %> <br/>
-                            <%= form.date_field :birthday, class: "form-control" %>
-                        </p>
-                      
-                        <p>
-                            <label class="container-radio">Nam
-                                <%= form.radio_button :gender, 'male', checked: true %>
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container-radio">Nữ
-                                <%= form.radio_button :gender, 'female' %>
-                                <span class="checkmark"></span>
-                            </label>                            
-                        </p>
-                      
-                        <p>
-                            <%= form.label ('Địa chỉ ') %> <br/>
-                            <%= form.text_field :address, id: :user_address %>
-                        </p>
-                      
-                        <p>
-                            <label class="container-radio">Cá nhân
-                                <%= form.radio_button :personal, 'true', checked: true %>
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container-radio">Công ty
-                                <%= form.radio_button :personal, 'false' %>
-                                <span class="checkmark"></span>
-                            </label>                          
-                        </p>
-                      
-                        <p class="signin button">
-                            <%= form.submit ('Đăng ký'), id: 'signup_btn', :type => 'button', onclick: 'validateSignupForm()' %>
-                        </p>
-                        <p class="change_link">  
-                            Bạn đã là thành viên?
-                        <%= link_to  " Trở lại đăng nhập ", '#', onclick: 'resetLoginForm()',
-                            data: { toggle: 'modal', dismiss: 'modal', target: '#loginForm' } %>
-                        </p>
-                    <% end %>
-                </div>
-            </div>                    
+            </div>
+            <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <p><i class="fa fa-map-marker"></i> 225 Võ Văn Kiệt, Quận 1, Hồ Chí Minh</p>
+                <p><i class="fa fa-map-marker"></i> 432/2 Quang Trung, Quận Gò Vấp, Hồ Chí Minh</p>
+                <p><i class="fa fa-phone"></i> 0280456214</p>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <p><a href="#"><i class="fa fa-facebook-official"></i> /everland</a></p>
+                <p><a href="#"><i class="fa fa-google-plus-square"></i> /everland</a></p>
+            </div>
+            </div>
         </div>
-    </div>
-</div>
-</div>
+    </footer>
 </body>
 </html>
