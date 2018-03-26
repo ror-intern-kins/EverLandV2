@@ -4,7 +4,11 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-
+#add fb
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-oauth2'
+gem 'omniauth-google-oauth2'
 gem 'devise'
 gem 'bcrypt', '3.1.11' #bảo mật mật khẩu
 
