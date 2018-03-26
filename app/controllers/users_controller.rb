@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update]
   before_action :checkCurrentId, only: [:edit, :update]
 
   # GET /users
@@ -26,6 +26,10 @@ class UsersController < ApplicationController
         redirect_to root_path    
       else
       end
+  end
+
+  def show_error
+    
   end
 
   # PATCH/PUT /users/1
@@ -91,7 +95,7 @@ class UsersController < ApplicationController
   def change_password
     @user = User.find_by_id(current_user.id)
     if @user.update_attributes(:password => params[:user][:change_password])
-      flash[:noti_pwd] = 'Thay đổi mật khẩu thành công'    
+      flash[:noti_pwd] = 'Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại.'    
       redirect_to new_user_session_path
     else
       flash[:noti_pwd] = 'Thay đổi mật khẩu thất bại'
