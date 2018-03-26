@@ -13,23 +13,9 @@ class User::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    if params[:session].present?
-      super
-    else
-      begin
-        user = User.from_omniauth(request.env['omniauth.auth'])
-        session[:user_id] = user.id
-        flash[:success] = "Welcome, #{user.email}"
-      rescue 
-        flash[:warning] = "Error"        
-      end
-    redirect_to root_path
-    end
+   super   
   end
 
-  def failure
-    render text: "Sorry..."
-  end
   # DELETE /resource/sign_out
   def destroy
     super
