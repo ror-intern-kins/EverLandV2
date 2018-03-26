@@ -10,9 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-		
   </head>
-  <body>
+  <body onLoad="myFunction()">
     <div class="container-fluid nav-fixed">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <%= link_to  "Everland", root_path, class: 'navbar-brand'%>
@@ -43,8 +42,8 @@
                 <%= link_to 'Đăng tin rao', new_user_post_path(current_user), class: 'btn btn-primary',
                 onclick: 'resetLoginForm()'%>                
             <% else %>
-                <%= link_to 'Đăng tin rao', '#loginForm', class: 'btn btn-primary',
-                onclick: 'resetLoginForm()', data: { toggle: 'modal' } %>
+                <%= link_to 'Đăng tin rao', new_user_session_path, class: 'btn btn-primary',
+                onclick: 'resetLoginForm()' %>
             <% end %>
             <!-- -xử lý đăng nhập/ đăng xuất- -->
             <!-- login button -->
@@ -74,12 +73,6 @@
 
     <div style="padding-top:56px">
     </div>
-    <% if notice %>                             
-        <p class="notice success" style="padding: 0px"><%= notice %></p>
-    <% end %>
-    <% if alert %>                             
-        <p class="alert error" style="padding: 0px"><%= alert %></p>
-    <% end %>
     <%= yield %>
     <footer class="container-fluid">
         <div class="container">
@@ -101,5 +94,19 @@
             </div>
         </div>
     </footer>
+        <% if notice || alert %>   
+        <div id="snackbar">
+            <%= notice %>
+            <%= alert %>
+        </div>
+        <% end %>
+
+        <script>
+        function myFunction() {
+            var x = document.getElementById("snackbar")
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+        }
+        </script>
 </body>
 </html>

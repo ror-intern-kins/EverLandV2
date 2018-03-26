@@ -14,7 +14,8 @@
             <div id="wrapper">
             <div id="login">                    
                 <%= form_for resource, as: resource_name, url: session_path(resource_name), :html => {:id => "form_login"} do |form| %>
-                    <h1>Đăng nhập </h1>    
+                    <h1>Đăng nhập </h1>   
+                    <p class="notice success" style="padding: 0px"> <%= flash[:noti_pwd] %> </p>
                     <% if notice %>                             
                         <p class="notice success" style="padding: 0px"><%= notice %></p>
                     <% end %>
