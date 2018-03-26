@@ -2,10 +2,11 @@ Rails.application.routes.draw do
   root 'welcome#index'
   devise_for :users, :controllers => { 
     :sessions => "user/sessions", 
-    :registrations => "user/registrations" 
+    :registrations => "user/registrations" ,
+    omniauth_callbacks: "callbacks" 
   }
-  get '/auth/:provider/callback', to: 'user/sessions#create'
-  get '/auth/failure', to: 'user/sessions#failure'
+  # get '/auth/:provider/callback', to: 'user/sessions#create'
+  # get '/auth/failure', to: 'user/sessions#failure'
 
   #----------Error page----------
   # match '/404', to: 'error/errors#not_found', via: :all, as: 'not_found'
