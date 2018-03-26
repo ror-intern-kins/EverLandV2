@@ -11,7 +11,7 @@ Devise.setup do |config|
   config.last_attempt_warning = true
 
 
-
+  config.omniauth :facebook, CONFIG["861216357384505"], CONFIG["64c64a7b1755d5c2bee9c738d67e0429"]
   config.authentication_keys = [:username]
   # config.scoped_views = true
   # The secret key used by Devise. Devise uses this key to generate

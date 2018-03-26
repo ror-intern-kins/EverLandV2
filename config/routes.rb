@@ -4,7 +4,8 @@ Rails.application.routes.draw do
     :sessions => "user/sessions", 
     :registrations => "user/registrations" 
   }
-
+  get '/auth/:provider/callback', to: 'user/sessions#create'
+  get '/auth/failure', to: 'user/sessions#failure'
 
   #----------Error page----------
   # match '/404', to: 'error/errors#not_found', via: :all, as: 'not_found'

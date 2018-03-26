@@ -43,7 +43,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
     add_column :users, :address, :string
     add_column :users, :personal, :boolean
     # add_column :users, :password_digest, :string
-
+    add_column :users, :provider, :string
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
