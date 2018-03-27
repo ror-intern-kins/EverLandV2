@@ -6,6 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 gem 'devise'
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-facebook"
 gem 'bcrypt', '3.1.11' #bảo mật mật khẩu
 gem 'omniauth-google-oauth2'
 gem 'omniauth'

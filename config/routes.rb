@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-  devise_for :user, :controllers => { 
+  devise_for :users, :controllers => { 
     :sessions => "user/sessions", 
     :registrations => "user/registrations",
     :omniauth_callbacks => "user/omniauth_callbacks"

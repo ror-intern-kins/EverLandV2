@@ -16,6 +16,7 @@ config.omniauth :google_oauth2, '795788943229-nrihb4lu0rqqhm3573gnssli3dqgmaub.a
   'VOO7LVIJ_QHGWZVx32b9DZx3', scope: 'userinfo.email,userinfo.profile'
 
   config.authentication_keys = [:username]
+  
   # config.scoped_views = true
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
