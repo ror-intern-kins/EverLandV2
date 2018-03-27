@@ -25,6 +25,9 @@ class User < ApplicationRecord
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
       end
+      if data = session["devise.google_data"] && session["devise.google_data"]["extra"]["raw_info"]
+          user.email = data["email"] if user.email.blank? 
+      end
     end
   end
   def self.from_google_omniauth(auth)
