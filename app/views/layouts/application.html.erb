@@ -94,19 +94,18 @@
             </div>
         </div>
     </footer>
-        <% if notice || alert %>   
+    <% if notice || alert %>   
         <div id="snackbar">
             <%= notice %>
             <%= alert %>
         </div>
-        <% end %>
-
         <script>
-        function myFunction() {
-            var x = document.getElementById("snackbar")
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
-        }
-        </script>
+            function myFunction() {
+                var x = document.getElementById("snackbar")
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+            }
+        </script> 
+    <% end %>   
 </body>
 </html>
