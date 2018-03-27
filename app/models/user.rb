@@ -27,7 +27,7 @@ class User < ApplicationRecord
       end
     end
   end
-  def self.from_google_omniauth(access_token)
+  def self.from_google_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
