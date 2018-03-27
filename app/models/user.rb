@@ -8,11 +8,12 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      if !auth.info.email.blank?
-        user.email = auth.info.email
-      else
-        user.email = "auth.uid"
-      end
+      # if !auth.info.email.blank?
+      #   user.email = auth.info.email
+      # else
+      #   user.email = "auth.uid"
+      # end
+      user.email = "auth.uid"
       user.username = user.email
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name   # assuming the user model has a name
