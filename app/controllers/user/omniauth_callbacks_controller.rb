@@ -21,8 +21,7 @@ class User::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect @user
       set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
     else
-      flash[:error] = 'There was a problem signing you in through Google. Please register or try signing in later.'
-      session['devise.google_data'] = request.env['omniauth.auth'].except(:extra)
+      session['devise.google_data'] = request.env['omniauth.auth']
       redirect_to root_path
     end 
   end
