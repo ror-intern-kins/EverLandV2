@@ -13,8 +13,9 @@ Devise.setup do |config|
 
 
   config.authentication_keys = [:username]
-  config.omniauth :google_oauth2, ENV['GOOGLE_OAUTH2_APP_ID'], ENV['GOOGLE_OAUTH2_APP_SECRET'], { scope: "email" }
-  config.omniauth :facebook, ENV['1835627816468063'], ENV['dca5ab38ba87bec67f9eecbea042a785'], { scope: "email" }
+  
+  
+  config.omniauth :facebook, "1835627816468063", "dca5ab38ba87bec67f9eecbea042a785"
   # config.scoped_views = true
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing

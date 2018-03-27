@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable,
-         :lockable, :timeoutable, :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+         :lockable, :timeoutable, :omniauthable, :omniauthable, omniauth_providers: %i[facebook]
   has_many :posts
 
   def self.from_omniauth(auth)

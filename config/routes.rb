@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
   devise_for :users, :controllers => { 
     :sessions => "user/sessions", 
-    :registrations => "user/registrations" 
+    :registrations => "user/registrations" ,
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
   get '/users/password', to: 'users#show_error'
 
