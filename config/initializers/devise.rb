@@ -11,9 +11,9 @@ Devise.setup do |config|
   config.last_attempt_warning = true
 
 #App
-config.omniauth :facebook, '861216357384505', '64c64a7b1755d5c2bee9c738d67e0429', scope: 'public_profile,email'
-config.omniauth :google_oauth2, '795788943229-nrihb4lu0rqqhm3573gnssli3dqgmaub.apps.googleusercontent.com', 
-  'VOO7LVIJ_QHGWZVx32b9DZx3', scope: 'userinfo.email,userinfo.profile'
+config.omniauth :facebook, '1837188616585142', 'f86c38c453ff1a6c01acea8ae7118fec', scope: 'public_profile,email'
+config.omniauth :google_oauth2, '1019459722193-63qo8t9ibiqp469g21ppho0nbd4krfsr.apps.googleusercontent.com', 
+  'yt5KObyfLpoYGQslL9kP3Rwt', scope: 'userinfo.email,userinfo.profile'
 
   config.authentication_keys = [:username]
   
