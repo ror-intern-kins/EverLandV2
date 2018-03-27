@@ -34,7 +34,7 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.email = auth.info.email
       user.username = auth.info.email
-      user.save!
+      user.skip_confirmation!
     end
   end
 end
