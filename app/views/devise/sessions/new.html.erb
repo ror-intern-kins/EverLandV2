@@ -9,53 +9,78 @@
 		
   </head>
   <body>
-    <div class="container">
-        <div class="row tung-modal">
-            <div id="wrapper">
-            <div id="login">                    
-                <%= form_for resource, as: resource_name, url: session_path(resource_name), :html => {:id => "form_login"} do |form| %>
-                    <h1>Đăng nhập </h1>   
-                    <p class="notice success" style="padding: 0px"> <%= flash[:noti_pwd] %> </p>
-                    <% if notice %>                             
-                        <p class="notice success" style="padding: 0px"><%= notice %></p>
-                    <% end %>
-                    <% if alert %>                             
-                        <p class="alert error" style="padding: 0px"><%= alert %></p>
-                    <% end %>
-                    <p>
-                        <%= form.label ('Tên đăng nhập:') %> <br/>
-                        <%= form.text_field :username, id: :username %> <br/>
-                        <p id="errorUsername" class='error' ></p>
-                    </p>   
-                    <p>
-                        <%= form.label ('Mật khẩu:') %> <br/>
-                        <%= form.password_field :password , id: :password%> <br/>
-                        <p id="errorPassword" class='error'></p>
-                    </p>
-                    <% if devise_mapping.rememberable? -%>
-                        <div class="field">
-                        <%= form.check_box :remember_me %>
-                        <%= form.label :remember_me %>
-                        </div>
-                    <% end %>
-                        
-                    <%= render "devise/shared/links" %>
+   <div class="container div-all-login">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 tung-form">
+                <div id="wrapper" >
+                    <div id="login">                    
+                        <%= form_for resource, as: resource_name, url: session_path(resource_name), :html => {:id => "form_login"} do |form| %>
+                            <h1>Đăng nhập </h1>   
+                            <p class="notice success" style="padding: 0px"> <%= flash[:noti_pwd] %> </p>
+                            <% if notice %>                             
+                                <p class="notice success" style="padding: 0px"><%= notice %></p>
+                            <% end %>
+                            <% if alert %>                             
+                                <p class="alert error" style="padding: 0px"><%= alert %></p>
+                            <% end %>
+                            <div class="row">
+                                <%= form.label ('Tên đăng nhập:') %> <br/>
+                                <%= form.text_field :username, id: :username, class: 'tung-input form-control' %>
+                                <p id="errorUsername" class='error' ></p>
+                            </div>
 
-                    <p id="invalid" class='error'>
-                    
-                    </p>
-                    <p class="login button"> 
-                        <%= form.submit ('Đăng nhập'),  id: 'login_btn', type: 'button', onclick: 'validateLoginForm()'%>
-                    </p>
-                    <%= link_to 'Về trang chủ', root_path %>
-                    <!-- , type: 'button', onclick: 'validateLoginForm()' -->
-                    <p class="change_link">
-                        Bạn đã đăng kí thành viên chưa?
-                        <%= link_to  "Đăng kí", new_registration_path(resource_name), id: 'signupl' %>
-                    </p>
-                <% end %>            
-            </div>   
+                            <div class="row">
+                                <%= form.label ('Mật khẩu:') %> <br/>
+                                <%= form.password_field :password , id: :password, class: 'tung-input form-control' %>
+                                <p id="errorPassword" class='error'></p>
+                            </div> 
+
+                            <div class="row" style="display: block">
+                                <% if devise_mapping.rememberable? %>
+                                    <div class="field">
+                                    <%= form.check_box :remember_me %>
+                                    <%= form.label :remember_me %>
+                                    </div>
+                                <% end %>
+                                <br/>    
+                                <%= render "devise/shared/links" %>                                                                      
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" style="padding: 30px 0px">
+                                    <%= form.submit ('Đăng nhập'),  id: 'login_btn', 
+                                    type: 'button', onclick: 'validateLoginForm()', class: 'btn btn-dark col-md-12 tung-btn-form' %>
+                                </div>                                                                                               
+                            </div>
+                            <% if devise_mapping.omniauthable? %>             
+                                <div class="tung-div-text">
+                                    <span>Đăng nhập với</span> 
+                                </div>
+                                <div class="tung-div-icon">
+                                    <a href="/users/auth/facebook" class="login-icon bg1">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                    <a href="/users/auth/google_oauth2" class="login-icon bg2">
+                                        <i class="fa fa-google"></i>
+                                    </a>
+                                </div>
+                            <% end %>
+                                
+                            <h6 style="text-align: center; margin-top: 30px">
+                                <%= link_to 'Về trang chủ', root_path, style: 'color: #006064' %>
+                            </h6>
+                            <div>
+                            <!-- , type: 'button', onclick: 'validateLoginForm()' -->
+                                <p class="change_link" style="margin-top: 40px">
+                                    Bạn đã đăng kí thành viên chưa?
+                                    <%= link_to  "Đăng kí", new_registration_path(resource_name), id: 'signupl' %>
+                                </p>
+                            </div>
+                        <% end %>            
+                    </div>   
+                </div>
             </div>
+            <div class="col-md-3"></div>
         </div>
     </div>
   </body>

@@ -43,7 +43,7 @@ function checkInvalid(username, password) {
 //----------------------check valid form signup-----------------------
 function validateSignupForm() {
 
-    if (checkUsername() && checkEmail() && checkPassword() && checkPasswordConfirm() && checkPhone() && checkName()) {
+    if (checkUsername() && checkEmail() && checkPassword() && checkPasswordConfirm() && checkName()) {
         $('#form_register').submit();
     }
 }
@@ -152,10 +152,7 @@ function checkPhone() {
     var checkValid = true;
     var errorPhone = $('#errorPhone').html('');
     var phone  = $('#signup_phone').val();
-    if (phone == null || phone == '') {
-        errorPhone.html('Số điện thoại di động không được để trống.');
-        checkValid = false;
-    } else if (!(/^[0]\d{9,10}$/).test(phone)) {
+    if (phone != '' && !(/^[0]\d{9,10}$/).test(phone)) {
         errorPhone.html('Số điện thoại không đúng. Độ dài từ 10 đến 11 số.');
         checkValid = false;
     }
@@ -208,10 +205,7 @@ function checkEditPhone() {
     var checkValid = true;
     var errorPhone = $('#errorPhone').html('');
     var phone  = $('#user_edit_phone').val();
-    if (phone == null || phone == '') {
-        errorPhone.html('Số điện thoại di động không được để trống.');
-        checkValid = false;
-    } else if (!(/^[0]\d{9,10}$/).test(phone)) {
+    if (phone != '' && !(/^[0]\d{9,10}$/).test(phone)) {
         errorPhone.html('Số điện thoại không đúng. Độ dài từ 10 đến 11 số.');
         checkValid = false;
     }
