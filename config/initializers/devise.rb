@@ -15,10 +15,8 @@ config.omniauth :facebook, '1837188616585142', 'f86c38c453ff1a6c01acea8ae7118fec
 config.omniauth :google_oauth2, '1019459722193-63qo8t9ibiqp469g21ppho0nbd4krfsr.apps.googleusercontent.com', 
   'yt5KObyfLpoYGQslL9kP3Rwt', scope: 'userinfo.email,userinfo.profile'
 
-  config.authentication_keys = [:username]
+config.authentication_keys = [:username]
   
-  
-  config.omniauth :facebook, "1835627816468063", "dca5ab38ba87bec67f9eecbea042a785", scope: 'email', info_fields: 'email,name'
   # config.scoped_views = true
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
