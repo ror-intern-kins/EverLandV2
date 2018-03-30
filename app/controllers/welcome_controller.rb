@@ -39,10 +39,16 @@ class WelcomeController < ApplicationController
     end
     #-------------------Search-----------
     if (params[:search_type])
-      search_type = params[:search_type] # get params search type
-      text = params[:query]
-      @posts = Post.where("title LIKE ? OR address_number LIKE ? OR description LIKE ?", "%" + params[:query] + "%","%" + params[:query] + "%","%" + params[:query] + "%"   ).all.page(params[:page]).per(12)
+     
+      text = params[:q]
       flash[:noti] = 'Kết quả tìm kiếm cho từ khóa "' + text + '"'
+      if(params[:q].nil?)
+        @posts = []
+      else
+        @rs = Post.search params[:q]
+      
+        @posts = Post.where(id: @rs.pluck(:_id)).page(params[:page]).per(9)
+      end
     end
     if (params[:search])
         query = params.require(:search).permit(:category_id,:area_top, :area_bottom,:price_top, :price_bottom, :category_detail_id,:area,:price,:city_id, :district_id, :ward_id, :street_id, :house_direction, :bedroom)  
@@ -126,11 +132,5 @@ class WelcomeController < ApplicationController
     return @posts
   end
 
-  def search
-    if params[:q].nil?
-     @posts = []
-    else
-     @posts = Post.search params[:q]
-    end
-    end
+
 end
