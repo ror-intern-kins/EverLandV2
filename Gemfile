@@ -10,7 +10,8 @@ gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "omniauth-facebook"
 gem 'bcrypt', '3.1.11' #bảo mật mật khẩu
-
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 gem 'jquery-validation-rails'
 # Search
 gem 'kaminari' 

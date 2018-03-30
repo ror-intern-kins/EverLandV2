@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'user/omniauth_callbacks'
   }
   get '/users/password', to: 'users#show_error'
+  # ------------ elastic search ---------------
+  get 'search', to: 'welcome#search'
 
   #----------Error page----------
   # match '/404', to: 'error/errors#not_found', via: :all, as: 'not_found'

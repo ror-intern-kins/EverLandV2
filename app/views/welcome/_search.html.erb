@@ -54,11 +54,11 @@
 <div class="container" style="padding-left:25px; padding-right:25px">
   <div style="background-color: white">
   <div id="full-search" class="container">
-    <%= form_tag("/", method: "get", class: "row") do %>
+    <%= form_tag("/search", method: "get", class: "row") do %>
     <%= hidden_field_tag(:search_type, "full") %>
     <%# <div class="col-md-1"></div> %>
     <div class="col-md-5">
-      <%= text_field_tag(:query, "", class: "form-control", placeholder: 'Nhập địa điểm') %>
+      <%= text_field_tag(:q, "", class: "form-control", placeholder: 'Nhập địa điểm') %>
     </div>
     <div class="col-md-4">
     <%= link_to 'Tìm kiếm nâng cao', '#all-search', 

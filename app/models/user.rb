@@ -13,7 +13,7 @@ class User < ApplicationRecord
       # else
       #   user.email = "auth.uid"
       # end
-      user.email = "auth.uid"
+      user.email = auth.info.email
       user.username = user.email
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name   # assuming the user model has a name
