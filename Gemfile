@@ -10,8 +10,14 @@ gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "omniauth-facebook"
 gem 'bcrypt', '3.1.11' #bảo mật mật khẩu
+<<<<<<< HEAD
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+=======
+gem 'omniauth-google-oauth2'
+gem 'omniauth'
+gem 'omniauth-facebook'
+>>>>>>> releaseheroku
 gem 'jquery-validation-rails'
 # Search
 gem 'kaminari' 

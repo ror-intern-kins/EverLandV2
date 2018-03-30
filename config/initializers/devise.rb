@@ -10,7 +10,10 @@ Devise.setup do |config|
   config.unlock_in = 1.hour
   config.last_attempt_warning = true
 
-
+#App
+config.omniauth :facebook, '1837188616585142', 'f86c38c453ff1a6c01acea8ae7118fec', scope: 'public_profile,email'
+config.omniauth :google_oauth2, '1019459722193-63qo8t9ibiqp469g21ppho0nbd4krfsr.apps.googleusercontent.com', 
+  'yt5KObyfLpoYGQslL9kP3Rwt', scope: 'userinfo.email,userinfo.profile'
 
   config.authentication_keys = [:username]
   

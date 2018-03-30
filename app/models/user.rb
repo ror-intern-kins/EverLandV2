@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable,
-         :lockable, :timeoutable, :omniauthable, :omniauthable, omniauth_providers: %i[facebook]
+         :lockable, :timeoutable, :omniauthable, :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   has_many :posts
 
   def self.from_omniauth(auth)
@@ -29,6 +29,9 @@ class User < ApplicationRecord
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
+      end
+      if data = session["devise.google_data"] && session["devise.google_data"]["extra"]["raw_info"]
+          user.email = data["email"] if user.email.blank? 
       end
     end
   end

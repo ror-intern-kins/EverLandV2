@@ -5,23 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-# dataset = JSON.parse(File.read('db/data.json'))
-# dataset.each do |ckey,cvalue|
-#     name: cvalue[:name])
-#     cvalue['quan-huyen'].each do |dk, dv|
-#         district = city.districts.create!(name: dv[:name])
-#         dv['xa-phuong'].each do |wk, wv|
-#             ward = district.wards.create!(name: wv[:name])
-#             2.times do |i|
-#                 ward.streets.create!(name: "Đường #{i}")
-#             end
-#         end
-#     end
-# end
-
 dataset = JSON.parse(File.read('db/data.json'))
-dataset.each do |ckey,cvalue|
+dataset.each do |ckey, cvalue|
     city = City.create!(name: cvalue['name'])
     cvalue['quan-huyen'].each do |dk, dv|
         district = city.districts.create!(name: dv['name'])

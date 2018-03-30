@@ -38,19 +38,19 @@
                             <div class="pmb-content">
                                 <div>  
                                     <p>
-                                        <span class="">Giá:</span>
-                                        <% if post.unit == 'Thỏa thuận'%>
+                                        <span>Giá:</span>
+                                        <% if post.unit == 'Thỏa Thuận'%>
                                             <span>Thỏa thuận</span>
                                         <% else %>
                                             <span><%= post.price %> <%= post.unit%></span>
                                         <% end %>
                                     </p>
                                     <p>
-                                        <span class="">Diện tích:</span>
+                                        <span>Diện tích:</span>
                                         <span><%= post.area %> m²</span>
                                     </p>
                                     <p>
-                                        <span class="">Địa chỉ:</span>
+                                        <span>Địa chỉ:</span>
                                         <span><%= post.address_number %></span>
                                     </p>
                                 </div>                    
