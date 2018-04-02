@@ -9,8 +9,8 @@ gem 'devise'
 gem 'bcrypt', '3.1.11' #bảo mật mật khẩu
 
 gem 'bonsai-elasticsearch-rails'
-# gem 'elasticsearch-model'
-# gem 'elasticsearch-rails'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 gem 'omniauth-google-oauth2'
 gem 'omniauth'

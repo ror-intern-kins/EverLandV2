@@ -275,6 +275,8 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.2)
   devise
+  elasticsearch-model
+  elasticsearch-rails
   font-awesome-rails
   jbuilder (~> 2.5)
   jquery-rails

@@ -91,4 +91,4 @@ class Post < ApplicationRecord
         end
     end
 end
-Post.import
+Post.import force: true
