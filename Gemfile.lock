@@ -45,6 +45,9 @@ GEM
       execjs
     bcrypt (3.1.11)
     bindex (0.5.0)
+    bonsai-elasticsearch-rails (0.2.0)
+      elasticsearch-model (~> 0)
+      elasticsearch-rails (~> 0)
     bootstrap (4.0.0)
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
@@ -82,17 +85,17 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
-    elasticsearch (5.0.4)
-      elasticsearch-api (= 5.0.4)
-      elasticsearch-transport (= 5.0.4)
-    elasticsearch-api (5.0.4)
+    elasticsearch (6.0.2)
+      elasticsearch-api (= 6.0.2)
+      elasticsearch-transport (= 6.0.2)
+    elasticsearch-api (6.0.2)
       multi_json
-    elasticsearch-model (5.0.2)
+    elasticsearch-model (0.1.9)
       activesupport (> 3)
-      elasticsearch (~> 5)
+      elasticsearch (> 0.4)
       hashie
-    elasticsearch-rails (5.0.2)
-    elasticsearch-transport (5.0.4)
+    elasticsearch-rails (0.1.9)
+    elasticsearch-transport (6.0.2)
       faraday
       multi_json
     erubi (1.7.1)
@@ -264,6 +267,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bcrypt (= 3.1.11)
+  bonsai-elasticsearch-rails
   bootstrap (~> 4.0.0)
   bootstrap4-kaminari-views
   byebug
@@ -271,8 +275,6 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.2)
   devise
-  elasticsearch-model
-  elasticsearch-rails
   font-awesome-rails
   jbuilder (~> 2.5)
   jquery-rails

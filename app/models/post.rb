@@ -1,4 +1,5 @@
 require 'elasticsearch/model'
+
 class Post < ApplicationRecord
     include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
@@ -90,3 +91,4 @@ class Post < ApplicationRecord
         end
     end
 end
+# Post.import
