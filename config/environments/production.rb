@@ -13,6 +13,9 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
+  #---------------------------------------
+  export BONSAI_URL="https://px3prodgi:klv2l3i5xm@azalea-8622498.us-east-1.bonsaisearch.net"
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
