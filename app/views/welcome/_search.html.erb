@@ -58,14 +58,14 @@
     <%= hidden_field_tag(:search_type, "full") %>
     <%# <div class="col-md-1"></div> %>
     <div class="col-md-5">
-      <%= text_field_tag(:query, "", class: "form-control", placeholder: 'Nhập địa điểm') %>
+      <%= text_field_tag(:q, "", class: "form-control", placeholder: 'Nhập địa điểm') %>
     </div>
     <div class="col-md-4">
     <%= link_to 'Tìm kiếm nâng cao', '#all-search', 
     class: 'btn btn-primary col-md-12', data: {toggle: 'collapse'}  %> 
   </div>
     <div class="col-md-3">
-      <%= submit_tag("Tìm kiếm", class: "btn btn-success col-md-12") %>
+      <%= submit_tag("Tìm kiếm",name: nil, class: "btn btn-success col-md-12") %>
     </div>
     <% end %>     
   </div>

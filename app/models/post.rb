@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class Post < ApplicationRecord
+    include Elasticsearch::Model
+    include Elasticsearch::Model::Callbacks
     belongs_to :user
     has_many :images, dependent: :destroy
     accepts_nested_attributes_for :images
@@ -87,3 +91,4 @@ class Post < ApplicationRecord
         end
     end
 end
+Post.import force: true
