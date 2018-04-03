@@ -75,3 +75,5 @@ vn:
               confirmation: "không đúng."
             unlock_token:
               invalid: "không hợp lệ. Vui lòng trở về trang chủ."
+      messages:
+        record_invalid: 'Ngôn ngữ không hợp lệ'        

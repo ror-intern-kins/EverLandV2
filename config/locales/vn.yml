@@ -37,3 +37,8 @@ vn:
     submit: 
       create: 'Đăng Tin'
       update: 'Cập Nhật Tin'
+
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'Ngôn ngữ không hợp lệ'        
