@@ -56,7 +56,7 @@ dataset_post.each do |v|
         contact_phone:  v['contact_mobile'],
         contact_mobile:  v['contact_mobile'],
     )
-    v['images'].each do |i|
-        post.images.create!(url: i)    
-    end
+    # v['images'].each do |i|
+    #     post.images.create!(url: i)    
+    # end
 end
