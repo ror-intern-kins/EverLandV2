@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
-  before_action :checkCurrentId, only: [:edit, :update]
+  before_action :check_current_id, only: [:edit, :update]
 
   # GET /users/1
   # GET /users/1.json
@@ -71,7 +71,6 @@ class UsersController < ApplicationController
       flash[:noti_pwd] = 'Thay đổi mật khẩu thất bại'
     end
     # render 'edit_change_password'
-    
   end
 
 
@@ -90,10 +89,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :username, :password, :password_confirmation, :birthday, :gender, :email, :phone, :address, :personal)
     end
     #----Check url
-    def checkCurrentId 
+    def check_current_id 
       @user = User.find(params[:id])
-      # puts current_user.id
-      puts @user
       redirect_to not_found_path if current_user.id != @user.id 
     end
 end

@@ -438,10 +438,8 @@
       google.maps.event.addListener(marker, 'click', function(){
           infoWindow.open(map, this);
       });
-     // console.log(latlng);
       
       google.maps.event.addListener(map, 'click', function(event) {
-         // console.log(event);
           var result = [event.latLng.lat(), event.latLng.lng()];
           transition(result);
       });
@@ -553,7 +551,6 @@
 
   // convert place to object
   function passData(model) {
-      //console.log(model);
       for(var i = 0; i < model.length; i++) {
           var addressType = model[i].types[0];
           if (addressType === 'administrative_area_level_1') {
@@ -576,7 +573,6 @@
               address.add = model[i].long_name;
             }
       } // end for
-        //console.log(address);
     }
 
       $('#post_address_number').on('input', function() {
@@ -584,9 +580,7 @@
       });
 
     function onAddressChange() {
-      
       var x = $('#post_address_number').val();
-      console.log(x);
       var geocoder = new google.maps.Geocoder();
       geocoder.geocode( { 'address': x}, function(results, status) {
         if (status == 'OK') {

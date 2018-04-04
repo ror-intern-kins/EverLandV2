@@ -438,7 +438,6 @@
     $.post("/getcate_edit.json", { 
       category_id: ca_id
     }, function (data, status) { 
-      console.log(data)         
       var t = data[2][0].super_id //get super_id in category have post edit
       $("select#cate_id").val(t); 
       data[0].forEach(function(item) {
@@ -491,7 +490,6 @@
 </script>
 <script>
   var position = [ <%= @post.lat%>, <%= @post.lng %>];
-  console.log(position);
   var address = {} // object store address
   var map;
   var currentPosition ; // ...
@@ -517,11 +515,9 @@
       google.maps.event.addListener(marker, 'click', function(){
           infoWindow.open(map, this);
       });
-     // console.log(latlng);
      $('#post_lat').val(position[0]);
      $('#post_lng').val(position[1]);
       google.maps.event.addListener(map, 'click', function(event) {
-         // console.log(event);
           var result = [event.latLng.lat(), event.latLng.lng()];
           transition(result);
       });
@@ -611,7 +607,6 @@
 
   // convert place to object
   function passData(model) {
-      //console.log(model);
       for(var i = 0; i < model.length; i++) {
           var addressType = model[i].types[0];
           if (addressType === 'administrative_area_level_1') {
@@ -634,7 +629,6 @@
               address.add = model[i].long_name;
             }
       } // end for
-        //console.log(address);
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnFxsxcFARq6WccD-0Nm3J0qw4DpQ_F2w&libraries=places&callback=initMap" async defer></script>

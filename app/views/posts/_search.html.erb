@@ -116,12 +116,6 @@
 
 </div>
 <script>
-        // This example displays an address form, using the autocomplete feature
-        // of the Google Places API to help users fill in the information.
-  
-        // This example requires the Places library. Include the libraries=places
-        // parameter when you first load the API. For example:
-        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
         var address = {};
         var placeSearch, autocomplete;
   
@@ -141,8 +135,6 @@
           // Get the place details from the autocomplete object.
           var place = autocomplete.getPlace();
           address = passData(place.address_components);
-          
-          
         }
   
         // Bias the autocomplete object to the user's geographical location,
@@ -185,10 +177,7 @@
                   {
                     address.add = model[i].long_name;
                   }
-            } // end for
-            console.log(address);
-        
-            
+            } // end for       
           }
       </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnFxsxcFARq6WccD-0Nm3J0qw4DpQ_F2w&libraries=places&callback=initAutocomplete"></script>

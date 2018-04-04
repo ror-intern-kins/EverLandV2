@@ -31,26 +31,8 @@ Rails.application.routes.draw do
       resources :images,only: [:create, :edit, :update, :show, :destroy]
     end
   end
+  resources :posts, only: [:show, :index]
   get '/index/user/:user_id/posts', to: 'posts#index_user_posts', as: 'index_user_posts' #liệt kê toàn bộ các bài viết của user 
-  # add a collection search - Q
-  resources :posts, except: [:destroy, :new, :create, :edit, :update] do
-    collection do
-      get 'search'
-      get 'result'
-    end
-  end
-  resources :images, except: [:create, :edit, :update, :show, :destroy]
-  
-  #resources :categories
-  # resources :cities do
-  #   resources :districts, only: [:create, :edit, :update, :show, :destroy] do
-  #     resources :wards, only: [:create, :edit, :update, :show, :destroy] do
-  #       resources :streets, only: [:create, :edit, :update, :show, :destroy]
-  #     end
-  #   end
-  # end
-  # resources :districts, except: [:create, :edit, :update, :show, :destroy]
-  # resources :wards, except: [:create, :edit, :update, :show, :destroy]
-  # resources :streets, except: [:create, :edit, :update, :show, :destroy]
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+
 end

@@ -1,26 +1,5 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
-
-  # GET /images
-  # GET /images.json
-  def index
-    @images = Image.all
-  end
-
-  # GET /images/1
-  # GET /images/1.json
-  def show
-  end
-
-  # GET /images/new
-  def new
-    @image = Image.new
-  end
-
-  # GET /images/1/edit
-  def edit
-  end
-
   # POST /images
   # POST /images.json
   def create
