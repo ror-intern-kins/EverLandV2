@@ -1,4 +1,4 @@
-vn:
+vi:
   devise:
     confirmations:
       confirmed: "Xác nhận tài khoản thành công."
