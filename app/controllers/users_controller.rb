@@ -1,35 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
-  before_action :checkCurrentId, only: [:edit, :update]
-
-  # GET /users
-  # GET /users.json
-  def index
-    #@users = User.all
-  end
+  before_action :check_current_id, only: [:edit, :update]
 
   # GET /users/1
   # GET /users/1.json
   def edit
     @user = User.find(params[:id])
-  end
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-  # POST /users
-  # POST /users.json
-  def create
-    @user = User.new(data_params)
-      if @user.save
-        log_in @user
-        redirect_to root_path    
-      else
-      end
-  end
-
-  def show_error
-    
   end
 
   # PATCH/PUT /users/1
@@ -40,15 +16,6 @@ class UsersController < ApplicationController
       end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
-  def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
   #kiểm tra user có tồn tại hay ko
   def check_existed_user
     current_user_id = params[:current_user_id]
@@ -101,7 +68,6 @@ class UsersController < ApplicationController
       flash[:noti_pwd] = 'Thay đổi mật khẩu thất bại'
     end
     # render 'edit_change_password'
-    
   end
 
 
@@ -120,10 +86,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :username, :password, :password_confirmation, :birthday, :gender, :email, :phone, :address, :personal)
     end
     #----Check url
-    def checkCurrentId 
+    def check_current_id 
       @user = User.find(params[:id])
-      # puts current_user.id
-      puts @user
       redirect_to not_found_path if current_user.id != @user.id 
     end
 end

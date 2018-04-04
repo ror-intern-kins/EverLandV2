@@ -9,7 +9,6 @@ class WelcomeController < ApplicationController
     @districts
     # find all city
 
-
     if(params[:city_id])
       @districts = City.find(params[:city_id]).districts.all
       respond_to do |format|  
@@ -100,7 +99,6 @@ class WelcomeController < ApplicationController
         end
         
         # IF
-
         if key == "category_detail_id" && !value.blank?
           query[:category_id] = query[:category_detail_id]
           query.delete(key)

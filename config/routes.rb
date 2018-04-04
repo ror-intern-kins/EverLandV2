@@ -26,31 +26,13 @@ Rails.application.routes.draw do
   get '/check_email', to: 'users#check_email' #kiểm tra user tồn tại
   get '/check_login', to: 'users#check_login' #kiểm tra user và pass đúng hay chưa
   #----------Role User >> Post----------
-  resources :users, except: [:index, :show] do
+  resources :users, only: [:update, :edit] do
     resources :posts, only: [:new, :edit, :update, :destroy, :create]  do
       resources :images,only: [:create, :edit, :update, :show, :destroy]
     end
   end
+  resources :posts, only: [:show, :index]
   get '/index/user/:user_id/posts', to: 'posts#index_user_posts', as: 'index_user_posts' #liệt kê toàn bộ các bài viết của user 
-  # add a collection search - Q
-  resources :posts, except: [:destroy, :new, :create, :edit, :update] do
-    collection do
-      get 'search'
-      get 'result'
-    end
-  end
-  resources :images, except: [:create, :edit, :update, :show, :destroy]
-  
-  #resources :categories
-  # resources :cities do
-  #   resources :districts, only: [:create, :edit, :update, :show, :destroy] do
-  #     resources :wards, only: [:create, :edit, :update, :show, :destroy] do
-  #       resources :streets, only: [:create, :edit, :update, :show, :destroy]
-  #     end
-  #   end
-  # end
-  # resources :districts, except: [:create, :edit, :update, :show, :destroy]
-  # resources :wards, except: [:create, :edit, :update, :show, :destroy]
-  # resources :streets, except: [:create, :edit, :update, :show, :destroy]
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+
 end

@@ -8,7 +8,8 @@ end
 gem 'devise'
 gem 'bcrypt', '3.1.11' #bảo mật mật khẩu
 
-gem 'bonsai-elasticsearch-rails'
+# gem 'bonsai-elasticsearch-rails'
+
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
