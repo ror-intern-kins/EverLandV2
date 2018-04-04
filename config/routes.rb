@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get '/check_email', to: 'users#check_email' #kiểm tra user tồn tại
   get '/check_login', to: 'users#check_login' #kiểm tra user và pass đúng hay chưa
   #----------Role User >> Post----------
-  resources :users, except: [:index, :show] do
+  resources :users, only: [:edit, :update] do
     resources :posts, only: [:new, :edit, :update, :destroy, :create]  do
       resources :images,only: [:create, :edit, :update, :show, :destroy]
     end
