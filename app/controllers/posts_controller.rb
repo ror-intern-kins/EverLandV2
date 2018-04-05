@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :set_post_to_show, only: [:show]
-  before_action :checkCurrentId, only: [:new, :create, :edit, :update, :index_user_posts] 
+  before_action :check_current_id, only: [:new, :create, :edit, :update, :index_user_posts] 
 
   #GET /user_posts
   #GET /user_posts.json
@@ -288,7 +288,7 @@ end
     end  
 
   #check current user id
-  def checkCurrentId 
+  def check_current_id 
     @user = User.find(params[:user_id])
     redirect_to not_found_path if current_user.id != @user.id 
   end
