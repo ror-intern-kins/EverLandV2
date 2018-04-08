@@ -1,0 +1,77 @@
+en:
+  activerecord:
+    errors:
+      models:
+# ------------User------------
+        user:
+          attributes:
+            email: 
+              blank: "can't be blank."
+            reset_password_token:
+              invalid: "is invalid. Check your mail again."
+            password:
+              blank: "can't be blank."
+              too_short: "is too short. Mininum must have 6 characters."
+            password_confirmation:
+              confirmation: "is invalid."
+            unlock_token:
+              invalid: "is invalid. Please come back Home page." 
+# ------------Post------------
+        post:
+          attributes:
+            title: 
+              blank: "Title can't be blank."
+              too_short: "Title minimum is 30 characters."
+              too_long: "Title maximum is 30 characters."
+            description: 
+              blank: "Description can't be blank."
+              too_short: "Description minimum is 30 characters."
+              too_long: "Description maximum is 3000 characters."
+            category_id: 
+              blank: "Category can't be blank."
+              exit_category: "Category didn't exist."
+            city_id: 
+              exit_city: "City didn't exist."
+              blank: "City can't be blank."
+            district_id:
+              blank: "District can't be blank."
+              exit_district: "District didn't exist."
+            address_number: 
+              blank: "Address can't be blank."
+              too_long: "Address maximum is 200 characters."
+            contact_mobile: 
+              blank: "Mobile can't be blank."
+              too_short: "Mobile minimum is 10 characters."
+              too_long: "Mobile maximum is 11 characters."
+              invalid: "Mobile is invalid."
+            furniture:
+              too_long: "Description of furniture maximum is 200 characters."
+            contact_phone:
+              too_short: "Phone minimum is 10 characters."
+              too_long:  "Phone maximum is 11 characters."
+              invalid: "Phone is invalid."
+            contact_address:
+              too_long: "Address of contact maximum is 200 characters."
+            contact_mail:
+              too_long: 'Mail of contact maximum is 100 characters.'
+              invalid: "Mail of contact is invalid."
+            contact_name:
+              too_long: "Name of contact maximum is 200 characters."
+              invalid: "Name of contact is invalid."
+            project:
+              too_long: "Project maximum is 200 characters."
+              invalid: "Name of project is invalid."
+            price:
+              not_a_number: "Price is invalid."
+            area:
+              not_a_number: "Area is invalid."
+            front: 
+              not_a_number: "Front is invalid."
+            entrance:
+              not_a_number: "Entrance is invalid."
+            floor:
+              not_a_number: "Floor is invalid."
+            bedroom:
+              not_a_number: "Bedroom is invalid."
+            toilet:
+              not_a_number: "Toilet is invalid."

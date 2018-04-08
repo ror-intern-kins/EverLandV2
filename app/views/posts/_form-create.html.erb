@@ -18,8 +18,6 @@
 <%= form_with model: @post,html: { multipart: true }, url: {action: "create"}, local:true, id:'from-create-post' do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2>Có
-        <%= pluralize(@post.errors.count, "")%>lỗi:</h2>
       <ul>
         <% @post.errors.full_messages.each do |message| %>
           <li>

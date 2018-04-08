@@ -1,0 +1,13 @@
+vi:
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    submit: 
+      create: "Đăng Tin"
+      update: "Cập Nhật Tin"
+  

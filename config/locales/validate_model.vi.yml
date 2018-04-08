@@ -1,0 +1,77 @@
+vi:
+  activerecord:
+    errors:
+      models:
+# ------------User------------
+        user:
+          attributes:
+            email: 
+              blank: "Email không được để trống."
+            reset_password_token:
+              invalid: "Mã không hợp lệ. Vui lòng kiểm tra lại email."
+            password:
+              blank: "Mật khẩu không được để trống."
+              too_short: "Mậu khẩu quá ngắn. Tối thiểu phải từ 6 ký tự trở lên."
+            password_confirmation:
+              confirmation: "Mật khẩu không đúng."
+            unlock_token:
+              invalid: "Mã không hợp lệ. Vui lòng trở về trang chủ."     
+# ------------Post------------
+        post:
+          attributes:
+            title: 
+              blank: "Tiêu đề không thể bỏ trống."
+              too_short: "Tiêu đề phải có độ dài tối thiểu 30 ký tự."
+              too_long: "Tiêu đề tối đa 99 ký tự."
+            description: 
+              blank: "Mô tả không thể bỏ trống."
+              too_short: "Mô tả phải có độ dài tối thiểu 30 ký tự."
+              too_long: "Mô tả phải có độ dài tối đa 3000 ký tự."
+            category_id: 
+              blank: "Hình thức không thể bỏ trống."
+              exit_category: "Hình thức không tồn tại."
+            city_id: 
+              exit_city: "Thành phố không có thật."
+              blank: "Thành phố không thể bỏ trống."
+            district_id:
+              blank: "Quận không thể bỏ trống."
+              exit_district: "Quận không có thật"
+            address_number: 
+              blank: "Địa chỉ không thể bỏ trống."
+              too_long: "Địa chỉ có độ dài tối đa 200 ký tự."
+            contact_mobile: 
+              blank: "Di động không thể bỏ trống."
+              too_short: 'Di động phải có độ dài tối thiểu 10 ký tự.'
+              too_long: 'Di động phải có độ dài tối đa 11 ký tự.'
+              invalid: "Số di động không đúng."
+            furniture:
+              too_long: 'Mô tả nội thất có độ dài tối đa 200 ký tự.'
+            contact_phone:
+              too_short: 'Điện thoại phải có độ dài tối thiểu 10 ký tự.'
+              too_long: ' Điện thoại phải có độ dài tối đa 11 ký tự.'
+              invalid: "Số điện thoại không đúng."
+            contact_address:
+              too_long: "Địa chỉ liên hệ có độ dài tối đa 200 ký tự."
+            contact_mail:
+              too_long: 'Mail liên hệ có độ dài tối đa 100 ký tự.'
+              invalid: "Địa chỉ email không hợp lệ."
+            contact_name:
+              too_long: 'Tên có độ dài tối đa 200 ký tự.'
+              invalid: 'Tên không hợp lệ.'
+            project:
+              too_long: 'Dự án có độ dài tối đa 200 ký tự.'
+              invalid: 'Tên dự án không hợp lệ.'
+            price:
+              not_a_number: 'Giá không hợp lệ.'
+            area:
+              not_a_number: 'Diện tích không hợp lệ.'
+            front: 
+              not_a_number: 'Mặt tiền không hợp lệ.'
+            entrance:
+              not_a_number: 'Đường vào không hợp lệ.'
+            floor:
+              not_a_number: 'Số tầng không hợp lệ.'
+            bedroom:
+              not_a_number: 'Số phòng ngủ không hợp lệ.'
+            toilet:
+              not_a_number: 'Số toilet không hợp lệ.'

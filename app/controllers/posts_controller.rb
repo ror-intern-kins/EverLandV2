@@ -156,7 +156,10 @@ end
     # @user = User.find(params[:user_id])
     @user = current_user    
     @post = @user.posts.build(post_params)
-    
+    #test i18n en
+    # @categories = Category.where(super_id: nil)
+    # @cities = City.all
+    #------
     respond_to do |format|
       if @post.save
         if !(params[:images].nil?)
