@@ -7,32 +7,32 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# dataset = JSON.parse(File.read('db/data.json'))
-# dataset.each do |ckey, cvalue|
-#     city = City.create!(name: cvalue['name'])
-#     cvalue['quan-huyen'].each do |dk, dv|
-#         district = city.districts.create!(name: dv['name'])
-#         dv['xa-phuong'].each do |wk, wv|
-#             ward = district.wards.create!(name: wv['name'])
-#             2.times do |i|
-#                 ward.streets.create!(name: "Đường #{i}")
-#             end
-#         end
-#     end
-# end
+dataset = JSON.parse(File.read('db/data.json'))
+dataset.each do |ckey, cvalue|
+    city = City.create!(name: cvalue['name'])
+    cvalue['quan-huyen'].each do |dk, dv|
+        district = city.districts.create!(name: dv['name'])
+        dv['xa-phuong'].each do |wk, wv|
+            ward = district.wards.create!(name: wv['name'])
+            2.times do |i|
+                ward.streets.create!(name: "Đường #{i}")
+            end
+        end
+    end
+end
 
-# Category.create!([
-#     {name: "Nhà đất bán"},
-#     {name: "Nhà đất cho thuê"},
-#     {name: "Bán căn hộ chung cư", super_id: 1},
-#     {name: "Bán nhà riêng", super_id: 1},
-#     {name: "Bán đất", super_id: 1},
-#     {name: "Bán biệt thự", super_id: 1},
-#     {name: "Thuê nhà riêng", super_id: 2},
-#     {name: "Thuê căn hộ chung cư", super_id: 2},
-#     {name: "Thuê văn phòng", super_id: 2},
-#     {name: "Thuê nhà trọ", super_id: 2}
-# ])
+Category.create!([
+    {name: "Nhà đất bán"},
+    {name: "Nhà đất cho thuê"},
+    {name: "Bán căn hộ chung cư", super_id: 1},
+    {name: "Bán nhà riêng", super_id: 1},
+    {name: "Bán đất", super_id: 1},
+    {name: "Bán biệt thự", super_id: 1},
+    {name: "Thuê nhà riêng", super_id: 2},
+    {name: "Thuê căn hộ chung cư", super_id: 2},
+    {name: "Thuê văn phòng", super_id: 2},
+    {name: "Thuê nhà trọ", super_id: 2}
+])
 user = User.find(1)
 
 dataset_post = JSON.parse(File.read('db/post.json'))
