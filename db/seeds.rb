@@ -33,35 +33,35 @@
 #     {name: "Thuê văn phòng", super_id: 2},
 #     {name: "Thuê nhà trọ", super_id: 2}
 # ])
-user = User.find(1)
+# user = User.find(1)
 
-dataset_post = JSON.parse(File.read('db/post.json'))
-dataset_post.each do |v|
-    post = user.posts.create!(
-        title: v['title'],
-        category_id: v['category_id'],
-        description: v['description'],
-        lng: v['lng'],
-        lat: v['lat'],
-        project: v['project'],
-        floor: v['floor'],
-        price: v['price'],
-        area: v['area'],
-        address_number: v['addr'],
-        unit: 'Thỏa Thuận',
-        front: v['street_front'],
-        house_direction: v['house_direction'],
-        bedroom: v['bedroom'],
-        toilet: v['bathroom'],
-        contact_name: v['contact_name'],
-        contact_address:  v['contact_address'],
-        contact_phone:  v['contact_mobile'],
-        contact_mobile:  v['contact_mobile'],
-    )
-    images = v['images']
-    images.each_index do |i|
-        if i < 8
-            post.images.create!(url_out: images[i])    
-        end
-    end
-end
+# dataset_post = JSON.parse(File.read('db/post.json'))
+# dataset_post.each do |v|
+#     post = user.posts.create!(
+#         title: v['title'],
+#         category_id: v['category_id'],
+#         description: v['description'],
+#         lng: v['lng'],
+#         lat: v['lat'],
+#         project: v['project'],
+#         floor: v['floor'],
+#         price: v['price'],
+#         area: v['area'],
+#         address_number: v['addr'],
+#         unit: 'Thỏa Thuận',
+#         front: v['street_front'],
+#         house_direction: v['house_direction'],
+#         bedroom: v['bedroom'],
+#         toilet: v['bathroom'],
+#         contact_name: v['contact_name'],
+#         contact_address:  v['contact_address'],
+#         contact_phone:  v['contact_mobile'],
+#         contact_mobile:  v['contact_mobile'],
+#     )
+#     images = v['images']
+#     images.each_index do |i|
+#         if i < 8
+#             post.images.create!(url_out: images[i])    
+#         end
+#     end
+# end
