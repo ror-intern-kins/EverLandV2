@@ -12,7 +12,7 @@
 <% if !@posts.present? %>    
 <div class="container">
     <div class="row">
-        <h3 class="post-noti col-md-12">Không tìm thấy kết quả nào</h3> 
+        <h3 class="post-noti col-md-12"><%= t "welcome.no_result_notice" %></h3> 
     </div>
 </div>
 <% else %>
@@ -25,7 +25,7 @@
                             <div class="pmb-header">
                                 <div class="pmb-date">
                                     <p class="day"><%= post.created_at.day %></p>
-                                    <p class="month">Tháng <%= post.created_at.month  %></p>
+                                    <p class="month"><%= t "welcome.month" %> <%= post.created_at.month  %></p>
                                 </div>
                                 <div>
                                 <%= link_to post.title, post_path(post.id), class: 'pmb-title'%>
@@ -53,19 +53,19 @@
                             <div class="pmb-content">
                                 <div>  
                                     <p>
-                                        <span>Giá:</span>
+                                        <span><%= t "welcome.price" %></span>
                                         <% if post.unit == 'Thỏa Thuận'%>
-                                            <span>Thỏa thuận</span>
+                                            <span><%= t "welcome.unit_deal" %></span>
                                         <% else %>
                                             <span><%= post.price %> <%= post.unit%></span>
                                         <% end %>
                                     </p>
                                     <p>
-                                        <span>Diện tích:</span>
+                                        <span><%= t "welcome.erea" %></span>
                                         <span><%= post.area %> m²</span>
                                     </p>
                                     <p>
-                                        <span>Địa chỉ:</span>
+                                        <span><%= t "welcome.address" %></span>
                                         <span><%= post.address_number %></span>
                                     </p>
                                 </div>                    
