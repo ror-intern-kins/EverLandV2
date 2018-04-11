@@ -1,0 +1,73 @@
+vi:
+  js:
+    post:
+      error:
+        error_total: "Vui lòng kiểm tra lại thông tin đã nhập."
+        title:
+          blank: "Tiêu đề không thể bỏ trống."
+          too_short: "Tiêu đề có tối thiểu 30 ký tự."
+          too_long: 'Tiêu đề có tối đa 99 ký tự.'
+        description: 
+          blank: "Mô tả không thể bỏ trống."
+          too_short: "Mô tả phải có độ dài tối thiểu 30 ký tự."
+          too_long: "Mô tả phải có độ dài tối đa 3000 ký tự."
+        category: 
+          blank: "Vui lòng chọn hình thức."
+          exit_category: "Hình thức không tồn tại."
+        sub_category:
+          blank: "Vui lòng chọn loại."
+        city: 
+          exit_city: "Thành phố không có thật."
+          blank: "Vui lòng chọn tỉnh/thành phố."
+        district:
+          blank: "Vui lòng chọn quận huyện."
+          exit_district: "Quận không có thật"
+        address: 
+          blank: "Địa chỉ không thể bỏ trống."
+          too_long: "Địa chỉ có độ dài tối đa 200 ký tự."
+        contact_mobile: 
+          blank: "Di động không thể bỏ trống."
+          too_short: 'Di động phải có độ dài tối thiểu 10 ký tự.'
+          too_long: 'Di động phải có độ dài tối đa 11 ký tự.'
+          invalid: "Số di động không đúng."
+        furniture_description:
+          too_long: 'Mô tả nội thất có độ dài tối đa 200 ký tự.'
+        contact_phone:
+          too_short: 'Điện thoại phải có độ dài tối thiểu 10 ký tự.'
+          too_long: ' Điện thoại phải có độ dài tối đa 11 ký tự.'
+          invalid: "Số điện thoại không đúng."
+        contact_address:
+          too_long: "Địa chỉ liên hệ có độ dài tối đa 200 ký tự."
+        contact_mail:
+          too_long: 'Mail liên hệ có độ dài tối đa 100 ký tự.'
+          invalid: "Địa chỉ email không hợp lệ."
+        contact_name:
+          too_long: 'Tên có độ dài tối đa 200 ký tự.'
+          invalid: 'Tên không hợp lệ.'
+        project:
+          too_long: 'Dự án có độ dài tối đa 200 ký tự.'
+          invalid: 'Tên dự án không hợp lệ.'
+        price:
+          max_value: 'Giá tối đa 999999.'
+          not_a_number: 'Giá không hợp lệ.'
+        area:
+          max_value: 'Diện tích tối đa 999999.'
+          not_a_number: 'Diện tích không hợp lệ.'
+        front: 
+          not_a_number: 'Mặt tiền không hợp lệ.'
+          max_value: 'Mặt tiền tối đa 999999m.'
+        entrance:
+          not_a_number: 'Đường vào không hợp lệ.'
+          max_value: 'Đường vào tối đa 999999m.'
+        floor:
+          not_a_number: 'Số tầng không hợp lệ.'
+          max_value: 'Số tầng tối đa 999 tầng.'
+        bedroom:
+          not_a_number: 'Số phòng ngủ không hợp lệ.'
+          max_value: 'Số phòng ngủ tối đa 999 phòng.'
+        toilet:
+          not_a_number: 'Số toilet không hợp lệ.'
+          max_value: 'Số toilet tối đa 999 phòng.'
+        unit:
+          blank: 'Vui lòng chọn đơn vị.'
+      agree: 'Thỏa Thuận'

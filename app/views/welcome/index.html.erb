@@ -31,9 +31,24 @@
                                 <%= link_to post.title, post_path(post.id), class: 'pmb-title'%>
                                 </div>
                             </div>
-                            <div class="pmb-img"
-                            style="background-image: url(<%= asset_url !(post.images.empty?)?(post.images.first.url):("default.jpg") %>)">
-                            </div> 
+                                <% if post.images.empty? %>
+                                    <div class="pmb-img"
+                                            style="background-image: url(<%= asset_url "default.jpg"%>)"
+                                        >
+                                    </div>
+                                    <% else %>
+                                    <% if post.images.first.url != nil && post.images.first.url.length > 0 %>
+                                        <div class="pmb-img"
+                                            style="background-image: url(<%= asset_url post.images.first.url%>)"
+                                        >
+                                        </div>
+                                        <% else %>
+                                        <div class="pmb-img"
+                                            style="background-image: url(<%= post.images.first.url_out%>)"
+                                        >
+                                        </div>
+                                    <% end %>
+                                <% end %>
                                                             
                             <div class="pmb-content">
                                 <div>  

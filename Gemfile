@@ -4,6 +4,8 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
+#i18n in js
+gem 'i18n-js'
 
 gem 'devise'
 gem 'bcrypt', '3.1.11' #bảo mật mật khẩu
