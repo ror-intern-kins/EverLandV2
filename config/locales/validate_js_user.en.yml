@@ -3,9 +3,9 @@ en:
     register:
       error:
         username:
-          existed: "Tên tài khoản đã tồn tại."
-          blank: "Tên đăng nhập không được để trống."
-          invalid: "Tên tài khoản không cho phép chứa ký tự đặc biệt."
+          existed: "Username is already exist."
+          blank: "Username can't be blank."
+          invalid: "Username doesn't allow contain special character."
           length: "Tên tài khoản phải có độ dài tối thiểu 6 ký tự và tối đa 20 ký tự."
         email: 
           blank: "Địa chỉ email không được để trống."

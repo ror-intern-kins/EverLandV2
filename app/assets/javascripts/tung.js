@@ -5,10 +5,10 @@ function checkPwd() {
     var password  = $('#user_change_password').val();
 
     if (password == null || password == '') {
-        errorPwd.html('Mật khẩu không được để trống.');
+        errorPwd.html(I18n.t('js.register.error.password.blank'));
         checkValid = false;
     } else if (password.length < 6) {
-        errorPwd.html('Mật khẩu phải có độ dài từ 6 kí tự.');
+        errorPwd.html(I18n.t('js.register.error.password.length'));
         checkValid = false;
     }
     return checkValid;
@@ -19,10 +19,10 @@ function checkPwdConfirm() {
     var passwordConfirm  = $('#user_change_password_confirmation').val();
     var password  = $('#user_change_password').val();
     if (passwordConfirm == null || passwordConfirm == '') {
-        errorPwdConfirm.html('Xác thực mật khẩu không được để trống.');
+        errorPwdConfirm.html(I18n.t('js.register.error.password.confirm_blank'));
         checkValid = false;
     } else if (passwordConfirm !== password) {
-        errorPwdConfirm.html('Xác thực mật khẩu không đúng.');
+        errorPwdConfirm.html(I18n.t('js.register.error.password.confirm_not_match'));
         checkValid = false;
     }
 
@@ -33,7 +33,7 @@ function confirmOldPwd() {
     $('#noti_pwd').html('');
     var old_password  = $('#old_password').val();
     if (old_password == null || old_password == '') {
-        $('#oldPwd').html('Mật khẩu không được để trống!')
+        $('#oldPwd').html(I18n.t('js.register.error.password.blank'))
     } else {
         $('#errorPwd').html('');
         $('#errorPwdConfirm').html('');
@@ -48,7 +48,7 @@ function confirmOldPwd() {
                     $('#div_2_button').hide();                    
                     $('#old_password').prop('readonly', true);
                 } else {
-                    $('#oldPwd').html('Mật khẩu cũ không đúng!')
+                    $('#oldPwd').html(I18n.t('js.register.error.password.old_not_match'))
                 }
             }
         })
