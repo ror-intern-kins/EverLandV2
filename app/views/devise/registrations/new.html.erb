@@ -17,74 +17,82 @@
 
                     <div id="register">        
                     <%= form_for resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "form_register"} do |form| %> <!-- form đăng ký -->
-                        <h1>Đăng ký</h1>
+                        <h1><%= t "registry.registry_title" %></h1>
                         <p class="notice"><%= notice %></p>
                         <p class="alert"><%= alert %></p>
                         <div class="row">
-                            <%= form.label ('Tên đăng nhập ') %> <span class="obli">(*)</span> <br/>
+                            <label><%= t "login.username_label" %></label> 
+                            <span class="obli">(*)</span> <br/>
                             <%= form.text_field :username, class: 'tung-input form-control', id: :signup_username, onchange: 'checkUsername()' %>
                             <p id="errorUser" class='error'></p>
                             <p id="successUser" class='success'></p>
                         </div>                 
                         <div class="row">
-                            <%= form.label ('Địa chỉ email ') %> <span class="obli">(*)</span> <br/>
+                            <label><%= t "registry.email_label" %></label> 
+                            <span class="obli">(*)</span> <br/>
                             <%= form.text_field :email, class: 'tung-input form-control', id: :signup_email, onchange: 'checkEmail()' %>
                             <p id="errorEmail" class='error'></p>
                             <p id="successEmail" class='success'></p>
                         </div>
                         
                         <div class="row">
-                            <%= form.label ('Mật khẩu ') %> <span class="obli">(*)</span> <br/>
+                            <label><%= t "login.password_label" %></label>
+                             <span class="obli">(*)</span> <br/>
                             <%= form.password_field :password, class: 'tung-input form-control', id: :signup_password, onchange: 'checkPassword()' %>
                             <p id="errorPass" class='error'></p>
                         </div>
                         
                         <div class="row">
-                            <%= form.label ('Xác thực mật khẩu ') %> <span class="obli">(*)</span> <br/>
+                            <label><%= t "registry.confirm_password_label" %></label>
+                            <span class="obli">(*)</span> <br/>
                             <%= form.password_field :password_confirmation, class: 'tung-input form-control',
                                 id: :signup_password_confirmation, onchange: 'checkPasswordConfirm()' %>
                             <p id="errorPasswordConfirm" class='error'></p>
                         </div>                       
                         
                         <div class="row">
-                            <%= form.label ('Tên đầy đủ ') %> <span class="obli">(*)</span> <br/>
+                            <label><%= t "registry.fullname_label" %></label>
+                            <span class="obli">(*)</span> <br/>
                             <%= form.text_field :name, class: 'tung-input form-control', id: :signup_name, onchange: 'checkName()' %>
                             <p id="errorName" class='error'></p>
                         </div>
 
                         <div class="row">
-                            <%= form.label ('Điện thoại di động ') %> <br/>
+                            <label><%= t "registry.phonenum_label" %></label>
+                             <br/>
                             <%= form.text_field :phone, class: 'tung-input form-control', id: :signup_phone, onchange: 'checkPhone()' %>
                             <p id="errorPhone" class='error'></p>
                         </div>
                         
                         <div class="row">
-                            <%= form.label ('Ngày sinh ') %> <br/>
+                            <label><%= t "registry.birthday_label" %></label>
+                            <br/>
                             <%= form.date_field :birthday, class: "tung-input form-control" %>
                         </div>
                         <br/>
                         <div class="row">
-                            <label class="container-radio">Nam
+                            <label class="container-radio"><%= t "registry.sex_male" %>
                                 <%= form.radio_button :gender, 'male', checked: true %>
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="container-radio">Nữ
+                            <label class="container-radio"><%= t "registry.sex_female" %>
                                 <%= form.radio_button :gender, 'female' %>
                                 <span class="checkmark"></span>
                             </label>                            
                         </div>
                         <br/>
                         <div class="row">
-                            <%= form.label ('Địa chỉ ') %> <br/>
+                            <label><%= t "registry.address_label" %></label>
+                            <br/>
                             <%= form.text_field :address, class: 'tung-input form-control', id: :user_address %>
                         </div>
                         <br/>
                         <div class="row">
-                            <label class="container-radio">Cá nhân
+                            <label class="container-radio"><%= t "registry.type_personal" %>
                                 <%= form.radio_button :personal, 'true', checked: true %>
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="container-radio">Công ty
+                            <label class="container-radio"><%= t "registry.type_company" %>
                                 <%= form.radio_button :personal, 'false' %>
                                 <span class="checkmark"></span>
                             </label>                          
@@ -92,16 +100,16 @@
                         <br/>                                              
                         <div class="row">
                             <div class="col-md-12" style="padding: 30px 0px">
-                            <%= form.submit ('Đăng ký'), id: 'signup_btn', class: 'col-md-12 btn btn-dark tung-btn-form', :type => 'button', onclick: 'validateSignupForm()'%>
+                            <%= form.submit (t "login.registry_button"), id: 'signup_btn', class: 'col-md-12 btn btn-dark tung-btn-form', :type => 'button', onclick: 'validateSignupForm()'%>
                             <!-- , :type => 'button', onclick: 'validateSignupForm()' -->
                             </div>
                         </div>                                                                                                  
                         <h6 style="text-align: center">
-                            <%= link_to 'Về trang chủ', root_path, style: 'color: #006064' %>
+                            <%= link_to (t "login.back_to_home"), root_path, style: 'color: #006064' %>
                         </h6>
                         <p class="change_link" style="margin-top: 40px">  
-                            Bạn đã là thành viên?
-                        <%= link_to  " Trở lại đăng nhập ", new_user_session_path, onclick: 'resetLoginForm()'%>
+                            <%= t "registry.login_question" %>
+                        <%= link_to  (t "registry.login_button"), new_user_session_path, onclick: 'resetLoginForm()'%>
                         </p>
                     <% end %>
                     </div>
