@@ -71,6 +71,7 @@ vi:
     placeholder:
       post: 
         title: "Vui lòng nhập tiêu đề tin đăng của bạn. Tối thiểu là 30 ký tự và tối đa là 99 ký tự."
+
   #-------Form create - edit post-------
 
   #-------New - edit post-------
@@ -98,3 +99,16 @@ vi:
   apartments_rent: "Thuê căn hộ chung cư"
   office_rent: "Thuê văn phòng"
   hostel_rent: "Thuê nhà trọ"
+
+  txt_radius: 'Đổi bán kính bản đồ'
+  radius_btn: 'Chọn'
+
+  #-----------------------
+  #---------Index posts of user
+  index_posts_user_title: "Tất Cả Các Bài Viết Của %{name}"
+  create_day: 'Ngày Tạo'
+  show_post: 'Xem'
+  edit_post: 'Sửa'
+  delete_post: 'Xóa'
+
+  time_zone_create: "%I:%M %p, %d/%m/%Y"
