@@ -18,6 +18,7 @@ module EverLandV2
     # Where the I18n library should search for translation files
     
     config.i18n.default_locale = :en
-
+    config.i18n.available_locales = %w(en vi)
+    config.middleware.use I18n::JS::Middleware
   end
 end

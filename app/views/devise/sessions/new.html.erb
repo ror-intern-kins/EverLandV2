@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-		
+	<script type="text/javascript">  
+        I18n.defaultLocale = "<%= I18n.default_locale %>"
+        I18n.locale = "<%= I18n.locale || I18n.default_locale %>"
+    </script>  	
   </head>
   <body>
    <div class="container div-all-login">
@@ -17,13 +20,14 @@
                     <div id="login">                    
                         <%= form_for resource, as: resource_name, url: session_path(resource_name), :html => {:id => "form_login"} do |form| %>
                             <h1>Đăng nhập </h1>   
-                            <p class="notice success" style="padding: 0px"> <%= flash[:noti_pwd] %> </p>
-                            <% if notice %>                             
-                                <p class="notice success" style="padding: 0px"><%= notice %></p>
-                            <% end %>
-                            <% if alert %>                             
-                                <p class="alert error" style="padding: 0px"><%= alert %></p>
-                            <% end %>
+                            <div class="row">
+                                <% if notice %>                             
+                                    <p class="notice success" style="padding: 0px"><%= notice %></p>
+                                <% end %>
+                                <% if alert %>                             
+                                    <p class="alert error" style="padding: 0px"><%= alert %></p>
+                                <% end %>
+                            </div>
                             <div class="row">
                                 <%= form.label ('Tên đăng nhập:') %> <br/>
                                 <%= form.text_field :username, id: :username, class: 'tung-input form-control' %>

@@ -1,0 +1,31 @@
+vi:
+  js:
+    register:
+      error:
+        username:
+          existed: "Tên tài khoản đã tồn tại."
+          blank: "Tên đăng nhập không được để trống."
+          invalid: "Tên tài khoản không cho phép chứa ký tự đặc biệt."
+          length: "Tên tài khoản phải có độ dài tối thiểu 6 ký tự và tối đa 20 ký tự."
+        email: 
+          blank: "Địa chỉ email không được để trống."
+          invalid: "Địa chỉ email không hợp lệ."
+          existed: "Địa chỉ email đã tồn tại."
+        password:
+          blank: "Mật khẩu không được để trống."
+          length: "Mật khẩu phải có độ dài từ 6 kí tự."
+          confirm_blank: "Xác thực mật khẩu không được để trống."
+          confirm_not_match: "Xác thực mật khẩu không đúng."
+          old_not_match: "Mật khẩu cũ không đúng."
+        phone:
+          invalid: "Số điện thoại không đúng. Độ dài từ 10 đến 11 số."
+        name:
+          blank: "Tên không được để trống."
+      success:
+        username: "Tên đăng nhập có thể sử dụng."
+        email: "Email có thể sử dụng."
+    login:
+      error:
+        blank:
+          username: "Tên đăng nhập không được để trống."
+          password: "Mật khẩu không được để trống."     

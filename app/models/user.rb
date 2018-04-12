@@ -6,6 +6,18 @@ class User < ApplicationRecord
          :lockable, :timeoutable, :omniauthable, :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   has_many :posts
 
+  # validates :name, presence: { message: "Tên không được để trống." }                         
+
+  # validates :username, presence: { message: "Tên tài khoản không được để trống." },
+  #                      length: {minimum: 6, maximum: 20, 
+  #                      message: "Tên tài khoản phải có độ dài tối thiểu 6 ký tự và tối đa 20 ký tự."},
+  #                      format: { with: /\A[a-zA-Z0-9]+\z?/, message: "Tên tài khoản không cho phép chứa ký tự đặc biệt."}
+
+  # validates :email, presence: { message: "Địa chỉ email không được để trống." },
+  #                   format: { with: /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|vn|info))\z/i,
+  #                             message: "Địa chỉ email không hợp lệ." }
+
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       # if !auth.info.email.blank?

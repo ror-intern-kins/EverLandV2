@@ -95,169 +95,170 @@ document.addEventListener("turbolinks:load", function (event) {
         var validate_digits = /^[0-9,\+-]+$/
         var validate_phone = /^0[0-9]{9,10}$/
         var validate_mail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
-        var flag = true
+        var flag = true;
 
         //THÔNG TIN CƠ BẢN
         //title
+
         if (title == "") {
-            $('#title_error').text('Tiêu đề không thể bỏ trống.');
+            $('#title_error').text(I18n.t('js.post.error.title.blank'));
             flag = false;
         } else if (title.length < 30) {
-            $('#title_error').text('Tiêu đề có tối thiểu 30 ký tự.');
+            $('#title_error').text(I18n.t('js.post.error.title.too_short'));
             flag = false;
         } else if (title.length > 99) {
-            $('#title_error').text('Tiêu đề có tối đa 99 ký tự.');
+            $('#title_error').text(I18n.t('js.post.error.title.too_long'));
             flag = false;
         } else $('#title_error').text('');
         //category
         if (category == "-- Hình Thức --") {
-            $('#category_error').text('Vui lòng chọn hình thức');
+            $('#category_error').text(I18n.t('js.post.error.category.blank'));
             flag = false;
         } else $('#category_error').text('');
 
         //sub category
         if (sub_category == "--Phân Mục--") {
-            $('#subcategory_error').text('Vui lòng chọn loại');
+            $('#subcategory_error').text(I18n.t('js.post.error.sub_category.blank'));
             flag = false;
         } else $('#subcategory_error').text('');
         //city
         if (city == '-- Tỉnh/Thành Phố --') {
-            $('#city_error').text('Vui lòng chọn tỉnh/thành phố');
+            $('#city_error').text(I18n.t('js.post.error.city.blank'));
             flag = false;
         } else $('#city_error').text('');
         //district
         if (district == '--Quận Huyện--') {
-            $('#district_error').text('Vui lòng chọn quận huyện');
+            $('#district_error').text(I18n.t('js.post.error.district.blank'));
             flag = false;
         } else $('#district_error').text('');
         //project
         if (project.length > 200) {
-            $('#project_error').text('Dự án có độ dài tối đa 200 ký tự.');
+            $('#project_error').text(I18n.t('js.post.error.project.too_long'));
             flag = false;
         } else if (!project.match(validate_characters) && project != '') {
             //console.log(project.match(validate_characters))
-            $('#project_error').text('Tên dự án không hợp lệ.');
+            $('#project_error').text(I18n.t('js.post.error.project.invalid'));
             flag = false;
         } else $('#project_error').text('');
         //area
         if (area.length > 6) {
-            $('#area_error').text('Diện tích tối đa 999999');
+            $('#area_error').text(I18n.t('js.post.error.area.max_value'));
             flag = false;
         } else if ((!$.isNumeric(area) && area != '') || (area <= 0 && area != '')) {
-            $('#area_error').text('Diện tích không hợp lệ.');
+            $('#area_error').text(I18n.t('js.post.error.area.not_a_number'));
             flag = false;
         } else $('#area_error').text('');
         //price
         if (price.length > 6) {
-            $('#price_error').text('Giá tối đa 999999');
+            $('#price_error').text(I18n.t('js.post.error.price.max_value'));
             flag = false;
         } else if ((!$.isNumeric(price) && price != '') || (price <= 0 && price != '')) {
-            $('#price_error').text('Giá không hợp lệ.');
+            $('#price_error').text(I18n.t('js.post.error.price.not_a_number'));
             flag = false;
         } else $('#price_error').text('');
         //address
         if (address == '') {
-            $('#address_error').text('Địa chỉ không thể bỏ trống.');
+            $('#address_error').text(I18n.t('js.post.error.address.blank'));
             flag = false;
         } else if (address.length > 200) {
-            $('#address_error').text('Địa chỉ phải có độ dài tối đa 200 ký tự.');
+            $('#address_error').text(I18n.t('js.post.error.address.too_long'));
             flag = false;
         } else $('#address_error').text('');
         //THÔNG TIN CƠ BẢN
 
         //THÔNG TIN MÔ TẢ - desciption
         if (desciption == '') {
-            $('#desciption_error').text('Mô tả không thể bỏ trống.');
+            $('#desciption_error').text(I18n.t('js.post.error.description.blank'));
             flag = false;
         } else if (desciption.length > 3000) {
-            $('#desciption_error').text('Mô tả có độ dài tối đa 3000 ký tự.');
+            $('#desciption_error').text(I18n.t('js.post.error.description.too_long'));
             flag = false;
         } else if (desciption.length < 30) {
-            $('#desciption_error').text('Mô tả phải có độ dài tối thiểu 30 ký tự.');
+            $('#desciption_error').text(I18n.t('js.post.error.description.too_short'));
             flag = false;
         } else $('#desciption_error').text('');
         //THÔNG TIN KHÁC
         //front
         if ((!$.isNumeric(front) && front != '') || (front <= 0 && front != '')) {
-            $('#front_error').text('Mặt tiền không hợp lệ.');
+            $('#front_error').text(I18n.t('js.post.error.front.not_a_number'));
             flag = false;
         } else if (front.length > 6) {
-            $('#front_error').text('Mặt tiền tối đa 999999m');
+            $('#front_error').text(I18n.t('js.post.error.front.max_value'));
             flag = false;
         } else $('#front_error').text('');
         //entrance
         if ((!$.isNumeric(entrance) && entrance != '') || (entrance <= 0 && entrance != '')) {
-            $('#entrance_error').text('Đường vào không hợp lệ.');
+            $('#entrance_error').text(I18n.t('js.post.error.front.not_a_number'));
             flag = false;
         } else if (entrance.length > 6) {
-            $('#entrance_error').text('Đường vào tối đa 999999m');
+            $('#entrance_error').text(I18n.t('js.post.error.entrance.max_value'));
             flag = false;
         } else $('#entrance_error').text('');
         //floor
         if ((!floor.match(validate_digits) && floor != '') || (floor <= 0 && floor != '')) {
-            $('#floor_error').text('Số tầng không hợp lệ.');
+            $('#floor_error').text(I18n.t('js.post.error.entrance.not_a_number'));
             flag = false;
         } else if (floor.length > 3) {
-            $('#floor_error').text('Số tầng tối đa 999 tầng.');
+            $('#floor_error').text(I18n.t('js.post.error.floow.max_value'));
             flag = false;
         } else $('#floor_error').text('');
         //bedroom
         if ((!bedroom.match(validate_digits) && bedroom != '') || (bedroom != '' && bedroom <= 0)) {
-            $('#bedroom_error').text('Số phòng ngủ không hợp lệ.');
+            $('#bedroom_error').text(I18n.t('js.post.error.bedroom.not_a_number'));
             flag = false;
         } else if (bedroom.length > 3) {
-            $('#bedroom_error').text('Số phòng ngủ tối đa 999 phòng.');
+            $('#bedroom_error').text(I18n.t('js.post.error.bedroom.max_value'));
             flag = false;
         } else $('#bedroom_error').text('');
         //toilet
         if ((!toilet.match(validate_digits) && toilet != '') || (toilet != '' && toilet <= 0)) {
-            $('#toilet_error').text('Số toilet không hợp lệ.');
+            $('#toilet_error').text(I18n.t('js.post.error.toilet.not_a_number'));
             flag = false;
         } else if (toilet.length > 3) {
-            $('#toilet_error').text('Số toilet tối đa 999 phòng.');
+            $('#toilet_error').text(I18n.t('js.post.error.toilet.max_value'));
             flag = false;
         } else $('#toilet_error').text('');
         //furniture
         if (furniture.length > 200) {
-            $('#furniture_error').text('Mô tả nội thất có độ dài tối đa 200 ký tự.');
+            $('#furniture_error').text(I18n.t('js.post.error.furniture_description.too_long'));
             flag = false;
         } else $('#furniture_error').text('');
         //THÔNG TIN KHÁC
         //LIÊN HỆ
         //contact name
         if (contact_name.length > 200) {
-            $('#contact_name_error').text('Tên có độ dài tối đa 200 ký tự.');
+            $('#contact_name_error').text(I18n.t('js.post.error.contact_name.too_long'));
             flag = false;
         } else $('#contact_name_error').text('');
         //contact address
         if (contact_addr.length > 200) {
-            $('#contact_address_error').text('Địa chỉ liên hệ có độ dài tối đa 200 ký tự.');
+            $('#contact_address_error').text(I18n.t('js.post.error.contact_address.too_long'));
             flag = false;
         } else $('#contact_address_error').text('');
         //contact phone
         if (!contact_phone.match(validate_phone) && contact_phone != '') {
-            $('#contact_phone_error').text('Số điện thoại không hợp lệ.');
+            $('#contact_phone_error').text(I18n.t('js.post.error.contact_phone.invalid'));
             flag = false;
         } else $('#contact_phone_error').text('');
         //contact mobile
         if (contact_mobile == '') {
-            $('#contact_mobile_error').text('Di động không thể bỏ trống.');
+            $('#contact_mobile_error').text(I18n.t('js.post.error.contact_mobile.blank'));
             flag = false;
         } else if (!contact_mobile.match(validate_phone)) {
-            $('#contact_mobile_error').text('Di động không hợp lệ.');
+            $('#contact_mobile_error').text(I18n.t('js.post.error.contact_mobile.invalid'));
             flag = false;
         } else $('#contact_mobile_error').text('');
         //mail
         if (!contact_mail.match(validate_mail) && contact_mail != '') {
-            $('#contact_mail_error').text('Địa chỉ email không hợp lệ.');
+            $('#contact_mail_error').text(I18n.t('js.post.error.contact_mail.invalid'));
             flag = false;
         } else if (contact_mail.length > 100) {
-            $('#contact_mail_error').text('Mail liên hệ có độ dài tối đa 100 ký tự.');
+            $('#contact_mail_error').text(I18n.t('js.post.error.contact_mail.too_long'));
             flag = false;
         } else $('#contact_mail_error').text('');
         //LIÊN HỆ
         if (!flag) {
-            $('#notice_error').text('Vui lòng kiểm tra lại thông tin đã nhập.').css({
+            $('#notice_error').text(I18n.t('js.post.error.error_total')).css({
                 "color": "red"
             });
         }
@@ -266,21 +267,21 @@ document.addEventListener("turbolinks:load", function (event) {
 
     //-------Calculate Price-------
     $(function calPrice() {
-        $('#totalPrice').text('Thỏa Thuận').css({
+        $('#totalPrice').text(I18n.t('js.post.agree')).css({
             'color': 'red'
-        })
-        checkPrice()
+        });
+        checkPrice();
         //price lost focus event
         $('#post_price').focusout(function () {
-            checkPrice()
+            checkPrice();
         });
         //area lost focus event
         $('#post_area').focusout(function () {
-            checkPrice()
+            checkPrice();
         });
         // unit dropdown on change
         $('#post_unit').change(function () {
-            checkPrice()
+            checkPrice();
         });
     });
     //-------Event onchange of dropdown-------
@@ -307,34 +308,34 @@ document.addEventListener("turbolinks:load", function (event) {
 //--------support calPrice function--------
 function checkPrice() {
     var unit, area, price;
-    price = $('#post_price').val()
-    area = $('#post_area').val()
-    unit = $('#post_unit :selected').text()
+    price = $('#post_price').val();
+    area = $('#post_area').val();
+    unit = $('#post_unit :selected').text();
     if (price > 0) {
         if (area > 0) {
             switch (unit) {
                 case 'Triệu':
-                    $('#totalPrice').text(price + ' triệu').css({
+                    $('#totalPrice').text(price + ' ' + I18n.t('js.post.million')).css({
                         'color': 'red'
-                    })
+                    });
                     break;
                 case 'Tỷ':
-                    $('#totalPrice').text(price + ' tỷ').css({
+                    $('#totalPrice').text(price + ' ' + I18n.t('js.post.billion')).css({
                         'color': 'red'
-                    })
+                    });
                     break;
                 case 'Trăm nghìn/m2':
-                    $('#totalPrice').text((price * area * 100) + ' nghìn').css({
+                    $('#totalPrice').text((price * area * 100) + ' ' + I18n.t('js.post.thousand')).css({
                         'color': 'red'
-                    })
+                    });
                     break;
                 case 'Triệu/m2':
-                    $('#totalPrice').text((price * area) + ' triệu').css({
+                    $('#totalPrice').text((price * area) + ' ' + I18n.t('js.post.million')).css({
                         'color': 'red'
-                    })
+                    });
                     break;
                 default:
-                    $('#totalPrice').text('Thỏa Thuận.').css({
+                    $('#totalPrice').text(I18n.t('js.post.agree')).css({
                         'color': 'red'
                     });
                     break;
@@ -342,31 +343,31 @@ function checkPrice() {
         } else {
             switch (unit) {
                 case 'Triệu':
-                    $('#totalPrice').text(price + ' triệu').css({
+                    $('#totalPrice').text(price + ' ' + I18n.t('js.post.million')).css({
                         'color': 'red'
                     })
                     break;
                 case 'Tỷ':
-                    $('#totalPrice').text(price + ' tỷ').css({
+                    $('#totalPrice').text(price + ' ' + I18n.t('js.post.billion')).css({
                         'color': 'red'
                     })
                     break;
                 case 'Trăm nghìn/m2':
                 case 'Triệu/m2':
-                    $('#totalPrice').text('Thỏa Thuận').css({
+                    $('#totalPrice').text(I18n.t('js.post.agree')).css({
                         'color': 'red'
                     });
                     break;
 
                 default:
-                    $('#totalPrice').text('Vui lòng chọn đơn vị.').css({
+                    $('#totalPrice').text(I18n.t('js.post.error.unit.blank')).css({
                         'color': 'red'
                     });
                     break;
             }
         }
     } else {
-        $('#totalPrice').text('Thoả Thuận.').css({
+        $('#totalPrice').text(I18n.t('js.post.agree')).css({
             'color': 'red'
         });
     }
@@ -394,8 +395,8 @@ function getCitiesList() {
     $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
 
     if (value > 0) {
-        str_addr[3] = $('#city_details :selected').text() //get city when onchange
-        $('#post_address_number').val(str_addr[3]) //set to address
+        str_addr[3] = $('#city_details :selected').text(); //get city when onchange
+        $('#post_address_number').val(str_addr[3]); //set to address
         $('#post_address_number').trigger('input');
         $.post("/getdata.json", {
             city_id: value
@@ -405,7 +406,7 @@ function getCitiesList() {
                 $('#district_details').append("<option value=" + item.id + ">" + item.name +
                     "</option>")
             });
-        })
+        });
     } else {
         $('select#district_details').prop('selectedIndex', 0);
         $('#district_details').html("<option>--Quận Huyện--</option>");

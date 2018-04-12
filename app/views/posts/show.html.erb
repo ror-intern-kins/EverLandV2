@@ -1,11 +1,28 @@
 <!--<p id="notice"><%= notice %></p> -->
 <div class="container-fluid">
   <div class="row window window--hight-75vh position-realative overflow-hidden">
+  
+  <% if @post.images.empty? %>
     <div class="background background--image paralax"
-          style="background-image: url(<%= asset_url !(@post.images.empty?)?(@post.images.first.url):("default.jpg")%>)"
+          style="background-image: url(<%= asset_url "default.jpg"%>)"
       >
       <div class="background_blackcover"></div>
     </div>
+    <% else %>
+    <% if @post.images.first.url != nil && @post.images.first.url.length > 0 %>
+      <div class="background background--image paralax"
+          style="background-image: url(<%= asset_url @post.images.first.url%>)"
+      >
+        <div class="background_blackcover"></div>
+      </div>
+      <% else %>
+      <div class="background background--image paralax"
+          style="background-image: url(<%= @post.images.first.url_out%>)"
+      >
+        <div class="background_blackcover"></div>
+      </div>
+    <% end %>
+  <% end %>
     <p class="position-center ellipsis col-xs-11 col-sm-10 col-md-8 col-lg-8" id="post_title_style"><%= @post.title %></p>
   </div>
 </div>
@@ -66,10 +83,24 @@
       </div>
 
       <div class="col-sm-6" style="min-height:300px;">
-        <div class="background background--image position-relative"
-              style="background-image: url(<%= asset_url !(@post.images.empty?)?(@post.images.first.url):("default.jpg")%>)"
-          >
-        </div>
+        <% if @post.images.empty? %>
+          <div class="background background--image position-relative"
+                style="background-image: url(<%= asset_url "default.jpg"%>)"
+            >
+          </div>
+          <% else %>
+          <% if @post.images.first.url != nil && @post.images.first.url.length > 0 %>
+            <div class="background background--image position-relative"
+                style="background-image: url(<%= asset_url @post.images.first.url%>)"
+            >
+            </div>
+            <% else %>
+            <div class="background background--image position-relative"
+                style="background-image: url(<%= @post.images.first.url_out%>)"
+            >
+            </div>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -79,7 +110,7 @@
       <div class="col-sm-12" id="post_description_style">
         <p class="post_span--size-big"><%= t(:show_sub_title_2) %></p>
         <p id="post_description_content">
-          <%= @post.description %>
+          <%= @post.description.html_safe %>
         </p>
       </div>
     </div>
@@ -88,7 +119,7 @@
         <% @imageNum = @post.images.length%>
         <% if @imageNum == 0 %>
           <div class="min-size background background--image position-relative" 
-                style="background-image: url(<%= asset_url !(@post.images.empty?)?(@post.images.first.url):("default.jpg")%>)">
+                style="background-image: url(<%= asset_url "default.jpg"%>)">
           </div>
         <% else %>
           <div id="carouselExampleIndicators" class="carousel slide size" data-ride="carousel">
@@ -100,15 +131,45 @@
             </ol>
             <div class="carousel-inner" role="listbox">
               <div class="carousel-item active">
-                <div class="d-block w-100 background background--image" 
-                  style="background-image: url(<%= asset_url @post.images.first.url%>)">
-                </div>
+                <% if @post.images.empty? %>
+                  <div class="d-block w-100 background background--image" 
+                        style="background-image: url(<%= asset_url "default.jpg"%>)"
+                    >
+                  </div>
+                  <% else %>
+                  <% if @post.images.first.url != nil && @post.images.first.url.length > 0 %>
+                    <div class="d-block w-100 background background--image" 
+                        style="background-image: url(<%= asset_url @post.images.first.url%>)"
+                    >
+                    </div>
+                    <% else %>
+                    <div class="d-block w-100 background background--image" 
+                        style="background-image: url(<%= @post.images.first.url_out%>)"
+                    >
+                    </div>
+                  <% end %>
+                <% end %>
               </div>
               <% (@imageNum - 1).times do |i|%>
                 <div class="carousel-item">
-                  <div class="d-block w-100 background background--image" 
-                    style="background-image: url(<%= asset_url (@post.images[i+1].url)%>)">
-                  </div>
+                  <% if @post.images.empty? %>
+                    <div class="d-block w-100 background background--image" 
+                          style="background-image: url(<%= asset_url "default.jpg"%>)"
+                      >
+                    </div>
+                    <% else %>
+                    <% if @post.images.first.url != nil && @post.images.first.url.length > 0 %>
+                      <div class="d-block w-100 background background--image" 
+                          style="background-image: url(<%= asset_url (@post.images[i+1].url)%>)"
+                      >
+                      </div>
+                      <% else %>
+                      <div class="d-block w-100 background background--image" 
+                          style="background-image: url(<%= @post.images[i+1].url_out%>)"
+                      >
+                      </div>
+                    <% end %>
+                  <% end %>
                 </div>
               <% end %>
             </div>

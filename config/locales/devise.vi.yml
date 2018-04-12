@@ -7,7 +7,7 @@ vi:
     failure:
       already_authenticated: "Đăng nhập thành công."
       inactive: "Tài khoản của bạn chưa được xác nhận."
-      invalid: "%{authentication_keys} hoặc password không đúng."
+      invalid: "Tên tài khoản hoặc mật khẩu không đúng."
       locked: "Tài khoản của bạn đã bị khóa."
       last_attempt: "Tài khoản của bạn còn 1 lần thử nữa trước khi bị khóa."
       not_found_in_database: "%{authentication_keys} hoặc password không đúng."

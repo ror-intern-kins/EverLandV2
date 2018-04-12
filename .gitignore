@@ -23,3 +23,5 @@
 .byebug_history
 /.vscode
 /public/uploads/image
+
+public/javascripts/i18n.js  
