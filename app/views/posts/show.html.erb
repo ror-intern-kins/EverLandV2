@@ -12,47 +12,47 @@
   <div class="container">
     <div class="row window window--padding-50px">
       <div class="col-sm-12">
-        <p class="post_span--size-big">Thông Tin</p>
+        <p class="post_span--size-big"><%= t(:show_sub_title_1) %></p>
       </div>
       <div class="col-sm-6">
         <div class="table--overflow">
           <table class="table table-hover table--label-right position-center position-relative">
             <tbody>
               <tr>
-                <td><strong>Địa Chỉ:</strong></td>
+                <td><strong><%= t(:address) %>:</strong></td>
                 <td><%= @post.address_number %></td>
               </tr>
               <tr>
-                <td><strong>Dự Án:</strong></td>
+                <td><strong><%= t(:project) %>:</strong></td>
                 <td><%= @post.project %></td>
               </tr>
 
               <tr>
-                <td><strong>Diện Tích:</strong></td>
+                <td><strong><%= t(:area) %>:</strong></td>
                 <td><%= @post.area %></td>
               </tr>
 
               <tr>
-                <td><strong>Giá:</strong></td>
+                <td><strong><%= t(:price) %>:</strong></td>
                 <td><%= @post.price %></td>
               </tr>
               <tr>
-                <td><strong>Tổng Tiền:</strong></td>
+                <td><strong><%= t(:total) %>:</strong></td>
                 <td>
                   <%if @post.price != nil %>
                     <%if @post.area != nil %>
                         <% case  @post.unit
-                          when 'Triệu' %> <%= @post.price %> triệu 
-                          <% when 'Tỷ' %> <%= @post.price %> tỷ
-                          <% when 'Trăm nghìn/m2' %> <%= @post.price * @post.area %> Trăm nghìn/m2
-                          <% when 'Triệu/m2' %> <%= @post.price * @post.area %> Triệu/m2
-                          <%else %> Thoả Thuận
+                          when 'Triệu' %> <%= @post.price %> <%= t(:select_unit_2) %>  
+                          <% when 'Tỷ' %> <%= @post.price %> <%= t(:select_unit_3) %>
+                          <% when 'Trăm nghìn/m2' %> <%= @post.price * @post.area %>  <%= t(:select_unit_4) %>
+                          <% when 'Triệu/m2' %> <%= @post.price * @post.area %>  <%= t(:select_unit_5) %>
+                          <%else %> <%= t(:select_unit_1) %>
                         <%end%>
                     <%else%>
                         <% case  @post.unit
-                          when 'Triệu' %> <%= @post.price %> triệu 
-                          <% when 'Tỷ' %> <%= @post.price %> tỷ
-                          <%else %> Thoả Thuận
+                          when 'Triệu' %> <%= @post.price %> <%= t(:select_unit_2) %> 
+                          <% when 'Tỷ' %> <%= @post.price %> <%= t(:select_unit_3) %>
+                          <%else %> <%= t(:select_unit_1) %>
                         <%end%>
                     <%end%>
                   <% else %> 
@@ -77,7 +77,7 @@
     <br/>
     <div class="row window">
       <div class="col-sm-12" id="post_description_style">
-        <p class="post_span--size-big">Mô Tả</p>
+        <p class="post_span--size-big"><%= t(:show_sub_title_2) %></p>
         <p id="post_description_content">
           <%= @post.description %>
         </p>
@@ -129,51 +129,51 @@
   <div class="container">
     <div class="row window window--padding-50px">
       <div class="col-sm-12">
-        <p class="post_span--size-big">Mô Tả Chi Tiết</p>
+        <p class="post_span--size-big"><%= t(:show_sub_title_3) %></p>
         <br/>
       </div>
       <div class="col-sm-6">
         <div class="table--overflow">
-          <p class="post_span--size-small">Thông Tin Về Nhà</p>
+          <p class="post_span--size-small"><%= t(:show_details_sub_1) %></p>
           <table class="table table-hover table--label-right">
             <tbody>
               <tr>
-                <td><strong>Mặt Tiền:</strong></td>
+                <td><strong><%= t(:front) %>:</strong></td>
                 <td><%= @post.front %><//td>
               </tr>
 
               <tr>
-                <td><strong>Đường Vào:</strong></td>
+                <td><strong><%= t(:entrance) %>:</strong></td>
                 <td><%= @post.entrance %></td>
               </tr>
 
               <tr>
-                <td><strong>Hướng Nhà:</strong></td>
+                <td><strong><%= t(:house_direction) %>:</strong></td>
                 <td><%= @post.house_direction %></td>
               </tr>
 
               <tr>
-                <td><strong>Hướng Ban Công:</strong></td>
+                <td><strong><%= t(:balcony_direction) %>:</strong></td>
                 <td><%= @post.balcony_direction %></td>
               </tr>
 
               <tr>
-                <td><strong>Số Tầng:</strong></td>
+                <td><strong><%= t(:floor) %>:</strong></td>
                 <td><%= @post.floor %><td>
               </tr>
 
               <tr>
-                <td><strong>Số Phòng Ngủ:</strong></td>
+                <td><strong><%= t(:bedroom) %>:</strong></td>
                 <td><%= @post.bedroom %><td>
               </tr>
 
               <tr>
-                <td><strong>Số Toilet:</strong></td>
+                <td><strong><%= t(:toilet) %>:</strong></td>
                 <td><%= @post.toilet %><td>
               </tr>
 
               <tr>
-                <td><strong>Nội Thất:</strong></td>
+                <td><strong><%= t(:furniture) %>:</strong></td>
                 <td><%= @post.furniture %></td>
               </tr>
             </tbody>
@@ -182,26 +182,26 @@
       </div>
       <div class="col-sm-6">
         <div class="table--overflow">
-          <p class="post_span--size-small">Thông Tin Liên Hệ</p>
+          <p class="post_span--size-small"><%= t(:show_details_sub_2) %></p>
           <table class="table table-hover table--label-right">
             <tbody>
               <tr>
-                <td><strong>Tên Người Liên Hệ:</strong></td>
+                <td><strong><%= t(:contact_name) %>:</strong></td>
                 <td><%= @post.contact_name %></td>
               </tr>
 
               <tr>
-                <td><strong>Địa Chỉ:</strong></td>
+                <td><strong><%= t(:address) %>:</strong></td>
                 <td><%= @post.contact_address %></td>
               </tr>
 
               <tr>
-                <td><strong>Số Điện Thoại:</strong></td>
+                <td><strong><%= t(:contact_phone) %>:</strong></td>
                 <td><%= @post.contact_phone %></td>
               </tr>
 
               <tr>
-                <td><strong>Di Động:</strong></td>
+                <td><strong><%= t(:contact_mobile) %>:</strong></td>
                 <td><%= @post.contact_mobile %></td>
               </tr>
 
@@ -218,19 +218,19 @@
   <div class="container">
     <div class="row window window--padding-50px">
       <div class="col-sm-12">
-        <p class="post_span--size-big">Vị Trí</p>
+        <p class="post_span--size-big"><%= t(:show_sub_title_4) %></p>
         <br/>
       </div>
       <div class="col-sm-12">           
           <div class="checkbox">
-              <span><input class="service_type" type="checkbox" value="store" checked> Cửa Hàng</span>
-              <span><input class="service_type" type="checkbox" value="school" checked> Trường Học </span>
-              <span><input class="service_type" type="checkbox" value="hospital"> Bệnh Viện </span>
-              <span><input class="service_type" type="checkbox" value="health"> Khu Thể Thao </span>
-              <span><input class="service_type" type="checkbox" value="restaurant"> Nhà Hàng </span>
-              <span><input class="service_type" type="checkbox" value="bus_station"> Trạm Xe Buýt </span>
-              <span><input class="service_type" type="checkbox" value="lodging"> Khách Sạn/ Nhà Trọ </span>
-              <span><input class="service_type" type="checkbox" value="local_government_office"> Ủy Ban </span>
+              <span><input class="service_type" type="checkbox" value="store" checked> <%= t(:select_map_1) %></span>
+              <span><input class="service_type" type="checkbox" value="school" checked> <%= t(:select_map_2) %></span>
+              <span><input class="service_type" type="checkbox" value="hospital"> <%= t(:select_map_3) %> </span>
+              <span><input class="service_type" type="checkbox" value="health"> <%= t(:select_map_4) %> </span>
+              <span><input class="service_type" type="checkbox" value="restaurant"> <%= t(:select_map_5) %> </span>
+              <span><input class="service_type" type="checkbox" value="bus_station"> <%= t(:select_map_6) %> </span>
+              <span><input class="service_type" type="checkbox" value="lodging"> <%= t(:select_map_7) %> </span>
+              <span><input class="service_type" type="checkbox" value="local_government_office"> <%= t(:select_map_8) %> </span>
           </div>
           <div class="radius">
             <div class="row col-sm-12">

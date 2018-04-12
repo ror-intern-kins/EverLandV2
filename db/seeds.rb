@@ -21,17 +21,18 @@ dataset.each do |ckey, cvalue|
     end
 end
 
+
 Category.create!([
-    {name: "Nhà đất bán"},
-    {name: "Nhà đất cho thuê"},
-    {name: "Bán căn hộ chung cư", super_id: 1},
-    {name: "Bán nhà riêng", super_id: 1},
-    {name: "Bán đất", super_id: 1},
-    {name: "Bán biệt thự", super_id: 1},
-    {name: "Thuê nhà riêng", super_id: 2},
-    {name: "Thuê căn hộ chung cư", super_id: 2},
-    {name: "Thuê văn phòng", super_id: 2},
-    {name: "Thuê nhà trọ", super_id: 2}
+    {name: "house_land_sell"},
+    {name: "house_land_rent"},
+    {name: "apartments_sell", super_id: 1},
+    {name: "house_sell", super_id: 1},
+    {name: "land_sell", super_id: 1},
+    {name: "villas_sell", super_id: 1},
+    {name: "house_rent", super_id: 2},
+    {name: "apartments_rent", super_id: 2},
+    {name: "office_rent", super_id: 2},
+    {name: "hostel_rent", super_id: 2}
 ])
 user = User.find(1)
 
