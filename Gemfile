@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# i18n-js
+gem "i18n-js"
+
 gem 'devise'
 gem 'bcrypt', '3.1.11' #bảo mật mật khẩu
 
