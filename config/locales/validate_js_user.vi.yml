@@ -31,6 +31,6 @@ vi:
     post:
       error:
         title:
-          blank: "111Tiêu đề không thể bỏ trống."
+          blank: "xTiêu đề không thể bỏ trống."
           min_length: "Tiêu đề có tối thiểu 30 ký tự."
           max_length: 'Tiêu đề có tối đa 99 ký tự.'        
