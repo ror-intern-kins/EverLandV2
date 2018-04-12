@@ -139,7 +139,7 @@
             <tbody>
               <tr>
                 <td><strong><%= t(:front) %>:</strong></td>
-                <td><%= @post.front %><//td>
+                <td><%= @post.front %></td>
               </tr>
 
               <tr>
@@ -234,8 +234,8 @@
           </div>
           <div class="radius">
             <div class="row col-sm-12">
-                <input id="txt_radius" type="number" placeholder="Đổi kích thước bán kính" required class="form-control col-sm-4"> 
-                <button type="button" class="btn btn-dark col-sm-2" onclick="onChangeRadius($('#txt_radius').val())">Chọn</button>
+              <input id="txt_radius" type="number" placeholder="<%= t(:txt_radius) %>" required class="form-control col-sm-4">
+              <button type="button" class="btn btn-dark col-sm-2" onclick="onChangeRadius($('#txt_radius').val())"><%= t(:radius_btn) %></button>
             </div>
                   <p id="require_number" style="color: red"></p>       
           </div>

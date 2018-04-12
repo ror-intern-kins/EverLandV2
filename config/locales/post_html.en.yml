@@ -65,3 +65,9 @@ en:
   apartments_rent: "Rent Apartments"
   office_rent: "Rent Office"
   hostel_rent: "Rent Hostel"
+
+  txt_radius: 'Type radius of map...'
+  radius_btn: 'Choose'
+  #--------------Index user post
+  index_posts_user_title: "%{name}'s posts"
+  time_zone_create: "%I:%M %p, %b %d %Y"
