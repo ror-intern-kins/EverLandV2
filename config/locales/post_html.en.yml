@@ -15,17 +15,7 @@ en:
   title: 'Title'
   category: 'Category'
   sub_category: 'Type'
-  #------------
-  east: 'East'
-  west: 'West'
-  south: 'South'
-  north: 'North'
-  #------------
-  agreement: "Agreement"
-  million: 'Million'
-  billion: 'Billion'
-  hunderm2: 'Hundred thousand / m2'
-  millionm2: 'Million / m2'
+  
   #------------
   sub_des_1: 'Maximum is only 3000 characters.'
   sub_des_2: 'General introduction of your real estate. For example: The house has convenient location: Near the park, near the school ... Total area 52m2, car road to the door.'
@@ -54,17 +44,6 @@ en:
   select_map_6: 'Bus Stop'
   select_map_7: 'Hotel / Homestay'
   select_map_8: 'Commission'
-  #==================
-  house_land_sell: 'Sell House'
-  house_land_rent: "Rent House"
-  apartments_sell: "Sell Apartments"
-  house_sell : "Sell Self House"
-  land_sell: "Sell Land"
-  villas_sell: "Sell Villas"
-  house_rent: "Rent House"
-  apartments_rent: "Rent Apartments"
-  office_rent: "Rent Office"
-  hostel_rent: "Rent Hostel"
 
   txt_radius: 'Type radius of map...'
   radius_btn: 'Choose'

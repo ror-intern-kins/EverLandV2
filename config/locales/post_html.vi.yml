@@ -13,7 +13,6 @@ vi:
   sub_title_5: 'BẢN ĐỒ'
   sub_title_6: 'LIÊN HỆ'
  
-
   title: 'Tiêu Đề'
   category: 'Hình Thức'
   sub_category: 'Loại'
@@ -39,12 +38,7 @@ vi:
   contact_address: 'Địa Chỉ'
   contact_phone: 'Điện Thoại'
   contact_mobile: 'Di Dộng'
-  #--------
-  agreement: 'Thỏa Thuận'
-  million: 'Triệu'
-  billion: 'Tỷ'
-  hunderm2: 'Trăm nghìn/m2'
-  millionm2: 'Triệu/m2'
+  
   #--------------
   select_city: '-- Tỉnh/Thành Phố  --'
   select_district: '--Quận Huyện--'
@@ -52,12 +46,7 @@ vi:
   select_category: '-- Hình Thức --'
   select_type: '--Phân Mục--'
   select_street: '-- Đường Phố --'
-  #---------
-  east: 'Đông'
-  west: 'Tây'
-  south: 'Nam'
-  north: 'Bắc'
-  select_direction: '--KXĐ--'
+  
   #---------
   sub_des_1: 'Tối đa chỉ 3000 ký tự'
   sub_des_2: 'Giới thiệu chung về bất động sản của bạn. Ví dụ: Khu nhà có vị trí thuận lợi: Gần công viên, gần trường học ... Tổng diện tích 52m2, đường đi ô tô vào tận cửa.'
@@ -89,17 +78,7 @@ vi:
   select_map_7: 'Khách Sạn/ Nhà Trọ'
   select_map_8: 'Ủy Ban'
   #-----------------------
-  house_land_sell: 'Nhà đất bán'
-  house_land_rent: "Nhà đất cho thuê"
-  apartments_sell: "Bán căn hộ chung cư"
-  house_sell : "Bán nhà riêng"
-  land_sell: "Bán đất"
-  villas_sell: "Bán biệt thự"
-  house_rent: "Thuê nhà riêng"
-  apartments_rent: "Thuê căn hộ chung cư"
-  office_rent: "Thuê văn phòng"
-  hostel_rent: "Thuê nhà trọ"
-
+  
   txt_radius: 'Đổi bán kính bản đồ'
   radius_btn: 'Chọn'
 

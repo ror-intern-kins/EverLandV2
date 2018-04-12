@@ -1,0 +1,22 @@
+#------------
+  east: 'East'
+  west: 'West'
+  south: 'South'
+  north: 'North'
+  #------------
+  agreement: "Agreement"
+  million: 'Million'
+  billion: 'Billion'
+  hunderm2: 'Hundred thousand / m2'
+  millionm2: 'Million / m2'
+  #==================
+  house_land_sell: 'Sell House'
+  house_land_rent: "Rent House"
+  apartments_sell: "Sell Apartments"
+  house_sell : "Sell Self House"
+  land_sell: "Sell Land"
+  villas_sell: "Sell Villas"
+  house_rent: "Rent House"
+  apartments_rent: "Rent Apartments"
+  office_rent: "Rent Office"
+  hostel_rent: "Rent Hostel"

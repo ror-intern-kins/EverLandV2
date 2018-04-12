@@ -2,76 +2,76 @@ en:
   js:
     post:
       error: 
-        error_total: "Vui lòng kiểm tra lại thông tin đã nhập."
+        error_total: "Please check the information entered."
         title:
-          blank: "Tiêu đề không thể bỏ trống."
-          too_short: "Tiêu đề có tối thiểu 30 ký tự."
-          too_long: 'Tiêu đề có tối đa 99 ký tự.'
+          blank: "Title can't be blank."
+          too_short: "Title minimum is 30 characters."
+          too_long: "Title maximum is 99 characters."
         description: 
-          blank: "Mô tả không thể bỏ trống."
-          too_short: "Mô tả phải có độ dài tối thiểu 30 ký tự."
-          too_long: "Mô tả phải có độ dài tối đa 3000 ký tự."
+          blank: "Description can't be blank."
+          too_short: "Description minimum is 30 characters."
+          too_long: "Description maximum is 3000 characters."
         category: 
-          blank: "Vui lòng chọn hình thức."
-          exit_category: "Hình thức không tồn tại."
+          blank: "Please choose category."
+          exit_category: "Category didn't exist."
         sub_category:
-          blank: "Vui lòng chọn loại."
+          blank: "Please choose type."
         city: 
-          exit_city: "Thành phố không có thật."
-          blank: "Vui lòng chọn tỉnh/thành phố."
+          exit_city: "City didn't exist."
+          blank: "City can't be blank."
         district:
-          blank: "Vui lòng chọn quận huyện."
-          exit_district: "Quận không có thật"
+          blank: "District can't be blank."
+          exit_district: "District didn't exist."
         address: 
-          blank: "Địa chỉ không thể bỏ trống."
-          too_long: "Địa chỉ có độ dài tối đa 200 ký tự."
+          blank: "Address can't be blank."
+          too_long: "Address maximum is 200 characters."
         contact_mobile: 
-          blank: "Di động không thể bỏ trống."
-          too_short: 'Di động phải có độ dài tối thiểu 10 ký tự.'
-          too_long: 'Di động phải có độ dài tối đa 11 ký tự.'
-          invalid: "Số di động không đúng."
+          blank: "Mobile can't be blank."
+          too_short: "Mobile minimum is 10 characters."
+          too_long: "Mobile maximum is 11 characters."
+          invalid:  "Mobile is invalid."
         furniture_description:
-          too_long: 'Mô tả nội thất có độ dài tối đa 200 ký tự.'
+          too_long: "Description of furniture maximum is 200 characters."
         contact_phone:
-          too_short: 'Điện thoại phải có độ dài tối thiểu 10 ký tự.'
-          too_long: ' Điện thoại phải có độ dài tối đa 11 ký tự.'
-          invalid: "Số điện thoại không đúng."
+          too_short: "Phone minimum is 10 characters."
+          too_long:  "Phone maximum is 11 characters."
+          invalid: "Phone is invalid."
         contact_address:
-          too_long: "Địa chỉ liên hệ có độ dài tối đa 200 ký tự."
+          too_long: "Address of contact maximum is 200 characters."
         contact_mail:
-          too_long: 'Mail liên hệ có độ dài tối đa 100 ký tự.'
-          invalid: "Địa chỉ email không hợp lệ."
+          too_long: 'Mail of contact maximum is 100 characters.'
+          invalid: "Mail of contact is invalid."
         contact_name:
-          too_long: 'Tên có độ dài tối đa 200 ký tự.'
-          invalid: 'Tên không hợp lệ.'
+          too_long: "Name of contact maximum is 200 characters."
+          invalid: "Name of contact is invalid."
         project:
-          too_long: 'Dự án có độ dài tối đa 200 ký tự.'
-          invalid: 'Tên dự án không hợp lệ.'
+          too_long: "Project maximum is 200 characters."
+          invalid: "Project of project is invalid."
         price:
-          max_value: 'Giá tối đa 999999.'
-          not_a_number: 'Giá không hợp lệ.'
+          max_value: 'Price maxium is 999999.'
+          not_a_number: "Price is invalid."
         area:
-          max_value: 'Diện tích tối đa 999999.'
-          not_a_number: 'Diện tích không hợp lệ.'
+          max_value: 'Area maxium is 999999.'
+          not_a_number: "Area is invalid."
         front: 
-          not_a_number: 'Mặt tiền không hợp lệ.'
-          max_value: 'Mặt tiền tối đa 999999m.'
+          not_a_number: "Front is invalid."
+          max_value: ''Front maxium is 999999m.'
         entrance:
-          not_a_number: 'Đường vào không hợp lệ.'
-          max_value: 'Đường vào tối đa 999999m.'
+          not_a_number: "Entrance is invalid."
+          max_value: 'Entrance maxium is 999999m.'
         floor:
-          not_a_number: 'Số tầng không hợp lệ.'
-          max_value: 'Số tầng tối đa 999 tầng.'
+          not_a_number: "Floor is invalid."
+          max_value: 'Floor maxium is 999.'
         bedroom:
-          not_a_number: 'Số phòng ngủ không hợp lệ.'
-          max_value: 'Số phòng ngủ tối đa 999 phòng.'
+          not_a_number: "Bedroom is invalid."
+          max_value: 'Bedroom maxium is 999rooms.'
         toilet:
-          not_a_number: 'Số toilet không hợp lệ.'
-          max_value: 'Số toilet tối đa 999 phòng.'
+          not_a_number: "Toilet is invalid."
+          max_value: 'Toilet maxium is 999rooms.'
         unit:
-          blank: 'Vui lòng chọn đơn vị.'
-      agree: 'Thỏa Thuận'
-      million: 'triệu'
-      billion: 'tỷ'
-      thousand: 'nghìn'
+          blank: 'Unit can't be blank.'
+      # agree: 'Thỏa Thuận'
+      # million: 'triệu'
+      # billion: 'tỷ'
+      # thousand: 'nghìn'
 

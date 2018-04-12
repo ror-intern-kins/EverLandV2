@@ -1,0 +1,23 @@
+#---------
+  east: 'Đông'
+  west: 'Tây'
+  south: 'Nam'
+  north: 'Bắc'
+  select_direction: '--KXĐ--'
+  #--------
+  agreement: 'Thỏa Thuận'
+  million: 'Triệu'
+  billion: 'Tỷ'
+  hunderm2: 'Trăm nghìn/m2'
+  millionm2: 'Triệu/m2'
+  #--------
+  house_land_sell: 'Nhà đất bán'
+  house_land_rent: "Nhà đất cho thuê"
+  apartments_sell: "Bán căn hộ chung cư"
+  house_sell : "Bán nhà riêng"
+  land_sell: "Bán đất"
+  villas_sell: "Bán biệt thự"
+  house_rent: "Thuê nhà riêng"
+  apartments_rent: "Thuê căn hộ chung cư"
+  office_rent: "Thuê văn phòng"
+  hostel_rent: "Thuê nhà trọ"
