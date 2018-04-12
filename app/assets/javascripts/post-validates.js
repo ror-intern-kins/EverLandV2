@@ -267,7 +267,7 @@ document.addEventListener("turbolinks:load", function (event) {
 
     //-------Calculate Price-------
     $(function calPrice() {
-        $('#totalPrice').text(I18n.t('js.post.agree')).css({
+        $('#totalPrice').text(I18n.t('agreement')).css({
             'color': 'red'
         });
         checkPrice();
@@ -315,27 +315,27 @@ function checkPrice() {
         if (area > 0) {
             switch (unit) {
                 case 'Triệu':
-                    $('#totalPrice').text(price + ' ' + I18n.t('js.post.million')).css({
+                    $('#totalPrice').text(price + ' ' + I18n.t('million')).css({
                         'color': 'red'
                     });
                     break;
                 case 'Tỷ':
-                    $('#totalPrice').text(price + ' ' + I18n.t('js.post.billion')).css({
+                    $('#totalPrice').text(price + ' ' + I18n.t('billion')).css({
                         'color': 'red'
                     });
                     break;
                 case 'Trăm nghìn/m2':
-                    $('#totalPrice').text((price * area * 100) + ' ' + I18n.t('js.post.thousand')).css({
+                    $('#totalPrice').text((price * area * 100) + ' ' + I18n.t('hunderm2')).css({
                         'color': 'red'
                     });
                     break;
                 case 'Triệu/m2':
-                    $('#totalPrice').text((price * area) + ' ' + I18n.t('js.post.million')).css({
+                    $('#totalPrice').text((price * area) + ' ' + I18n.t('millionm2')).css({
                         'color': 'red'
                     });
                     break;
                 default:
-                    $('#totalPrice').text(I18n.t('js.post.agree')).css({
+                    $('#totalPrice').text(I18n.t('agreement')).css({
                         'color': 'red'
                     });
                     break;
@@ -343,18 +343,18 @@ function checkPrice() {
         } else {
             switch (unit) {
                 case 'Triệu':
-                    $('#totalPrice').text(price + ' ' + I18n.t('js.post.million')).css({
+                    $('#totalPrice').text(price + ' ' + I18n.t('million')).css({
                         'color': 'red'
                     })
                     break;
                 case 'Tỷ':
-                    $('#totalPrice').text(price + ' ' + I18n.t('js.post.billion')).css({
+                    $('#totalPrice').text(price + ' ' + I18n.t('billion')).css({
                         'color': 'red'
                     })
                     break;
                 case 'Trăm nghìn/m2':
                 case 'Triệu/m2':
-                    $('#totalPrice').text(I18n.t('js.post.agree')).css({
+                    $('#totalPrice').text(I18n.t('agreement')).css({
                         'color': 'red'
                     });
                     break;
@@ -367,7 +367,7 @@ function checkPrice() {
             }
         }
     } else {
-        $('#totalPrice').text(I18n.t('js.post.agree')).css({
+        $('#totalPrice').text(I18n.t('agreement')).css({
             'color': 'red'
         });
     }
