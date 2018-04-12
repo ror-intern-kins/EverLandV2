@@ -16,8 +16,7 @@ module EverLandV2
     # -- all .rb files in that directory are automatically loaded.
     config.assets.initialize_on_precompile = false
     # Where the I18n library should search for translation files
-    
-    config.i18n.default_locale = :en
 
+    config.i18n.default_locale = :vi
   end
 end
