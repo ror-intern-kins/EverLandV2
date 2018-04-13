@@ -37,6 +37,11 @@
                     <% end %> <!-- end for -->
                 </ul>
             <% end %> <!-- end if -->
+            <!-- Chuyen ngon ngu -->
+            <%= link_to "English", locale:"en" %>
+            <span>&nbsp</span>
+            <%= link_to "Vietnamese", locale:"vi" %>
+            <span>&nbsp</span>
                 <!-- Nút Post -->
             <% if user_signed_in? %>
                 <%= link_to 'Đăng tin rao', new_user_post_path(current_user), class: 'btn btn-primary',

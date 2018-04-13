@@ -17,6 +17,6 @@ module EverLandV2
     config.assets.initialize_on_precompile = false
     # Where the I18n library should search for translation files
 
-    config.i18n.default_locale = :vi
+    config.i18n.default_locale = :en
   end
 end

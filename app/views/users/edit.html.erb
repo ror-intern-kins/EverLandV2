@@ -8,7 +8,7 @@
       <div class="card col-md-12">
         <%= image_tag("login-icon.png", class: 'avatar-img')%>
         <h1 style="margin-bottom: 30px"><%= @user.name %></h1>
-        <%= link_to 'Thay đổi mật khẩu', edit_change_password_path, class: 'btn btn-danger' %>
+        <%= link_to (t "change_password.change_password_title"), edit_change_password_path, class: 'btn btn-danger' %>
       </div>
     </div>
     <!-- show info -->
