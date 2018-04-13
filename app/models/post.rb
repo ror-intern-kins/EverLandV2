@@ -43,9 +43,9 @@ class Post < ApplicationRecord
         "hostel_rent" => I18n.t(:hostel_rent)
     }
     #Check foreign key exists
-    validate :category_id_exists
-    validate :city_id_exists
-    validate :district_id_exists
+    # validate :category_id_exists
+    # validate :city_id_exists
+    # validate :district_id_exists
     
     #Can not be blank
     validates :title, :description, :category_id, :city_id,
