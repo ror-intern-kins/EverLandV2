@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "79": {
         "name": "Hồ Chí Minh",
@@ -5,6 +6,15 @@
         "type": "thanh-pho",
         "name_with_type": "Thành phố Hồ Chí Minh",
         "code": "79",
+=======
+{   
+    "89": {
+        "name": "An Giang",
+        "slug": "an-giang",
+        "type": "tinh",
+        "name_with_type": "Tỉnh An Giang",
+        "code": "89",
+>>>>>>> 613a0265d32e1ca630df662c5e6e1c23b64b7726
         "quan-huyen": {
             "760": {
                 "name": "1",
