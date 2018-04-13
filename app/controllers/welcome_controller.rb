@@ -1,9 +1,13 @@
 class WelcomeController < ApplicationController
+
   def index
     @posts = newest_posts
-    flash[:noti] = 'Các bài đăng mới nhất'
+    flash[:noti] = t(:noti_default)
     @search 
     @categories = Category.where(super_id: nil)
+    @categories.each_with_index do |c, i|
+      @categories[i].name = t(c.name)
+    end
     puts @categories
     @cities = City.all
     @districts
@@ -40,7 +44,7 @@ class WelcomeController < ApplicationController
     if (params[:search_type])
      
       text = params[:q]
-      flash[:noti] = 'Kết quả tìm kiếm cho từ khóa "' + text + '"'
+      flash[:noti] = t(:noti_search, search: text)
       if(params[:q].nil?)
         @posts = []
       else
@@ -120,7 +124,7 @@ class WelcomeController < ApplicationController
         @posts = Post.where(query).order(created_at: :desc).page(params[:page]).per(9)
       end
         
-      flash[:noti] = 'Kết quả tìm kiếm cho tìm kiếm nâng cao'
+      flash[:noti] = t(:noti_high_search)
     end #end if
 
   end

@@ -139,7 +139,7 @@ end
     @image = @post.images.build
     @categories = Category.where(super_id: nil)#find all category parent
     @categories.each_with_index do |c, i|
-      @categories[i].name = Post::CATEGORY_LIST_POST[c.name]
+      @categories[i].name = t(c.name)
     end
     @cities = City.all
   end
@@ -148,7 +148,7 @@ end
   def edit
     @categories = Category.where(super_id: nil) #find all category parent
     @categories.each_with_index do |c, i|
-      @categories[i].name = Post::CATEGORY_LIST_POST[c.name]
+      @categories[i].name = t(c.name)
     end
     @cities = City.all
   end

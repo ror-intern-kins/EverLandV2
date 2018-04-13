@@ -14,6 +14,14 @@ class Post < ApplicationRecord
         [I18n.t(:south), 'south'],
         [I18n.t(:north), 'north']
     ]
+    SEARCH_DIRECTION = [
+        [I18n.t(:east), 'east'],
+        [I18n.t(:west), 'west'],
+        [I18n.t(:south), 'south'],
+        [I18n.t(:north), 'north'],
+        [I18n.t(:unknow), 'unknow']
+    ]
+
     UNIT_POST =[
         [I18n.t(:agreement), 'agreement'], 
         [I18n.t(:million), 'million'], 

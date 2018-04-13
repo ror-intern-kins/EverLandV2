@@ -91,3 +91,8 @@ vi:
   delete_post: 'Xóa'
 
   time_zone_create: "%I:%M %p, %d/%m/%Y"
+  #=========Search Home
+  search_area: 'Diện tích từ'
+  search_price: 'Giá cả từ'
+  to: 'đến'
+  more_detail: "Thêm chi tiết"

@@ -85,3 +85,8 @@ en:
   delete_post: 'Delete'
 
   time_zone_create: "%I:%M %p, %b %d %Y"
+
+  search_area: 'Area from'
+  search_price: 'Price from'
+  to: 'to'
+  more_detail: "More detail"

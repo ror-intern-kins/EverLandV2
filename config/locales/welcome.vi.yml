@@ -1,0 +1,8 @@
+vi:
+  welcome:
+    no_result_notice: "Không tìm thấy kết quả nào"
+    month: "Tháng"
+    price: "Giá: "
+    unit_deal: "Thỏa thuận"
+    erea: "Diện tích: "
+    address: "Địa chỉ: "
