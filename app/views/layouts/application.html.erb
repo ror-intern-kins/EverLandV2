@@ -25,12 +25,12 @@
                     <% @menu_category.each do |item| %>
                         <div class="dropdown btn btn-light" style="float:left" >
                             <a href="/?search[category_id]=<%= item[:super_cate].id%>&search[category_detail_id]" style="color:black; text-decoration: none;">
-                                <%= item[:super_cate].name %>
+                                <%= t(item[:super_cate].name) %>
                             </a>                             
                             <div class="dropdown-content" style="left:0; min-width: 200px" >
                                 <% item[:sub_cate].each do |category| %>
                                     <a class="dropdown-item"
-                                    href="/?search[category_id]=<%= item[:super_cate].id%>&search[category_detail_id]=<%= category.id %>"><%= category.name %></a>
+                                    href="/?search[category_id]=<%= item[:super_cate].id%>&search[category_detail_id]=<%= category.id %>"><%= t(category.name) %></a>
                                 <% end %>
                             </div>
                         </div>
@@ -38,16 +38,16 @@
                 </ul>
             <% end %> <!-- end if -->
             <!-- Chuyen ngon ngu -->
-            <%= link_to "English", locale:"en" %>
+            <%= link_to_unless I18n.locale == :en, "English", locale: :en %> <br>
             <span>&nbsp</span>
-            <%= link_to "Vietnamese", locale:"vi" %>
+            <%= link_to_unless I18n.locale == :vi, "Vietnames", locale: :vi %> <br>
             <span>&nbsp</span>
                 <!-- Nút Post -->
             <% if user_signed_in? %>
-                <%= link_to 'Đăng tin rao', new_user_post_path(current_user), class: 'btn btn-primary',
+                <%= link_to t(:btn_create_post), new_user_post_path(current_user), class: 'btn btn-primary',
                 onclick: 'resetLoginForm()'%>                
             <% else %>
-                <%= link_to 'Đăng tin rao', new_user_session_path, class: 'btn btn-primary',
+                <%= link_to t(:btn_create_post), new_user_session_path, class: 'btn btn-primary',
                 onclick: 'resetLoginForm()' %>
             <% end %>
             <!-- -xử lý đăng nhập/ đăng xuất- -->
@@ -59,15 +59,15 @@
                     <div class="dropdown-content">
                         <%= link_to  "#{current_user.name}", edit_user_path(current_user.id), class: 'font-weight-bold' %>
                         <div class="dropdown-divider"></div>
-                        <%= link_to  "Bài viết của tôi", index_user_posts_path(current_user.id) %>
+                        <%= link_to  t(:drop_menu_posts), index_user_posts_path(current_user.id) %>
                         <div class="dropdown-divider"></div>
-                        <%= link_to  "Đăng xuất", destroy_user_session_path, method: 'delete' %>
+                        <%= link_to  t(:log_out), destroy_user_session_path, method: 'delete' %>
                     </div>
                 </div>
             <% else %>
                <!-- <%= link_to 'Đăng nhập', '#loginForm', class: 'btn btn-success',
                 onclick: 'resetLoginForm()', data: { toggle: 'modal' } %> -->
-                <%= link_to 'Đăng nhập', new_user_session_path, class: 'btn btn-success',
+                <%= link_to t(:btn_login), new_user_session_path, class: 'btn btn-success',
                 onclick: 'resetLoginForm()' %>
             <% end %> 
             <!-- .............................................................. -->

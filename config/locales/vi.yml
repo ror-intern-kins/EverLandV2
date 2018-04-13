@@ -10,4 +10,16 @@ vi:
     submit: 
       create: "Đăng Tin"
       update: "Cập Nhật Tin"
+  noti_default: 'Các bài đăng mới nhất'
+  noti_search: 'Kết quả tìm kiếm cho từ khóa %{search}'
+  noti_high_search: 'Kết quả tìm kiếm cho tìm kiếm nâng cao'
+
+  btn_create_post: "Đăng tin rao"
+  drop_menu_posts : "Bài viết của tôi"
+  log_out: "Đăng xuất"
+  btn_login: 'Đăng nhập'
+  btn_search_high: 'Tìm kiếm nâng cao'
+  btn_search: "Tìm kiếm"
+  txt_place: 'Nhập địa điểm'
   
+  unknow: 'Không xác định'
