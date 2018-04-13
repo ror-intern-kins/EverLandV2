@@ -23,6 +23,6 @@
 #
 
 translations:
-  - file: "public/javascripts/translations.js"
+  - file: "app/assets/javascripts/i18n/translations.js"
     only: "*"
 #

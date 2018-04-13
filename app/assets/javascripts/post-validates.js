@@ -111,23 +111,23 @@ document.addEventListener("turbolinks:load", function (event) {
             flag = false;
         } else $('#title_error').text('');
         //category
-        if (category == "-- Hình Thức --") {
+        if (category == I18n.t('select_category')) {
             $('#category_error').text(I18n.t('js.post.error.category.blank'));
             flag = false;
         } else $('#category_error').text('');
 
         //sub category
-        if (sub_category == "--Phân Mục--") {
+        if (sub_category == I18n.t('select_type')) {
             $('#subcategory_error').text(I18n.t('js.post.error.sub_category.blank'));
             flag = false;
         } else $('#subcategory_error').text('');
         //city
-        if (city == '-- Tỉnh/Thành Phố --') {
+        if (city == I18n.t('select_city')) {
             $('#city_error').text(I18n.t('js.post.error.city.blank'));
             flag = false;
         } else $('#city_error').text('');
         //district
-        if (district == '--Quận Huyện--') {
+        if (district == I18n.t('select_district')) {
             $('#district_error').text(I18n.t('js.post.error.district.blank'));
             flag = false;
         } else $('#district_error').text('');
@@ -314,22 +314,22 @@ function checkPrice() {
     if (price > 0) {
         if (area > 0) {
             switch (unit) {
-                case 'Triệu':
+                case I18n.t('million'):
                     $('#totalPrice').text(price + ' ' + I18n.t('million')).css({
                         'color': 'red'
                     });
                     break;
-                case 'Tỷ':
+                case I18n.t('billion'):
                     $('#totalPrice').text(price + ' ' + I18n.t('billion')).css({
                         'color': 'red'
                     });
                     break;
-                case 'Trăm nghìn/m2':
+                case I18n.t('hunderm2'):
                     $('#totalPrice').text((price * area * 100) + ' ' + I18n.t('hunderm2')).css({
                         'color': 'red'
                     });
                     break;
-                case 'Triệu/m2':
+                case I18n.t('millionm2'):
                     $('#totalPrice').text((price * area) + ' ' + I18n.t('millionm2')).css({
                         'color': 'red'
                     });
@@ -342,18 +342,18 @@ function checkPrice() {
             }
         } else {
             switch (unit) {
-                case 'Triệu':
+                case I18n.t('million'):
                     $('#totalPrice').text(price + ' ' + I18n.t('million')).css({
                         'color': 'red'
                     })
                     break;
-                case 'Tỷ':
+                case I18n.t('billion'):
                     $('#totalPrice').text(price + ' ' + I18n.t('billion')).css({
                         'color': 'red'
                     })
                     break;
-                case 'Trăm nghìn/m2':
-                case 'Triệu/m2':
+                case I18n.t('hunderm2'):
+                case I18n.t('millionm2'):
                     $('#totalPrice').text(I18n.t('agreement')).css({
                         'color': 'red'
                     });
@@ -376,13 +376,13 @@ function checkPrice() {
 //----------------Get category list ----------------
 function getCategoriesList() {
     var value = $('#cate_id').val();
-    $('#cate_detail_id').html("<option>--Phân Mục--</option>"); //clear option     
+    $('#cate_detail_id').html("<option>" + I18n.t('select_type') + "</option>"); //clear option     
     $.post("/getcate.json", {
             category_id: value
         },
         function (data, status) {
             data.forEach(function(item) {
-                $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name + "</option>")
+                $('#cate_detail_id').append("<option value=" + item.id + ">" + I18n.t(item.name) + "</option>")
             });
     })
 }
@@ -392,7 +392,7 @@ var str_addr = [3];
 
 function getCitiesList() {
     var value = $('#city_details').val();
-    $('#district_details').html("<option>--Quận Huyện--</option>"); //clear option 
+    $('#district_details').html("<option>" + I18n.t('select_district') + "</option>"); //clear option 
 
     if (value > 0) {
         str_addr[3] = $('#city_details :selected').text(); //get city when onchange
@@ -409,13 +409,13 @@ function getCitiesList() {
         });
     } else {
         $('select#district_details').prop('selectedIndex', 0);
-        $('#district_details').html("<option>--Quận Huyện--</option>");
+        $('#district_details').html("<option>" + I18n.t('select_district') + "</option>");
 
         $('select#ward_details').prop('selectedIndex', 0);
-        $('#ward_details').html("<option>-- Phường/Xã  --</option>");
+        $('#ward_details').html("<option>" + I18n.t('select_ward') + "</option>");
 
         $('select#street_details').prop('selectedIndex', 0);
-        $('#street_details').html("<option>-- Đường Phố --</option>");
+        $('#street_details').html("<option>" + I18n.t('select_street') + "</option>");
 
         $('#post_address_number').val('') //reset if value dropdown = 0
     }
@@ -424,7 +424,7 @@ function getCitiesList() {
 //----------------Get districts list ----------------
 function getDistrictsList() {
     var value = $('#district_details').val();
-    $('#ward_details').html("<option>-- Phường/Xã  --</option>"); //clear option 
+    $('#ward_details').html("<option>" + I18n.t('select_ward') + "</option>"); //clear option 
 
     if (value > 0) {
         str_addr[3] = $('#city_details :selected').text() //get value if onchange any dropdown
@@ -440,10 +440,10 @@ function getDistrictsList() {
         })
     } else {
         $('select#ward_details').prop('selectedIndex', 0);
-        $('#ward_details').html("<option>-- Phường/Xã  --</option>");
+        $('#ward_details').html("<option>" + I18n.t('select_ward') + "</option>");
 
         $('select#street_details').prop('selectedIndex', 0);
-        $('#street_details').html("<option>-- Đường Phố --</option>");
+        $('#street_details').html("<option>" + I18n.t('select_street') + "</option>");
 
         $('#post_address_number').val('') //reset if value dropdown = 0
     }
@@ -452,7 +452,7 @@ function getDistrictsList() {
 //----------------Get wards list ----------------
 function getWardsList() {
     var value = $('#ward_details').val();
-    $('#street_details').html("<option>-- Đường Phố --</option>"); //clear option 
+    $('#street_details').html("<option>" + I18n.t('select_street') + "</option>"); //clear option 
     if (value > 0) {
         str_addr[3] = $('#city_details :selected').text() 
         str_addr[2] = $('#district_details :selected').text() 
@@ -469,7 +469,7 @@ function getWardsList() {
             })
     } else {
         $('select#street_details').prop('selectedIndex', 0);
-        $('#street_details').html("<option>-- Đường Phố --</option>");
+        $('#street_details').html("<option>" + I18n.t('select_street') + "</option>");
 
         $('#post_address_number').val('') //reset if value dropdown = 0
     }

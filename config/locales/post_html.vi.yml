@@ -41,10 +41,10 @@ vi:
   
   #--------------
   select_city: '-- Tỉnh/Thành Phố  --'
-  select_district: '--Quận Huyện--'
+  select_district: '-- Quận Huyện --'
   select_ward: '-- Phường/Xã --'
   select_category: '-- Hình Thức --'
-  select_type: '--Phân Mục--'
+  select_type: '-- Phân Mục --'
   select_street: '-- Đường Phố --'
   
   #---------

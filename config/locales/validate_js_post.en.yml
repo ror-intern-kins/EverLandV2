@@ -53,9 +53,9 @@ en:
         area:
           max_value: 'Area maxium is 999999.'
           not_a_number: "Area is invalid."
-        front: 
+        front:
           not_a_number: "Front is invalid."
-          max_value: ''Front maxium is 999999m.'
+          max_value: 'Front maxium is 999999m.'
         entrance:
           not_a_number: "Entrance is invalid."
           max_value: 'Entrance maxium is 999999m.'
@@ -69,9 +69,5 @@ en:
           not_a_number: "Toilet is invalid."
           max_value: 'Toilet maxium is 999rooms.'
         unit:
-          blank: 'Unit can't be blank.'
-      # agree: 'Thỏa Thuận'
-      # million: 'triệu'
-      # billion: 'tỷ'
-      # thousand: 'nghìn'
+          blank: "Unit can't be blank."
 

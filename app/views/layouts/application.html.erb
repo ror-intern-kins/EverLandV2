@@ -10,6 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript">  
+        I18n.defaultLocale = "<%= I18n.default_locale %>"
+        I18n.locale = "<%= I18n.locale || I18n.default_locale %>"
+    </script> 
   </head>
   <body onLoad="myFunction()">
     <div class="container-fluid nav-fixed">
@@ -40,10 +44,12 @@
                 <!-- Nút Post -->
             <% if user_signed_in? %>
                 <%= link_to 'Đăng tin rao', new_user_post_path(current_user), class: 'btn btn-primary',
-                onclick: 'resetLoginForm()'%>                
+                onclick: 'resetLoginForm()'%>
+                <span>&nbsp&nbsp&nbsp</span>
             <% else %>
                 <%= link_to 'Đăng tin rao', new_user_session_path, class: 'btn btn-primary',
-                onclick: 'resetLoginForm()' %>
+                onclick: 'resetLoginForm()'%>
+                <span>&nbsp&nbsp&nbsp</span>
             <% end %>
             <!-- -xử lý đăng nhập/ đăng xuất- -->
             <!-- login button -->

@@ -15,16 +15,46 @@ en:
   title: 'Title'
   category: 'Category'
   sub_category: 'Type'
+  city: 'City'
+  district: 'District'
+  ward: 'Ward'
+  street: 'Street'
+  project: 'Project'
+  area: 'Area'
+  price: 'Price'
+  unit: 'Unit'
+  total: 'Total'
+  address: 'Address'
+  front: 'Front'
+  entrance: 'Entrance'
+  house_direction: "House's direction"
+  balcony_direction: "Balcony's direction"
+  floor: 'Floor'
+  bedroom: 'Bedroom'
+  toilet: 'Toilet'
+  furniture: 'Furniture'
+  contact_name: 'Name contact'
+  contact_address: 'Address contact'
+  contact_phone: 'Phone contact'
+  contact_mobile: 'Mobile contact'
+  
+  #--------------
+  select_city: '-- City --'
+  select_district: '-- District --'
+  select_ward: '-- Ward --'
+  select_category: '-- Category --'
+  select_type: '-- Type --'
+  select_street: '-- Street--'
   
   #------------
   sub_des_1: 'Maximum is only 3000 characters.'
   sub_des_2: 'General introduction of your real estate. For example: The house has convenient location: Near the park, near the school ... Total area 52m2, car road to the door.'
   sub_des_3: 'Note: the news only accept value VND.'
-  sub_other_1: 'You should fill out the information below for more effective coverage'
   sub_img_1: 'Maximum is 8 images.'
   sub_img_2: 'Image ads will be viewed more than 10 times and are called more than five times the message without photos. Please post a picture to be traded quickly!'
   sub_map_1: 'To increase your credibility and your message, be sure to fix your location on the map by dragging it to the correct location. The map data may not be accurate. So if there is any error please tell us to correct in time.'
   # ---------model > attr
+  sub_other_1: 'You should fill out the information below for more effective coverage'
   helpers:
     placeholder:
       post: 
@@ -49,4 +79,9 @@ en:
   radius_btn: 'Choose'
   #--------------Index user post
   index_posts_user_title: "%{name}'s posts"
+  create_day: 'Created day'
+  show_post: 'Show'
+  edit_post: 'Edit'
+  delete_post: 'Delete'
+
   time_zone_create: "%I:%M %p, %b %d %Y"
