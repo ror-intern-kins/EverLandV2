@@ -27,14 +27,17 @@
             <% if @menu_category.present?%>
                 <ul class="navbar-nav mr-auto">
                     <% @menu_category.each do |item| %>
-                        <div class="dropdown btn btn-light" style="float:left" >
-                            <a href="/?search[category_id]=<%= item[:super_cate].id%>&search[category_detail_id]" style="color:black; text-decoration: none;">
-                                <%= t(item[:super_cate].name) %>
-                            </a>                             
+                        <div class="dropdown btn btn-light" style="float:left" >          
+                    <%#= link_to t(item[:super_cate].name), "/?search[category_id]=" + item[:super_cate].id.to_s + "&search[category_detail_id]",
+                                style:"color:black; text-decoration: none;" %>    
+
+                               <%= link_to t(item[:super_cate].name), search_by_super_category_id_path(category_id: item[:super_cate].id),
+                               style:"color:black; text-decoration: none;" %>       
+
                             <div class="dropdown-content" style="left:0; min-width: 200px" >
                                 <% item[:sub_cate].each do |category| %>
-                                    <a class="dropdown-item"
-                                    href="/?search[category_id]=<%= item[:super_cate].id%>&search[category_detail_id]=<%= category.id %>"><%= t(category.name) %></a>
+                                <%= link_to t(category.name), search_by_category_id_path(category_id: category.id),
+                                    class:"dropdown-item" %>       
                                 <% end %>
                             </div>
                         </div>

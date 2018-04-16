@@ -25,7 +25,9 @@
                             <div class="pmb-header">
                                 <div class="pmb-date">
                                     <p class="day"><%= post.created_at.day %></p>
-                                    <p class="month"><%= t "welcome.month" %> <%= post.created_at.month  %></p>
+                                    <p class="month"><%= post.created_at.strftime(t("welcome.month"))  %>
+
+                                    </p>
                                 </div>
                                 <div>
                                 <%= link_to post.title, post_path(post.id), class: 'pmb-title'%>

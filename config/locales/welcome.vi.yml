@@ -1,7 +1,7 @@
 vi:
   welcome:
     no_result_notice: "Không tìm thấy kết quả nào"
-    month: "Tháng"
+    month: "Tháng %m"
     price: "Giá: "
     unit_deal: "Thỏa thuận"
     erea: "Diện tích: "

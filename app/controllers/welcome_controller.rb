@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  before_action :load_data, only: [:index]
+  before_action :load_data, only: [:index, :search_by_super_category_id, :search_by_category_id]
   def index
     @posts = newest_posts
     flash[:noti] = t(:noti_default)
@@ -134,6 +134,22 @@ class WelcomeController < ApplicationController
     return @posts
   end
 
+  def search_by_super_category_id
+    query = Category.where(super_id: params[:category_id])
+
+    @posts = Post.where(category_id: query).order(created_at: :desc).page(params[:page]).per(9)    
+          
+    flash[:noti] = t(:noti_high_search)
+    render :index
+  end
+
+  def search_by_category_id
+
+    @posts = Post.where(category_id: params[:category_id]).order(created_at: :desc).page(params[:page]).per(9)    
+          
+    flash[:noti] = t(:noti_high_search)
+    render :index
+  end
 private
   def load_data
     @categories = Category.where(super_id: nil)#find all category parent
