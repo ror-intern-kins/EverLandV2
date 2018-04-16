@@ -1,16 +1,16 @@
 class WelcomeController < ApplicationController
-
+  before_action :load_data, only: [:index]
   def index
     @posts = newest_posts
     flash[:noti] = t(:noti_default)
     @search 
-    @categories = Category.where(super_id: nil)
-    @categories.each_with_index do |c, i|
-      @categories[i].name = t(c.name)
-    end
-    puts @categories
-    @cities = City.all
-    @districts
+    # @categories = Category.where(super_id: nil)
+    # @categories.each_with_index do |c, i|
+    #   @categories[i].name = t(c.name)
+    # end
+    # puts @categories
+    # @cities = City.all
+    # @districts
     # find all city
 
     if(params[:city_id])
@@ -134,5 +134,17 @@ class WelcomeController < ApplicationController
     return @posts
   end
 
-
+private
+  def load_data
+    @categories = Category.where(super_id: nil)#find all category parent
+    @categories.each_with_index do |c, i|
+      @categories[i].name = t(c.name)
+    end
+    @search_direction = Post::SEARCH_DIRECTION
+    @search_direction_list = Hash.new
+    @search_direction.each do |d|
+      @search_direction_list[I18n.t(d)] = d
+    end
+    @cities = City.all
+  end
 end
