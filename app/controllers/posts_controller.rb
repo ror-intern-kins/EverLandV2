@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :set_post_to_show, only: [:show]
   before_action :check_current_id, only: [:edit, :update, :destroy] 
-
+  before_action :load_data, only: [:edit, :new]
   #GET /user_posts
   #GET /user_posts.json
   def index_user_posts
@@ -14,20 +14,13 @@ s  # GET /posts/new
   def new
     @post = Post.new
     @image = @post.images.build
-    @categories = Category.where(super_id: nil)#find all category parent
-    @categories.each_with_index do |c, i|
-      @categories[i].name = t(c.name)
-    end
-    @cities = City.all
+    load_data()
   end
 
   # GET /posts/1/edit
   def edit
     @categories = Category.where(super_id: nil) #find all category parent
-    @categories.each_with_index do |c, i|
-      @categories[i].name = t(c.name)
-    end
-    @cities = City.all
+    load_data()
   end
 
   # POST users/id/posts
@@ -35,10 +28,6 @@ s  # GET /posts/new
   def create
     @user = current_user    
     @post = @user.posts.build(post_params)
-    #test i18n en
-    # @categories = Category.where(super_id: nil)
-    # @cities = City.all
-    #------
     respond_to do |format|
       if @post.save
         if !(params[:images].nil?)
@@ -116,6 +105,7 @@ s  # GET /posts/new
       @tmp = Category.where('id = ?', params[:category_id]) #category in post edit
       @sCategory = Category.where('super_id = ?', @tmp[0].super_id)  #category child when load page
       @list_child_categories = Category.where('super_id = ? ', params[:category_id]) #categories child dropdown
+
       respond_to do |format|
         format.json { render json: [@sCategory, @list_child_categories, @tmp] }
       end
@@ -165,9 +155,29 @@ s  # GET /posts/new
       images_attributes: [:id, :post_id, :url])
     end  
 
-    def check_current_id
-      @user = current_user
-      @post = Post.find(params[:id])
-      redirect_to not_found_path unless @user.id == @post.user_id
+  def check_current_id
+    @user = current_user
+    @post = Post.find(params[:id])
+    redirect_to not_found_path unless @user.id == @post.user_id
+  end
+
+  def load_data
+    @categories = Category.where(super_id: nil)#find all category parent
+    @categories.each_with_index do |c, i|
+      @categories[i].name = t(c.name)
     end
+    
+    @units = Post::UNIT_POST
+    @units_hash = Hash.new
+    @units.each do |u|
+      @units_hash[I18n.t(u)] =  u
+    end
+    
+    @direction = Post::DIRECTION
+    @direction_list = Hash.new
+    @direction.each do |d|
+      @direction_list[I18n.t(d)] = d
+    end
+    @cities = City.all
+  end
 end

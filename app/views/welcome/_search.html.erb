@@ -126,7 +126,7 @@
         </div>
         <!-- HOUSE DIRECTION -->
         <div class="house_direction margin-form">
-          <%= f.select :house_direction, Post::SEARCH_DIRECTION,
+          <%= f.select :house_direction, @search_direction_list,
           {prompt: t(:house_direction)}, {class: 'form-control'} %>               
         </div>
         <!-- BEDROOM -->
