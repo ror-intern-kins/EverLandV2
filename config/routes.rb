@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     :omniauth_callbacks => "user/omniauth_callbacks"
   }
   get '/users/password', to: 'users#show_error'
+  # ------------ navigator link  ---------------
+  get '/searchsupercategoryid/:category_id', to: 'welcome#search_by_super_category_id', as: "search_by_super_category_id"
+  get '/searchcategoryid/:category_id', to: 'welcome#search_by_category_id', as: "search_by_category_id"
   # ------------ elastic search ---------------
   get 'search', to: 'welcome#search'
 
