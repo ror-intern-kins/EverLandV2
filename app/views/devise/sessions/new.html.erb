@@ -20,13 +20,16 @@
                     <div id="login">                    
                         <%= form_for resource, as: resource_name, url: session_path(resource_name), :html => {:id => "form_login"} do |form| %>
                             <h1><%= t "login.login_title" %> </h1>   
-                            <p class="notice success" style="padding: 0px"> <%= flash[:noti_pwd] %> </p>
-                            <% if notice %>                             
-                                <p class="notice success" style="padding: 0px"><%= notice %></p>
-                            <% end %>
-                            <% if alert %>                             
-                                <p class="alert error" style="padding: 0px"><%= alert %></p>
-                            <% end %>
+
+                            <div class="row">
+                                <% if notice %>                             
+                                    <p class="notice success" style="padding: 0px"><%= notice %></p>
+                                <% end %>
+                                <% if alert %>                             
+                                    <p class="alert error" style="padding: 0px"><%= alert %></p>
+                                <% end %>
+                            </div>
+
                             <div class="row">
                                 <label><%= t "login.username_label"%></label> <br/>
                                 <%= form.text_field :username, id: :username, class: 'tung-input form-control' %>

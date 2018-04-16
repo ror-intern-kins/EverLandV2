@@ -6,17 +6,17 @@ en:
           existed: "Username is already exist."
           blank: "Username can't be blank."
           invalid: "Username doesn't allow contain special character."
-          too_short: "Username is too short. Mininum must have 6 characters."
-          too_long: "Username is too long. Maxinum must have 20 characters."
+          length: "Username must have min length is 6 characters and max length is 20 characters."
         email: 
           blank: "Email can't be blank."
           invalid: "Email is invalid."
           existed: "Email is already exist."
         password:
           blank: "Password can't be blank."
-          too_short: "Password is too short. Mininum must have 6 characters."
-          confirm_blank: "Confirm password can't be blank"
-          confirm_not_match: "Confirm password is invalid"
+          length: "Password is too short. Mininum must have 6 characters."
+          confirm_blank: "Confirm password can't be blank."
+          confirm_not_match: "Confirm password is invalid."
+          old_not_match: "Old password is wrong."
         phone:
           invalid: "Phone number is invalid"
         name:
