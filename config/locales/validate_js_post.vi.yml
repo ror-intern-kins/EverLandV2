@@ -70,4 +70,3 @@ vi:
           max_value: 'Số toilet tối đa 999 phòng.'
         unit:
           blank: 'Vui lòng chọn đơn vị.'
-      agree: 'Thỏa Thuận'

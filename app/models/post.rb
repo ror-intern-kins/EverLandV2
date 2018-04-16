@@ -8,12 +8,46 @@ class Post < ApplicationRecord
     has_many :images, dependent: :destroy
     accepts_nested_attributes_for :images
 
-    #Check foreign key exists
+    DIRECTION = [
+        [I18n.t(:east), 'east'],
+        [I18n.t(:west), 'west'],
+        [I18n.t(:south), 'south'],
+        [I18n.t(:north), 'north']
+    ]
+    SEARCH_DIRECTION = [
+        [I18n.t(:east), 'east'],
+        [I18n.t(:west), 'west'],
+        [I18n.t(:south), 'south'],
+        [I18n.t(:north), 'north'],
+        [I18n.t(:unknow), 'unknow']
+    ]
+
+    UNIT_POST =[
+        [I18n.t(:agreement), 'agreement'], 
+        [I18n.t(:million), 'million'], 
+        [I18n.t(:billion), 'billion'], 
+        [I18n.t(:hunderm2), 'hunderm2'], 
+        [I18n.t(:millionm2), 'millionm2']
+    ]
+    
+    CATEGORY_LIST_POST =  {
+        "house_land_sell" => I18n.t(:house_land_sell),
+        "house_land_rent" => I18n.t(:house_land_rent),
+        "apartments_sell" => I18n.t(:apartments_sell), 
+        "house_sell" => I18n.t(:house_sell), 
+        "land_sell" => I18n.t(:land_sell), 
+        "villas_sell" => I18n.t(:villas_sell), 
+        "house_rent" => I18n.t(:house_rent), 
+        "apartments_rent" => I18n.t(:apartments_rent), 
+        "office_rent" => I18n.t(:office_rent), 
+        "hostel_rent" => I18n.t(:hostel_rent)
+    }
+    # Check foreign key exists
     validate :category_id_exists
     validate :city_id_exists
     validate :district_id_exists
     
-    #Can not be blank
+    # Can not be blank
     validates :title, :description, :category_id, :city_id,
         :district_id, :address_number, :contact_mobile, presence: true
     #Length
@@ -63,6 +97,8 @@ class Post < ApplicationRecord
           false
         end
     end
+        
+    
 end
 
 # Post.import force: true

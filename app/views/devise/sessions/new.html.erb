@@ -19,7 +19,8 @@
                 <div id="wrapper" >
                     <div id="login">                    
                         <%= form_for resource, as: resource_name, url: session_path(resource_name), :html => {:id => "form_login"} do |form| %>
-                            <h1>Đăng nhập </h1>   
+                            <h1><%= t "login.login_title" %> </h1>   
+
                             <div class="row">
                                 <% if notice %>                             
                                     <p class="notice success" style="padding: 0px"><%= notice %></p>
@@ -28,14 +29,15 @@
                                     <p class="alert error" style="padding: 0px"><%= alert %></p>
                                 <% end %>
                             </div>
+
                             <div class="row">
-                                <%= form.label ('Tên đăng nhập:') %> <br/>
+                                <label><%= t "login.username_label"%></label> <br/>
                                 <%= form.text_field :username, id: :username, class: 'tung-input form-control' %>
                                 <p id="errorUsername" class='error' ></p>
                             </div>
 
                             <div class="row">
-                                <%= form.label ('Mật khẩu:') %> <br/>
+                                <label><%= t "login.password_label"%></label> <br/>
                                 <%= form.password_field :password , id: :password, class: 'tung-input form-control' %>
                                 <p id="errorPassword" class='error'></p>
                             </div> 
@@ -44,7 +46,7 @@
                                 <% if devise_mapping.rememberable? %>
                                     <div class="field">
                                     <%= form.check_box :remember_me %>
-                                    <%= form.label :remember_me %>
+                                    <label><%= t "login.remember_me_checkbox"%></label>
                                     </div>
                                 <% end %>
                                 <br/>    
@@ -52,13 +54,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12" style="padding: 30px 0px">
-                                    <%= form.submit ('Đăng nhập'),  id: 'login_btn', 
+                                    <%= form.submit (t "login.login_button"),  id: 'login_btn', 
                                     type: 'button', onclick: 'validateLoginForm()', class: 'btn btn-dark col-md-12 tung-btn-form' %>
                                 </div>                                                                                               
                             </div>
                             <% if devise_mapping.omniauthable? %>             
                                 <div class="tung-div-text">
-                                    <span>Đăng nhập với</span> 
+                                    <span><%= t "login.login_with" %></span> 
                                 </div>
                                 <div class="tung-div-icon">
                                     <a href="/users/auth/facebook" class="login-icon bg1">
@@ -71,13 +73,13 @@
                             <% end %>
                                 
                             <h6 style="text-align: center; margin-top: 30px">
-                                <%= link_to 'Về trang chủ', root_path, style: 'color: #006064' %>
+                                <%= link_to (t "login.back_to_home"), root_path, style: 'color: #006064' %>
                             </h6>
                             <div>
                             <!-- , type: 'button', onclick: 'validateLoginForm()' -->
                                 <p class="change_link" style="margin-top: 40px">
-                                    Bạn đã đăng kí thành viên chưa?
-                                    <%= link_to  "Đăng kí", new_registration_path(resource_name), id: 'signupl' %>
+                                    <%= t "login.registry_question" %>
+                                    <%= link_to  (t "login.registry_button"), new_registration_path(resource_name), id: 'signupl' %>
                                 </p>
                             </div>
                         <% end %>            

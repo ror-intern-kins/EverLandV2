@@ -8,7 +8,7 @@
       <div class="card col-md-12">
         <%= image_tag("login-icon.png", class: 'avatar-img')%>
         <h1 style="margin-bottom: 30px"><%= @user.name %></h1>
-        <%= link_to 'Thay đổi mật khẩu', edit_change_password_path, class: 'btn btn-danger' %>
+        <%= link_to (t "change_password.change_password_title"), edit_change_password_path, class: 'btn btn-danger' %>
       </div>
     </div>
     <!-- show info -->
@@ -21,7 +21,7 @@
         <%= form_with(model: @user, id: 'update_form', local: true) do |form| %>
           <!-- input Name -->
           <div class="form-group row edit-form-group">
-            <label class="col-md-2 col-form-label font-weight-bold">Họ và tên <span class="obli">(*)</span></label>
+            <label class="col-md-2 col-form-label font-weight-bold"><%= t "registry.fullname_label" %> <span class="obli">(*)</span></label>
             <div class="col-md-7">                     
               <%= form.text_field :name, id: :user_edit_name, onchange: 'checkEditName()', class: "form-control input-md"%>  
             </div>
@@ -30,7 +30,7 @@
           </div>       
           <!-- input Birthday -->
           <div class="form-group row edit-form-group">
-            <label class="col-md-2 col-form-label font-weight-bold">Ngày sinh</label>
+            <label class="col-md-2 col-form-label font-weight-bold"><%= t "registry.birthday_label" %></label>
             <div class="col-md-7">
                 <%= form.date_field :birthday, class: "form-control" %>
             </div>
@@ -38,7 +38,7 @@
           </div>
           <!-- input Email -->
           <div class="form-group row edit-form-group">
-            <label class="col-md-2 col-form-label font-weight-bold">Email</label>
+            <label class="col-md-2 col-form-label font-weight-bold"><%= t "registry.email_label" %></label>
             <div class="col-md-7">
               <%= form.text_field :email, class: "form-control", disabled: true %>
             </div>
@@ -46,13 +46,13 @@
           </div>
           <!-- input Gender -->
           <div class="form-group row edit-form-group">
-            <label class="col-md-2 col-form-label font-weight-bold">Giới tính</label>
+            <label class="col-md-2 col-form-label font-weight-bold"><%= t "registry.sex_label" %></label>
             <div class="col-md-7">
-              <label class="container-radio">Nam
+              <label class="container-radio"><%= t "registry.sex_male" %>
                 <%= form.radio_button :gender, 'male', checked: true %>
                 <span class="checkmark"></span>
               </label>
-              <label class="container-radio">Nữ
+              <label class="container-radio"><%= t "registry.sex_female" %>
                 <%= form.radio_button :gender, 'female' %>
                 <span class="checkmark"></span>
               </label>
@@ -61,7 +61,7 @@
           </div>
           <!-- input Phone -->
           <div class="form-group row edit-form-group">
-            <label class="col-md-2 col-form-label font-weight-bold">Số điện thoại</label>
+            <label class="col-md-2 col-form-label font-weight-bold"><%= t "registry.phonenum_label" %></label>
             <div class="col-md-7">
               <%= form.text_field :phone, class: "form-control", id: :user_edit_phone, onchange: 'checkEditPhone()' %>
             </div>
@@ -69,7 +69,7 @@
             <div class="col-md-3"></div>
           </div>
           <div class="form-group row edit-form-group">
-            <label  class="col-md-2 col-form-label font-weight-bold">Địa chỉ</label>
+            <label  class="col-md-2 col-form-label font-weight-bold"><%= t "registry.address_label" %></label>
             <div class="col-md-7">
               <%= form.text_field :address, class: "form-control" %>
             </div>
@@ -77,8 +77,9 @@
           </div>
           <div class="row">
             <div class="col-md-4"></div>
-            <%= form.submit ('Lưu thay đổi'), class: 'col-md-2 btn btn-primary', type: 'button', onclick: 'validateEditForm()' %>
-            <%= link_to 'Trở về', root_path, class: 'col-md-2 btn btn-info' %>
+            <%= form.submit (t "edit_user.save_label"), class: 'col-md-2 btn btn-primary', type: 'button', onclick: 'validateEditForm()' %>
+            <span>&nbsp&nbsp</span>
+            <%= link_to (t "edit_user.back_button"), root_path, class: 'col-md-2 btn btn-info' %>
             <div class="col-md-4"></div>
           </div>
           <% end %>

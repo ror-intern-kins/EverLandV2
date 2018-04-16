@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <h2 style="text-align: center">Thay đổi mật khẩu</h2>
+      <h2 style="text-align: center"><%= t('change_password.change_password_title')%></h2>
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
         <%= devise_error_messages! %>
         <%= f.hidden_field :reset_password_token %>
@@ -22,7 +22,7 @@
         <div class="col-md-12" style="margin-bottom: 20px">
           <div class="row">
             <div class="col-md-4"></div>
-            <%= f.submit "Thay đổi", class: 'btn btn-success col-md-4' %>
+            <%= f.submit t('change_password.change_button'), class: 'btn btn-success col-md-4' %>
             <div class="col-md-4"></div>
           </div>
         </div>

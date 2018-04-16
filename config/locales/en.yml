@@ -44,4 +44,15 @@ en:
     submit: 
       create: "Create Post"
       update: "Update Post"
-  
+  noti_default: 'Hot News'
+  noti_search: 'Result of search: %{search}'
+  noti_high_search: 'Result of high level search'
+
+  btn_create_post: 'Create Post'
+  drop_menu_posts: 'All my posts'
+  btn_login: 'Login'
+  btn_search_high: 'Search High Level'
+  btn_search: 'Search'
+  txt_place: 'Type keyword...'
+
+  unknow: 'Unknow'

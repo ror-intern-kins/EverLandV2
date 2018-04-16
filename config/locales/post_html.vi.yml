@@ -1,0 +1,98 @@
+vi:
+  #-------Form create - edit post-------
+  show_sub_title_1: 'Thông Tin'
+  show_sub_title_2: 'Mô Tả'
+  show_sub_title_3: 'Mô Tả Chi Tiết'
+  show_sub_title_4: 'Vị Trí'
+  show_details_sub_1: 'Thông Tin Về Nhà'
+  show_details_sub_2: 'Thông Tin Liên Hệ'
+  sub_title_1: 'THÔNG TIN CƠ BẢN'
+  sub_title_2: 'THÔNG TIN MÔ TẢ'
+  sub_title_3: 'THÔNG TIN KHÁC'
+  sub_title_4: 'HÌNH ẢNH'
+  sub_title_5: 'BẢN ĐỒ'
+  sub_title_6: 'LIÊN HỆ'
+ 
+  title: 'Tiêu Đề'
+  category: 'Hình Thức'
+  sub_category: 'Loại'
+  city: 'Tỉnh/Thành Phố '
+  district: 'Quận/Huyện'
+  ward: 'Phường/Xã:'
+  street: 'Đường/Phố'
+  project: 'Dự Án'
+  area: 'Diện Tích'
+  price: 'Giá'
+  unit: 'Đơn Vị'
+  total: 'Tổng Giá Tiền'
+  address: 'Địa Chỉ'
+  front: 'Mặt Tiền'
+  entrance: 'Đường Vào'
+  house_direction: 'Hướng Nhà'
+  balcony_direction: 'Hướng Ban Công'
+  floor: 'Số Tầng'
+  bedroom: 'Số Phòng Ngủ'
+  toilet: 'Số Toilet'
+  furniture: 'Nội Thất'
+  contact_name: 'Tên Liên Hệ'
+  contact_address: 'Địa Chỉ'
+  contact_phone: 'Điện Thoại'
+  contact_mobile: 'Di Dộng'
+  
+  #--------------
+  select_city: '-- Tỉnh/Thành Phố  --'
+  select_district: '-- Quận Huyện --'
+  select_ward: '-- Phường/Xã --'
+  select_category: '-- Hình Thức --'
+  select_type: '-- Phân Mục --'
+  select_street: '-- Đường Phố --'
+  
+  #---------
+  sub_des_1: 'Tối đa chỉ 3000 ký tự'
+  sub_des_2: 'Giới thiệu chung về bất động sản của bạn. Ví dụ: Khu nhà có vị trí thuận lợi: Gần công viên, gần trường học ... Tổng diện tích 52m2, đường đi ô tô vào tận cửa.'
+  sub_des_3: 'Lưu ý: tin rao chỉ để mệnh giá tiền Việt Nam Đồng.'
+  sub_img_1: 'Tối đa 8 ảnh.'
+  sub_img_2: 'Tin rao có ảnh sẽ được xem nhiều hơn gấp 10 lần và được nhiều người gọi gấp 5 lần so với tin rao không có ảnh. Hãy đăng ảnh để được giao dịch nhanh chóng!'
+  sub_map_1: 'Để tăng độ tin cậy và tin rao được nhiều người quan tâm hơn, hãy sửa vị trí tin rao của bạn trên bản đồ bằng cách kéo icon tới đúng vị trí của tin rao. Có thể dữ liệu bản đồ không chính xác. Vì vậy nếu có bất kỳ sai xót nào xin bạn hãy báo cho chúng tôi để khắc phục kịp thời.'
+  #--------
+  sub_other_1: 'Quý vị nên điền đầy đủ thông tin vào các mục dưới đây để tin đăng có hiệu quả hơn'
+  helpers:
+    placeholder:
+      post: 
+        title: "Vui lòng nhập tiêu đề tin đăng của bạn. Tối thiểu là 30 ký tự và tối đa là 99 ký tự."
+
+  #-------Form create - edit post-------
+
+  #-------New - edit post-------
+  new_post_title: 'ĐĂNG TIN RAO BÁN, CHO THUÊ NHÀ ĐẤT'
+  new_post_sub: '(Quý vị nhập thông tin nhà đất cần bán hoặc cho thuê vào các mục dưới đây)'
+  edit_post_title: 'Chỉnh Sửa Bài Viết'
+
+  #---------Map select-----------
+  select_map_1: 'Cửa Hàng'
+  select_map_2: 'Trường Học'
+  select_map_3: 'Bệnh Viện'
+  select_map_4: 'Khu Thể Thao'
+  select_map_5: 'Nhà Hàng'
+  select_map_6: 'Trạm Xe Buýt'
+  select_map_7: 'Khách Sạn/ Nhà Trọ'
+  select_map_8: 'Ủy Ban'
+  #-----------------------
+  
+  txt_radius: 'Đổi bán kính bản đồ'
+  radius_btn: 'Chọn'
+
+  #-----------------------
+  #---------Index posts of user
+  index_posts_user_title: "Tất Cả Các Bài Viết Của %{name}"
+  create_day: 'Ngày Tạo'
+  show_post: 'Xem'
+  edit_post: 'Sửa'
+  delete_post: 'Xóa'
+
+  time_zone_create: "%I:%M %p, %d/%m/%Y"
+  #=========Search Home
+  search_area: 'Diện tích từ'
+  search_price: 'Giá cả từ'
+  to: 'đến'
+  more_detail: "Thêm chi tiết"

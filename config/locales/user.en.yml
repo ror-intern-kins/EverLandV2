@@ -1,0 +1,46 @@
+en:
+  login:
+    login_title: "Login"
+    username_label: "Username"
+    password_label: "Password"
+    remember_me_checkbox: "Remember me"
+    forgot_password: "Forgot password"
+    verify_account: "Confirm account"
+    unlock_account: "Unlock account"
+    login_button: "Login"
+    login_with: "Login with"
+    back_to_home: "Back to home"
+    registry_question: "Do you have account?"
+    registry_button: "Registry"
+  registry:
+    registry_title: "Registry"
+    email_label: "Email "
+    confirm_password_label: "Confirm pasword "
+    fullname_label: "Fullname"
+    phonenum_label: "Phone number"
+    birthday_label: "Birthday "
+    sex_label: "Sex"
+    sex_female: "Female"
+    sex_male: "Male"
+    address_label: "Address"
+    type_personal: "Personal"
+    type_company: "Company"
+    login_question: "Are you registry?"
+    login_button: "Return to login"
+  change_password:
+    change_password_title: "Change password"
+    old_password: "Old password"
+    confirm_button: "Confirm"
+    back_button: "Back"
+    new_password: "New password"
+    confirm_new_password: "Confirm new password"
+    change_button: "Change password"
+  edit_user:
+    save_label: "Save change"
+    back_button: "Back"
+  devise_custom:
+    input_email: "Input email"
+    send_again: "Send again"
+    email_confirmation_title: "Send email again to confirm your account"
+  
+    

@@ -17,8 +17,7 @@
 <%= form_with model: @post, url: {action: "update"}, local:true, id:'from-create-post' do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2>Có
-        <%= pluralize(@post.errors.count, "")%>lỗi:</h2>
+        <%= pluralize(@post.errors.count, "")%>
       <ul>
         <% @post.errors.full_messages.each do |message| %>
           <li>
@@ -31,13 +30,13 @@
 
 <!-- THÔNG TIN CƠ BẢN -->
 <div class="container">
-  <h3>THÔNG TIN CƠ BẢN</h3>
+  <h3><%= t(:sub_title_1) %></h3>
   <div class="form-group row">
     <div class="col-sm-12 row">
-      <label class="col-sm-2 col-form-label"> Tiêu Đề (<span style="color:red;">*</span>):</label>
+      <label class="col-sm-2 col-form-label"> <%= t(:title)%> (<span style="color:red;">*</span>):</label>
       <div class="col-sm-10">
         <%= form.text_field :title, id: :post_title, class:"form-control", 
-        placeholder:"Vui lòng nhập tiêu đề tin đăng của bạn. Tối thiểu là 30 ký tự và tối đa là 99 ký tự."%>
+        placeholder: true%>
         <span id="title_error"></span>
       </div>
     </div>
@@ -45,21 +44,21 @@
   <!-- Row Hình thức -->
   <div class="form-group row">
     <div class="col-sm-6 row">
-      <label class="col-sm-4 col-form-label">Hình Thức (<span style="color:red;">*</span>) :</label>
+      <label class="col-sm-4 col-form-label"><%= t(:category) %> (<span style="color:red;">*</span>) :</label>
       <div class="col-sm-8">
         
           <%= form.collection_select(:category_id, @categories, :id, :name, 
-          {prompt: '-- Hình Thức --'},{class:"custom-select", id:'cate_id'}) %>
+          {prompt: t(:select_category)},{class:"custom-select", id:'cate_id'}) %>
         <span id="category_error"></span>
       </div>
     </div>
 
     <div class="col-sm-6 row">
-      <label class="col-sm-3 col-form-label"> Loại (<span style="color:red;">*</span>) :</label>
+      <label class="col-sm-3 col-form-label"> <%= t(:sub_category) %> (<span style="color:red;">*</span>) :</label>
       <div class="col-sm-9">
         
         <%= form.select :category_id, "<option></option>", 
-          {prompt:'--Phân Mục--'},{class:"custom-select", id:'cate_detail_id'}%>
+          {prompt: t(:select_type)},{class:"custom-select", id:'cate_detail_id'}%>
         <span id="subcategory_error"></span>
         </div>
     </div>
@@ -69,19 +68,19 @@
   <!-- Row Quận -->
   <div class="form-group row">
     <div class="col-sm-6 row">
-      <label class="col-sm-4 col-form-label">Tỉnh/Thành Phố (<span style="color:red;">*</span>):</label>
+      <label class="col-sm-4 col-form-label"><%= t(:city) %> (<span style="color:red;">*</span>):</label>
       <div class="col-sm-8">
         <%= form.collection_select(:city_id, @cities, :id, :name, 
-        {prompt: '-- Tỉnh/Thành Phố --'}, {class:"custom-select", id:'city_details'}) %>
+        {prompt: t(:select_city)}, {class:"custom-select", id:'city_details'}) %>
         <span id="city_error"></span>
       </div>
     </div>
 
     <div class="col-sm-6 row">
-      <label class="col-sm-3 col-form-label">Quận/Huyện(<span style="color:red;">*</span>):</label>
+      <label class="col-sm-3 col-form-label"><%= t(:district)%> (<span style="color:red;">*</span>):</label>
       <div class="col-sm-9">
         <%= form.select :district_id, "<option></option>", 
-          {prompt:'--Quận Huyện--'},{class:"custom-select", id:'district_details'}%>
+          {prompt: t(:select_district)},{class:"custom-select", id:'district_details'}%>
           <span id="district_error"></span>
       </div>
     </div>
@@ -91,17 +90,17 @@
   <!-- Row Phường  -->
   <div class="form-group row">
     <div class="col-sm-6 row">
-      <label class="col-sm-4 col-form-label">Phường/Xã:</label>
+      <label class="col-sm-4 col-form-label"><%= t(:ward) %>:</label>
       <div class="col-sm-8">
         <%= form.select :ward_id, "<option></option>", 
-      {prompt:'-- Phường/Xã --'},{class:"custom-select", id:'ward_details'}%>
+      {prompt: t(:select_ward)},{class:"custom-select", id:'ward_details'}%>
       </div>
     </div>
     <div class="col-sm-6 row">
-      <label class="col-sm-3 col-form-label">Đường/Phố:</label>
+      <label class="col-sm-3 col-form-label"><%= t(:street) %>:</label>
       <div class="col-sm-9">
         <%= form.select :street_id, "<option></option>", 
-        {prompt:'-- Đường Phố --'},{class:"custom-select", id:'street_details'}%>
+        {prompt: t(:select_street)},{class:"custom-select", id:'street_details'}%>
       </div>
     </div>
   </div>
@@ -110,14 +109,14 @@
   <!-- Row Dự Án - Diện Tích  -->
   <div class="form-group row">
     <div class="col-sm-6 row">
-      <label class="col-sm-4 col-form-label">Dự Án:</label>
+      <label class="col-sm-4 col-form-label"><%= t(:project) %>:</label>
       <div class="col-sm-8">
         <%= form.text_field :project, id: :post_project, class:"form-control", maxlength:"200"%>
         <span id="project_error"></span>
       </div>
     </div>
     <div class="col-sm-6 row">
-      <label class="col-sm-3 col-form-label">Diện Tích:</label>
+      <label class="col-sm-3 col-form-label"><%= t(:area) %>:</label>
       <div class="col-sm-6">
         <%= form.text_field :area, id: :post_area, class:"form-control", 
         numbersonly:"true",numberonly:"2", maxlength:"6"%>
@@ -131,7 +130,7 @@
   <!-- Row Giá - Đơn Vị  -->
   <div class="form-group row">
     <div class="col-sm-6 row">
-      <label class="col-sm-4 col-form-label">Giá:</label>
+      <label class="col-sm-4 col-form-label"><%= t(:price) %>:</label>
       <div class="col-sm-8">
         <%= form.text_field :price, id: :post_price, class:"form-control",
         numbersonly:"true",numberonly:"2", maxlength:"6"%>
@@ -139,10 +138,9 @@
       </div>
     </div>
     <div class="col-sm-6 row">
-      <label class="col-sm-3 col-form-label">Đơn Vị:</label>
+      <label class="col-sm-3 col-form-label"><%= t(:unit) %>:</label>
       <div class="col-sm-9">
-        <%= form.select :unit, [['Thỏa Thuận', 'Thỏa Thuận'], ['Triệu', 'Triệu'], ['Tỷ', 'Tỷ'], 
-        ['Trăm nghìn/m2', 'Trăm nghìn/m2'], ['Triệu/m2', 'Triệu/m2']], 
+        <%= form.select :unit, Post::UNIT_POST,
         {prompt:false},{class:"custom-select", id:'post_unit'}%>
       </div>
     </div>
@@ -152,7 +150,7 @@
   <!-- Row Tổng Tiền  -->
   <div class="form-group row">
     <div class="col-sm-12 row">
-      <label class="col-sm-2 col-form-label">Tổng Giá Tiền:</label>
+      <label class="col-sm-2 col-form-label"><%= t(:total) %>:</label>
       <div class="col-sm-10" >
         <span id="totalPrice"></span>
       </div>
@@ -164,7 +162,7 @@
   <!-- Row Địa chỉ  -->
   <div class="form-group row">
     <div class="col-sm-12 row">
-      <label class="col-sm-2 col-form-label">Địa Chỉ (<span style="color:red;">*</span>):</label>
+      <label class="col-sm-2 col-form-label"> <%= t(:address)%> (<span style="color:red;">*</span>):</label>
       <div class="col-sm-10">
         <%= form.text_field :address_number, id: :post_address_number, class:"form-control",
         maxlength:"200"%>
@@ -172,42 +170,38 @@
       </div>
     </div>
   </div>
-  <!-- End Row Tổng Tiền -->
+
 </div>
 <!-- THÔNG TIN CƠ BẢN -->
 
 <!-- THÔNG TIN MÔ TẢ -->      
 <div class="container">
-  <h3>THÔNG TIN MÔ TẢ</h3>
+  <h3><%= t(:sub_title_2)%></h3>
     <div class="form-group row">
-        <div class="col-sm-12 row">
-          <label class="col-sm-12 col-form-label"><small>(<span style="color:red;">*</span>) Tối đa chỉ 3000 ký tự</small></label>
-          <div class="col-sm-8">
-            <%= form.text_area :description, id: :post_description, class:"form-control", 
-            rows:"8",cols:"100" %>
-          <span id="desciption_error"></span>
-          </div>
-          <div class="col-sm-4" style="text-align: justify;">
-              <small>
-                  Giới thiệu chung về bất động sản của bạn. Ví dụ: Khu nhà có vị trí thuận lợi: Gần công viên, gần trường học ... Tổng diện
-                  tích 52m2, đường đi ô tô vào tận cửa.
-                </small>
-                <br>
-                <small style="color:red;">Lưu ý: tin rao chỉ để mệnh giá tiền Việt Nam Đồng.</small>
-          </div>
+      <div class="col-sm-12 row">
+        <label class="col-sm-12 col-form-label"><small>(<span style="color:red;">*</span>) <%= t(:sub_des_1) %></small></label>
+        <div class="col-sm-8">
+          <%= form.text_area :description, id: :post_description, class:"form-control", 
+          rows:"8",cols:"100" %>
+        <span id="desciption_error"></span>
+        </div>
+        <div class="col-sm-4" style="text-align: justify;">
+            <small><%= t(:sub_des_2) %></small>
+            <br><small style="color:red;"><%= t(:sub_des_3) %></small>
         </div>
       </div>
+    </div>
 </div>
 <!-- THÔNG TIN MÔ TẢ -->
 
 <!-- THÔNG TIN KHÁC -->
 <div class="container">
-  <h3>THÔNG TIN KHÁC</h3>
-  <small>Quý vị nên điền đầy đủ thông tin vào các mục dưới đây để tin đăng có hiệu quả hơn</small>
+   <h3><%= t(:sub_title_3) %></h3>
+  <small><%= t(:sub_other_1) %></small>
   <!-- row mặt tiền- đường vào -->
   <div class="form-group row">
       <div class="col-sm-6 row">
-        <label class="col-sm-4 col-form-label">Mặt Tiền (m):</label>
+        <label class="col-sm-4 col-form-label"><%= t(:front) %> (m):</label>
         <div class="col-sm-8">
             <%= form.text_field :front, id: :post_front, class:'form-control',
             maxlength:"6", numberonly:"2", numbersonly:"true"%>
@@ -216,7 +210,7 @@
       </div>
   
       <div class="col-sm-6 row">
-        <label class="col-sm-4 col-form-label"> Đường vào (m):</label>
+        <label class="col-sm-4 col-form-label"> <%= t(:entrance) %> (m):</label>
         <div class="col-sm-8">
             <%= form.text_field :entrance, id: :post_entrance, class:'form-control',
             maxlength:"6", numberonly:"2", numbersonly:"true" %>
@@ -228,19 +222,19 @@
   
   <!-- row hướng nhà hướng ban công -->
   <div class="form-group row">
-      <div class="col-sm-6 row">
-        <label class="col-sm-4 col-form-label">Hướng Nhà:</label>
+    <div class="col-sm-6 row">
+        <label class="col-sm-4 col-form-label"><%= t(:house_direction) %>:</label>
         <div class="col-sm-8">
-            <%= form.select :house_direction, [['Đông', 'Đông'], ['Tây', 'Tây'], ['Nam', 'Nam'], ['Bắc', 'Bắc']],
-            {prompt:'--KXĐ--'},{class:"custom-select"} %>
+            <%= form.select :house_direction, Post::DIRECTION,
+            {prompt: t(:select_direction)},{class:"custom-select"} %>
         </div>
       </div>
   
       <div class="col-sm-6 row">
-        <label class="col-sm-4 col-form-label">Hướng Ban Công:</label>
+        <label class="col-sm-4 col-form-label"><%= t(:balcony_direction) %>:</label>
         <div class="col-sm-8">
-            <%= form.select :balcony_direction, [['Đông', 'Đông'], ['Tây', 'Tây'], ['Nam', 'Nam'], ['Bắc', 'Bắc']],
-            {prompt:'--KXĐ--'},{class:"custom-select"} %>
+            <%= form.select :balcony_direction, Post::DIRECTION,
+            {prompt: t(:select_direction)},{class:"custom-select"} %>
         </div>
       </div>
     </div>
@@ -249,7 +243,7 @@
   <!-- row hướng số tầng-->
   <div class="form-group row">
       <div class="col-sm-6 row">
-        <label class="col-sm-4 col-form-label"> Số Tầng:</label>
+        <label class="col-sm-4 col-form-label"><%= t(:floor) %> :</label>
         <div class="col-sm-8">
             <%= form.text_field :floor, id: :post_floor, class:'form-control',
             maxlength:"3", numberonly:"1", numbersonly:"true", decimal:"false" %>
@@ -262,7 +256,7 @@
  <!-- row hướng số phòng, toilet-->
  <div class="form-group row">
     <div class="col-sm-6 row">
-        <label class="col-sm-4 col-form-label">Số Phòng Ngủ:</label>
+        <label class="col-sm-4 col-form-label"><%= t(:bedroom) %> :</label>
         <div class="col-sm-8">
             <%= form.text_field :bedroom, id: :post_bedroom, class:'form-control',
             maxlength:"3", numberonly:"1", numbersonly:"true", decimal:"false"%>
@@ -271,7 +265,7 @@
       </div>
   
       <div class="col-sm-6 row">
-        <label class="col-sm-4 col-form-label"> Số Toilet:</label>
+        <label class="col-sm-4 col-form-label"><%= t(:toilet) %> :</label>
         <div class="col-sm-8">
             <%= form.text_field :toilet, id: :post_toilet, class:'form-control',
             maxlength:"3", numberonly:"1", numbersonly:"true", decimal:"false"%>
@@ -284,7 +278,7 @@
 <!-- row nội thất-->
 <div class="form-group row">
     <div class="col-sm-12 row">
-        <label class="col-sm-2 col-form-label"> Nội Thất:</label>
+        <label class="col-sm-2 col-form-label"><%= t(:furniture) %> :</label>
         <div class="col-sm-10">
         <%= form.text_area :furniture, id: :post_furniture, cols:"100", rows:"10", 
         class:'form-control', maxlength:"200" %> 
@@ -298,11 +292,9 @@
 
 <!-- HÌNH ẢNH VÀ VIDEO chưa làm -->
 <div class="container">
-  <h3>HÌNH ẢNH</h3>
-    <small>Tối đa 8 ảnh. </small>
-    <br><small>Tin rao có ảnh sẽ được xem nhiều hơn gấp 10 lần và được nhiều người gọi 
-      gấp 5 lần so với tin rao không có ảnh. Hãy đăng ảnh để được giao dịch nhanh chóng!</small>
-  <div class="row" id="file_field_container">
+  <h3><%= t(:sub_title_4) %></h3>
+  <small><%= t(:sub_img_1) %></small><br><small><%= t(:sub_img_2) %></small>
+<div class="row" id="file_field_container">
   <% if @post.images.length == 8 %>
     <%= form.fields_for :images do |p| %>
       <div class="file_field">
@@ -334,14 +326,11 @@
   </div>
 </div>
 
-<!-- BẢN ĐỒ  chưa làm-->
+<!-- BẢN ĐỒ-->
 <div class="container">
-<h3>BẢN ĐỒ</h3>
-<small>Để tăng độ tin cậy và tin rao được nhiều người quan tâm hơn, 
-  hãy sửa vị trí tin rao của bạn trên bản đồ bằng cách kéo icon tới đúng vị trí của tin rao.</small>
-  <small>Có thể dữ liệu bản đồ không chính xác. 
-    Vì vậy nếu có bất kỳ sai xót nào xin bạn hãy báo cho chúng tôi để khắc phục kịp thời.</small>
-    <div>
+  <h3><%= t(:sub_title_5) %></h3>
+  <small><%= t(:sub_map_1) %></small>
+      <div>
       <input type="text" id="address_formated" class="form-control">
       <%= form.hidden_field :lat, id: :post_lat %>
       <%= form.hidden_field :lng, id: :post_lng %>
@@ -352,10 +341,10 @@
 
   <!-- LIÊN HỆ -->
   <div class="container">
-    <h3>LIÊN HỆ</h3>
+    <h3><%= t(:sub_title_6) %></h3>
     <div class="form-group row">
         <div class="col-sm-12 row">
-            <label class="col-sm-2 col-form-label">Tên Liên Hệ:</label>
+            <label class="col-sm-2 col-form-label"><%= t(:contact_name) %>:</label>
             <div class="col-sm-10">
               <%= form.text_field :contact_name, id: :post_contact_name, 
               class:'form-control', maxlength:"200" %>
@@ -365,7 +354,7 @@
     </div>
     <div class="form-group row">
         <div class="col-sm-12 row">
-            <label class="col-sm-2 col-form-label">Địa Chỉ:</label>
+            <label class="col-sm-2 col-form-label"><%= t(:contact_address) %>:</label>
             <div class="col-sm-10">
               <%= form.text_field :contact_address, id: :post_contact_address, 
               class:'form-control', maxlength:"200" %>
@@ -375,7 +364,7 @@
     </div>
     <div class="form-group row">
         <div class="col-sm-12 row">
-            <label class="col-sm-2 col-form-label"> Điện Thoại:</label>
+            <label class="col-sm-2 col-form-label"><%= t(:contact_phone) %>:</label>
             <div class="col-sm-10">
               <%= form.text_field :contact_phone, id: :post_contact_phone, 
               class:'form-control', maxlength:"11", numberonly:'1'  %>
@@ -385,7 +374,7 @@
     </div>
     <div class="form-group row">
         <div class="col-sm-12 row">
-            <label class="col-sm-2 col-form-label"> Di Dộng (<span style="color:red;">*</span>):</label>
+            <label class="col-sm-2 col-form-label"><%= t(:contact_mobile) %> (<span style="color:red;">*</span>):</label>
             <div class="col-sm-10">
               <%= form.text_field :contact_mobile, id: :post_contact_mobile, 
               class:'form-control', maxlength:"11", minlength:'10',numberonly:'1'  %>
@@ -417,7 +406,7 @@
         <div class="col-md-3 offset-md-6">
           <div class="row">
               <div class="actions">
-                  <%= form.submit class:'btn btn-danger' %>
+                  <%= form.submit class:'btn btn-danger'  %>
                 </div>
           </div>
         </div>

@@ -1,0 +1,8 @@
+en:
+  welcome:
+    no_result_notice: "Found nothing"
+    month: "Tháng"
+    price: "Price: "
+    unit_deal: "Deal"
+    erea: "Area: "
+    address: "Address: "

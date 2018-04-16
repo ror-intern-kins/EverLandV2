@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :set_post_to_show, only: [:show]
-  before_action :check_current_id, only: [:new, :create, :edit, :update, :index_user_posts] 
+  before_action :check_current_id, only: [:edit, :update, :destroy] 
 
   #GET /user_posts
   #GET /user_posts.json
@@ -10,26 +10,29 @@ class PostsController < ApplicationController
     @posts = @user.posts.order("created_at DESC").page(params[:page]).per(5)  #phân trang 
   end
 
-  # GET /posts/new
+s  # GET /posts/new
   def new
     @post = Post.new
     @image = @post.images.build
-    @categories = Category.where(super_id: nil) #find all category parent
+    @categories = Category.where(super_id: nil)#find all category parent
+    @categories.each_with_index do |c, i|
+      @categories[i].name = t(c.name)
+    end
     @cities = City.all
   end
 
   # GET /posts/1/edit
   def edit
-    @user = current_user
-    @post = @user.posts.find(params[:id])    
     @categories = Category.where(super_id: nil) #find all category parent
+    @categories.each_with_index do |c, i|
+      @categories[i].name = t(c.name)
+    end
     @cities = City.all
   end
 
   # POST users/id/posts
   # POST users/id/posts.json
   def create
-    # @user = User.find(params[:user_id])
     @user = current_user    
     @post = @user.posts.build(post_params)
     #test i18n en
@@ -55,41 +58,49 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    # @user = User.find(params[:user_id])        
-    @user = current_user
-    @post = @user.posts.find(params[:id])
-
-    respond_to do |format|
-      if @post.update(post_params)
-        if !(params[:images].nil?)
-          params[:images]['url'].each do |a|
-            @image = @post.images.create!(url: a, post_id: @post.id)
+    # @user = current_user
+    # @p = Post.find(params(:id))
+    # if @p.user_id == @user.id
+      # @post = @user.posts.find(params[:id])
+      respond_to do |format|
+        if @post.update(post_params)
+          if !(params[:images].nil?)
+            params[:images]['url'].each do |a|
+              @image = @post.images.create!(url: a, post_id: @post.id)
+            end
           end
-        end
-        if !(params[:images_delete].nil?)
-          params[:images_delete].each do |i|
-            image = Image.find(i['id']);
-            @post.images.destroy(image);
+          if !(params[:images_delete].nil?)
+            params[:images_delete].each do |i|
+              image = Image.find(i['id']);
+              @post.images.destroy(image);
+            end
           end
+          format.html { redirect_to @post, notice: 'Bài viết đã được chỉnh sửa thành công.' }
+          format.json { render :show, status: :ok, location: @post }
+        else
+          format.html { render :edit }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
         end
-        format.html { redirect_to @post, notice: 'Bài viết đã được chỉnh sửa thành công.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
-    end
+    # else
+    #   redirect_to not_found_path
+    # end
   end
 
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @user = current_user
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to index_user_posts_path(@user), notice: 'Bài viết đã được xóa thành công.' }
-      format.json { head :no_content }
-    end
+    # @user = current_user
+    # @post = Post.find(params[:id])
+    # if @user.id == @post.user_id
+      @post.destroy
+      respond_to do |format|
+        format.html { redirect_to index_user_posts_path(@user), notice: 'Bài viết đã được xóa thành công.' }
+        format.json { head :no_content }
+      end
+    # else
+    #   redirect_to not_found_path
+    # end
   end
 
  #NEW
@@ -109,6 +120,8 @@ class PostsController < ApplicationController
         format.json { render json: [@sCategory, @list_child_categories, @tmp] }
       end
   end
+
+  
   def get_data 
     if params[:city_id]
       @districts = City.find(params[:city_id]).districts.all
@@ -128,7 +141,7 @@ class PostsController < ApplicationController
         format.json { render json: @streets }
       end
     end 
-  end
+  end 
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -152,10 +165,9 @@ class PostsController < ApplicationController
       images_attributes: [:id, :post_id, :url])
     end  
 
-  #check current user id
-  def check_current_id 
-    @user = User.find(params[:user_id])
-    redirect_to not_found_path if current_user.id != @user.id 
-  end
-
+    def check_current_id
+      @user = current_user
+      @post = Post.find(params[:id])
+      redirect_to not_found_path unless @user.id == @post.user_id
+    end
 end

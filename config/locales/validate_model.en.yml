@@ -22,7 +22,7 @@ en:
             title: 
               blank: "Title can't be blank."
               too_short: "Title minimum is 30 characters."
-              too_long: "Title maximum is 30 characters."
+              too_long: "Title maximum is 99 characters."
             description: 
               blank: "Description can't be blank."
               too_short: "Description minimum is 30 characters."

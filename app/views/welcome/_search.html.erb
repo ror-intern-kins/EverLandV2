@@ -54,24 +54,24 @@
 <div class="container" style="padding-left:25px; padding-right:25px">
   <div style="background-color: white">
   <div id="full-search" class="container">
-    <%= form_tag("/", method: "get", class: "row") do %>
+    <%= form_tag(root_path(locale:I18n.locale), method: "get", class: "row") do %>
     <%= hidden_field_tag(:search_type, "full") %>
     <%# <div class="col-md-1"></div> %>
     <div class="col-md-5">
       <%= text_field_tag(:search_normal, "", class: "form-control", placeholder: 'Nhập địa điểm') %>
     </div>
     <div class="col-md-4">
-    <%= link_to 'Tìm kiếm nâng cao', '#all-search', 
+    <%= link_to t(:btn_search_high), '#all-search', 
     class: 'btn btn-primary col-md-12', data: {toggle: 'collapse'}  %> 
   </div>
     <div class="col-md-3">
-      <%= submit_tag("Tìm kiếm",name: nil, class: "btn btn-success col-md-12") %>
+      <%= submit_tag(t(:btn_search),name: nil, class: "btn btn-success col-md-12") %>
     </div>
     <% end %>     
   </div>
 
   <div id="all-search" class="collapse col-md-12" style="background-color: white">
-  <%= form_for(:search, url:"/", method: "get") do |f| %>
+  <%= form_for(:search, url:root_path(locale:I18n.locale), method: "get") do |f| %>
     <%= f.hidden_field :search_type, :value => "advance" %>
     <div class="row">
     
@@ -80,67 +80,66 @@
         
           <!-- CATEGORY select -->
             <div class="category">
-                <%= f.select :category_id, options_from_collection_for_select(@categories, "id", "name"),
-                  {prompt:'--Chọn hình thức nhà đất--'}, {class: 'row form-control margin-form'} %>
+                <%= f.select :category_id, options_from_collection_for_select(@categories, :id, :name),
+                  {prompt: t(:select_category)}, {class: 'row form-control margin-form'} %>
             </div>
             <div id="category-detail">
                 <%= f.select :category_detail_id, "<option></option>",
-                {prompt:'--Chọn loại nhà đất--'}, {class: 'row form-control margin-form'} %>
+                {prompt: t(:select_type)}, {class: 'row form-control margin-form'} %>
             </div>
             <!-- CITY SELECT -->
             <div class="city">
                 <%= f.select :city_id, options_from_collection_for_select(@cities, "id", "name", params[:id]),
-                  {prompt: "--Chọn Tỉnh/Thành phố--"}, {class: 'row form-control margin-form'} %>
+                  {prompt: t(:select_city)}, {class: 'row form-control margin-form'} %>
             </div>
             <!-- DISTRICT SELECT -->
             <div class="district">
                 <%= f.select :district_id, '<option></option>', 
-                {include_blank: true, prompt: '--Chọn Quận/Huyện--'}, {class: 'row form-control margin-form'}  %>
+                {include_blank: true, prompt: t(:select_district)}, {class: 'row form-control margin-form'}  %>
             </div>
             <!-- AREA  -->
             <div class="field row margin-form">
-              <div class="col-sm-4 col-lg-4">Diện tích nhỏ từ</div>
+              <div class="col-sm-4 col-lg-4"><%= t(:search_area) %></div>
               <%= f.text_field :area_bottom, id: :area_bottom, class: 'form-control col-md-3' %>
-              <div class="col-sm-2 col-lg-2">đến</div>
+              <div class="col-sm-2 col-lg-2"><%= t(:to) %></div>
               <%= f.text_field :area_top, id: :area_top, class: 'form-control col-md-3' %>
             </div>
             <div class="field row margin-form">
-              <div class="col-sm-4 col-lg-4">Giá cả từ</div>   
+              <div class="col-sm-4 col-lg-4"><%= t(:search_price) %></div>   
               <%= f.text_field :price_bottom, id: :price_bottom, class: 'form-control col-md-3' %>
-              <div class="col-sm-2 col-lg-2">đến</div>   
+              <div class="col-sm-2 col-lg-2"><%= t(:to) %></div>   
                 <%= f.text_field :price_top, id: :price_top, class: 'form-control col-md-3' %>
             </div>
 
-            <%= link_to  "Thêm chi tiết", '#super_advance', data: {toggle: 'collapse'}, style: 'text-decoration: underline;' %>
+            <%= link_to t(:more_detail), '#super_advance', data: {toggle: 'collapse'}, style: 'text-decoration: underline;' %>
       </div>    
 
     <!-- SUPER ADVANCE -->
       <div id="super_advance" class="collapse col-md-6" style="padding: 0px 30px 0px 30px">
           <!-- WARD -->
         <div class="ward margin-form">
-          <%= f.select :ward_id,"<option></option>", {prompt: "--Chọn Phường/Xã--"}, {class: 'form-control'} %>
+          <%= f.select :ward_id,"<option></option>", {prompt: t(:select_ward)}, {class: 'form-control'} %>
         </div>
         <!-- STREET -->
         <div class="street margin-form">
-          <%= f.select :street_id,"<option></option>", {prompt: "--Chọn Đường/Phố--"}, {class: 'form-control'} %>
+          <%= f.select :street_id,"<option></option>", {prompt: t(:select_street)}, {class: 'form-control'} %>
         </div>
         <!-- HOUSE DIRECTION -->
         <div class="house_direction margin-form">
-          <%= f.select :house_direction, 
-          "<option value="">Không xác định</option><option value='Đông'>Đông</option><option value='Tây'>Tây</option><option value='Nam'>Nam</option><option value='Bắc'>Bắc</option><option value='Đông-Bắc'>Đông-Bắc</option><option value='Tây-Bắc'>Tây-Bắc</option><option value='Tây-Nam'>Tây-Nam</option><option value='Đông-Nam'>Đông-Nam</option>".html_safe,
-          {prompt: "--Chọn hướng nhà--"}, {class: 'form-control'} %>               
+          <%= f.select :house_direction, Post::SEARCH_DIRECTION,
+          {prompt: t(:house_direction)}, {class: 'form-control'} %>               
         </div>
         <!-- BEDROOM -->
         <div class="bedroom margin-form">
-          <%= f.select :bedroom,"<option value="">Không xác định</option><option value=1>1+</option><option value=2>2+</option><option value=3>3+</option><option value=4>4+</option><option value=5>5+</option>".html_safe,
-          {prompt: "--Chọn số phòng ngủ--"}, {class: 'form-control'} %>                               
+          <%= f.select :bedroom,("<option value=''>" + t(:unknow) + "</option><option value=1>1+</option><option value=2>2+</option><option value=3>3+</option><option value=4>4+</option><option value=5>5+</option>").html_safe,
+          {prompt: t(:bedroom)}, {class: 'form-control'} %>                               
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4"></div>
       <div class="col-md-4" style="padding: 0px 30px 0px 30px">
-          <%= f.submit ('Tìm kiếm'), class: 'btn btn-info col-md-12', style: 'margin-top: 20px' %>
+          <%= f.submit (t(:btn_search)), class: 'btn btn-info col-md-12', style: 'margin-top: 20px' %>
       </div>
       <div class="col-md-4"></div>
     </div>

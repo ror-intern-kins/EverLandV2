@@ -1,0 +1,92 @@
+en:
+  show_sub_title_1: 'INFORMATION'
+  show_sub_title_2: 'DESCRIPTION'
+  show_sub_title_3: 'DETAIL DESCRIPTIONS'
+  show_sub_title_4: 'POSTION'
+  show_details_sub_1: "HOUSE'S INFORMATION"
+  show_details_sub_2: "CONTACT INFORMATION"
+  sub_title_1: "BASIC INFORMATION"
+  sub_title_2: 'INFORMATION DESCRIPTION'
+  sub_title_3: 'OTHER INFORMATION'
+  sub_title_4: 'IMAGES'
+  sub_title_5: 'MAPS'
+  sub_title_6: 'CONTACT'
+  
+  title: 'Title'
+  category: 'Category'
+  sub_category: 'Type'
+  city: 'City'
+  district: 'District'
+  ward: 'Ward'
+  street: 'Street'
+  project: 'Project'
+  area: 'Area'
+  price: 'Price'
+  unit: 'Unit'
+  total: 'Total'
+  address: 'Address'
+  front: 'Front'
+  entrance: 'Entrance'
+  house_direction: "House's direction"
+  balcony_direction: "Balcony's direction"
+  floor: 'Floor'
+  bedroom: 'Bedroom'
+  toilet: 'Toilet'
+  furniture: 'Furniture'
+  contact_name: 'Name contact'
+  contact_address: 'Address contact'
+  contact_phone: 'Phone contact'
+  contact_mobile: 'Mobile contact'
+  
+  #--------------
+  select_city: '-- City --'
+  select_district: '-- District --'
+  select_ward: '-- Ward --'
+  select_category: '-- Category --'
+  select_type: '-- Type --'
+  select_street: '-- Street--'
+  
+  #------------
+  sub_des_1: 'Maximum is only 3000 characters.'
+  sub_des_2: 'General introduction of your real estate. For example: The house has convenient location: Near the park, near the school ... Total area 52m2, car road to the door.'
+  sub_des_3: 'Note: the news only accept value VND.'
+  sub_img_1: 'Maximum is 8 images.'
+  sub_img_2: 'Image ads will be viewed more than 10 times and are called more than five times the message without photos. Please post a picture to be traded quickly!'
+  sub_map_1: 'To increase your credibility and your message, be sure to fix your location on the map by dragging it to the correct location. The map data may not be accurate. So if there is any error please tell us to correct in time.'
+  # ---------model > attr
+  sub_other_1: 'You should fill out the information below for more effective coverage'
+  helpers:
+    placeholder:
+      post: 
+        title: "Type your title here. Min is 30 characters & max is 99 characters."
+
+  #-------New - edit post-------
+  new_post_title: 'SIGN NEWS SELL, LEASE LAND HOUSE'
+  new_post_sub: 'You enter information needed housing sale or lease in the categories below'
+  edit_post_title: 'Edit Post'
+
+   #---------Map select-----------
+  select_map_1: 'Store'
+  select_map_2: 'School'
+  select_map_3: 'Hospital'
+  select_map_4: 'Sport Area'
+  select_map_5: 'Restaurant'
+  select_map_6: 'Bus Stop'
+  select_map_7: 'Hotel / Homestay'
+  select_map_8: 'Commission'
+
+  txt_radius: 'Type radius of map...'
+  radius_btn: 'Choose'
+  #--------------Index user post
+  index_posts_user_title: "%{name}'s posts"
+  create_day: 'Created day'
+  show_post: 'Show'
+  edit_post: 'Edit'
+  delete_post: 'Delete'
+
+  time_zone_create: "%I:%M %p, %b %d %Y"
+
+  search_area: 'Area from'
+  search_price: 'Price from'
+  to: 'to'
+  more_detail: "More detail"

@@ -6,25 +6,26 @@ en:
           existed: "Username is already exist."
           blank: "Username can't be blank."
           invalid: "Username doesn't allow contain special character."
-          length: "Username phải có độ dài tối thiểu 6 ký tự và tối đa 20 ký tự."
+          length: "Username must have min length is 6 characters and max length is 20 characters."
         email: 
-          blank: "Địa chỉ email không được để trống."
-          invalid: "Địa chỉ email không hợp lệ."
-          existed: "Địa chỉ email đã tồn tại."
+          blank: "Email can't be blank."
+          invalid: "Email is invalid."
+          existed: "Email is already exist."
         password:
-          blank: "Mật khẩu không được để trống."
-          length: "Mật khẩu phải có độ dài từ 6 kí tự."
-          confirm_blank: "Xác thực mật khẩu không được để trống."
-          confirm_not_match: "Xác thực mật khẩu không đúng."
+          blank: "Password can't be blank."
+          length: "Password is too short. Mininum must have 6 characters."
+          confirm_blank: "Confirm password can't be blank."
+          confirm_not_match: "Confirm password is invalid."
+          old_not_match: "Old password is wrong."
         phone:
-          invalid: "Số điện thoại không đúng. Độ dài từ 10 đến 11 số."
+          invalid: "Phone number is invalid"
         name:
-          blank: "Tên không được để trống."
+          blank: "Name can't be blank"
       success:
-        username: "Tên đăng nhập có thể sử dụng."
-        email: "Email có thể sử dụng."
+        username: "Username can use."
+        email: "Email can use."
     login:
       error:
         blank:
-          username: "Tên đăng nhập không được để trống."
-          password: "Mật khẩu không được để trống."
+          username: "Username can't be blank."
+          password: "Password can't be blank."
