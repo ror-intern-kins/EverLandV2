@@ -59,17 +59,17 @@
                   <%if @post.price != nil %>
                     <%if @post.area != nil %>
                         <% case  @post.unit
-                          when 'Triệu' %> <%= @post.price %> <%= t(:select_unit_2) %>  
-                          <% when 'Tỷ' %> <%= @post.price %> <%= t(:select_unit_3) %>
-                          <% when 'Trăm nghìn/m2' %> <%= @post.price * @post.area %>  <%= t(:select_unit_4) %>
-                          <% when 'Triệu/m2' %> <%= @post.price * @post.area %>  <%= t(:select_unit_5) %>
-                          <%else %> <%= t(:select_unit_1) %>
+                          when t(:million) %> <%= @post.price %> <%= t(:million) %>  
+                          <% when t(:billion) %> <%= @post.price %> <%= t(:billion) %>
+                          <% when t(:hunderm2) %> <%= @post.price * @post.area %>  <%= t(:hunderm2) %>
+                          <% when t(:millionm2) %> <%= @post.price * @post.area %>  <%= t(:millionm2) %>
+                          <%else %> <%= t(:agreement) %>
                         <%end%>
                     <%else%>
                         <% case  @post.unit
-                          when 'Triệu' %> <%= @post.price %> <%= t(:select_unit_2) %> 
-                          <% when 'Tỷ' %> <%= @post.price %> <%= t(:select_unit_3) %>
-                          <%else %> <%= t(:select_unit_1) %>
+                          when t(:million) %> <%= @post.price %> <%= t(:million) %> 
+                          <% when t(:billion) %> <%= @post.price %> <%= t(:billion) %>
+                          <%else %> <%= t(:agreement) %>
                         <%end%>
                     <%end%>
                   <% else %> 

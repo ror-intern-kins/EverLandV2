@@ -4,7 +4,7 @@ vi:
   west: 'Tây'
   south: 'Nam'
   north: 'Bắc'
-  select_direction: '-- KXĐ -'
+  select_direction: '-- KXĐ --'
   #--------
   agreement: 'Thỏa Thuận'
   million: 'Triệu'

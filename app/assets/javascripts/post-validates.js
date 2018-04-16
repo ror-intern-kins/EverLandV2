@@ -1,5 +1,6 @@
 document.addEventListener("turbolinks:load", function (event) {
     //-------Validate form-------
+    checkPrice();    
     $('#from-create-post').submit(function () {
         //messages
         $('#title_error').text('').css({

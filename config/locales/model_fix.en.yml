@@ -4,6 +4,7 @@ en:
   west: 'West'
   south: 'South'
   north: 'North'
+  select_direction: '-- Unknown --'
   #------------
   agreement: "Agreement"
   million: 'Million'
