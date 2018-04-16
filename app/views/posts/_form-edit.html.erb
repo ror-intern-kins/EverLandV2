@@ -431,9 +431,9 @@
       $("select#cate_id").val(t); 
       data[0].forEach(function(item) {
         if (item.id == ca_id) {
-          $('#cate_detail_id').append("<option selected='selected' value=" + item.id + ">" + item.name +"</option>")
+          $('#cate_detail_id').append("<option selected='selected' value=" + item.id + ">" + I18n.t(item.name) +"</option>")
         } else {
-          $('#cate_detail_id').append("<option value=" + item.id + ">" + item.name +"</option>")
+          $('#cate_detail_id').append("<option value=" + item.id + ">" + I18n.t(item.name) +"</option>")
         }})
     });
     //city dropdown
@@ -461,8 +461,8 @@
     });
     //ward can be empty in db so if empty render html
     if(w_id == 0){
-      $('#ward_details').html("<option>-- Phường/Xã  --</option>"); 
-      $('#street_details').html("<option>-- Đường Phố --</option>");
+      $('#ward_details').html("<option>" + I18n.t('select_ward') + "</option>");
+      $('#street_details').html("<option>" + I18n.t('select_street') + "</option>");
     } else {
       $.post("/getdata.json", {
         ward_id: w_id
