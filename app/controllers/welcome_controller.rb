@@ -27,7 +27,7 @@ class WelcomeController < ApplicationController
       end
     end
     # find ward by district_id
-    if( params[:district_id])
+    if(params[:district_id])
       @wards = District.find(params[:district_id]).wards.all
       respond_to do |format|  
         format.json { render json: @wards  }  
@@ -54,7 +54,7 @@ class WelcomeController < ApplicationController
     end
     #------Advance search------
     if (params[:search])
-        query = params.require(:search).permit(:category_id,:area_top, :area_bottom,:price_top, :price_bottom, :category_detail_id,:area,:price,:city_id, :district_id, :ward_id, :street_id, :house_direction, :bedroom)  
+      query = params.require(:search).permit(:category_id,:area_top, :area_bottom,:price_top, :price_bottom, :category_detail_id,:area,:price,:city_id, :district_id, :ward_id, :street_id, :house_direction, :bedroom)  
       @h = Array.new # search array only for area and price
       @s = "" # search string
       @h[0] = @s # h => [""]

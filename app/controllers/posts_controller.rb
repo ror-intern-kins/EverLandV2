@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @posts = @user.posts.order("created_at DESC").page(params[:page]).per(5)  #phân trang 
   end
 
-s  # GET /posts/new
+  # GET /posts/new
   def new
     @post = Post.new
     @image = @post.images.build
