@@ -140,7 +140,7 @@
     <div class="col-sm-6 row">
       <label class="col-sm-3 col-form-label"><%= t(:unit) %>:</label>
       <div class="col-sm-9">
-        <%= form.select :unit, Post::UNIT_POST, 
+        <%= form.select :unit, @units_hash, 
         {prompt:false},{class:"custom-select", id:'post_unit'}%>
       </div>
     </div>
@@ -225,7 +225,7 @@
       <div class="col-sm-6 row">
         <label class="col-sm-4 col-form-label"><%= t(:house_direction) %>:</label>
         <div class="col-sm-8">
-            <%= form.select :house_direction, Post::DIRECTION,
+            <%= form.select :house_direction, @direction_list,
             {prompt: t(:select_direction)},{class:"custom-select"} %>
         </div>
       </div>
@@ -233,7 +233,7 @@
       <div class="col-sm-6 row">
         <label class="col-sm-4 col-form-label"><%= t(:balcony_direction) %>:</label>
         <div class="col-sm-8">
-            <%= form.select :balcony_direction, Post::DIRECTION,
+            <%= form.select :balcony_direction, @direction_list,
             {prompt: t(:select_direction)},{class:"custom-select"} %>
         </div>
       </div>

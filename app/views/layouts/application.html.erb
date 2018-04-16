@@ -42,10 +42,12 @@
                 </ul>
             <% end %> <!-- end if -->
             <!-- Chuyen ngon ngu -->
+            <div data-turbolinks="false">
             <%= link_to_unless I18n.locale == :en, "EN", locale: :en %>
             <span>&nbsp</span> |  <span>&nbsp</span>
             <%= link_to_unless I18n.locale == :vi, "VI", locale: :vi %>
             <span>&nbsp&nbsp</span>
+            </div>
                 <!-- Nút Post -->
             <% if user_signed_in? %>
                 <%= link_to t(:btn_create_post), new_user_post_path(current_user), class: 'btn btn-primary col-md-2',

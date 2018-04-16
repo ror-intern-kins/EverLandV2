@@ -9,27 +9,14 @@ class Post < ApplicationRecord
     accepts_nested_attributes_for :images
 
     DIRECTION = [
-        [I18n.t(:east), 'east'],
-        [I18n.t(:west), 'west'],
-        [I18n.t(:south), 'south'],
-        [I18n.t(:north), 'north']
+        'east','west','south', 'north'
     ]
     SEARCH_DIRECTION = [
-        [I18n.t(:east), 'east'],
-        [I18n.t(:west), 'west'],
-        [I18n.t(:south), 'south'],
-        [I18n.t(:north), 'north'],
-        [I18n.t(:unknow), 'unknow']
+        'east','west','south', 'north', 'unknow'
     ]
-
-    UNIT_POST =[
-        [I18n.t(:agreement), 'agreement'], 
-        [I18n.t(:million), 'million'], 
-        [I18n.t(:billion), 'billion'], 
-        [I18n.t(:hunderm2), 'hunderm2'], 
-        [I18n.t(:millionm2), 'millionm2']
-    ]
-    
+    UNIT_POST =['agreement', 'million', 'billion', 
+        'hunderm2', 'millionm2']
+  
     CATEGORY_LIST_POST =  {
         "house_land_sell" => I18n.t(:house_land_sell),
         "house_land_rent" => I18n.t(:house_land_rent),
