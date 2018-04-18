@@ -55,13 +55,23 @@
                             <div class="pmb-content">
                                 <div>  
                                     <p>
-                                        <span><%= t "welcome.price" %></span>
-                                        <% if post.unit == 'Thỏa Thuận'%>
-                                            <span><%= t "welcome.unit_deal" %></span>
-                                        <% else %>
-                                            <span><%= post.price %> <%= post.unit%></span>
+                                        <span><%= t "welcome.price" %> </span>
+                                        <% if post.unit == 'agreement' %>                                        
+                                        <span>
+                                            <%= t 'agreement' %>
+                                        <%else%>
+                                            
+                                            <% if  post.unit == 'million'%>
+                                             <%= post.price %><%= t 'million' %>   
+                                            <% elsif post.unit == 'billion' %>
+                                              <%= post.price %><%= t 'billion' %>
+                                            <% elsif post.unit == 'hunderm2' %>
+                                              <%= post.price %><%= t 'hunderm2' %>
+                                            <% else %>
+                                              <%= post.price %><%= t 'millionm2' %>
+                                            <% end %>                                    
+                                        </span>
                                         <% end %>
-                                    </p>
                                     <p>
                                         <span><%= t "welcome.erea" %></span>
                                         <span><%= post.area %> m²</span>
